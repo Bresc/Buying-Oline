@@ -8,7 +8,7 @@ public class Shop {
 	public static int ID_BASE;
 
 	public Shop(String name, String srcImg) {
-		super();
+		this.id  = ID_BASE++;
 		this.name = name;
 		this.srcImg = srcImg;
 	}
