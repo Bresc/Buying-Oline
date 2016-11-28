@@ -2,8 +2,7 @@ package models.dao;
 
 import java.util.ArrayList;
 
-import exceptions.ErrorAssignmentProductShopNotFound;
-import exceptions.ErrorOrderNotFound;
+
 import models.entities.AssignmentProductShop;
 import models.entities.Order;
 import models.entities.OrderProduct;
@@ -11,6 +10,8 @@ import models.entities.Product;
 import models.entities.Shop;
 import models.entities.State;
 import models.entities.User;
+import models.exceptions.ErrorAssignmentProductShopNotFound;
+import models.exceptions.ErrorOrderNotFound;
 
 public class AdminManager {
 	

@@ -1,4 +1,5 @@
-package exceptions;
+package models.exceptions;
+
 
 public class ErrorOrderNotFound extends Exception {
 
