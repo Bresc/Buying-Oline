@@ -18,13 +18,25 @@ public class Order {
 	public int getId() {
 		return id;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public ArrayList<OrderProduct> getProducts() {
 		return products;
 	}
 	
+	public void setProducts(ArrayList<OrderProduct> orderProducts) {
+		this.products = orderProducts;
+	}
+	
 	public State getState() {
 		return state;
+	}
+	
+	public void setState(State state) {
+		this.state = state;
 	}
 	
 }
