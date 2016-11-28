@@ -7,7 +7,7 @@ import view.admin.MainWindowAdmin;
 import view.user.MainWindowUser;
 
 public class Controller implements ActionListener {
-	
+
 	private MainWindowUser mainWindowUser;
 	private MainWindowAdmin mainWindowAdmin;
 
@@ -20,6 +20,16 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand())) {
 		case ADD_USER:
+			break;
+		case ADD_PRODUCT:
+			break;
+		case CANCEL_PRODUCT:
+			break;
+		case CHARGE_IMAGE:
+			break;
+		case SEARCH_RESTAURANT:
+			break;
+		case SHOW_DROP_DOWN_MENU:
 			break;
 		}
 	}

@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 
 public class PanelProduct extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
+
 	public PanelProduct() {
 		setLayout(new BorderLayout());
 		init();
