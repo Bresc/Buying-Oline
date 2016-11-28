@@ -34,4 +34,5 @@ public class MainWindowUser extends JFrame{
 	public void refreshCardRestaurant(Controller controller){
 		PanelForRestaurants.refreshCardRestaurant(controller);
 	}
+
 }

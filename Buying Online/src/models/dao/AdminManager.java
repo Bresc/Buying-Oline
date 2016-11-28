@@ -16,10 +16,15 @@ public class AdminManager {
 	
 	private ArrayList<Order> orders;
 	private ArrayList<AssignmentProductShop> assignmentsProductsShopList;
+	private ArrayList<Product> listProducts;
 	
 	public AdminManager() {
 		orders = new ArrayList<>();
 		assignmentsProductsShopList = new ArrayList<>();
+	}
+	
+	public static Product createProduct( String name, double price, String srcImg){
+		return new Product(name, price, srcImg);
 	}
 	
 	public static Order createOrder(int id, User user, ArrayList<OrderProduct> products, State state) {
@@ -29,7 +34,9 @@ public class AdminManager {
 	public static AssignmentProductShop createAssignmentProductShop(int id, Product product, Shop shop) {
 		return new AssignmentProductShop(id, product, shop);
 	}
-	
+	public void addProduct(Product product){
+		listProducts.add(product);
+	}
 	public void addOrder(Order orderToAdd) {
 		orders.add(orderToAdd);
 	}
@@ -37,6 +44,12 @@ public class AdminManager {
 	public void addAssignmentProductShop(AssignmentProductShop assignment) {
 		assignmentsProductsShopList.add(assignment);
 	}
+	
+	public Product deleteProduct(Product product) throws ErrorOrderNotFound{
+		listProducts.remove(searhProduct(product.getId()));
+		return product;
+	}
+	
 	
 	public Order deleteOrder(Order orderToDelete) throws ErrorOrderNotFound{
 		orders.remove(searhOrder(orderToDelete.getId()));
@@ -48,7 +61,14 @@ public class AdminManager {
 		assignmentsProductsShopList.remove(searchAssignmentProductShop(assignmentToDelete.getId()));
 		return assignmentToDelete;
 	}
-	
+	public Product searhProduct(int id) throws ErrorOrderNotFound{
+		for (Product product: listProducts) {
+			if (product.getId() == id) {
+				return product;
+			}
+		}
+		throw new ErrorOrderNotFound();
+	}
 	public Order searhOrder(int id) throws ErrorOrderNotFound{
 		for (Order order : orders) {
 			if (order.getId() == id) {
@@ -67,6 +87,14 @@ public class AdminManager {
 		throw new ErrorAssignmentProductShopNotFound();
 	}
 	
+	public void editProduct(Product productEdit, Product procutOld) throws ErrorOrderNotFound{
+		Product productFound = searhProduct(procutOld.getId());
+		productFound.setId(procutOld.getId());
+		productFound.setName(productEdit.getName());
+		productFound.setPrice(productEdit.getPrice());
+		productFound.setSrcImg(productEdit.getSrcImg());
+	}
+	
 	public void editOrder(Order newOrder, Order oldOrder) throws ErrorOrderNotFound{
 		Order orderFound = searhOrder(oldOrder.getId());
 		orderFound.setId(newOrder.getId());
@@ -80,5 +108,13 @@ public class AdminManager {
 		assignmentFound.setId(newAssignment.getId());
 		assignmentFound.setProduct(newAssignment.getProduct());
 		assignmentFound.setshop(newAssignment.getShop());
+	}
+
+	public ArrayList<Product> getListProducts() {
+		return listProducts;
+	}
+
+	public void setListProducts(ArrayList<Product> listProducts) {
+		this.listProducts = listProducts;
 	}
 }
