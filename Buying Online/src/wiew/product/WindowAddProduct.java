@@ -122,6 +122,7 @@ public class WindowAddProduct extends JDialog{
 		labelImage.setIcon(new ImageIcon(new ImageIcon(product.getSrcImg()).getImage().getScaledInstance(150, -10, Image.SCALE_AREA_AVERAGING)));
 	}
 	
+	
 	public void searchForImage(){
 		chooseImage = new JFileChooser("src/images");
 		chooseImage.showOpenDialog(this);
