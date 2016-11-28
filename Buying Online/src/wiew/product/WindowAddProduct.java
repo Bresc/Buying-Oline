@@ -22,12 +22,10 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import controller.Actions;
+import controller.ConstantUI;
 import controller.Controller;
-import models.dao.ProductManager;
 import models.entities.Product;
-import models.errors.ProductException;
-import views.ConstantUI;
-import views.MainFrame;
+import view.admin.MainWindowAdmin;
 
 public class WindowAddProduct extends JDialog{
 	
@@ -43,7 +41,7 @@ public class WindowAddProduct extends JDialog{
 	private JButton btnAceptProduct;
 	private JButton btnCancelProduct;
 
-	public WindowAddProduct(MainFrame mainFrame,Controller controller) {
+	public WindowAddProduct(MainWindowAdmin mainFrame,Controller controller) {
 		super(mainFrame,true);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		setTitle("Add a new Product");
@@ -77,7 +75,6 @@ public class WindowAddProduct extends JDialog{
 		
 		btnChargeImage = new JButton("Charge An Image");
 		btnChargeImage.setForeground(Color.white);
-		btnChargeImage.setBackground(ConstantUI.BTN_COLOR);
 		btnChargeImage.setActionCommand(Actions.CHARGE_IMAGE.toString());
 		btnChargeImage.addActionListener(controller);
 		
@@ -92,14 +89,12 @@ public class WindowAddProduct extends JDialog{
 		panelButtonsEdit.setLayout(new FlowLayout());
 				
 		btnAceptProduct  = new JButton("Ad");
-		btnAceptProduct.setBackground(ConstantUI.BTN_COLOR);
 		btnAceptProduct.setForeground(Color.white);
 		btnAceptProduct.setActionCommand(Actions.ADD_PRODUCT.toString());
 		btnAceptProduct.addActionListener(controller);
 		btnAceptProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		btnCancelProduct  = new JButton("Cancel");
-		btnCancelProduct.setBackground(ConstantUI.BTN_COLOR);
 		btnCancelProduct.setForeground(Color.white);
 		btnCancelProduct.setActionCommand(Actions.CANCEL_PRODUCT.toString());
 		btnCancelProduct.addActionListener(controller);
@@ -113,18 +108,18 @@ public class WindowAddProduct extends JDialog{
 		add(Box.createRigidArea(new Dimension(0,10))); //espacio en blanco
 			}
 
-	public Product extractProductFromWindow() throws NumberFormatException {		
-		return ProductManager.createProduct((Integer)spId.getValue(),
-				textName.getText(), 
-				Double.parseDouble(textValue.getText()),
-				getImageInChooser());
-	}
+//	public Product extractProductFromWindow() throws NumberFormatException {		
+//		return ProductManager.createProduct((Integer)spId.getValue(),
+//				textName.getText(), 
+//				Double.parseDouble(textValue.getText()),
+//				getImageInChooser());
+//	}
 	
 	public void chargeProductInWindow(Product product){
-		spId.setValue(product.getIdProduct());
-		textName.setText(product.getNameProduct());
-		textValue.setText("" + product.getPriceProduct());
-		labelImage.setIcon(new ImageIcon(new ImageIcon(product.getImageProduct()).getImage().getScaledInstance(150, -10, Image.SCALE_AREA_AVERAGING)));
+		spId.setValue(product.getId());
+		textName.setText(product.getName());
+		textValue.setText("" + product.getPrice());
+		labelImage.setIcon(new ImageIcon(new ImageIcon(product.getSrcImg()).getImage().getScaledInstance(150, -10, Image.SCALE_AREA_AVERAGING)));
 	}
 	
 	public void searchForImage(){
