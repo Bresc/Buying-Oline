@@ -1,12 +1,14 @@
 package view.admin;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 import controller.Controller;
+import models.entities.Shop;
 
 public class MainWindowAdmin extends JFrame{
 
@@ -34,5 +36,8 @@ public class MainWindowAdmin extends JFrame{
 		add(objects);
 		
 		setVisible(true);
+	}
+	public void refreshTableShop(ArrayList<Shop> shops){
+		tableShop.refreshTable(shops);
 	}
 }

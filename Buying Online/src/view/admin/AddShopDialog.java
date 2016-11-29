@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 
 import controller.Actions;
 import controller.Controller;
+import models.dao.AdminManager;
 import models.entities.Shop;
 import view.user.GridSystem;
 
@@ -64,11 +65,11 @@ public class AddShopDialog extends JDialog{
 		minImage.setAlignmentX(Component.LEFT_ALIGNMENT);
 		add(minImage, gridDialog.insertComponent(2, 4, 3, 0.1));
 		
-		JButton btnAddStudent = new JButton("Accept");
-		btnAddStudent.addActionListener(controller);
-		btnAddStudent.setActionCommand(Actions.ADD_SHOP.toString());
-		btnAddStudent.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(btnAddStudent, gridDialog.insertComponent(3, 2, 7, 0.01));
+		JButton btnAddShop = new JButton("Accept");
+		btnAddShop.addActionListener(controller);
+		btnAddShop.setActionCommand(Actions.ADD_SHOP.toString());
+		btnAddShop.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(btnAddShop, gridDialog.insertComponent(3, 2, 7, 0.01));
 	}
 	
 	public Icon reSize(ImageIcon imagen){
@@ -99,9 +100,9 @@ public class AddShopDialog extends JDialog{
 		return imageLoaded;
 	}
 	
-//	public Shop getStudent(){
-//		return AdminManager.createShop(txName.getText(), minImage.getText());
-//	}
+	public Shop getShop(){
+		return AdminManager.createShop(txName.getText(), minImage.getText());
+	}
 	
 	public void setForm(Shop shop){
 		txName.setText(shop.getName());

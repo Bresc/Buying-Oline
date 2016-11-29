@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import models.dao.AdminManager;
+import models.entities.Shop;
 import view.admin.AddShopDialog;
 import view.admin.MainWindowAdmin;
 import view.user.MainWindowUser;
@@ -14,6 +16,7 @@ public class Controller implements ActionListener {
 	private MainWindowAdmin mainWindowAdmin;
 	
 	private AddShopDialog addShopDialog;
+	private AdminManager adminManager;
 
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
@@ -50,6 +53,8 @@ public class Controller implements ActionListener {
 	}
 
 	private void addShop() {
-		// TODO Auto-generated method stub
+		Shop shop = addShopDialog.getShop();
+		adminManager.addShop(shop);
+		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 	}
 }
