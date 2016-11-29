@@ -46,15 +46,22 @@ public class ToolBar extends JToolBar{
 		btnAddProduct.addActionListener(controller);
 		add(btnAddProduct);
 		
+		addSeparator();
+		addSeparator();
+		
 		txSearch = new JTextField();
 		add(txSearch);
 		
+		addSeparator();
+		addSeparator();
+	
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setToolTipText("Search");
 		btnSearch.setBackground(Color.decode("#FFFFFF"));
 		add(btnSearch);
 		
-		
+		addSeparator();
+		addSeparator();
 		
 		setFloatable(false);
 	}
