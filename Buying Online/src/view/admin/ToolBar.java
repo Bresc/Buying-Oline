@@ -1,5 +1,6 @@
 package view.admin;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
@@ -15,6 +16,7 @@ public class ToolBar extends JToolBar{
 		
 		JButton btnAddUser = new JButton("Add User");
 		btnAddUser.setToolTipText("Add estudent");
+		btnAddUser.setIcon(new ImageIcon(new ImageIcon("src/img/addUser.png").getImage().getScaledInstance(20, 20, 20)));
 		btnAddUser.setActionCommand(Actions.SHOW_ADD_USER_DIALOG.toString());
 		btnAddUser.addActionListener(controller);
 		add(btnAddUser);
@@ -24,7 +26,6 @@ public class ToolBar extends JToolBar{
 		btnAddShop.setActionCommand(Actions.SHOW_ADD_SHOP_DIALOG.toString());
 		btnAddShop.addActionListener(controller);
 		add(btnAddShop);
-		
 			
 		setFloatable(false);
 	}

@@ -1,7 +1,9 @@
 package view.admin;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -49,6 +51,9 @@ public class TableShop extends JPanel {
 				return false;
 			}
 		};
+		shopTable.getTableHeader().setBackground(Color.decode("#E6E6FA"));
+		shopTable.getTableHeader().setFont(new Font("Ahaori", Font.BOLD, 18));
+		shopTable.getTableHeader().setForeground(Color.decode("#1E90FF"));
 		shopTable.addMouseListener(new MouseAdapter() {
 
 			@Override

@@ -1,7 +1,9 @@
 package view.admin;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -50,6 +52,9 @@ public class TableUser extends JPanel{
 				return false; 
 			}
 		};
+		userTable.getTableHeader().setBackground(Color.decode("#E6E6FA"));
+		userTable.getTableHeader().setFont(new Font("Ahaori", Font.BOLD, 18));
+		userTable.getTableHeader().setForeground(Color.decode("#1E90FF"));
 		userTable.addMouseListener(new MouseAdapter() {
 
 			@Override
