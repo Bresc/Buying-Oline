@@ -60,6 +60,14 @@ public class MainWindowAdmin extends JFrame {
 	public void refreshTableProducts(ArrayList<Product> listProducts) {
 		tableProducts.refreshTable(listProducts);
 	}
+	
+	public int getIdToTableProducts(){
+		return tableProducts.getProductFromTable();
+	}
+	
+	public int getIdToTableShops(){
+		return tableProducts.getProductFromTable();
+	}
 
 	public void showMessageDialog(String message) {
 		JOptionPane.showMessageDialog(this, message);
