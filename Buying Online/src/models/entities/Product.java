@@ -1,5 +1,7 @@
 package models.entities;
 
+import java.util.Vector;
+
 public class Product {
 
 	private int id;
@@ -50,6 +52,10 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", srcImg=" + srcImg + "].";
+	}
+
+	public Object[] toObjectVector() {
+		return new Object[] {id, name, price };
 	}
 
 }

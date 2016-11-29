@@ -1,6 +1,7 @@
 package view.admin;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -9,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import controller.Controller;
+import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
 
@@ -18,6 +20,7 @@ public class MainWindowAdmin extends JFrame{
 	private ToolBar toolbar;
 	private TableUser tableUser;
 	private TableShop tableShop;
+	private TableProducts tableProducts;
 
 	public MainWindowAdmin(Controller controller) {
 		setLayout(new BorderLayout());
@@ -32,9 +35,11 @@ public class MainWindowAdmin extends JFrame{
 		
 		tableUser = new TableUser(controller);
 		tableShop = new TableShop(controller);
+		tableProducts = new TableProducts(controller);
 		
-		objects.addTab("Shop" , tableShop);
-		objects.addTab("User" , tableUser);
+		objects.addTab("Shops" , tableShop);
+		objects.addTab("Users" , tableUser);
+		objects.addTab("Products" , tableProducts);
 		add(objects);
 		
 		setVisible(true);
@@ -45,6 +50,10 @@ public class MainWindowAdmin extends JFrame{
 	
 	public void refreshTableUser(ArrayList<User> users){
 		tableUser.refreshTable(users);
+	}
+	
+	public void refreshTableProducts(ArrayList<Product> listProducts){
+		tableProducts.refreshTable(listProducts);
 	}
 	
 	public void showMessageDialog(String message) {

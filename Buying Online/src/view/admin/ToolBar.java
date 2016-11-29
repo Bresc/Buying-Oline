@@ -26,6 +26,12 @@ public class ToolBar extends JToolBar{
 		btnAddShop.setActionCommand(Actions.SHOW_ADD_SHOP_DIALOG.toString());
 		btnAddShop.addActionListener(controller);
 		add(btnAddShop);
+		
+		JButton btnAddProduct = new JButton("Add New Product");
+		btnAddProduct.setToolTipText("Add Product");
+		btnAddProduct.setActionCommand(Actions.SHOW_ADD_PRODUCT.toString());
+		btnAddProduct.addActionListener(controller);
+		add(btnAddProduct);
 			
 		setFloatable(false);
 	}

@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +9,7 @@ import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
 import view.user.MainWindowUser;
+import wiew.product.WindowAddProduct;
 
 public class Controller implements ActionListener {
 
@@ -16,6 +18,7 @@ public class Controller implements ActionListener {
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
 	private AddUserDialog addUserDialog;
+	private WindowAddProduct addProductDialog;
 
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
@@ -23,6 +26,7 @@ public class Controller implements ActionListener {
 		adminManager = new AdminManager();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
+		addProductDialog = new WindowAddProduct(mainWindowAdmin, this);
 	}
 
 	@Override
@@ -32,6 +36,7 @@ public class Controller implements ActionListener {
 			addUser();
 			break;
 		case ADD_PRODUCT:
+			addProduct();
 			break;
 		case CANCEL_PRODUCT:
 			break;
@@ -47,6 +52,8 @@ public class Controller implements ActionListener {
 		case ADD_IMAGE_TO_USER:
 			addUserDialog.openFileChooser();
 			break;
+		case CHARGE_IMAGE_PRODUCT:
+			addProductDialog.searchForImage();
 		case ADD_SHOP:
 			addShop();
 			break;
@@ -56,9 +63,19 @@ public class Controller implements ActionListener {
 		case SHOW_ADD_USER_DIALOG:
 			addUserDialog.setVisible(true);
 			break;
+		case SHOW_ADD_PRODUCT:
+			addProductDialog.setVisible(true);
 		default:
 			break;
 		}
+	}
+
+	private void addProduct() {
+		adminManager.addProduct(addProductDialog.extractProductFromWindow());
+		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+		addProductDialog.cleanForm();
+		addProductDialog.setVisible(false);
+		mainWindowAdmin.showMessageDialog("Product Added Successfully");
 	}
 
 	private void addUser() {

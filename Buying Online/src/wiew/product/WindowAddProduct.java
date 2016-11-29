@@ -24,13 +24,13 @@ import javax.swing.SwingConstants;
 import controller.Actions;
 import controller.ConstantUI;
 import controller.Controller;
+import models.dao.AdminManager;
 import models.entities.Product;
 import view.admin.MainWindowAdmin;
 
 public class WindowAddProduct extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JSpinner spId;
 	private JTextField textName;
 	private JTextField textValue;
 	private JLabel labelImage;
@@ -49,11 +49,6 @@ public class WindowAddProduct extends JDialog {
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
 
-		// (componentes))
-		spId = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-		spId.setBorder(BorderFactory.createTitledBorder("Id"));
-		spId.setBackground(Color.white);
-		add(spId);
 
 		textName = new JTextField();
 		textName.setBorder(BorderFactory.createTitledBorder("Product's Name"));
@@ -69,14 +64,14 @@ public class WindowAddProduct extends JDialog {
 
 		labelImage = new JLabel();
 		labelImage.setIcon(new ImageIcon(
-				new ImageIcon(ConstantUI.DEFAULT_PRODUCT_IMAGE).getImage().getScaledInstance(70, 70, 100)));
+				new ImageIcon(ConstantUIProduct.DEFAULT_PRODUCT_IMAGE).getImage().getScaledInstance(70, 70, 100)));
 
 		panelImage.add(labelImage, BorderLayout.CENTER);
 		add(panelImage);
 
 		btnChargeImage = new JButton("Charge An Image");
 		btnChargeImage.setForeground(Color.white);
-		btnChargeImage.setActionCommand(Actions.CHARGE_IMAGE.toString());
+		btnChargeImage.setActionCommand(Actions.CHARGE_IMAGE_PRODUCT.toString());
 		btnChargeImage.addActionListener(controller);
 
 		panelImage.add(btnChargeImage, BorderLayout.EAST);
@@ -89,14 +84,14 @@ public class WindowAddProduct extends JDialog {
 		panelButtonsEdit = new JPanel();
 		panelButtonsEdit.setLayout(new FlowLayout());
 
-		btnAceptProduct = new JButton("Ad");
-		btnAceptProduct.setForeground(Color.white);
+		btnAceptProduct = new JButton("Add");
+		btnAceptProduct.setForeground(Color.black);
 		btnAceptProduct.setActionCommand(Actions.ADD_PRODUCT.toString());
 		btnAceptProduct.addActionListener(controller);
 		btnAceptProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		btnCancelProduct = new JButton("Cancel");
-		btnCancelProduct.setForeground(Color.white);
+		btnCancelProduct.setForeground(Color.black);
 		btnCancelProduct.setActionCommand(Actions.CANCEL_PRODUCT.toString());
 		btnCancelProduct.addActionListener(controller);
 		btnCancelProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -109,15 +104,13 @@ public class WindowAddProduct extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10))); // espacio en blanco
 	}
 
-	// public Product extractProductFromWindow() throws NumberFormatException {
-	// return ProductManager.createProduct((Integer)spId.getValue(),
-	// textName.getText(),
-	// Double.parseDouble(textValue.getText()),
-	// getImageInChooser());
-	// }
+	public Product extractProductFromWindow() throws NumberFormatException {
+		return AdminManager.createProduct(textName.getText(),
+				Double.parseDouble(textValue.getText()),
+				getImageInChooser());
+	}
 
 	public void chargeProductInWindow(Product product) {
-		spId.setValue(product.getId());
 		textName.setText(product.getName());
 		textValue.setText("" + product.getPrice());
 		labelImage.setIcon(new ImageIcon(
@@ -125,7 +118,7 @@ public class WindowAddProduct extends JDialog {
 	}
 
 	public void searchForImage() {
-		chooseImage = new JFileChooser("src/images");
+		chooseImage = new JFileChooser("src/img");
 		chooseImage.showOpenDialog(this);
 		// chooseImage.setSelectedFile(new
 		// File(ConstantUI.DEFAULT_PRODUCT_IMAGE));
@@ -144,15 +137,10 @@ public class WindowAddProduct extends JDialog {
 	}
 
 	public void cleanForm() {
-		spId.setValue(0);
 		textName.setText("");
 		textValue.setText("");
 		labelImage.setIcon(new ImageIcon(new ImageIcon(ConstantUI.DEFAULT_PRODUCT_IMAGE).getImage()
 				.getScaledInstance(150, -10, Image.SCALE_AREA_AVERAGING)));
-	}
-
-	public JSpinner getSpId() {
-		return spId;
 	}
 
 	public JPanel getPanelButtonsProduct() {
