@@ -4,19 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import models.dao.AdminManager;
-import models.entities.Shop;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
 import view.user.MainWindowUser;
-import wiew.product.PanelProduct;
 
 public class Controller implements ActionListener {
 
 	private MainWindowUser mainWindowUser;
 	private MainWindowAdmin mainWindowAdmin;
-	
-
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
 	private AddUserDialog addUserDialog;
@@ -80,5 +76,4 @@ public class Controller implements ActionListener {
 		addShopDialog.setVisible(false);
 		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
 	}
-	
 }
