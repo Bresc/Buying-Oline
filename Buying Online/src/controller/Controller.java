@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import models.dao.AdminManager;
+import models.exceptions.ErrorOrderNotFound;
+import models.exceptions.ErrorShopNotFound;
+import view.admin.AddProductDialog;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
@@ -17,7 +20,7 @@ public class Controller implements ActionListener {
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
 	private AddUserDialog addUserDialog;
-	private WindowAddProduct addProductDialog;
+	private AddProductDialog addProductDialog;
 	
 	
 
@@ -27,7 +30,7 @@ public class Controller implements ActionListener {
 		adminManager = new AdminManager();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
-		addProductDialog = new WindowAddProduct(mainWindowAdmin, this);
+		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 	}
 
 	@Override
@@ -68,8 +71,68 @@ public class Controller implements ActionListener {
 		case SHOW_ADD_PRODUCT:
 			addProductDialog.setVisible(true);
 			break;
-		default:
+		case CHARGE_IMAGE:
 			break;
+		case GO_LEFT_ARROW:
+			break;
+		case GO_RIGHT_ARROW:
+			break;
+		case DELETE_PRODUCT:
+			deleteProduct();
+			break;
+		case DELETE_SHOP:
+			deleteShop();
+			break;
+		case DELETE_USER:
+			deleteUser();
+			break;
+		case EDIT_PRODUCT:
+			editProduct();
+			break;
+		case EDIT_SHOP:
+			editShop();
+			break;
+		case EDIT_USER:
+			editUser();
+			break;
+		}
+	}
+
+	private void editShop() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void editUser() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void editProduct() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void deleteUser() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void deleteShop() {
+		try {
+			adminManager.delteShop(adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
+			mainWindowAdmin.refreshTableShop(adminManager.getListShop());
+		} catch (ErrorShopNotFound e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteProduct() {
+		try {
+			adminManager.deleteProduct(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
+			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+		} catch (ErrorOrderNotFound e) {
+			e.printStackTrace();
 		}
 	}
 

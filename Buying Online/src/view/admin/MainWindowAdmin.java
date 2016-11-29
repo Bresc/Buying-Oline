@@ -20,12 +20,14 @@ public class MainWindowAdmin extends JFrame {
 	private TableUser tableUser;
 	private TableShop tableShop;
 	private TableProducts tableProducts;
+	private PaginatePanel paginatePanel;
 
 	public MainWindowAdmin(Controller controller) {
 		setLayout(new BorderLayout());
+		setSize(500, 500);
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("TutoringSoft Admin v0.1");
+		setTitle("RestaurantSoft Admin v0.1");
 		setIconImage(new ImageIcon("src/img/icon.png").getImage());
 		toolbar = new ToolBar(controller);
 		add(toolbar, BorderLayout.PAGE_START);
@@ -40,6 +42,9 @@ public class MainWindowAdmin extends JFrame {
 		objects.addTab("Users", tableUser);
 		objects.addTab("Products", tableProducts);
 		add(objects);
+		
+		paginatePanel = new PaginatePanel(controller);
+		add(paginatePanel, BorderLayout.PAGE_END);
 
 		setVisible(true);
 	}
@@ -54,6 +59,14 @@ public class MainWindowAdmin extends JFrame {
 
 	public void refreshTableProducts(ArrayList<Product> listProducts) {
 		tableProducts.refreshTable(listProducts);
+	}
+	
+	public int getIdToTableProducts(){
+		return tableProducts.getProductFromTable();
+	}
+	
+	public int getIdToTableShops(){
+		return tableProducts.getProductFromTable();
 	}
 
 	public void showMessageDialog(String message) {

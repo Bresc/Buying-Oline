@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import controller.Actions;
@@ -12,6 +13,7 @@ import controller.Controller;
 public class ToolBar extends JToolBar{
 
 	private static final long serialVersionUID = 1L;
+	private JTextField txSearch;
 
 	public ToolBar(Controller controller) {
 		setBackground(Color.decode("#00BBBB"));
@@ -43,7 +45,28 @@ public class ToolBar extends JToolBar{
 		btnAddProduct.setActionCommand(Actions.SHOW_ADD_PRODUCT.toString());
 		btnAddProduct.addActionListener(controller);
 		add(btnAddProduct);
-			
+		
+		addSeparator();
+		addSeparator();
+		
+		txSearch = new JTextField();
+		add(txSearch);
+		
+		addSeparator();
+		addSeparator();
+	
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setToolTipText("Search");
+		btnSearch.setBackground(Color.decode("#FFFFFF"));
+		add(btnSearch);
+		
+		addSeparator();
+		addSeparator();
+		
 		setFloatable(false);
+	}
+	
+	public String getTextSearch(){
+		return txSearch.getText();
 	}
 }
