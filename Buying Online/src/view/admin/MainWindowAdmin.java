@@ -24,6 +24,7 @@ public class MainWindowAdmin extends JFrame {
 
 	public MainWindowAdmin(Controller controller) {
 		setLayout(new BorderLayout());
+		setSize(500, 500);
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("TutoringSoft Admin v0.1");
