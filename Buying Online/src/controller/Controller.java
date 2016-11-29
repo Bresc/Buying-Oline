@@ -68,6 +68,12 @@ public class Controller implements ActionListener {
 		case SHOW_ADD_PRODUCT:
 			addProductDialog.setVisible(true);
 			break;
+		case CHARGE_IMAGE:
+			break;
+		case GO_LEFT_ARROW:
+			break;
+		case GO_RIGHT_ARROW:
+			break;
 		default:
 			break;
 		}

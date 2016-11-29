@@ -13,7 +13,7 @@ public class PaginatePanel extends JPanel{
 
 	public PaginatePanel(Controller controller) {
 		JButton btnLeft = new JButton(new ImageIcon("src/img/arrow_left.png"));
-		btnLeft.setToolTipText("Go to the page in the left");
+		btnLeft.setToolTipText("Go to left page");
 		btnLeft.setActionCommand(Actions.GO_LEFT_ARROW.toString());
 		btnLeft.addActionListener(controller);
 		btnLeft.setFocusPainted(false);
@@ -21,7 +21,7 @@ public class PaginatePanel extends JPanel{
 		add(btnLeft);
 		
 		JButton btnRight = new JButton(new ImageIcon("src/img/arrow_right.png"));
-		btnRight.setToolTipText("Go to the page in the right");
+		btnRight.setToolTipText("Go to right page");
 		btnRight.setActionCommand(Actions.GO_RIGHT_ARROW.toString());
 		btnRight.addActionListener(controller);
 		btnRight.setFocusPainted(false);
