@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import controller.Controller;
 import models.entities.Shop;
+import models.entities.User;
 
-public class MainWindowAdmin extends JFrame {
+public class MainWindowAdmin extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private ToolBar toolbar;
@@ -25,20 +27,27 @@ public class MainWindowAdmin extends JFrame {
 		setIconImage(new ImageIcon("src/img/icon.png").getImage());
 		toolbar = new ToolBar(controller);
 		add(toolbar, BorderLayout.PAGE_START);
-
+		
 		JTabbedPane objects = new JTabbedPane();
-
+		
 		tableUser = new TableUser(controller);
 		tableShop = new TableShop(controller);
-
-		objects.addTab("User", tableUser);
-		objects.addTab("Shop", tableShop);
+		
+		objects.addTab("Shop" , tableShop);
+		objects.addTab("User" , tableUser);
 		add(objects);
-
+		
 		setVisible(true);
 	}
-
-	public void refreshTableShop(ArrayList<Shop> shops) {
+	public void refreshTableShop(ArrayList<Shop> shops){
 		tableShop.refreshTable(shops);
+	}
+	
+	public void refreshTableUser(ArrayList<User> users){
+		tableUser.refreshTable(users);
+	}
+	
+	public void showMessageDialog(String message) {
+		JOptionPane.showMessageDialog(this, message);
 	}
 }

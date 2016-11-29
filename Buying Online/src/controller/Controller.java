@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import models.dao.AdminManager;
 import models.entities.Shop;
 import view.admin.AddShopDialog;
+import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
 import view.user.MainWindowUser;
 import wiew.product.PanelProduct;
@@ -17,17 +18,20 @@ public class Controller implements ActionListener {
 
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
+	private AddUserDialog addUserDialog;
 
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
+		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand())) {
 		case ADD_USER:
+			addUser();
 			break;
 		case ADD_PRODUCT:
 			break;
@@ -39,8 +43,11 @@ public class Controller implements ActionListener {
 			break;
 		case SHOW_DROP_DOWN_MENU:
 			break;
-		case ADD_IMAGE:
+		case ADD_IMAGE_TO_SHOP:
 			addShopDialog.openFileChooser();
+			break;
+		case ADD_IMAGE_TO_USER:
+			addUserDialog.openFileChooser();
 			break;
 		case ADD_SHOP:
 			addShop();
@@ -48,12 +55,28 @@ public class Controller implements ActionListener {
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
 			break;
+		case SHOW_ADD_USER_DIALOG:
+			addUserDialog.setVisible(true);
+			break;
+		default:
+			break;
 		}
 	}
 
-	private void addShop() {
-		Shop shop = addShopDialog.getShop();
-		adminManager.addShop(shop);
-		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
+	private void addUser() {
+		adminManager.addUser(addUserDialog.getUser());
+		mainWindowAdmin.refreshTableUser(adminManager.getUsersLsit());
+		addUserDialog.cleanForm();
+		addUserDialog.setVisible(false);
+		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
 	}
+
+	private void addShop() {
+		adminManager.addShop(addShopDialog.getShop());
+		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
+		addShopDialog.cleanForm();
+		addShopDialog.setVisible(false);
+		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+	}
+	
 }

@@ -28,7 +28,7 @@ public class MainWindowUser extends JFrame {
 		PanelForRestaurants = new PanelForRestaurants(controller);
 		add(new JScrollPane(PanelForRestaurants), BorderLayout.CENTER);
 
-		setVisible(true);
+//		setVisible(true);
 	}
 
 	public void refreshCardRestaurant(Controller controller) {

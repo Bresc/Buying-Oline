@@ -192,6 +192,10 @@ public class AdminManager {
 		return shopList;
 	}
 
+	public ArrayList<User> getUsersLsit() {
+		return usersLsit;
+	}
+
 	public void setListShop(ArrayList<Shop> listShop) {
 		this.shopList = listShop;
 	}

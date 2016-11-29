@@ -65,6 +65,6 @@ public class User {
 	}
 
 	public Object[] toObjectVector() {
-		return new Object[] { name, address, password, sourceImg };
+		return new Object[] { id, name, address};
 	}
 }
