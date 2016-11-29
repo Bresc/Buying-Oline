@@ -32,16 +32,16 @@ public class TableShop extends JPanel{
 		
 		listshopMenu = new JPopupMenu();
 
-		JMenuItem itemDeleteTutor = new JMenuItem("Delete Tutor");
-//		itemDeleteTutor.setActionCommand(Actions.DELETE_TUTOR.toString());
-		itemDeleteTutor.addActionListener(controller);
-		listshopMenu.add(itemDeleteTutor);
+		JMenuItem itemDeleteShop = new JMenuItem("Delete Shop");
+//		itemDeleteShop.setActionCommand(Actions.DELETE_TUTOR.toString());
+		itemDeleteShop.addActionListener(controller);
+		listshopMenu.add(itemDeleteShop);
 		
 
-		JMenuItem itemEditTutor = new JMenuItem("Edit Tutor");
-//		itemEditTutor.setActionCommand(Actions.EDIT_TUTOR.toString());
-		itemEditTutor.addActionListener(controller);
-		listshopMenu.add(itemEditTutor);
+		JMenuItem itemEditShop = new JMenuItem("Edit Shop");
+//		itemEditShop.setActionCommand(Actions.EDIT_TUTOR.toString());
+		itemEditShop.addActionListener(controller);
+		listshopMenu.add(itemEditShop);
 		
 		shopModel = new DefaultTableModel(COLUMNS_NAME, 0);
 	    

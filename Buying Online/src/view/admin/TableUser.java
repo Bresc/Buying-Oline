@@ -70,11 +70,11 @@ public class TableUser extends JPanel{
 		listUserMenu.show(component, x, y);
 	}
 
-	public void addStudentToTable(User user) {
+	public void addUser(User user) {
 //		studentModel.addRow(student.toObjectVector());
 	}
 	
-	public void editStudentToTable(User user, int cod) {
+	public void editUserToTable(User user, int cod) {
 //		userModel.setValueAt(user.getName(), searchCodInTable(cod), 1);
 	}
 	
