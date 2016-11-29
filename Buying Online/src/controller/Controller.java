@@ -39,6 +39,8 @@ public class Controller implements ActionListener {
 			addProduct();
 			break;
 		case CANCEL_PRODUCT:
+			addProductDialog.cleanForm();
+			addProductDialog.setVisible(false);
 			break;
 		case SEARCH_RESTAURANT:
 			break;
