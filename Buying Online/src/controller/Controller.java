@@ -14,14 +14,13 @@ public class Controller implements ActionListener {
 
 	private MainWindowUser mainWindowUser;
 	private MainWindowAdmin mainWindowAdmin;
-	
+
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
 
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
-		
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 	}
 

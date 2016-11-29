@@ -8,7 +8,7 @@ public class Shop {
 	public static int ID_BASE;
 
 	public Shop(String name, String srcImg) {
-		this.id  = ID_BASE++;
+		this.id = ID_BASE++;
 		this.name = name;
 		this.srcImg = srcImg;
 	}
@@ -37,7 +37,7 @@ public class Shop {
 		this.srcImg = srcImg;
 	}
 
-	public Object[] toObjectVector(){
-		return new Object[]{id, name};
+	public Object[] toObjectVector() {
+		return new Object[] { id, name };
 	}
 }

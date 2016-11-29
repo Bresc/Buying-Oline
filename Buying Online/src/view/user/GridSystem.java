@@ -20,39 +20,50 @@ public class GridSystem {
 		component.setLayout(new GridBagLayout());
 		constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
-		generateBasicGrid(component);	
+		generateBasicGrid(component);
 	}
 
-	private void generateBasicGrid(Container component){
+	private void generateBasicGrid(Container component) {
 		constraints.weightx = DEFAULT_COLUMN_WIDTH;
 		for (int i = 0; i < COLUMNS_NUMBER; i++) {
 			constraints.gridx = i;
 			component.add(new JLabel(), constraints);
 		}
 	}
+
 	/**
 	 * 
-	 * @param row initial value is 1
-	 * @param column initial value is 0
-	 * @param width number between 1 and 12, is the columns number that fill the component
-	 * @param height of the row
+	 * @param row
+	 *            initial value is 1
+	 * @param column
+	 *            initial value is 0
+	 * @param width
+	 *            number between 1 and 12, is the columns number that fill the
+	 *            component
+	 * @param height
+	 *            of the row
 	 * @return constrains with the new values
 	 */
-	public GridBagConstraints insertComponent(int row, int column, int width, double height){
+	public GridBagConstraints insertComponent(int row, int column, int width, double height) {
 		constraints.gridy = row;
 		constraints.gridx = column;
 		constraints.gridwidth = width;
 		constraints.weighty = height;
 		return constraints;
 	}
+
 	/**
 	 * 
 	 * Keeps row and height
-	 * @param column initial value is 0
-	 * @param width number between 1 and 12, is the columns number that fill the component
+	 * 
+	 * @param column
+	 *            initial value is 0
+	 * @param width
+	 *            number between 1 and 12, is the columns number that fill the
+	 *            component
 	 * @return constrains with the new values
 	 */
-	public GridBagConstraints insertComponent(int column, int width){
+	public GridBagConstraints insertComponent(int column, int width) {
 		constraints.gridx = column;
 		constraints.gridwidth = width;
 		return constraints;
@@ -60,12 +71,13 @@ public class GridSystem {
 
 	/**
 	 * Add a border to the previous component
+	 * 
 	 * @param top
 	 * @param right
 	 * @param bottom
 	 * @param left
 	 */
-	public void addExternalBorder(int top, int right, int bottom, int left){
-		constraints.insets = new Insets(top,left,bottom,right);
+	public void addExternalBorder(int top, int right, int bottom, int left) {
+		constraints.insets = new Insets(top, left, bottom, right);
 	}
 }

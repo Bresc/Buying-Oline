@@ -7,7 +7,7 @@ public class Order {
 	private User user;
 	private State state;
 	private ArrayList<OrderProduct> products;
-	
+
 	public Order(int id, User user, ArrayList<OrderProduct> products, State state) {
 		this.id = id;
 		this.user = user;
@@ -18,7 +18,7 @@ public class Order {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -26,11 +26,11 @@ public class Order {
 	public ArrayList<OrderProduct> getProducts() {
 		return products;
 	}
-	
+
 	public void setProducts(ArrayList<OrderProduct> orderProducts) {
 		this.products = orderProducts;
 	}
-	
+
 	public State getState() {
 		return state;
 	}
@@ -42,9 +42,9 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public void setState(State state) {
 		this.state = state;
 	}
-	
+
 }

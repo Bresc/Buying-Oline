@@ -49,7 +49,7 @@ public class AdminManager {
 	public static AssignmentProductShop createAssignmentProductShop(int id, Product product, Shop shop) {
 		return new AssignmentProductShop(id, product, shop);
 	}
-	
+
 	public void addUser(User user) {
 		usersLsit.add(user);
 	}
@@ -69,8 +69,8 @@ public class AdminManager {
 	public void addAssignmentProductShop(AssignmentProductShop assignment) {
 		assignmentsProductsShopList.add(assignment);
 	}
-	
-	public User deleteUser (User user) throws ErrorUserNotFound {
+
+	public User deleteUser(User user) throws ErrorUserNotFound {
 		usersLsit.remove(searhUser(user.getId()));
 		return user;
 	}
@@ -113,7 +113,7 @@ public class AdminManager {
 		}
 		throw new ErrorOrderNotFound();
 	}
-	
+
 	public User searhUser(int id) throws ErrorUserNotFound {
 		for (User user : usersLsit) {
 			if (user.getId() == id) {
@@ -155,7 +155,7 @@ public class AdminManager {
 		productFound.setPrice(productEdit.getPrice());
 		productFound.setSrcImg(productEdit.getSrcImg());
 	}
-	
+
 	public void editUser(User userEdit, Product userOld) throws ErrorUserNotFound {
 		User userFound = searhUser(userOld.getId());
 		userFound.setId(userOld.getId());
