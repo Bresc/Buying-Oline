@@ -20,6 +20,7 @@ public class MainWindowAdmin extends JFrame {
 	private TableUser tableUser;
 	private TableShop tableShop;
 	private TableProducts tableProducts;
+	private PaginatePanel paginatePanel;
 
 	public MainWindowAdmin(Controller controller) {
 		setLayout(new BorderLayout());
@@ -40,6 +41,9 @@ public class MainWindowAdmin extends JFrame {
 		objects.addTab("Users", tableUser);
 		objects.addTab("Products", tableProducts);
 		add(objects);
+		
+		paginatePanel = new PaginatePanel(controller);
+		add(paginatePanel, BorderLayout.PAGE_END);
 
 		setVisible(true);
 	}
