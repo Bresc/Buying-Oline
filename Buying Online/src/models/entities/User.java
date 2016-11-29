@@ -40,6 +40,30 @@ public class User {
 		return ID_BASE;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setSourceImg(String sourceImg) {
+		this.sourceImg = sourceImg;
+	}
+
+	public static void setID_BASE(int iD_BASE) {
+		ID_BASE = iD_BASE;
+	}
+
 	public Object[] toObjectVector() {
 		return new Object[] { name, address, password, sourceImg };
 	}

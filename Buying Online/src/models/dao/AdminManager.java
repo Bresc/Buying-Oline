@@ -11,6 +11,8 @@ import models.entities.State;
 import models.entities.User;
 import models.exceptions.ErrorAssignmentProductShopNotFound;
 import models.exceptions.ErrorOrderNotFound;
+import models.exceptions.ErrorShopNotFound;
+import models.exceptions.ErrorUserNotFound;
 
 public class AdminManager {
 
@@ -18,12 +20,18 @@ public class AdminManager {
 	private ArrayList<AssignmentProductShop> assignmentsProductsShopList;
 	private ArrayList<Product> productsList;
 	private ArrayList<Shop> shopList;
+	private ArrayList<User> usersLsit;
 
 	public AdminManager() {
 		ordersList = new ArrayList<>();
 		assignmentsProductsShopList = new ArrayList<>();
 		productsList = new ArrayList<>();
 		shopList = new ArrayList<>();
+		usersLsit = new ArrayList<>();
+	}
+
+	public static User createUser(String name, String address, String password, String sourceImg) {
+		return new User(name, address, password, sourceImg);
 	}
 
 	public static Shop createShop(String name, String srcImg) {
@@ -41,6 +49,10 @@ public class AdminManager {
 	public static AssignmentProductShop createAssignmentProductShop(int id, Product product, Shop shop) {
 		return new AssignmentProductShop(id, product, shop);
 	}
+	
+	public void addUser(User user) {
+		usersLsit.add(user);
+	}
 
 	public void addShop(Shop shop) {
 		shopList.add(shop);
@@ -57,8 +69,13 @@ public class AdminManager {
 	public void addAssignmentProductShop(AssignmentProductShop assignment) {
 		assignmentsProductsShopList.add(assignment);
 	}
+	
+	public User deleteUser (User user) throws ErrorUserNotFound {
+		usersLsit.remove(searhUser(user.getId()));
+		return user;
+	}
 
-	public Shop delteShop(Shop shop) throws ErrorOrderNotFound {
+	public Shop delteShop(Shop shop) throws ErrorShopNotFound {
 		shopList.remove(searhShop(shop.getId()));
 		return shop;
 	}
@@ -79,13 +96,13 @@ public class AdminManager {
 		return assignmentToDelete;
 	}
 
-	public Shop searhShop(int id) throws ErrorOrderNotFound {
+	public Shop searhShop(int id) throws ErrorShopNotFound {
 		for (Shop shop : shopList) {
 			if (shop.getId() == id) {
 				return shop;
 			}
 		}
-		throw new ErrorOrderNotFound();
+		throw new ErrorShopNotFound();
 	}
 
 	public Product searhProduct(int id) throws ErrorOrderNotFound {
@@ -95,6 +112,15 @@ public class AdminManager {
 			}
 		}
 		throw new ErrorOrderNotFound();
+	}
+	
+	public User searhUser(int id) throws ErrorUserNotFound {
+		for (User user : usersLsit) {
+			if (user.getId() == id) {
+				return user;
+			}
+		}
+		throw new ErrorUserNotFound();
 	}
 
 	public Order searhOrder(int id) throws ErrorOrderNotFound {
@@ -115,12 +141,11 @@ public class AdminManager {
 		throw new ErrorAssignmentProductShopNotFound();
 	}
 
-	public void editShop(Shop shopedit, Shop shopold) throws ErrorOrderNotFound {
-		Shop shopFound = searhShop(shopold.getId());
-		shopFound.setId(shopold.getId());
-		shopFound.setName(shopedit.getName());
-		shopFound.setSrcImg(shopedit.getSrcImg());
-
+	public void editShop(Shop shopEdit, Shop shopOld) throws ErrorShopNotFound {
+		Shop shopFound = searhShop(shopOld.getId());
+		shopFound.setId(shopOld.getId());
+		shopFound.setName(shopEdit.getName());
+		shopFound.setSrcImg(shopEdit.getSrcImg());
 	}
 
 	public void editProduct(Product productEdit, Product procutOld) throws ErrorOrderNotFound {
@@ -129,6 +154,15 @@ public class AdminManager {
 		productFound.setName(productEdit.getName());
 		productFound.setPrice(productEdit.getPrice());
 		productFound.setSrcImg(productEdit.getSrcImg());
+	}
+	
+	public void editUser(User userEdit, Product userOld) throws ErrorUserNotFound {
+		User userFound = searhUser(userOld.getId());
+		userFound.setId(userOld.getId());
+		userFound.setName(userEdit.getName());
+		userFound.setAddress(userEdit.getAddress());
+		userFound.setPassword(userEdit.getPassword());
+		userFound.setSourceImg(userEdit.getSourceImg());
 	}
 
 	public void editOrder(Order newOrder, Order oldOrder) throws ErrorOrderNotFound {
