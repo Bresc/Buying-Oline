@@ -65,6 +65,7 @@ public class AddUserDialog extends JDialog {
 
 		JButton btImage = new JButton("Add imagen");
 		btImage.addActionListener(controller);
+		btImage.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btImage.setActionCommand(Actions.ADD_IMAGE_TO_USER.toString());
 		btImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btImage, gridDialog.insertComponent(3, 4, 3, 0.01));
@@ -78,6 +79,7 @@ public class AddUserDialog extends JDialog {
 		JButton btnAddUser = new JButton("Accept");
 		btnAddUser.addActionListener(controller);
 		btnAddUser.setActionCommand(Actions.ADD_USER.toString());
+		btnAddUser.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btnAddUser.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddUser, gridDialog.insertComponent(5, 2, 7, 0.01));
 	}
