@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import models.dao.AdminManager;
+import view.admin.AddProductDialog;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
@@ -17,7 +18,7 @@ public class Controller implements ActionListener {
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
 	private AddUserDialog addUserDialog;
-	private WindowAddProduct addProductDialog;
+	private AddProductDialog addProductDialog;
 	
 	
 
@@ -27,7 +28,7 @@ public class Controller implements ActionListener {
 		adminManager = new AdminManager();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
-		addProductDialog = new WindowAddProduct(mainWindowAdmin, this);
+		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 	}
 
 	@Override
