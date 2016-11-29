@@ -15,6 +15,7 @@ public class Controller implements ActionListener {
 
 	private MainWindowUser mainWindowUser;
 	private MainWindowAdmin mainWindowAdmin;
+	
 
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
@@ -23,6 +24,7 @@ public class Controller implements ActionListener {
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
+		adminManager = new AdminManager();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 	}
