@@ -21,15 +21,19 @@ public class AdminManager {
 	private ArrayList<Product> productsList;
 	private ArrayList<Shop> shopList;
 	private ArrayList<User> usersLsit;
+	private ArrayList<OrderProduct> listOrderProduct;
 
 	public AdminManager() {
+		listOrderProduct = new ArrayList<>();
 		ordersList = new ArrayList<>();
 		assignmentsProductsShopList = new ArrayList<>();
 		productsList = new ArrayList<>();
 		shopList = new ArrayList<>();
 		usersLsit = new ArrayList<>();
 	}
-
+	public static OrderProduct CreateOrderProduct(Product product ,int quantity){
+		return new OrderProduct(product, quantity);
+	}
 	public static User createUser(String name, String address, String password, String sourceImg) {
 		return new User(name, address, password, sourceImg);
 	}
@@ -49,7 +53,10 @@ public class AdminManager {
 	public static AssignmentProductShop createAssignmentProductShop(int id, Product product, Shop shop) {
 		return new AssignmentProductShop(id, product, shop);
 	}
-
+	public void addOrderProduct(OrderProduct orderProduct){
+		listOrderProduct.add(orderProduct );
+	}
+	
 	public void addUser(User user) {
 		usersLsit.add(user);
 	}
@@ -178,6 +185,14 @@ public class AdminManager {
 		assignmentFound.setId(newAssignment.getId());
 		assignmentFound.setProduct(newAssignment.getProduct());
 		assignmentFound.setshop(newAssignment.getShop());
+	}
+	
+	public double getTotalPriceOrder(){
+		double total = 0;
+		for (OrderProduct orderProduct : listOrderProduct) {
+			total = (orderProduct.getQuantity()* orderProduct.getProduct().getPrice());
+		}
+		return total;
 	}
 
 	public ArrayList<Product> getListProducts() {
