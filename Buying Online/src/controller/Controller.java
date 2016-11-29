@@ -40,8 +40,6 @@ public class Controller implements ActionListener {
 			break;
 		case CANCEL_PRODUCT:
 			break;
-		case CHARGE_IMAGE:
-			break;
 		case SEARCH_RESTAURANT:
 			break;
 		case SHOW_DROP_DOWN_MENU:
@@ -54,6 +52,7 @@ public class Controller implements ActionListener {
 			break;
 		case CHARGE_IMAGE_PRODUCT:
 			addProductDialog.searchForImage();
+			break;
 		case ADD_SHOP:
 			addShop();
 			break;
@@ -65,6 +64,7 @@ public class Controller implements ActionListener {
 			break;
 		case SHOW_ADD_PRODUCT:
 			addProductDialog.setVisible(true);
+			break;
 		default:
 			break;
 		}
