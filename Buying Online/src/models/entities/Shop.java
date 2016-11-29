@@ -37,4 +37,7 @@ public class Shop {
 		this.srcImg = srcImg;
 	}
 
+	public Object[] toObjectVector(){
+		return new Object[]{id, name};
+	}
 }
