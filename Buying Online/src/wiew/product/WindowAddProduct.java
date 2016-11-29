@@ -16,9 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import controller.Actions;
@@ -48,7 +46,6 @@ public class WindowAddProduct extends JDialog {
 		setSize(330, 460);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
-
 
 		textName = new JTextField();
 		textName.setBorder(BorderFactory.createTitledBorder("Product's Name"));
@@ -105,8 +102,7 @@ public class WindowAddProduct extends JDialog {
 	}
 
 	public Product extractProductFromWindow() throws NumberFormatException {
-		return AdminManager.createProduct(textName.getText(),
-				Double.parseDouble(textValue.getText()),
+		return AdminManager.createProduct(textName.getText(), Double.parseDouble(textValue.getText()),
 				getImageInChooser());
 	}
 

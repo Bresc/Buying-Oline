@@ -15,7 +15,6 @@ public class PanelForRestaurants extends JPanel {
 	public PanelForRestaurants(Controller controller) {
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
-
 		gridFile = new GridSystem(this);
 	}
 

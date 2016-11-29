@@ -32,7 +32,6 @@ public class CardRestaurant extends JPanel {
 		lbNameRestaurant = new JLabel();
 		lbNameRestaurant.setFont(new Font("Elephant", Font.ITALIC, 16));
 		add(lbNameRestaurant, gridPanel.insertComponent(1, 6, 5, 0.15));
-
 	}
 
 	public Icon reSize(ImageIcon imagen) {

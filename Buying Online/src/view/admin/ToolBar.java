@@ -9,7 +9,6 @@ import javax.swing.JToolBar;
 import controller.Actions;
 import controller.Controller;
 
-
 public class ToolBar extends JToolBar{
 
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,6 @@
 package view.admin;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -14,7 +13,7 @@ import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
 
-public class MainWindowAdmin extends JFrame{
+public class MainWindowAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private ToolBar toolbar;
@@ -30,32 +29,33 @@ public class MainWindowAdmin extends JFrame{
 		setIconImage(new ImageIcon("src/img/icon.png").getImage());
 		toolbar = new ToolBar(controller);
 		add(toolbar, BorderLayout.PAGE_START);
-		
+
 		JTabbedPane objects = new JTabbedPane();
-		
+
 		tableUser = new TableUser(controller);
 		tableShop = new TableShop(controller);
 		tableProducts = new TableProducts(controller);
-		
-		objects.addTab("Shops" , tableShop);
-		objects.addTab("Users" , tableUser);
-		objects.addTab("Products" , tableProducts);
+
+		objects.addTab("Shops", tableShop);
+		objects.addTab("Users", tableUser);
+		objects.addTab("Products", tableProducts);
 		add(objects);
-		
+
 		setVisible(true);
 	}
-	public void refreshTableShop(ArrayList<Shop> shops){
+
+	public void refreshTableShop(ArrayList<Shop> shops) {
 		tableShop.refreshTable(shops);
 	}
-	
-	public void refreshTableUser(ArrayList<User> users){
+
+	public void refreshTableUser(ArrayList<User> users) {
 		tableUser.refreshTable(users);
 	}
-	
-	public void refreshTableProducts(ArrayList<Product> listProducts){
+
+	public void refreshTableProducts(ArrayList<Product> listProducts) {
 		tableProducts.refreshTable(listProducts);
 	}
-	
+
 	public void showMessageDialog(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}
