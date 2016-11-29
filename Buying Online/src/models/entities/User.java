@@ -13,7 +13,7 @@ public class User {
 		this.address = address;
 		this.password = password;
 		this.sourceImg = sourceImg;
-		ID_BASE++;
+		this.id = ID_BASE++;
 	}
 
 	public int getId() {
