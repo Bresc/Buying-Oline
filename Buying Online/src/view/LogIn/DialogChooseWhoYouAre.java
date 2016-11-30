@@ -1,8 +1,4 @@
 package view.LogIn;
-
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
