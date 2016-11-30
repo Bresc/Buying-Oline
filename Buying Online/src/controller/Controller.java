@@ -171,7 +171,8 @@ public class Controller implements ActionListener {
 		try {
 			adminManager.delteShop(adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
 			mainWindowAdmin.refreshTableShop(adminManager.getListShop());
-		} catch (ErrorShopNotFound e) {
+			readXML.writeShop(adminManager.getListShop());
+		} catch (ErrorShopNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
@@ -201,7 +202,8 @@ public class Controller implements ActionListener {
 		try {
 			adminManager.deleteProduct(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
-		} catch (ErrorOrderNotFound e) {
+			readXML.writeProduct(adminManager.getListProducts());
+		} catch (ErrorOrderNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
