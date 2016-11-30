@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 import models.entities.AssignmentProductShop;
+import models.entities.Product;
 
 public class PanelProductsFromShop extends JPanel{
 
@@ -35,11 +36,11 @@ public class PanelProductsFromShop extends JPanel{
 		add(pnlMain, BorderLayout.CENTER);
 	}
 
-	public void refreshProducts(ArrayList<AssignmentProductShop> productsFromShop) {
+	public void refreshProducts(ArrayList<Product> productsFromShop) {
 		pnlMain.removeAll();
 		int columns = 0;
 		int rows = 0;
-		for (AssignmentProductShop assignment : productsFromShop) {
+		for (Product product : productsFromShop) {
 			gridManger.gridx = columns;
 			gridManger.gridy = rows;
 			gridManger.weightx = 0.5;
@@ -59,7 +60,7 @@ public class PanelProductsFromShop extends JPanel{
 
 			// NORTH
 			JLabel lbImage = new JLabel();
-			Image img = new ImageIcon(assignment.getProduct().getSrcImg()).getImage().getScaledInstance(320, 150,
+			Image img = new ImageIcon(product.getSrcImg()).getImage().getScaledInstance(320, 150,
 					java.awt.Image.SCALE_AREA_AVERAGING);
 			lbImage.setIcon(new ImageIcon(img));
 			lbImage.setHorizontalAlignment((int) CENTER_ALIGNMENT);
@@ -71,7 +72,7 @@ public class PanelProductsFromShop extends JPanel{
 			JPanel pnlCenter = new JPanel(new BorderLayout());
 			pnlCenter.setBackground(Color.WHITE);
 
-			JLabel lbNameProduct = new JLabel(assignment.getProduct().getName());
+			JLabel lbNameProduct = new JLabel(product.getName());
 			lbNameProduct.setFont(new Font("Arial", Font.BOLD, 16));
 			lbNameProduct.setBorder(BorderFactory.createEmptyBorder(10, 20, 0, 20));
 			lbNameProduct.setVerticalAlignment(JLabel.NORTH);

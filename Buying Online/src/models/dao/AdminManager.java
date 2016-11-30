@@ -194,6 +194,16 @@ public class AdminManager {
 		}
 		return total;
 	}
+	
+	public ArrayList<Product> getProductsListFromShop(Shop shop) {
+		ArrayList<Product> productsFromShop = new ArrayList<>();
+		for (AssignmentProductShop assignmentProductShop : assignmentsProductsShopList) {
+			if (assignmentProductShop.getShop().getId() == shop.getId()) {
+				productsFromShop.add(assignmentProductShop.getProduct());
+			}
+		}
+		return productsFromShop;
+	}
 
 	public ArrayList<Product> getListProducts() {
 		return productsList;

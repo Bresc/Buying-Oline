@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controller.Controller;
 import models.entities.AssignmentProductShop;
+import models.entities.Product;
 
 public class MainWindowUser extends JFrame {
 
@@ -41,7 +42,7 @@ public class MainWindowUser extends JFrame {
 		panelForRestaurants.refreshCardRestaurant(controller);
 	}
 	
-	public void changeToProductsFromShopPanel(ArrayList<AssignmentProductShop> productsFromShop) {
+	public void changeToProductsFromShopPanel(ArrayList<Product> productsFromShop) {
 		panelActualCenter.removeAll();
 		panelProductsFromShop.refreshProducts(productsFromShop);
 		panelActualCenter.add(panelProductsFromShop);
