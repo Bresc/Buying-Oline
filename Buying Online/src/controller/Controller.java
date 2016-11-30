@@ -3,12 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 import models.dao.AdminManager;
-import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
@@ -42,9 +43,7 @@ public class Controller implements ActionListener {
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 
 		try {
-			refreshDataUser(readXML.readUser());
-			refreshDataShop(readXML.readShop());
-			refreshDataProduct(readXML.readProduct());
+			refreshData(readXML.readUser());
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,6 +117,18 @@ public class Controller implements ActionListener {
 		case EDIT_USER:
 			editUser();
 			break;
+		case CHANGE_TO_PRODUCTS_FROM_SHOP_PANEL:
+			changeToProductsFromShopPanel(e);
+		}
+	}
+
+	public void changeToProductsFromShopPanel(ActionEvent e) {
+		JButton bntSource = (JButton)(e.getSource());
+		try {
+			Shop selectedShop = adminManager.searhShop(Integer.parseInt(bntSource.getName()));
+			mainWindowUser.changeToProductsFromShopPanel(adminManager.getProductsListFromShop(selectedShop));
+		} catch (NumberFormatException | ErrorShopNotFound e1) {
+			e1.printStackTrace();
 		}
 	}
 
@@ -150,25 +161,11 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	private void refreshDataUser(ArrayList<User> users) throws SAXException {
+	private void refreshData(ArrayList<User> users) throws SAXException {
 		for (User user : users) {
 			adminManager.addUser(user);
 		}
 		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
-	}
-	
-	private void refreshDataProduct(ArrayList<Product> readProduct) {
-		for (Product product : readProduct) {
-			adminManager.addProduct(product);
-		}
-		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
-	}
-
-	private void refreshDataShop(ArrayList<Shop> readShop) {
-		for (Shop shop : readShop) {
-			adminManager.addShop(shop);
-		}
-		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 	}
 
 	private void deleteProduct() {
