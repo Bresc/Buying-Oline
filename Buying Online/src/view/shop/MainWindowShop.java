@@ -11,6 +11,5 @@ public class MainWindowShop extends JFrame{
 
 	public MainWindowShop() {
 		setTitle("Shop");
-		setVisible(true);
 	}
 }

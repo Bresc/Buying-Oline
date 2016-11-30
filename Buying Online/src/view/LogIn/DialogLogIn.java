@@ -50,7 +50,7 @@ public class DialogLogIn extends JDialog{
 		buttonAgreeAdmin = new JButton("Log In");
 		buttonAgreeAdmin.addActionListener(controller);
 		buttonAgreeAdmin.setActionCommand(Actions.ADMIN_VIEW.toString());
-		buttonAgreeAdmin.setEnabled(false);
+//		buttonAgreeAdmin.setEnabled(false);
 		buttonAgreeAdmin.setVisible(false);
 		add(buttonAgreeAdmin);
 		
@@ -64,7 +64,7 @@ public class DialogLogIn extends JDialog{
 		buttonAgreeShop = new JButton("Log In");
 		buttonAgreeShop.addActionListener(controller);
 		buttonAgreeShop.setActionCommand(Actions.SHOP_VIEW.toString());
-		buttonAgreeShop.setEnabled(false);
+//		buttonAgreeShop.setEnabled(false);
 		buttonAgreeShop.setVisible(false);
 		add(buttonAgreeShop);
 	}

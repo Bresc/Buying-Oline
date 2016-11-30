@@ -148,6 +148,16 @@ public class AdminManager {
 		throw new ErrorAssignmentProductShopNotFound();
 	}
 
+	public boolean searchForLogInUser(String name, String password){
+		boolean helper = false;
+		for (User user : usersLsit) {
+			if (user.getName().equals(name) && user.getPassword().equals(password)) {
+				helper = true;
+			}
+		}
+		return helper;
+	}
+	
 	public void editShop(Shop shopEdit, Shop shopOld) throws ErrorShopNotFound {
 		Shop shopFound = searhShop(shopOld.getId());
 		shopFound.setId(shopOld.getId());

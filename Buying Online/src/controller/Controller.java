@@ -1,6 +1,8 @@
 package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,33 +18,41 @@ import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
 import persistence.ReadXML;
+import view.LogIn.DialogChooseWhoYouAre;
+import view.LogIn.DialogLogIn;
 import view.admin.AddProductDialog;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
 import view.product.WindowAddProduct;
+import view.shop.MainWindowShop;
 import view.user.MainWindowUser;
 
-public class Controller implements ActionListener {
+public class Controller implements ActionListener, KeyListener {
 
 	private MainWindowUser mainWindowUser;
 	private MainWindowAdmin mainWindowAdmin;
+	private MainWindowShop mainWindowShop;
 	private AddShopDialog addShopDialog;
 	private AdminManager adminManager;
 	private AddUserDialog addUserDialog;
 	private AddProductDialog addProductDialog;
+	private DialogChooseWhoYouAre chooseWhoYouAre;
+	private DialogLogIn logIn;
 	private ReadXML readXML;
 
 
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
+		mainWindowShop = new MainWindowShop();
 		adminManager = new AdminManager();
 		readXML = new ReadXML();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
-
+		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
+		logIn = new DialogLogIn(this);
 		try {
 			refreshDataUser(readXML.readUser());
 			refreshDataShop(readXML.readShop());
@@ -134,9 +144,63 @@ public class Controller implements ActionListener {
 			break;
 		case CHANGE_TO_PRODUCTS_FROM_SHOP_PANEL:
 			changeToProductsFromShopPanel(e);
+			break;
+		case OPEN_DIALOG_LOG_IN:
+			OpenDialogLogIn();
+			break;
+		case SHOP_LOG_IN:
+			shopLogIn();
+			break;
+		case USER_LOG_IN:
+			userLogIn();
+			break;
+		case ADMIN_VIEW:
+			adminView();
+			break;
+		case SHOP_VIEW:
+			shopView();
+			break;
+		case USER_VIEW:
+			userView();
+			break;
+		default:
+			break;
 		}
 	}
 
+	private void userView() {
+		mainWindowUser.setVisible(true);
+		logIn.setVisible(false);
+	}
+
+	private void shopView() {
+		mainWindowShop.setVisible(true);
+		logIn.setVisible(false);
+	}
+
+	private void adminView() {
+		mainWindowAdmin.setVisible(true);
+		logIn.setVisible(false);
+	}
+	
+	private void userLogIn() {
+		logIn.UserView();
+		chooseWhoYouAre.setVisible(false);
+	}
+	
+/**
+ * este metodo es lo de shop
+ */
+	private void shopLogIn() {
+		logIn.CompanyView();
+		chooseWhoYouAre.setVisible(false);
+	}
+
+	private void OpenDialogLogIn() {
+		logIn.adminView();
+		chooseWhoYouAre.setVisible(false);
+	}
+	
 	public void changeToProductsFromShopPanel(ActionEvent e) {
 		JButton bntSource = (JButton)(e.getSource());
 		try {
@@ -233,5 +297,26 @@ public class Controller implements ActionListener {
 		addShopDialog.setVisible(false);
 		readXML.writeShop(adminManager.getListShop());
 		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+	}
+
+
+
+	public void run() {
+		chooseWhoYouAre.setVisible(true);
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
 	}
 }
