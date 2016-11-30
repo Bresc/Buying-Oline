@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import org.xml.sax.SAXException;
 import models.dao.AdminManager;
 import models.entities.User;
@@ -26,7 +28,7 @@ public class Controller implements ActionListener {
 	private AddUserDialog addUserDialog;
 	private AddProductDialog addProductDialog;
 	private ReadXML readXML;
-	
+
 
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
@@ -36,7 +38,7 @@ public class Controller implements ActionListener {
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
-		
+
 		try {
 			refreshData(readXML.readUser());
 		} catch (SAXException | ParserConfigurationException | IOException e) {
@@ -49,7 +51,12 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand())) {
 		case ADD_USER:
-			addUser();
+			try {
+				addUser();
+			} catch (TransformerException | ParserConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
 		case ADD_PRODUCT:
 			addProduct();
@@ -145,7 +152,7 @@ public class Controller implements ActionListener {
 		}
 		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 	}
-	
+
 	private void deleteProduct() {
 		try {
 			adminManager.deleteProduct(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
@@ -163,11 +170,12 @@ public class Controller implements ActionListener {
 		mainWindowAdmin.showMessageDialog("Product Added Successfully");
 	}
 
-	private void addUser() {
+	private void addUser() throws TransformerException, ParserConfigurationException {
 		adminManager.addUser(addUserDialog.getUser());
 		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 		addUserDialog.cleanForm();
 		addUserDialog.setVisible(false);
+		readXML.writeUser(adminManager.getUsersList());
 		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
 	}
 
