@@ -1,6 +1,5 @@
 package models.entities;
 
-import java.util.Vector;
 
 public class Product {
 

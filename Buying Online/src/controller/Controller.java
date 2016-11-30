@@ -5,11 +5,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
 import org.xml.sax.SAXException;
 import models.dao.AdminManager;
 import models.entities.Product;
@@ -24,7 +22,6 @@ import view.admin.AddProductDialog;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
-import view.product.WindowAddProduct;
 import view.shop.MainWindowShop;
 import view.user.MainWindowUser;
 
@@ -58,13 +55,11 @@ public class Controller implements ActionListener, KeyListener {
 			refreshDataShop(readXML.readShop());
 			refreshDataProduct(readXML.readProduct());
 		} catch (SAXException | ParserConfigurationException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand())) {
@@ -72,7 +67,6 @@ public class Controller implements ActionListener, KeyListener {
 			try {
 				addUser();
 			} catch (TransformerException | ParserConfigurationException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -80,7 +74,6 @@ public class Controller implements ActionListener, KeyListener {
 			try {
 				addProduct();
 			} catch (TransformerException | ParserConfigurationException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 			break;
@@ -105,7 +98,6 @@ public class Controller implements ActionListener, KeyListener {
 			try {
 				addShop();
 			} catch (TransformerException | ParserConfigurationException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;

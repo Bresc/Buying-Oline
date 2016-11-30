@@ -112,7 +112,7 @@ public class AddUserDialog extends JDialog {
 	}
 
 	public User getUser() {
-		return AdminManager.createUser(txName.getText(), txAddress.getText(), txPassword.getText(),
+		return AdminManager.createUser(txName.getText(), txAddress.getText(), String.valueOf(txPassword.getPassword()),
 				String.valueOf(fcLoadImage.getSelectedFile()));
 	}
 
