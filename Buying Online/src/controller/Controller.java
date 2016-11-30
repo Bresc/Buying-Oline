@@ -10,8 +10,8 @@ import view.admin.AddProductDialog;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
+import view.product.WindowAddProduct;
 import view.user.MainWindowUser;
-import wiew.product.WindowAddProduct;
 
 public class Controller implements ActionListener {
 

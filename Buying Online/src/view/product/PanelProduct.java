@@ -1,4 +1,4 @@
-package wiew.product;
+package view.product;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

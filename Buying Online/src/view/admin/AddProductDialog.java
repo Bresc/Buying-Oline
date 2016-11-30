@@ -27,8 +27,8 @@ import controller.ConstantUI;
 import controller.Controller;
 import models.dao.AdminManager;
 import models.entities.Product;
+import view.product.ConstantUIProduct;
 import view.user.GridSystem;
-import wiew.product.ConstantUIProduct;
 
 public class AddProductDialog extends JDialog {
 

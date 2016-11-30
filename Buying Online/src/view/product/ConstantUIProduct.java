@@ -1,4 +1,4 @@
-package wiew.product;
+package view.product;
 
 public class ConstantUIProduct {
 
