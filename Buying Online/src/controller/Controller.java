@@ -2,10 +2,18 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import models.dao.AdminManager;
+import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
+import persistence.ReadXML;
 import view.admin.AddProductDialog;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
@@ -21,16 +29,24 @@ public class Controller implements ActionListener {
 	private AdminManager adminManager;
 	private AddUserDialog addUserDialog;
 	private AddProductDialog addProductDialog;
-	
+	private ReadXML readXML;
 	
 
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
 		adminManager = new AdminManager();
+		readXML = new ReadXML();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
+		
+		try {
+			refreshData(readXML.readUser());
+		} catch (SAXException | ParserConfigurationException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -127,6 +143,13 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	private void refreshData(ArrayList<User> users) throws SAXException {
+		for (User user : users) {
+			adminManager.addUser(user);
+		}
+		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+	}
+	
 	private void deleteProduct() {
 		try {
 			adminManager.deleteProduct(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
@@ -146,7 +169,7 @@ public class Controller implements ActionListener {
 
 	private void addUser() {
 		adminManager.addUser(addUserDialog.getUser());
-		mainWindowAdmin.refreshTableUser(adminManager.getUsersLsit());
+		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 		addUserDialog.cleanForm();
 		addUserDialog.setVisible(false);
 		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");

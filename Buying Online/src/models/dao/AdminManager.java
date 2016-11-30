@@ -207,7 +207,7 @@ public class AdminManager {
 		return shopList;
 	}
 
-	public ArrayList<User> getUsersLsit() {
+	public ArrayList<User> getUsersList() {
 		return usersLsit;
 	}
 

@@ -17,7 +17,7 @@ import models.entities.User;
 
 public class ReadXML {
 
-	public ArrayList<User> read() throws ParserConfigurationException, SAXException, IOException{
+	public ArrayList<User> readUser() throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<User> userList = new ArrayList<>();
 		File file = new File("src/data/users.xml");
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
