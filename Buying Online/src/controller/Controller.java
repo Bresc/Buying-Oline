@@ -8,6 +8,8 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 import models.dao.AdminManager;
+import models.entities.Product;
+import models.entities.Shop;
 import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
@@ -40,7 +42,9 @@ public class Controller implements ActionListener {
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 
 		try {
-			refreshData(readXML.readUser());
+			refreshDataUser(readXML.readUser());
+			refreshDataShop(readXML.readShop());
+			refreshDataProduct(readXML.readProduct());
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,11 +150,25 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	private void refreshData(ArrayList<User> users) throws SAXException {
+	private void refreshDataUser(ArrayList<User> users) throws SAXException {
 		for (User user : users) {
 			adminManager.addUser(user);
 		}
 		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+	}
+	
+	private void refreshDataProduct(ArrayList<Product> readProduct) {
+		for (Product product : readProduct) {
+			adminManager.addProduct(product);
+		}
+		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+	}
+
+	private void refreshDataShop(ArrayList<Shop> readShop) {
+		for (Shop shop : readShop) {
+			adminManager.addShop(shop);
+		}
+		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 	}
 
 	private void deleteProduct() {

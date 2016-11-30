@@ -18,6 +18,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import models.entities.Product;
+import models.entities.Shop;
 import models.entities.User;
 
 public class ReadXML {
@@ -41,7 +43,45 @@ public class ReadXML {
 		}
 		return userList;
 	}
+	
+	public ArrayList<Shop> readShop() throws ParserConfigurationException, SAXException, IOException{
+		ArrayList<Shop> shopList = new ArrayList<>();
+		File file = new File("src/data/shops.xml");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
 
+		Document document = builder.parse(file);
+		document.getDocumentElement().normalize();
+
+		NodeList nodeList = document.getElementsByTagName("shop");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			shopList.add(new Shop(((((Element)nodeList.item(i)).getElementsByTagName("name")).item(0)).getTextContent()
+					, ((((Element)nodeList.item(i)).getElementsByTagName("srcImg")).item(0)).getTextContent()
+					));
+		}
+		System.out.println(shopList);
+		return shopList;
+	}
+
+	public ArrayList<Product> readProduct() throws ParserConfigurationException, SAXException, IOException{
+		ArrayList<Product> productList = new ArrayList<>();
+		File file = new File("src/data/products.xml");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		Document document = builder.parse(file);
+		document.getDocumentElement().normalize();
+
+		NodeList nodeList = document.getElementsByTagName("product");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			productList.add(new Product(((((Element)nodeList.item(i)).getElementsByTagName("name")).item(0)).getTextContent()
+					, Double.parseDouble(((((Element)nodeList.item(i)).getElementsByTagName("price")).item(0)).getTextContent())
+					, ((((Element)nodeList.item(i)).getElementsByTagName("srcImg")).item(0)).getTextContent()
+					));
+		}
+		return productList;
+	}
+	
 	public void writeUser(ArrayList<User> users) throws TransformerException, ParserConfigurationException{
 		DocumentBuilder docBuilder;
 		docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
