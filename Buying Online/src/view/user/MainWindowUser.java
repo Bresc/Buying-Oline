@@ -7,13 +7,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controller.Controller;
 import models.entities.Product;
+import models.entities.Shop;
 
 public class MainWindowUser extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private ToolBar toolBarUser;
-	private PanelShop panelForRestaurants;
+	
 	private JPanel panelActualCenter;
+	private PanelShops panelShops;
 	private PanelProductsFromShop panelProductsFromShop;
 
 	public MainWindowUser(Controller controller) {
@@ -30,17 +32,18 @@ public class MainWindowUser extends JFrame {
 
 		panelActualCenter = new JPanel();
 		panelProductsFromShop = new PanelProductsFromShop(controller);
-
-		panelActualCenter.add(panelForRestaurants);
+		
+		panelShops=  new PanelShops();
+		panelActualCenter.add(panelShops);
 		add(new JScrollPane(panelActualCenter), BorderLayout.CENTER);
 
-	 setVisible(true);
-	}
-
-	public void refreshCardRestaurant(Controller controller) {
-		panelForRestaurants.refreshCardRestaurant(controller);
 	}
 	
+	public void agregarShop(Shop shop , Controller controller){
+		panelShops.agregaShop(shop, controller);
+	}
+
+
 	public void changeToProductsFromShopPanel(ArrayList<Product> productsFromShop) {
 		panelActualCenter.removeAll();
 		panelProductsFromShop.refreshProducts(productsFromShop);

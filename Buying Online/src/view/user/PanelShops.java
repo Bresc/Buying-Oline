@@ -1,11 +1,8 @@
 package view.user;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controller.Controller;
@@ -39,6 +36,5 @@ public class PanelShops extends JPanel {
 		PanelShops = new JPanel(new GridLayout(3, 1, 5, 10));
 		revalidate();
 	}
-	
 
 }
