@@ -1,14 +1,10 @@
 package controller;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.xml.sax.SAXException;
-
 import models.dao.AdminManager;
 import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
