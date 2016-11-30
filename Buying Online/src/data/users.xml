@@ -1,0 +1,23 @@
+﻿<list.user>
+	<user>
+		<id>0</id>
+		<name>Marco Gonzalez</name>
+		<address>cll4 No 12-04</address>
+		<password>1</password>
+		<sourceImg>src\img\ProfileDefault.jpg</sourceImg>
+	</user>
+	<user>
+		<id>1</id>
+		<name>Daniel</name>
+		<address>cll5 No 14-32</address>
+		<password>2</password>
+		<sourceImg>src\img\ProfileDefault.jpg</sourceImg>
+	</user>
+	<user>
+		<id>2</id>
+		<name>jose</name>
+		<address>cll6 No 15-32</address>
+		<password>3</password>
+		<sourceImg>src\img\ProfileDefault.jpg</sourceImg>
+	</user>
+</list.user>
