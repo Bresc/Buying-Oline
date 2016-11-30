@@ -6,14 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controller.Controller;
-import models.entities.AssignmentProductShop;
 import models.entities.Product;
 
 public class MainWindowUser extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private ToolBar toolBarUser;
-	private PanelForRestaurants panelForRestaurants;
+	private PanelShop panelForRestaurants;
 	private JPanel panelActualCenter;
 	private PanelProductsFromShop panelProductsFromShop;
 
@@ -31,11 +30,11 @@ public class MainWindowUser extends JFrame {
 
 		panelActualCenter = new JPanel();
 		panelProductsFromShop = new PanelProductsFromShop(controller);
-		panelForRestaurants = new PanelForRestaurants(controller);
+
 		panelActualCenter.add(panelForRestaurants);
 		add(new JScrollPane(panelActualCenter), BorderLayout.CENTER);
 
-//		 setVisible(true);
+	 setVisible(true);
 	}
 
 	public void refreshCardRestaurant(Controller controller) {
@@ -49,4 +48,5 @@ public class MainWindowUser extends JFrame {
 		panelActualCenter.updateUI();
 		panelActualCenter.repaint();
 	}
+
 }
