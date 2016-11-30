@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerException;
 
 import org.xml.sax.SAXException;
 import models.dao.AdminManager;
+import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
@@ -43,12 +44,16 @@ public class Controller implements ActionListener {
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 
 		try {
-			refreshData(readXML.readUser());
+			refreshDataUser(readXML.readUser());
+			refreshDataShop(readXML.readShop());
+			refreshDataProduct(readXML.readProduct());
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -62,7 +67,12 @@ public class Controller implements ActionListener {
 			}
 			break;
 		case ADD_PRODUCT:
-			addProduct();
+			try {
+				addProduct();
+			} catch (TransformerException | ParserConfigurationException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			break;
 		case CANCEL_PRODUCT:
 			addProductDialog.cleanForm();
@@ -82,7 +92,12 @@ public class Controller implements ActionListener {
 			addProductDialog.searchForImage();
 			break;
 		case ADD_SHOP:
-			addShop();
+			try {
+				addShop();
+			} catch (TransformerException | ParserConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
@@ -161,11 +176,25 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	private void refreshData(ArrayList<User> users) throws SAXException {
+	private void refreshDataUser(ArrayList<User> users) throws SAXException {
 		for (User user : users) {
 			adminManager.addUser(user);
 		}
 		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+	}
+	
+	private void refreshDataProduct(ArrayList<Product> readProduct) {
+		for (Product product : readProduct) {
+			adminManager.addProduct(product);
+		}
+		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+	}
+
+	private void refreshDataShop(ArrayList<Shop> readShop) {
+		for (Shop shop : readShop) {
+			adminManager.addShop(shop);
+		}
+		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 	}
 
 	private void deleteProduct() {
@@ -177,11 +206,12 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	private void addProduct() {
+	private void addProduct() throws TransformerException, ParserConfigurationException {
 		adminManager.addProduct(addProductDialog.extractProductFromWindow());
 		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
 		addProductDialog.cleanForm();
 		addProductDialog.setVisible(false);
+		readXML.writeProduct(adminManager.getListProducts());
 		mainWindowAdmin.showMessageDialog("Product Added Successfully");
 	}
 
@@ -194,11 +224,12 @@ public class Controller implements ActionListener {
 		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
 	}
 
-	private void addShop() {
+	private void addShop() throws TransformerException, ParserConfigurationException {
 		adminManager.addShop(addShopDialog.getShop());
 		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 		addShopDialog.cleanForm();
 		addShopDialog.setVisible(false);
+		readXML.writeShop(adminManager.getListShop());
 		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
 	}
 }
