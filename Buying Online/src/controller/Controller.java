@@ -73,22 +73,13 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand())) {
 		case ADD_USER:
-			try {
-				addUser();
-			} catch (TransformerException | ParserConfigurationException e1) {
-				e1.printStackTrace();
-			}
+			addUser();
 			break;
 		case ADD_PRODUCT:
-			try {
-				addProduct();
-			} catch (TransformerException | ParserConfigurationException e2) {
-				e2.printStackTrace();
-			}
+			addProduct();
 			break;
 		case CANCEL_PRODUCT:
-			addProductDialog.cleanForm();
-			addProductDialog.setVisible(false);
+			cancelProduct();
 			break;
 		case SEARCH_RESTAURANT:
 			break;
@@ -104,11 +95,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			addProductDialog.searchForImage();
 			break;
 		case ADD_SHOP:
-			try {
-				addShop();
-			} catch (TransformerException | ParserConfigurationException e1) {
-				e1.printStackTrace();
-			}
+			addShop();
 			break;
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
@@ -166,9 +153,12 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case USER_VIEW:
 			userView();
 			break;
-		default:
-			break;
 		}
+	}
+
+	private void cancelProduct() {
+		addProductDialog.cleanForm();
+		addProductDialog.setVisible(false);
 	}
 
 	private void userView() {
@@ -279,31 +269,42 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		}
 	}
 
-	private void addProduct() throws TransformerException, ParserConfigurationException {
-		adminManager.addProduct(addProductDialog.extractProductFromWindow());
-		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
-		addProductDialog.cleanForm();
-		addProductDialog.setVisible(false);
-		readXML.writeProduct(adminManager.getListProducts());
-		mainWindowAdmin.showMessageDialog("Product Added Successfully");
+	private void addProduct() {
+		try {
+			adminManager.addProduct(addProductDialog.extractProductFromWindow());
+			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+			cancelProduct();
+			readXML.writeProduct(adminManager.getListProducts());
+			mainWindowAdmin.showMessageDialog("Product Added Successfully");
+		} catch (TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void addUser() throws TransformerException, ParserConfigurationException {
-		adminManager.addUser(addUserDialog.getUser());
-		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
-		addUserDialog.cleanForm();
-		addUserDialog.setVisible(false);
-		readXML.writeUser(adminManager.getUsersList());
-		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+	private void addUser() {
+		try {
+			adminManager.addUser(addUserDialog.getUser());
+			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+			addUserDialog.cleanForm();
+			addUserDialog.setVisible(false);
+			readXML.writeUser(adminManager.getUsersList());
+			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+		} catch (TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void addShop() throws TransformerException, ParserConfigurationException {
-		adminManager.addShop(addShopDialog.getShop());
-		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
-		addShopDialog.cleanForm();
-		addShopDialog.setVisible(false);
-		readXML.writeShop(adminManager.getListShop());
-		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+	private void addShop() {
+		try {
+			adminManager.addShop(addShopDialog.getShop());
+			mainWindowAdmin.refreshTableShop(adminManager.getListShop());
+			addShopDialog.cleanForm();
+			addShopDialog.setVisible(false);
+			readXML.writeShop(adminManager.getListShop());
+			mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+		} catch (TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void run() {
@@ -312,61 +313,65 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
+		// logIn.getPassword()));
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
+		// logIn.getPassword()));
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
+		// logIn.getPassword()));
 	}
 
-	//paginacion
+	// paginacion
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		JTabbedPane tp = (JTabbedPane) e.getSource();
 		actualPage = 1;
 		refreshList(tp.getSelectedIndex());
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public void refreshList(int index){
+	public void refreshList(int index) {
 		mainWindowAdmin.refreshPage(actualPage,
 				adminManager.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
 		switch (index) {
 		case 0:
-			mainWindowAdmin.refreshTableShop((ArrayList<Shop>)adminManager.paginate(adminManager.returnListDependIndex(index),
-					actualPage));
+			mainWindowAdmin.refreshTableShop(
+					(ArrayList<Shop>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
 			break;
 		case 1:
-			mainWindowAdmin.refreshTableUser((ArrayList<User>) adminManager.paginate(adminManager.returnListDependIndex(index),
-					actualPage));
+			mainWindowAdmin.refreshTableUser(
+					(ArrayList<User>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
 			break;
 		case 2:
-			mainWindowAdmin.refreshTableProducts((ArrayList<Product>) adminManager.paginate(adminManager.returnListDependIndex(index),
-					actualPage));
+			mainWindowAdmin.refreshTableProducts(
+					(ArrayList<Product>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
 			break;
 
 		default:
 			break;
 		}
 	}
-	
+
 	private void changeToNextPage() {
-		if (actualPage < adminManager.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
+		if (actualPage < adminManager
+				.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
 			actualPage++;
-			refreshList(mainWindowAdmin.getTabbedPaneIndex());			
+			refreshList(mainWindowAdmin.getTabbedPaneIndex());
 		}
 	}
 
 	private void changeToPreviousPage() {
 		if (actualPage > 1) {
 			actualPage--;
-			refreshList(mainWindowAdmin.getTabbedPaneIndex());			
+			refreshList(mainWindowAdmin.getTabbedPaneIndex());
 		}
 	}
 }
