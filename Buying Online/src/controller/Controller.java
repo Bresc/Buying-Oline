@@ -180,8 +180,10 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void userView() {
 		if (adminManager.searchForLogInUser(logIn.getTheName(), logIn.getPassword())) {
 			mainWindowUser.setVisible(true);
+			logIn.setVisible(false);
+		}else{
+			logIn.setVisible(true);
 		}
-		logIn.setVisible(false);
 	}
 
 	private void shopView() {
