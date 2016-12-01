@@ -41,7 +41,7 @@ public class TableProducts extends JPanel {
 
 		JMenuItem itemEditShop = new JMenuItem("Edit Product");
 		itemEditShop.addActionListener(controller);
-		itemEditShop.setActionCommand(Actions.EDIT_PRODUCT.toString());
+		itemEditShop.setActionCommand(Actions.SHOW_EDIT_PRODUCT.toString());
 		listshopMenu.add(itemEditShop);
 
 		modelProducts = new DefaultTableModel(COLUMN_NAMES, 0);

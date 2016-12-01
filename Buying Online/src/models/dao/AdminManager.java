@@ -167,12 +167,10 @@ public class AdminManager {
 		shopFound.setSrcImg(shopEdit.getSrcImg());
 	}
 
-	public void editProduct(Product productEdit, Product procutOld) throws ErrorOrderNotFound {
-		Product productFound = searhProduct(procutOld.getId());
-		productFound.setId(procutOld.getId());
-		productFound.setName(productEdit.getName());
-		productFound.setPrice(productEdit.getPrice());
-		productFound.setSrcImg(productEdit.getSrcImg());
+	public void editProduct(Product productEdit, Product procutOld){
+		procutOld.setName(productEdit.getName());
+		procutOld.setPrice(productEdit.getPrice());
+		procutOld.setSrcImg(productEdit.getSrcImg());
 	}
 
 	public void editUser(User userEdit, Product userOld) throws ErrorUserNotFound {

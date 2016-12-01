@@ -76,9 +76,9 @@ public class AddProductDialog extends JDialog {
 		labelImage.setIcon(new ImageIcon(ConstantUIProduct.DEFAULT_PRODUCT_IMAGE));
 		add(labelImage, gridProduct.insertComponent(3, 5, 4, 0.01));
 
-		btnAceptProduct = new JButton("Add");
+		btnAceptProduct = new JButton();
 		btnAceptProduct.setForeground(Color.black);
-		btnAceptProduct.setActionCommand(Actions.ADD_PRODUCT.toString());
+		changeActionToProductAdd();
 		btnAceptProduct.addActionListener(controller);
 		btnAceptProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAceptProduct, gridProduct.insertComponent(4, 3, 3, 0.001));
@@ -96,6 +96,16 @@ public class AddProductDialog extends JDialog {
 	public Product extractProductFromWindow() throws NumberFormatException {
 		return AdminManager.createProduct(textName.getText(), Double.parseDouble(intergerFormatter(textValue.getText())),
 				getImageInChooser());
+	}
+	
+	public void changeActionToProductEdit(){
+		btnAceptProduct.setText("Edit Product");
+		btnAceptProduct.setActionCommand(Actions.EDIT_PRODUCT.name());
+	}
+	
+	public void changeActionToProductAdd(){
+		btnAceptProduct.setText("Add Product");
+		btnAceptProduct.setActionCommand(Actions.ADD_PRODUCT.name());
 	}
 	
 	public String intergerFormatter(String num){

@@ -123,6 +123,9 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case DELETE_USER:
 			deleteUser();
 			break;
+		case SHOW_EDIT_PRODUCT:
+			showEditProduct();
+			break;
 		case EDIT_PRODUCT:
 			editProduct();
 			break;
@@ -153,7 +156,14 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case USER_VIEW:
 			userView();
 			break;
+		case SHOW_ADD_ORDER_DIALOG:
+			break;
 		}
+	}
+	
+	private void showEditProduct() {
+		addProductDialog.changeActionToProductEdit();
+		addProductDialog.setVisible(true);
 	}
 
 	private void cancelProduct() {
@@ -217,8 +227,14 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	}
 
 	private void editProduct() {
-		// TODO Auto-generated method stub
-
+		try {
+			adminManager.editProduct(addProductDialog.extractProductFromWindow(),
+					adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
+			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+			addProductDialog.changeActionToProductAdd();
+		} catch (NumberFormatException | ErrorOrderNotFound e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void deleteUser() {
