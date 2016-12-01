@@ -306,6 +306,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			cancelProduct();
 			readXML.writeProduct(adminManager.getListProducts());
 			mainWindowAdmin.showMessageDialog("Product Added Successfully");
+			actualPage = 1;
 			refreshList(2);
 		} catch (TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
@@ -319,7 +320,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			addUserDialog.setVisible(false);
 			readXML.writeUser(adminManager.getUsersList());
 			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
-			refreshList(1);
+			actualPage = 1;
+			refreshList(1);			
 		} catch (TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -332,6 +334,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			addShopDialog.setVisible(false);
 			readXML.writeShop(adminManager.getListShop());
 			mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+			actualPage = 1;
 			refreshList(0);
 		} catch (TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
