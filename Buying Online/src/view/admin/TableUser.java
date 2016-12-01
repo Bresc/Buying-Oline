@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.Actions;
 import controller.Controller;
 import models.entities.User;
 
@@ -33,12 +34,12 @@ public class TableUser extends JPanel {
 		listUserMenu = new JPopupMenu();
 
 		JMenuItem itemDeleteUser = new JMenuItem("Delete User");
-		// itemDeleteUser.setActionCommand(Actions.DELETE_USER.toString());
+		itemDeleteUser.setActionCommand(Actions.DELETE_USER.toString());
 		itemDeleteUser.addActionListener(controller);
 		listUserMenu.add(itemDeleteUser);
 
 		JMenuItem itemEditUser = new JMenuItem("Edit User");
-		// itemEditUser.setActionCommand(Actions.EDIT_USER.toString());
+		itemEditUser.setActionCommand(Actions.EDIT_USER.toString());
 		itemEditUser.addActionListener(controller);
 		listUserMenu.add(itemEditUser);
 

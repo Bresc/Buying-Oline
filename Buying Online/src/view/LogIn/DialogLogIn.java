@@ -57,7 +57,7 @@ public class DialogLogIn extends JDialog{
 		buttonAgreeUser = new JButton("Log In");
 		buttonAgreeUser.addActionListener(controller);
 		buttonAgreeUser.setActionCommand(Actions.USER_VIEW.toString());
-		buttonAgreeUser.setEnabled(false);
+		buttonAgreeUser.setEnabled(true);
 		buttonAgreeUser.setVisible(false);
 		add(buttonAgreeUser);
 		
@@ -84,7 +84,7 @@ public class DialogLogIn extends JDialog{
 	}
 	
 	public void changeTheButtonAdmin(boolean confirmation){
-		if (confirmation) {
+		if (confirmation == true) {
 			buttonAgreeAdmin.setEnabled(true);
 		}
 	}

@@ -1,4 +1,5 @@
 package controller;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -6,6 +7,9 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
@@ -15,6 +19,7 @@ import models.entities.Shop;
 import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
+import models.exceptions.ErrorUserNotFound;
 import persistence.ReadXML;
 import view.LogIn.DialogChooseWhoYouAre;
 import view.LogIn.DialogLogIn;
@@ -25,7 +30,7 @@ import view.admin.MainWindowAdmin;
 import view.shop.MainWindowShop;
 import view.user.MainWindowUser;
 
-public class Controller implements ActionListener, KeyListener {
+public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private MainWindowUser mainWindowUser;
 	private MainWindowAdmin mainWindowAdmin;
@@ -37,19 +42,22 @@ public class Controller implements ActionListener, KeyListener {
 	private DialogChooseWhoYouAre chooseWhoYouAre;
 	private DialogLogIn logIn;
 	private ReadXML readXML;
-
+	private User user;
+	private int actualPage;
 
 	public Controller() {
+		adminManager = new AdminManager();
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
 		mainWindowShop = new MainWindowShop();
-		adminManager = new AdminManager();
 		readXML = new ReadXML();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		logIn = new DialogLogIn(this);
+		user = new User("Holi", "wea", "holi", " ");
+		adminManager.addUser(user);
 		try {
 			refreshDataUser(readXML.readUser());
 			refreshDataShop(readXML.readShop());
@@ -57,29 +65,21 @@ public class Controller implements ActionListener, KeyListener {
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
+		actualPage = 1;
+		refreshList(0);
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand())) {
 		case ADD_USER:
-			try {
-				addUser();
-			} catch (TransformerException | ParserConfigurationException e1) {
-				e1.printStackTrace();
-			}
+			addUser();
 			break;
 		case ADD_PRODUCT:
-			try {
-				addProduct();
-			} catch (TransformerException | ParserConfigurationException e2) {
-				e2.printStackTrace();
-			}
+			addProduct();
 			break;
 		case CANCEL_PRODUCT:
-			addProductDialog.cleanForm();
-			addProductDialog.setVisible(false);
+			cancelProduct();
 			break;
 		case SEARCH_RESTAURANT:
 			break;
@@ -95,11 +95,7 @@ public class Controller implements ActionListener, KeyListener {
 			addProductDialog.searchForImage();
 			break;
 		case ADD_SHOP:
-			try {
-				addShop();
-			} catch (TransformerException | ParserConfigurationException e1) {
-				e1.printStackTrace();
-			}
+			addShop();
 			break;
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
@@ -113,8 +109,10 @@ public class Controller implements ActionListener, KeyListener {
 		case CHARGE_IMAGE:
 			break;
 		case GO_LEFT_ARROW:
+			changeToPreviousPage();
 			break;
 		case GO_RIGHT_ARROW:
+			changeToNextPage();
 			break;
 		case DELETE_PRODUCT:
 			deleteProduct();
@@ -155,13 +153,18 @@ public class Controller implements ActionListener, KeyListener {
 		case USER_VIEW:
 			userView();
 			break;
-		default:
-			break;
 		}
 	}
 
+	private void cancelProduct() {
+		addProductDialog.cleanForm();
+		addProductDialog.setVisible(false);
+	}
+
 	private void userView() {
-		mainWindowUser.setVisible(true);
+		if (adminManager.searchForLogInUser(logIn.getTheName(), logIn.getPassword())) {
+			mainWindowUser.setVisible(true);
+		}
 		logIn.setVisible(false);
 	}
 
@@ -174,15 +177,15 @@ public class Controller implements ActionListener, KeyListener {
 		mainWindowAdmin.setVisible(true);
 		logIn.setVisible(false);
 	}
-	
+
 	private void userLogIn() {
 		logIn.UserView();
 		chooseWhoYouAre.setVisible(false);
 	}
-	
-/**
- * este metodo es lo de shop
- */
+
+	/**
+	 * este metodo es lo de shop
+	 */
 	private void shopLogIn() {
 		logIn.CompanyView();
 		chooseWhoYouAre.setVisible(false);
@@ -192,9 +195,9 @@ public class Controller implements ActionListener, KeyListener {
 		logIn.adminView();
 		chooseWhoYouAre.setVisible(false);
 	}
-	
+
 	public void changeToProductsFromShopPanel(ActionEvent e) {
-		JButton bntSource = (JButton)(e.getSource());
+		JButton bntSource = (JButton) (e.getSource());
 		try {
 			Shop selectedShop = adminManager.searhShop(Integer.parseInt(bntSource.getName()));
 			mainWindowUser.changeToProductsFromShopPanel(adminManager.getProductsListFromShop(selectedShop));
@@ -219,8 +222,13 @@ public class Controller implements ActionListener, KeyListener {
 	}
 
 	private void deleteUser() {
-		// TODO Auto-generated method stub
-
+		try {
+			adminManager.deleteUser(adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
+			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+			readXML.writeUser(adminManager.getUsersList());
+		} catch (TransformerException | ParserConfigurationException | ErrorUserNotFound e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void deleteShop() {
@@ -237,21 +245,18 @@ public class Controller implements ActionListener, KeyListener {
 		for (User user : users) {
 			adminManager.addUser(user);
 		}
-		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 	}
-	
+
 	private void refreshDataProduct(ArrayList<Product> readProduct) {
 		for (Product product : readProduct) {
 			adminManager.addProduct(product);
 		}
-		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
 	}
 
 	private void refreshDataShop(ArrayList<Shop> readShop) {
 		for (Shop shop : readShop) {
 			adminManager.addShop(shop);
 		}
-		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 	}
 
 	private void deleteProduct() {
@@ -264,34 +269,43 @@ public class Controller implements ActionListener, KeyListener {
 		}
 	}
 
-	private void addProduct() throws TransformerException, ParserConfigurationException {
-		adminManager.addProduct(addProductDialog.extractProductFromWindow());
-		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
-		addProductDialog.cleanForm();
-		addProductDialog.setVisible(false);
-		readXML.writeProduct(adminManager.getListProducts());
-		mainWindowAdmin.showMessageDialog("Product Added Successfully");
+	private void addProduct() {
+		try {
+			adminManager.addProduct(addProductDialog.extractProductFromWindow());
+			cancelProduct();
+			readXML.writeProduct(adminManager.getListProducts());
+			mainWindowAdmin.showMessageDialog("Product Added Successfully");
+			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+		} catch (TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void addUser() throws TransformerException, ParserConfigurationException {
-		adminManager.addUser(addUserDialog.getUser());
-		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
-		addUserDialog.cleanForm();
-		addUserDialog.setVisible(false);
-		readXML.writeUser(adminManager.getUsersList());
-		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+	private void addUser() {
+		try {
+			adminManager.addUser(addUserDialog.getUser());
+			addUserDialog.cleanForm();
+			addUserDialog.setVisible(false);
+			readXML.writeUser(adminManager.getUsersList());
+			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+		} catch (TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void addShop() throws TransformerException, ParserConfigurationException {
-		adminManager.addShop(addShopDialog.getShop());
-		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
-		addShopDialog.cleanForm();
-		addShopDialog.setVisible(false);
-		readXML.writeShop(adminManager.getListShop());
-		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+	private void addShop() {
+		try {
+			adminManager.addShop(addShopDialog.getShop());
+			addShopDialog.cleanForm();
+			addShopDialog.setVisible(false);
+			readXML.writeShop(adminManager.getListShop());
+			mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+			mainWindowAdmin.refreshTableShop(adminManager.getListShop());
+		} catch (TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
-
-
 
 	public void run() {
 		chooseWhoYouAre.setVisible(true);
@@ -299,16 +313,65 @@ public class Controller implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
+		// logIn.getPassword()));
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
+		// logIn.getPassword()));
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
+		// logIn.getPassword()));
+	}
+
+	// paginacion
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		JTabbedPane tp = (JTabbedPane) e.getSource();
+		actualPage = 1;
+		refreshList(tp.getSelectedIndex());
+	}
+
+	@SuppressWarnings("unchecked")
+	public void refreshList(int index) {
+		mainWindowAdmin.refreshPage(actualPage,
+				adminManager.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
+		switch (index) {
+		case 0:
+			mainWindowAdmin.refreshTableShop(
+					(ArrayList<Shop>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
+			break;
+		case 1:
+			mainWindowAdmin.refreshTableUser(
+					(ArrayList<User>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
+			break;
+		case 2:
+			mainWindowAdmin.refreshTableProducts(
+					(ArrayList<Product>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	private void changeToNextPage() {
+		if (actualPage < adminManager
+				.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
+			actualPage++;
+			refreshList(mainWindowAdmin.getTabbedPaneIndex());
+		}
+	}
+
+	private void changeToPreviousPage() {
+		if (actualPage > 1) {
+			actualPage--;
+			refreshList(mainWindowAdmin.getTabbedPaneIndex());
+		}
 	}
 }

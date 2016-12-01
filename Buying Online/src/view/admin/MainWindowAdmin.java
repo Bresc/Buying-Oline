@@ -21,6 +21,7 @@ public class MainWindowAdmin extends JFrame {
 	private TableShop tableShop;
 	private TableProducts tableProducts;
 	private PaginatePanel paginatePanel;
+	private JTabbedPane objects;
 
 	public MainWindowAdmin(Controller controller) {
 		setLayout(new BorderLayout());
@@ -32,7 +33,8 @@ public class MainWindowAdmin extends JFrame {
 		toolbar = new ToolBar(controller);
 		add(toolbar, BorderLayout.PAGE_START);
 
-		JTabbedPane objects = new JTabbedPane();
+		objects = new JTabbedPane();
+		
 
 		tableUser = new TableUser(controller);
 		tableShop = new TableShop(controller);
@@ -41,8 +43,9 @@ public class MainWindowAdmin extends JFrame {
 		objects.addTab("Shops", tableShop);
 		objects.addTab("Users", tableUser);
 		objects.addTab("Products", tableProducts);
+		objects.addChangeListener(controller);
 		add(objects);
-		
+
 		paginatePanel = new PaginatePanel(controller);
 		add(paginatePanel, BorderLayout.PAGE_END);
 
@@ -59,13 +62,25 @@ public class MainWindowAdmin extends JFrame {
 	public void refreshTableProducts(ArrayList<Product> listProducts) {
 		tableProducts.refreshTable(listProducts);
 	}
-	
-	public int getIdToTableProducts(){
+
+	public int getIdToTableProducts() {
 		return tableProducts.getProductFromTable();
 	}
-	
-	public int getIdToTableShops(){
+
+	public int getIdToTableShops() {
 		return tableProducts.getProductFromTable();
+	}
+
+	public int getIdToTableUser() {
+		return tableUser.getUsertInTable();
+	}
+	
+	public int getTabbedPaneIndex(){
+		return objects.getSelectedIndex();
+	}
+	
+	public void refreshPage(int actualPage, int maxPage){
+		paginatePanel.refreshPage(actualPage, maxPage);
 	}
 
 	public void showMessageDialog(String message) {

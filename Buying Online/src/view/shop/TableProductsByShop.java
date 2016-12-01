@@ -1,4 +1,4 @@
-package view.admin;
+package view.shop;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,33 +15,30 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.Actions;
 import controller.Controller;
 import models.entities.Product;
 import models.entities.Shop;
 
-public class TableProducts extends JPanel {
+public class TableProductsByShop extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = { "id", "Name", "Value" };
+	private static final String[] COLUMN_NAMES = { "id", "Product" };
 	private static final int ROW_HEIGHT = 25;
 	private DefaultTableModel modelProducts;
 	private JTable productsTable;
 	private JPopupMenu listshopMenu;
 
-	public TableProducts(Controller controller) {
+	public TableProductsByShop(Controller controller) {
 		setLayout(new BorderLayout());
 
 		listshopMenu = new JPopupMenu();
 
 		JMenuItem jmiDeleteProduct = new JMenuItem("Delete Product");
 		jmiDeleteProduct.addActionListener(controller);
-		jmiDeleteProduct.setActionCommand(Actions.DELETE_PRODUCT.toString());
 		listshopMenu.add(jmiDeleteProduct);
 
 		JMenuItem itemEditShop = new JMenuItem("Edit Product");
 		itemEditShop.addActionListener(controller);
-		itemEditShop.setActionCommand(Actions.EDIT_PRODUCT.toString());
 		listshopMenu.add(itemEditShop);
 
 		modelProducts = new DefaultTableModel(COLUMN_NAMES, 0);

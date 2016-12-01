@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.Actions;
 import controller.Controller;
 import models.entities.Shop;
 
@@ -33,13 +34,13 @@ public class TableShop extends JPanel {
 		listshopMenu = new JPopupMenu();
 
 		JMenuItem itemDeleteShop = new JMenuItem("Delete Shop");
-		// itemDeleteShop.setActionCommand(Actions.DELETE_TUTOR.toString());
 		itemDeleteShop.addActionListener(controller);
+		itemDeleteShop.setActionCommand(Actions.DELETE_SHOP.toString());
 		listshopMenu.add(itemDeleteShop);
 
 		JMenuItem itemEditShop = new JMenuItem("Edit Shop");
-		// itemEditShop.setActionCommand(Actions.EDIT_TUTOR.toString());
 		itemEditShop.addActionListener(controller);
+		itemEditShop.setActionCommand(Actions.EDIT_SHOP.toString());
 		listshopMenu.add(itemEditShop);
 
 		shopModel = new DefaultTableModel(COLUMNS_NAME, 0);
