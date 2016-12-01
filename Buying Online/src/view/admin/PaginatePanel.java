@@ -1,7 +1,10 @@
 package view.admin;
 
+import java.awt.Component;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
@@ -10,6 +13,7 @@ import controller.Actions;
 public class PaginatePanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private JLabel lbPage;
 
 	public PaginatePanel(Controller controller) {
 		JButton btnLeft = new JButton(new ImageIcon("src/img/arrow_left.png"));
@@ -20,6 +24,10 @@ public class PaginatePanel extends JPanel{
 		btnLeft.setBorder(null);
 		add(btnLeft);
 		
+		lbPage = new JLabel("Page: 0/0");
+		lbPage.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(lbPage);
+		
 		JButton btnRight = new JButton(new ImageIcon("src/img/arrow_right.png"));
 		btnRight.setToolTipText("Go to right page");
 		btnRight.setActionCommand(Actions.GO_RIGHT_ARROW.toString());
@@ -27,5 +35,9 @@ public class PaginatePanel extends JPanel{
 		btnRight.setFocusPainted(false);
 		btnRight.setBorder(null);
 		add(btnRight);
+	}
+	
+	public void refreshPage(int actualPage, int maxPage){
+		lbPage.setText("Page: "+ actualPage +"/" + maxPage);
 	}
 }

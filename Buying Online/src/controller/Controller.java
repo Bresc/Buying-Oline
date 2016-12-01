@@ -7,6 +7,9 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
@@ -27,7 +30,7 @@ import view.admin.MainWindowAdmin;
 import view.shop.MainWindowShop;
 import view.user.MainWindowUser;
 
-public class Controller implements ActionListener, KeyListener {
+public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private MainWindowUser mainWindowUser;
 	private MainWindowAdmin mainWindowAdmin;
@@ -40,12 +43,13 @@ public class Controller implements ActionListener, KeyListener {
 	private DialogLogIn logIn;
 	private ReadXML readXML;
 	private User user;
-	
+	private int actualPage;
+
 	public Controller() {
+		adminManager = new AdminManager();
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
 		mainWindowShop = new MainWindowShop();
-		adminManager = new AdminManager();
 		readXML = new ReadXML();
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
@@ -61,6 +65,8 @@ public class Controller implements ActionListener, KeyListener {
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
+		actualPage = 1;
+		refreshList(0);
 	}
 
 	@Override
@@ -116,8 +122,10 @@ public class Controller implements ActionListener, KeyListener {
 		case CHARGE_IMAGE:
 			break;
 		case GO_LEFT_ARROW:
+			changeToPreviousPage();
 			break;
 		case GO_RIGHT_ARROW:
+			changeToNextPage();
 			break;
 		case DELETE_PRODUCT:
 			deleteProduct();
@@ -247,21 +255,18 @@ public class Controller implements ActionListener, KeyListener {
 		for (User user : users) {
 			adminManager.addUser(user);
 		}
-		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 	}
 
 	private void refreshDataProduct(ArrayList<Product> readProduct) {
 		for (Product product : readProduct) {
 			adminManager.addProduct(product);
 		}
-		mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
 	}
 
 	private void refreshDataShop(ArrayList<Shop> readShop) {
 		for (Shop shop : readShop) {
 			adminManager.addShop(shop);
 		}
-		mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 	}
 
 	private void deleteProduct() {
@@ -307,16 +312,61 @@ public class Controller implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+		//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+	}
+
+	//paginacion
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		JTabbedPane tp = (JTabbedPane) e.getSource();
+		actualPage = 1;
+		refreshList(tp.getSelectedIndex());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void refreshList(int index){
+		mainWindowAdmin.refreshPage(actualPage,
+				adminManager.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
+		switch (index) {
+		case 0:
+			mainWindowAdmin.refreshTableShop((ArrayList<Shop>)adminManager.paginate(adminManager.returnListDependIndex(index),
+					actualPage));
+			break;
+		case 1:
+			mainWindowAdmin.refreshTableUser((ArrayList<User>) adminManager.paginate(adminManager.returnListDependIndex(index),
+					actualPage));
+			break;
+		case 2:
+			mainWindowAdmin.refreshTableProducts((ArrayList<Product>) adminManager.paginate(adminManager.returnListDependIndex(index),
+					actualPage));
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	private void changeToNextPage() {
+		if (actualPage < adminManager.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
+			actualPage++;
+			refreshList(mainWindowAdmin.getTabbedPaneIndex());			
+		}
+	}
+
+	private void changeToPreviousPage() {
+		if (actualPage > 1) {
+			actualPage--;
+			refreshList(mainWindowAdmin.getTabbedPaneIndex());			
+		}
 	}
 }
