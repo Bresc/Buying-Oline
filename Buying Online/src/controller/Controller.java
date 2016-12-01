@@ -56,8 +56,6 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		logIn = new DialogLogIn(this);
-		user = new User("Holi", "wea", "holi", " ");
-		adminManager.addUser(user);
 		try {
 			refreshDataUser(readXML.readUser());
 			refreshDataShop(readXML.readShop());
