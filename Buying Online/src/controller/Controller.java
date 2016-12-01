@@ -164,6 +164,12 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private void showEditUser() {
 		addUserDialog.changeActionToEditUser();
+		try {
+			addUserDialog.setForm(adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
+		} catch (ErrorUserNotFound e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		addUserDialog.setVisible(true);
 	}
 

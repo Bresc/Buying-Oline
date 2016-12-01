@@ -115,7 +115,6 @@ public class AddUserDialog extends JDialog {
 		try {
 			image = ImageIO.read(file);
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		imageLoaded = new ImageIcon(image);
 		minImage.setIcon(reSize(imageLoaded));
@@ -131,7 +130,11 @@ public class AddUserDialog extends JDialog {
 		txName.setText(user.getName());
 		txAddress.setText(user.getAddress());
 		txPassword.setText(user.getPassword());
-		minImage.setIcon(loadImage(new File(user.getSourceImg())));
+		try {
+			minImage.setIcon(loadImage(new File(user.getSourceImg())));
+		} catch (Exception e) {
+			minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));
+		}
 	}
 
 	public void cleanForm() {

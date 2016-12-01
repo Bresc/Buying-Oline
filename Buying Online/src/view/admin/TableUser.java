@@ -39,7 +39,7 @@ public class TableUser extends JPanel {
 		listUserMenu.add(itemDeleteUser);
 
 		JMenuItem itemEditUser = new JMenuItem("Edit User");
-		itemEditUser.setActionCommand(Actions.SHOW_ADD_USER_DIALOG.name());
+		itemEditUser.setActionCommand(Actions.SHOW_EDIT_USER.name());
 		itemEditUser.addActionListener(controller);
 		listUserMenu.add(itemEditUser);
 
