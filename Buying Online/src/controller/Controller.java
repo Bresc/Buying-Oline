@@ -272,10 +272,10 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void addProduct() {
 		try {
 			adminManager.addProduct(addProductDialog.extractProductFromWindow());
-			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
 			cancelProduct();
 			readXML.writeProduct(adminManager.getListProducts());
 			mainWindowAdmin.showMessageDialog("Product Added Successfully");
+			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
 		} catch (TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -284,11 +284,11 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void addUser() {
 		try {
 			adminManager.addUser(addUserDialog.getUser());
-			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 			addUserDialog.cleanForm();
 			addUserDialog.setVisible(false);
 			readXML.writeUser(adminManager.getUsersList());
 			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 		} catch (TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -297,11 +297,11 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void addShop() {
 		try {
 			adminManager.addShop(addShopDialog.getShop());
-			mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 			addShopDialog.cleanForm();
 			addShopDialog.setVisible(false);
 			readXML.writeShop(adminManager.getListShop());
 			mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+			mainWindowAdmin.refreshTableShop(adminManager.getListShop());
 		} catch (TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
