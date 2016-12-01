@@ -21,12 +21,12 @@ import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
 import models.exceptions.ErrorUserNotFound;
 import persistence.ReadXML;
-import view.LogIn.DialogChooseWhoYouAre;
-import view.LogIn.DialogLogIn;
 import view.admin.AddProductDialog;
 import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
+import view.login.DialogChooseWhoYouAre;
+import view.login.DialogLogIn;
 import view.shop.MainWindowShop;
 import view.user.MainWindowUser;
 

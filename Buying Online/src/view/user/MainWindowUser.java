@@ -33,7 +33,7 @@ public class MainWindowUser extends JFrame {
 		panelActualCenter = new JPanel();
 		panelProductsFromShop = new PanelProductsFromShop(controller);
 		
-		panelShops=  new PanelShops();
+		panelShops =  new PanelShops();
 		panelActualCenter.add(panelShops);
 		add(new JScrollPane(panelActualCenter), BorderLayout.CENTER);
 

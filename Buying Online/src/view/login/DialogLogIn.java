@@ -1,4 +1,4 @@
-package view.LogIn;
+package view.login;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
