@@ -16,7 +16,7 @@ import models.exceptions.ErrorUserNotFound;
 
 public class AdminManager {
 	
-	public static final int PAGE_SIZE = 1;
+	public static final int PAGE_SIZE = 10;
 
 	private ArrayList<Order> ordersList;
 	private ArrayList<AssignmentProductShop> assignmentsProductsShopList;

@@ -224,13 +224,15 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private void editShop() {
 		// TODO Auto-generated method stub
-
+		actualPage = 1;
+		refreshList(0);
 	}
 
 	private void editUser() {
 		try {
 			adminManager.editUser(addUserDialog.getUser(), adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
-			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+			actualPage = 1;
+			refreshList(1);
 			addUserDialog.setVisible(false);
 			addUserDialog.changeActionToAddUser();
 			readXML.writeUser(adminManager.getUsersList());
@@ -243,7 +245,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		try {
 			adminManager.editProduct(addProductDialog.extractProductFromWindow(),
 					adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
-			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+			actualPage = 1;
+			refreshList(2);
 			addProductDialog.setVisible(false);
 			addProductDialog.changeActionToProductAdd();
 			readXML.writeProduct(adminManager.getListProducts());
@@ -255,7 +258,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void deleteUser() {
 		try {
 			adminManager.deleteUser(adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
-			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+			actualPage = 1;
+			refreshList(1);
 			readXML.writeUser(adminManager.getUsersList());
 		} catch (TransformerException | ParserConfigurationException | ErrorUserNotFound e) {
 			e.printStackTrace();
@@ -265,7 +269,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void deleteShop() {
 		try {
 			adminManager.delteShop(adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
-			mainWindowAdmin.refreshTableShop(adminManager.getListShop());
+			actualPage = 1;
+			refreshList(0);
 			readXML.writeShop(adminManager.getListShop());
 		} catch (ErrorShopNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
@@ -293,7 +298,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void deleteProduct() {
 		try {
 			adminManager.deleteProduct(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
-			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+			actualPage = 1;
+			refreshList(2);
 			readXML.writeProduct(adminManager.getListProducts());
 		} catch (ErrorOrderNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
