@@ -39,7 +39,8 @@ public class Controller implements ActionListener, KeyListener {
 	private DialogChooseWhoYouAre chooseWhoYouAre;
 	private DialogLogIn logIn;
 	private ReadXML readXML;
-
+	private User user;
+	
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
@@ -51,6 +52,8 @@ public class Controller implements ActionListener, KeyListener {
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		logIn = new DialogLogIn(this);
+		user = new User("Holi", "wea", "holi", " ");
+		adminManager.addUser(user);
 		try {
 			refreshDataUser(readXML.readUser());
 			refreshDataShop(readXML.readShop());
@@ -161,7 +164,9 @@ public class Controller implements ActionListener, KeyListener {
 	}
 
 	private void userView() {
-		mainWindowUser.setVisible(true);
+		if (adminManager.searchForLogInUser(logIn.getTheName(), logIn.getPassword())) {
+			mainWindowUser.setVisible(true);
+		}
 		logIn.setVisible(false);
 	}
 
@@ -302,16 +307,16 @@ public class Controller implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
+//		logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(), logIn.getPassword()));
 	}
 }

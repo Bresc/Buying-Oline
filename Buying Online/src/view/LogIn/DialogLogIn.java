@@ -19,7 +19,7 @@ public class DialogLogIn extends JDialog{
 	private static final long serialVersionUID = 1L;
 
 	private JTextField textToWrite;
-	private JPasswordField password;
+	private JTextField password;
 	private JLabel labelPassWord;
 	private JLabel labelNickName;
 	private JButton buttonAgreeAdmin;
@@ -57,7 +57,7 @@ public class DialogLogIn extends JDialog{
 		buttonAgreeUser = new JButton("Log In");
 		buttonAgreeUser.addActionListener(controller);
 		buttonAgreeUser.setActionCommand(Actions.USER_VIEW.toString());
-		buttonAgreeUser.setEnabled(false);
+		buttonAgreeUser.setEnabled(true);
 		buttonAgreeUser.setVisible(false);
 		add(buttonAgreeUser);
 		
@@ -74,7 +74,7 @@ public class DialogLogIn extends JDialog{
 	}
 	
 	public String getPassword(){
-		return String.valueOf(password.getPassword());
+		return password.getText();
 	}
 	
 	public void changeTheButtonUser(boolean confirmation){
@@ -84,7 +84,7 @@ public class DialogLogIn extends JDialog{
 	}
 	
 	public void changeTheButtonAdmin(boolean confirmation){
-		if (confirmation) {
+		if (confirmation == true) {
 			buttonAgreeAdmin.setEnabled(true);
 		}
 	}
