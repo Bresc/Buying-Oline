@@ -1,5 +1,8 @@
 package view.login;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,6 +34,12 @@ public class DialogLogIn extends JDialog{
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
 		setSize(150, 150);
 		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		addWindowListener(new WindowAdapter() { 
+		    @Override public void windowClosed(WindowEvent e) { 
+		      System.exit(0);
+		    }
+		  });
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
 		labelNickName = new JLabel("Name");

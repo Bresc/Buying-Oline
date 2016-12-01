@@ -1,4 +1,7 @@
 package view.login;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +23,12 @@ public class DialogChooseWhoYouAre extends JDialog{
 		setSize(358, 130);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		addWindowListener(new WindowAdapter() { 
+		    @Override public void windowClosed(WindowEvent e) { 
+		      System.exit(0);
+		    }
+		  });
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
 		
 		buttonAdmin = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496207_administrator.png")).getImage().getScaledInstance(80, 80, 0)));
