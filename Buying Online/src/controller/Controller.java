@@ -231,6 +231,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			adminManager.editProduct(addProductDialog.extractProductFromWindow(),
 					adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
+			addProductDialog.setVisible(false);
 			addProductDialog.changeActionToProductAdd();
 		} catch (NumberFormatException | ErrorOrderNotFound e) {
 			e.printStackTrace();
