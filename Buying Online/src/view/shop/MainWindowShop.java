@@ -11,5 +11,6 @@ public class MainWindowShop extends JFrame{
 
 	public MainWindowShop() {
 		setTitle("Shop");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 }
