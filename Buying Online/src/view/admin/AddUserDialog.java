@@ -79,6 +79,7 @@ public class AddUserDialog extends JDialog {
 
 		btnAddUser = new JButton();
 		btnAddUser.addActionListener(controller);
+		changeActionToAddUser();
 		btnAddUser.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btnAddUser.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddUser, gridDialog.insertComponent(5, 2, 7, 0.01));
