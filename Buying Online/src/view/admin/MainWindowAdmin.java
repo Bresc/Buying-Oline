@@ -42,7 +42,7 @@ public class MainWindowAdmin extends JFrame {
 		objects.addTab("Users", tableUser);
 		objects.addTab("Products", tableProducts);
 		add(objects);
-		
+
 		paginatePanel = new PaginatePanel(controller);
 		add(paginatePanel, BorderLayout.PAGE_END);
 
@@ -59,13 +59,17 @@ public class MainWindowAdmin extends JFrame {
 	public void refreshTableProducts(ArrayList<Product> listProducts) {
 		tableProducts.refreshTable(listProducts);
 	}
-	
-	public int getIdToTableProducts(){
+
+	public int getIdToTableProducts() {
 		return tableProducts.getProductFromTable();
 	}
-	
-	public int getIdToTableShops(){
+
+	public int getIdToTableShops() {
 		return tableProducts.getProductFromTable();
+	}
+
+	public int getIdToTableUser() {
+		return tableUser.getUsertInTable();
 	}
 
 	public void showMessageDialog(String message) {

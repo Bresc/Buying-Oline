@@ -1,4 +1,5 @@
 package controller;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,7 @@ import models.entities.Shop;
 import models.entities.User;
 import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
+import models.exceptions.ErrorUserNotFound;
 import persistence.ReadXML;
 import view.LogIn.DialogChooseWhoYouAre;
 import view.LogIn.DialogLogIn;
@@ -38,7 +40,6 @@ public class Controller implements ActionListener, KeyListener {
 	private DialogLogIn logIn;
 	private ReadXML readXML;
 
-
 	public Controller() {
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
@@ -59,7 +60,6 @@ public class Controller implements ActionListener, KeyListener {
 		}
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand())) {
@@ -174,15 +174,15 @@ public class Controller implements ActionListener, KeyListener {
 		mainWindowAdmin.setVisible(true);
 		logIn.setVisible(false);
 	}
-	
+
 	private void userLogIn() {
 		logIn.UserView();
 		chooseWhoYouAre.setVisible(false);
 	}
-	
-/**
- * este metodo es lo de shop
- */
+
+	/**
+	 * este metodo es lo de shop
+	 */
 	private void shopLogIn() {
 		logIn.CompanyView();
 		chooseWhoYouAre.setVisible(false);
@@ -192,9 +192,9 @@ public class Controller implements ActionListener, KeyListener {
 		logIn.adminView();
 		chooseWhoYouAre.setVisible(false);
 	}
-	
+
 	public void changeToProductsFromShopPanel(ActionEvent e) {
-		JButton bntSource = (JButton)(e.getSource());
+		JButton bntSource = (JButton) (e.getSource());
 		try {
 			Shop selectedShop = adminManager.searhShop(Integer.parseInt(bntSource.getName()));
 			mainWindowUser.changeToProductsFromShopPanel(adminManager.getProductsListFromShop(selectedShop));
@@ -219,8 +219,13 @@ public class Controller implements ActionListener, KeyListener {
 	}
 
 	private void deleteUser() {
-		// TODO Auto-generated method stub
-
+		try {
+			adminManager.deleteUser(adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
+			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+			readXML.writeUser(adminManager.getUsersList());
+		} catch (TransformerException | ParserConfigurationException | ErrorUserNotFound e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void deleteShop() {
@@ -239,7 +244,7 @@ public class Controller implements ActionListener, KeyListener {
 		}
 		mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 	}
-	
+
 	private void refreshDataProduct(ArrayList<Product> readProduct) {
 		for (Product product : readProduct) {
 			adminManager.addProduct(product);
@@ -290,8 +295,6 @@ public class Controller implements ActionListener, KeyListener {
 		readXML.writeShop(adminManager.getListShop());
 		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
 	}
-
-
 
 	public void run() {
 		chooseWhoYouAre.setVisible(true);

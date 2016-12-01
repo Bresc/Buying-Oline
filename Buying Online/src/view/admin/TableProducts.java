@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.Actions;
 import controller.Controller;
 import models.entities.Product;
 import models.entities.Shop;
@@ -35,10 +36,12 @@ public class TableProducts extends JPanel {
 
 		JMenuItem jmiDeleteProduct = new JMenuItem("Delete Product");
 		jmiDeleteProduct.addActionListener(controller);
+		jmiDeleteProduct.setActionCommand(Actions.DELETE_PRODUCT.toString());
 		listshopMenu.add(jmiDeleteProduct);
 
 		JMenuItem itemEditShop = new JMenuItem("Edit Product");
 		itemEditShop.addActionListener(controller);
+		itemEditShop.setActionCommand(Actions.EDIT_PRODUCT.toString());
 		listshopMenu.add(itemEditShop);
 
 		modelProducts = new DefaultTableModel(COLUMN_NAMES, 0);
