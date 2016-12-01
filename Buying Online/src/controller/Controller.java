@@ -158,6 +158,9 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			break;
 		case SHOW_ADD_ORDER_DIALOG:
 			break;
+		case SHOW_EDIT_USER:
+			showEditUser();
+			break;
 		}
 	}
 
@@ -232,7 +235,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
 			addUserDialog.setVisible(false);
 			addUserDialog.changeActionToAddUser();
-			readXML.writeProduct(adminManager.getListProducts());
+			readXML.writeUser(adminManager.getUsersList());
 		} catch (NumberFormatException | ErrorUserNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
