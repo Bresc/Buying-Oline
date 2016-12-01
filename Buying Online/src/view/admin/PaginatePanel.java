@@ -38,6 +38,9 @@ public class PaginatePanel extends JPanel{
 	}
 	
 	public void refreshPage(int actualPage, int maxPage){
+		if (maxPage == 0) {
+			maxPage = 1;
+		}
 		lbPage.setText("Page: "+ actualPage +"/" + maxPage);
 	}
 }
