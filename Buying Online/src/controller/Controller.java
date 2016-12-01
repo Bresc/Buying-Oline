@@ -160,7 +160,12 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			break;
 		}
 	}
-	
+
+	private void showEditUser() {
+		addUserDialog.changeActionToEditUser();
+		addUserDialog.setVisible(true);
+	}
+
 	private void showEditProduct() {
 		addProductDialog.changeActionToProductEdit();
 		addProductDialog.setVisible(true);
@@ -222,8 +227,15 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	}
 
 	private void editUser() {
-		// TODO Auto-generated method stub
-
+		try {
+			adminManager.editUser(addUserDialog.getUser(), adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
+			mainWindowAdmin.refreshTableUser(adminManager.getUsersList());
+			addUserDialog.setVisible(false);
+			addUserDialog.changeActionToAddUser();
+			readXML.writeProduct(adminManager.getListProducts());
+		} catch (NumberFormatException | ErrorUserNotFound | TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void editProduct() {

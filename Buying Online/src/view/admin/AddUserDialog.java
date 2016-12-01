@@ -35,6 +35,7 @@ public class AddUserDialog extends JDialog {
 	private JTextField txName;
 	private JTextField txAddress;
 	private JPasswordField txPassword;
+	private JButton btnAddUser;
 
 	public AddUserDialog(MainWindowAdmin mainWindowAdmin, Controller controller) {
 		super(mainWindowAdmin, true);
@@ -76,12 +77,21 @@ public class AddUserDialog extends JDialog {
 		minImage.setAlignmentX(Component.LEFT_ALIGNMENT);
 		add(minImage, gridDialog.insertComponent(4, 4, 3, 0.1));
 
-		JButton btnAddUser = new JButton("Accept");
+		btnAddUser = new JButton();
 		btnAddUser.addActionListener(controller);
-		btnAddUser.setActionCommand(Actions.ADD_USER.toString());
 		btnAddUser.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btnAddUser.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddUser, gridDialog.insertComponent(5, 2, 7, 0.01));
+	}
+	
+	public void changeActionToEditUser() {
+		btnAddUser.setText("Edit User");
+		btnAddUser.setActionCommand(Actions.EDIT_USER.name());
+	}
+	
+	public void changeActionToAddUser() {
+		btnAddUser.setText("Add User");
+		btnAddUser.setActionCommand(Actions.ADD_USER.name());
 	}
 
 	public Icon reSize(ImageIcon imagen) {

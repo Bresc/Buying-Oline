@@ -173,13 +173,11 @@ public class AdminManager {
 		procutOld.setSrcImg(productEdit.getSrcImg());
 	}
 
-	public void editUser(User userEdit, Product userOld) throws ErrorUserNotFound {
-		User userFound = searhUser(userOld.getId());
-		userFound.setId(userOld.getId());
-		userFound.setName(userEdit.getName());
-		userFound.setAddress(userEdit.getAddress());
-		userFound.setPassword(userEdit.getPassword());
-		userFound.setSourceImg(userEdit.getSourceImg());
+	public void editUser(User userEdit, User userOld) throws ErrorUserNotFound {
+		userOld.setName(userEdit.getName());
+		userOld.setAddress(userEdit.getAddress());
+		userOld.setPassword(userEdit.getPassword());
+		userOld.setSourceImg(userEdit.getSourceImg());
 	}
 
 	public void editOrder(Order newOrder, Order oldOrder) throws ErrorOrderNotFound {
