@@ -233,7 +233,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			mainWindowAdmin.refreshTableProducts(adminManager.getListProducts());
 			addProductDialog.setVisible(false);
 			addProductDialog.changeActionToProductAdd();
-		} catch (NumberFormatException | ErrorOrderNotFound e) {
+			readXML.writeProduct(adminManager.getListProducts());
+		} catch (NumberFormatException | ErrorOrderNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
