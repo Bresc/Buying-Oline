@@ -28,7 +28,7 @@ public class DialogLogIn extends JDialog{
 	public DialogLogIn(Controller controller) {
 		setTitle("Log In");
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
-		setSize(350, 600);
+		setSize(350, 200);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.decode("#4383BD"));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
