@@ -36,6 +36,11 @@ public class Shop {
 	public void setSrcImg(String srcImg) {
 		this.srcImg = srcImg;
 	}
+	
+	@Override
+	public String toString() {
+		return "Shop [id=" + id + ", name=" + name + "]";
+	}
 
 	public Object[] toObjectVector() {
 		return new Object[] { id, name };

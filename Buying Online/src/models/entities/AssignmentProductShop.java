@@ -32,6 +32,11 @@ public class AssignmentProductShop {
 	public Shop getShop() {
 		return shop;
 	}
+	
+	@Override
+	public String toString() {
+		return "AssignmentProductShop [id=" + id + ", product=" + product + ", shop=" + shop + "]";
+	}
 
 	public void setshop(Shop shop) {
 		this.shop = shop;

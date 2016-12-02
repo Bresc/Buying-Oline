@@ -14,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 import models.dao.AdminManager;
+import models.entities.AssignmentProductShop;
 import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
@@ -42,7 +43,6 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private DialogChooseWhoYouAre chooseWhoYouAre;
 	private DialogLogIn logIn;
 	private ReadXML readXML;
-	private User user;
 	private int actualPage;
 
 	public Controller() {
@@ -60,6 +60,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			refreshDataUser(readXML.readUser());
 			refreshDataShop(readXML.readShop());
 			refreshDataProduct(readXML.readProduct());
+			refreshDataAssigmentProductShop(readXML.readAsigmentProducts());
 		} catch (SAXException | ParserConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
@@ -305,6 +306,12 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void refreshDataProduct(ArrayList<Product> readProduct) {
 		for (Product product : readProduct) {
 			adminManager.addProduct(product);
+		}
+	}
+	
+	private void refreshDataAssigmentProductShop(ArrayList<AssignmentProductShop> readAssignmentProductShops) {
+		for (AssignmentProductShop assigment : readAssignmentProductShops) {
+			adminManager.addAssignmentProductShop(assigment);
 		}
 	}
 

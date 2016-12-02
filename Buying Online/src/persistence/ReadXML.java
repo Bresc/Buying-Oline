@@ -84,8 +84,8 @@ public class ReadXML {
 
 		NodeList nodeList = document.getElementsByTagName("assignedProduct");
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			assignmentProductShops.add(new AssignmentProductShop(getProduct((Element) ((Element) nodeList.item(i)).getElementsByTagName("product")),
-					getShop((Element) ((Element) nodeList.item(i)).getElementsByTagName("shop"))));
+			assignmentProductShops.add(new AssignmentProductShop(getProduct((Element) ((Element) nodeList.item(i)).getElementsByTagName("product").item(0)),
+					getShop((Element) ((Element) nodeList.item(i)).getElementsByTagName("shop").item(0))));
 		}
 		return assignmentProductShops;
 	}
