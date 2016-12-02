@@ -7,7 +7,7 @@ public class AssignmentProductShop {
 	private Shop shop;
 	public static int ID_BASE = 0;
 
-	public AssignmentProductShop(int id, Product product, Shop shop) {
+	public AssignmentProductShop(Product product, Shop shop) {
 		this.id = ID_BASE++;;
 		this.product = product;
 		this.shop = shop;

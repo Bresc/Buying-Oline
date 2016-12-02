@@ -52,8 +52,8 @@ public class AdminManager {
 		return new Order(id, user, products, state);
 	}
 
-	public static AssignmentProductShop createAssignmentProductShop(int id, Product product, Shop shop) {
-		return new AssignmentProductShop(id, product, shop);
+	public static AssignmentProductShop createAssignmentProductShop(Product product, Shop shop) {
+		return new AssignmentProductShop(product, shop);
 	}
 	public void addOrderProduct(OrderProduct orderProduct){
 		listOrderProduct.add(orderProduct );

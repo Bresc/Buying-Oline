@@ -18,6 +18,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import models.entities.AssignmentProductShop;
 import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
@@ -35,11 +36,7 @@ public class ReadXML {
 
 		NodeList nodeList = document.getElementsByTagName("user");
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			userList.add(new User(((((Element)nodeList.item(i)).getElementsByTagName("name")).item(0)).getTextContent()
-					, ((((Element)nodeList.item(i)).getElementsByTagName("address")).item(0)).getTextContent()
-					, ((((Element)nodeList.item(i)).getElementsByTagName("password")).item(0)).getTextContent()
-					, ((((Element)nodeList.item(i)).getElementsByTagName("sourceImg")).item(0)).getTextContent()
-					));
+			userList.add(getUser((Element)nodeList.item(i)));
 		}
 		return userList;
 	}
@@ -55,9 +52,7 @@ public class ReadXML {
 
 		NodeList nodeList = document.getElementsByTagName("shop");
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			shopList.add(new Shop(((((Element)nodeList.item(i)).getElementsByTagName("name")).item(0)).getTextContent()
-					, ((((Element)nodeList.item(i)).getElementsByTagName("srcImg")).item(0)).getTextContent()
-					));
+			shopList.add(getShop((Element)nodeList.item(i)));
 		}
 		return shopList;
 	}
@@ -73,12 +68,26 @@ public class ReadXML {
 
 		NodeList nodeList = document.getElementsByTagName("product");
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			productList.add(new Product(((((Element)nodeList.item(i)).getElementsByTagName("name")).item(0)).getTextContent()
-					, Double.parseDouble(((((Element)nodeList.item(i)).getElementsByTagName("price")).item(0)).getTextContent())
-					, ((((Element)nodeList.item(i)).getElementsByTagName("srcImg")).item(0)).getTextContent()
-					));
+			productList.add(getProduct((Element)nodeList.item(i)));
 		}
 		return productList;
+	}
+	
+	public ArrayList<AssignmentProductShop> readAsigmentProducts() throws ParserConfigurationException, SAXException, IOException{
+		ArrayList<AssignmentProductShop> assignmentProductShops = new ArrayList<>();
+		File file = new File("src/data/asigmentProducts.xml");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+
+		Document document = builder.parse(file);
+		document.getDocumentElement().normalize();
+
+		NodeList nodeList = document.getElementsByTagName("assignedProduct");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			assignmentProductShops.add(new AssignmentProductShop(getProduct((Element) ((Element) nodeList.item(i)).getElementsByTagName("product")),
+					getShop((Element) ((Element) nodeList.item(i)).getElementsByTagName("shop"))));
+		}
+		return assignmentProductShops;
 	}
 	
 	public void writeUser(ArrayList<User> users) throws TransformerException, ParserConfigurationException{
@@ -183,4 +192,21 @@ public class ReadXML {
 		}
 	}
 	
+	public Product getProduct(Element product){
+		return new Product((product.getElementsByTagName("name").item(0)).getTextContent(),
+				Double.parseDouble((product.getElementsByTagName("price").item(0)).getTextContent()),
+				(product.getElementsByTagName("srcImg").item(0)).getTextContent());
+	}
+	
+	public Shop getShop(Element shop){
+		return new Shop((shop.getElementsByTagName("name").item(0)).getTextContent(),
+				(shop.getElementsByTagName("srcImg").item(0)).getTextContent());
+	}
+	
+	public User getUser(Element user){
+		return new User((user.getElementsByTagName("name").item(0)).getTextContent(),
+				(user.getElementsByTagName("address").item(0)).getTextContent(),
+				(user.getElementsByTagName("password").item(0)).getTextContent(), 
+				(user.getElementsByTagName("sourceImg").item(0)).getTextContent());
+	}
 }
