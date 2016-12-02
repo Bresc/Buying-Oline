@@ -48,8 +48,8 @@ public class AdminManager {
 		return new Product(name, price, srcImg);
 	}
 
-	public static Order createOrder(int id, User user, ArrayList<OrderProduct> products, State state) {
-		return new Order(id, user, products, state);
+	public static Order createOrder( User user, ArrayList<OrderProduct> products, State state) {
+		return new Order( user, products, state);
 	}
 
 	public static AssignmentProductShop createAssignmentProductShop(Product product, Shop shop) {
@@ -213,7 +213,7 @@ public class AdminManager {
 	}
 
 	public void editUser(User userEdit, User userOld) throws ErrorUserNotFound {
-		usersList.set(usersList.indexOf(userEdit), userOld);
+		usersList.set(usersList.indexOf(userOld), userEdit);
 	}
 
 	public void editOrder(Order newOrder, Order oldOrder) throws ErrorOrderNotFound {

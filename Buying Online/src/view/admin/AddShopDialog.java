@@ -110,6 +110,7 @@ public class AddShopDialog extends JDialog {
 	}
 
 	public Shop getShop() {
+		Shop.sumShopId();
 		return AdminManager.createShop(txName.getText(), String.valueOf(fcLoadImage.getSelectedFile()));
 	}
 
