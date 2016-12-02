@@ -380,7 +380,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	
 	private void addProductToShop() {
 		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
-		adminManager.addProduct(createdProduct);
+//		adminManager.addAssignmentProductShop(AdminManager.createAssignmentProductShop(createdProduct,
+//				mainWindowShop.getActualShop()));
 //		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(mainWindowShop.getActualShop()));
 		mainWindowAdmin.showMessageDialog("Product Added Successfully");
 		addProductFromShopViewDialog.setVisible(false);
