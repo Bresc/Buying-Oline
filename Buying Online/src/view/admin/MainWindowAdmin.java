@@ -29,7 +29,7 @@ public class MainWindowAdmin extends JFrame {
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("RestaurantSoft Admin v0.1");
-		setIconImage(new ImageIcon("src/img/icon.png").getImage());
+		setIconImage(new ImageIcon("src/img/administrator-icon.png").getImage());
 		toolbar = new ToolBar(controller);
 		add(toolbar, BorderLayout.PAGE_START);
 
