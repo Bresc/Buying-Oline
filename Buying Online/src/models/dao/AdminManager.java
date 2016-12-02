@@ -22,7 +22,7 @@ public class AdminManager {
 	private ArrayList<AssignmentProductShop> assignmentsProductsShopList;
 	private ArrayList<Product> productsList;
 	private ArrayList<Shop> shopList;
-	private ArrayList<User> usersLsit;
+	private ArrayList<User> usersList;
 	private ArrayList<OrderProduct> listOrderProduct;
 
 	public AdminManager() {
@@ -31,7 +31,7 @@ public class AdminManager {
 		assignmentsProductsShopList = new ArrayList<>();
 		productsList = new ArrayList<>();
 		shopList = new ArrayList<>();
-		usersLsit = new ArrayList<>();
+		usersList = new ArrayList<>();
 	}
 	public static OrderProduct CreateOrderProduct(Product product ,int quantity){
 		return new OrderProduct(product, quantity);
@@ -60,7 +60,7 @@ public class AdminManager {
 	}
 	
 	public void addUser(User user) {
-		usersLsit.add(user);
+		usersList.add(user);
 	}
 
 	public void addShop(Shop shop) {
@@ -80,7 +80,7 @@ public class AdminManager {
 	}
 
 	public User deleteUser(User user) throws ErrorUserNotFound {
-		usersLsit.remove(searhUser(user.getId()));
+		usersList.remove(searhUser(user.getId()));
 		return user;
 	}
 
@@ -124,7 +124,7 @@ public class AdminManager {
 	}
 
 	public User searhUser(int id) throws ErrorUserNotFound {
-		for (User user : usersLsit) {
+		for (User user : usersList) {
 			if (user.getId() == id) {
 				return user;
 			}
@@ -152,7 +152,7 @@ public class AdminManager {
 
 	public boolean searchForLogInUser(String name, String password){
 		boolean helper = false;
-		for (User user : usersLsit) {
+		for (User user : usersList) {
 			if (user.getName().equals(name) && user.getPassword().equals(password)) {
 				helper = true;
 			}
@@ -161,27 +161,19 @@ public class AdminManager {
 	}
 	
 	public void editShop(Shop shopEdit, Shop shopOld) throws ErrorShopNotFound {
-		shopList.set(shopOld.getId(), shopEdit);
+		shopList.set(shopList.indexOf(shopOld), shopEdit);
 	}
 
-	public void editProduct(Product productEdit, Product procutOld){
-		procutOld.setName(productEdit.getName());
-		procutOld.setPrice(productEdit.getPrice());
-		procutOld.setSrcImg(productEdit.getSrcImg());
+	public void editProduct(Product productEdit, Product productOld){
+		productsList.set(productsList.indexOf(productOld), productEdit);
 	}
 
 	public void editUser(User userEdit, User userOld) throws ErrorUserNotFound {
-		userOld.setName(userEdit.getName());
-		userOld.setAddress(userEdit.getAddress());
-		userOld.setPassword(userEdit.getPassword());
-		userOld.setSourceImg(userEdit.getSourceImg());
+		usersList.set(usersList.indexOf(userEdit), userOld);
 	}
 
 	public void editOrder(Order newOrder, Order oldOrder) throws ErrorOrderNotFound {
-		Order orderFound = searhOrder(oldOrder.getId());
-		orderFound.setId(newOrder.getId());
-		orderFound.setState(newOrder.getState());
-		orderFound.setProducts(newOrder.getProducts());
+		ordersList.set(ordersList.indexOf(oldOrder), newOrder);
 	}
 
 	public void editAssignmentProductShop(AssignmentProductShop newAssignment, AssignmentProductShop oldAssignment)
@@ -226,7 +218,7 @@ public class AdminManager {
 		return assignmentsProductsShopList;
 	}
 	public ArrayList<User> getUsersList() {
-		return usersLsit;
+		return usersList;
 	}
 
 	public void setListShop(ArrayList<Shop> listShop) {
@@ -251,7 +243,7 @@ public class AdminManager {
 		if (index == 0) {
 			return shopList;
 		}else if (index == 1) {
-			return usersLsit;
+			return usersList;
 		}else {
 			return productsList;
 		}
