@@ -162,6 +162,10 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case CONFIRM:
 			cofirm();
 			break;
+		case OPEN_DIALOG_CHOOSE:
+			logIn.setVisible(false);
+			chooseWhoYouAre.setVisible(true);
+			break;
 		}
 	}
 

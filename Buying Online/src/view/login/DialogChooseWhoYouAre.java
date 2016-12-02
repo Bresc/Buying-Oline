@@ -1,4 +1,5 @@
 package view.login;
+import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -29,12 +30,7 @@ public class DialogChooseWhoYouAre extends JDialog{
 		      System.exit(0);
 		    }
 		  });
-		setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
-		
-		buttonAdmin = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496207_administrator.png")).getImage().getScaledInstance(80, 80, 0)));
-		buttonAdmin.addActionListener(controller);
-		buttonAdmin.setActionCommand(Actions.OPEN_DIALOG_LOG_IN.toString());
-		add(buttonAdmin);
+		setLayout(new GridLayout(1, 2));
 		
 		buttonUser = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png")).getImage().getScaledInstance(80, 80, 0)));
 		buttonUser.addActionListener(controller);
