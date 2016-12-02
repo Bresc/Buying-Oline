@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -28,6 +30,7 @@ import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
 import view.login.DialogChooseWhoYouAre;
 import view.login.DialogLogIn;
+import view.shop.AddProductFromShopViewDialog;
 import view.shop.MainWindowShop;
 import view.user.MainWindowUser;
 
@@ -42,6 +45,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private AddProductDialog addProductDialog;
 	private DialogChooseWhoYouAre chooseWhoYouAre;
 	private DialogLogIn logIn;
+	private AddProductFromShopViewDialog addProductFromShopViewDialog;
 	private ReadXML readXML;
 	private int actualPage;
 
@@ -51,6 +55,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		mainWindowUser = new MainWindowUser(this);
 		mainWindowShop = new MainWindowShop();
 		readXML = new ReadXML();
+		addProductFromShopViewDialog = new AddProductFromShopViewDialog(mainWindowAdmin, this);
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
@@ -93,8 +98,13 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case CHARGE_IMAGE_PRODUCT:
 			addProductDialog.searchForImage();
 			break;
+		case CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW:
+			chargeImageProductFromShopView();
 		case ADD_SHOP:
 			addShop();
+			break;
+		case ADD_PRODUCT_TO_SHOP:
+			addProductToShop();
 			break;
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
@@ -137,7 +147,8 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case CHANGE_TO_PRODUCTS_FROM_SHOP_PANEL:
 			changeToProductsFromShopPanel(e);
 			break;
-		case SHOW_ADD_ORDER_DIALOG:
+		case SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG:
+			showAddProductFromShopViewDialog();
 			break;
 		case SHOW_EDIT_USER:
 			showEditUser();
@@ -152,6 +163,12 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			cofirm();
 			break;
 		}
+	}
+
+
+	private void showAddProductFromShopViewDialog() {
+		addProductFromShopViewDialog.showToAddProduct();
+		addProductFromShopViewDialog.setVisible(true);
 	}
 
 	private void cofirm() {
@@ -360,6 +377,14 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			e.printStackTrace();
 		}
 	}
+	
+	private void addProductToShop() {
+		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
+		adminManager.addProduct(createdProduct);
+//		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(mainWindowShop.getActualShop()));
+		mainWindowAdmin.showMessageDialog("Product Added Successfully");
+		addProductFromShopViewDialog.setVisible(false);
+	}
 
 	private void addUser() {
 		try {
@@ -442,6 +467,13 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		}
 	}
 
+	private void chargeImageProductFromShopView(){
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.showOpenDialog(null);
+		File file = fileChooser.getSelectedFile();
+		addProductFromShopViewDialog.addImage(file.getAbsolutePath());
+	}
+	
 	private void changeToNextPage() {
 		if (actualPage < adminManager
 				.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {

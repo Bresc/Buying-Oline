@@ -18,13 +18,13 @@ public class ToolBarShop extends JToolBar{
 	public ToolBarShop(Controller controller) {
 		setBackground(Color.decode("#00BBBB"));
 		
-		JButton btnAddOrder = new JButton("Add product");
-		btnAddOrder.setToolTipText("Add estudent");
-		btnAddOrder.setIcon(new ImageIcon(new ImageIcon("src/img/default.png").getImage().getScaledInstance(20, 20, 20)));
-		btnAddOrder.setActionCommand(Actions.SHOW_ADD_ORDER_DIALOG.toString());
-		btnAddOrder.setBackground(Color.decode("#FFFFFF"));
-		btnAddOrder.addActionListener(controller);
-		add(btnAddOrder);
+		JButton btnAddProduct = new JButton("Add product");
+		btnAddProduct.setToolTipText("Add product");
+		btnAddProduct.setIcon(new ImageIcon(new ImageIcon("src/img/default.png").getImage().getScaledInstance(20, 20, 20)));
+		btnAddProduct.setActionCommand(Actions.SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG.toString());
+		btnAddProduct.setBackground(Color.decode("#FFFFFF"));
+		btnAddProduct.addActionListener(controller);
+		add(btnAddProduct);
 		
 		addSeparator();
 		addSeparator();
