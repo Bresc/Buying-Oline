@@ -1,5 +1,6 @@
 package view.login;
 
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -8,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -18,95 +20,57 @@ public class DialogLogIn extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 
-	private JTextField textToWrite;
-	private JTextField password;
-	private JLabel labelPassWord;
-	private JLabel labelNickName;
-	private JButton buttonAgreeAdmin;
-	private JButton buttonAgreeUser;
-	private JButton buttonAgreeShop;
+	private JLabel labelBuyingOnline;
+	private JLabel labelNotRegister;
+	private JButton buttonAgreeLogIn;
+	private PanelConteiner panelConteiner;
 	
 	public DialogLogIn(Controller controller) {
 		setTitle("Log In");
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
-		setSize(150, 150);
+		setSize(350, 600);
 		setLocationRelativeTo(null);
+		getContentPane().setBackground(Color.decode("#4383BD"));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new WindowAdapter() { 
 		    @Override public void windowClosed(WindowEvent e) { 
 		      System.exit(0);
 		    }
 		  });
+		
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+//		setLayout(new BorderLayout());
 		
-		labelNickName = new JLabel("Name");
-		add(labelNickName);
+		JPanel panelTitle = new JPanel();
+		panelTitle.setBackground(Color.decode("#4383BD"));
+		labelBuyingOnline = new JLabel("Buying Online");
+		labelBuyingOnline.setForeground(Color.WHITE);
+		panelTitle.add(labelBuyingOnline);
 		
-		textToWrite = new JTextField();
-		textToWrite.addKeyListener(controller);
-		add(textToWrite);
+		add(panelTitle);
 		
-		labelPassWord = new JLabel("Password");
-		add(labelPassWord);
+		panelConteiner = new PanelConteiner(controller);		
+		add(panelConteiner);
 		
-		password = new JPasswordField();
-		password.addKeyListener(controller);
-		add(password);
-		
-		buttonAgreeAdmin = new JButton("Log In");
-		buttonAgreeAdmin.addActionListener(controller);
-		buttonAgreeAdmin.setActionCommand(Actions.ADMIN_VIEW.toString());
-//		buttonAgreeAdmin.setEnabled(false);
-		buttonAgreeAdmin.setVisible(false);
-		add(buttonAgreeAdmin);
-		
-		buttonAgreeUser = new JButton("Log In");
-		buttonAgreeUser.addActionListener(controller);
-		buttonAgreeUser.setActionCommand(Actions.USER_VIEW.toString());
-		buttonAgreeUser.setEnabled(true);
-		buttonAgreeUser.setVisible(false);
-		add(buttonAgreeUser);
-		
-		buttonAgreeShop = new JButton("Log In");
-		buttonAgreeShop.addActionListener(controller);
-		buttonAgreeShop.setActionCommand(Actions.SHOP_VIEW.toString());
-//		buttonAgreeShop.setEnabled(false);
-		buttonAgreeShop.setVisible(false);
-		add(buttonAgreeShop);
+		JPanel panelRegister = new JPanel();
+		panelRegister.setBackground(Color.decode("#4383BD"));
+		labelNotRegister = new JLabel("are you registed, arent you? click here");
+		labelNotRegister.setForeground(Color.WHITE);
+		panelRegister.add(labelNotRegister);
+		add(panelRegister);
 	}
 
 	public String getTheName(){
-		return textToWrite.getText();
+		return panelConteiner.getTheName();
 	}
 	
 	public String getPassword(){
-		return password.getText();
-	}
-	
-	public void changeTheButtonUser(boolean confirmation){
-		if (confirmation) {
-			buttonAgreeUser.setEnabled(true);
-		}
+		return panelConteiner.getPassword();
 	}
 	
 	public void changeTheButtonAdmin(boolean confirmation){
 		if (confirmation == true) {
-			buttonAgreeAdmin.setEnabled(true);
+			buttonAgreeLogIn.setEnabled(true);
 		}
-	}
-	
-	public void adminView() {
-		buttonAgreeAdmin.setVisible(true);
-		setVisible(true);
-	}
-	
-	public void UserView(){
-		buttonAgreeUser.setVisible(true);
-		setVisible(true);
-	}
-	
-	public void CompanyView(){
-		buttonAgreeShop.setVisible(true);
-		setVisible(true);
 	}
 }

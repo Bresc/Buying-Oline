@@ -160,6 +160,52 @@ public class AdminManager {
 		return helper;
 	}
 	
+	/**
+	 * Este metodo es para diferenciar un administrador de un usuario 
+	 * y a su vez lo diferencia de una tienda 
+	 * @param name nombre a buscar
+	 * @param password contraseña a buscar
+	 * @return retorna user si encuetra en la lista de usuario, 
+	 * shop si lo encuentra en la de tiendas,
+	 * o admin si no lo encuentra en ninguna de las dos
+	 */
+	public String searchForLogIn(String name, String password){
+		String helperWho = "admin";
+		for (User user : usersList) {
+			if (user.getName().equals(name) && user.getPassword().equals(password)) {
+				helperWho = "user";
+			}
+		}
+		
+		for (Shop shop : shopList) {
+			if (shop.getName().equals(name)) {
+				helperWho = "shop";
+			}
+		}
+		
+		return helperWho;
+	}
+	
+	public User searchUserNamePassword(String name, String password) throws ErrorUserNotFound{
+		for (User user : usersList) {
+			if (user.getName().equals(name) && user.getPassword().equals(password)) {
+				return user;
+			}
+		}
+		throw new ErrorUserNotFound();
+	}
+	
+	public Shop searchShopName(String name) throws ErrorShopNotFound{
+		for (Shop shop : shopList) {
+			if (shop.getName().equalsIgnoreCase(name)) {
+				System.out.println(shop);
+				System.out.println("Si entrooooo");
+				 return shop;
+			}
+		}
+		throw new ErrorShopNotFound();
+	}
+	
 	public void editShop(Shop shopEdit, Shop shopOld) throws ErrorShopNotFound {
 		shopList.set(shopList.indexOf(shopOld), shopEdit);
 	}

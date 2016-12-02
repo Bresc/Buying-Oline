@@ -137,24 +137,6 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case CHANGE_TO_PRODUCTS_FROM_SHOP_PANEL:
 			changeToProductsFromShopPanel(e);
 			break;
-		case OPEN_DIALOG_LOG_IN:
-			OpenDialogLogIn();
-			break;
-		case SHOP_LOG_IN:
-			shopLogIn();
-			break;
-		case USER_LOG_IN:
-			userLogIn();
-			break;
-		case ADMIN_VIEW:
-			adminView();
-			break;
-		case SHOP_VIEW:
-			shopView();
-			break;
-		case USER_VIEW:
-			userView();
-			break;
 		case SHOW_ADD_ORDER_DIALOG:
 			break;
 		case SHOW_EDIT_USER:
@@ -166,9 +148,48 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case SHOW_EDIT_SHOP:
 			showEditShop();
 			break;
+		case CONFIRM:
+			cofirm();
+			break;
 		}
 	}
 
+	private void cofirm() {
+		if (adminManager.searchForLogIn(logIn.getTheName(), logIn.getPassword()).equals("user")) {
+			try {
+				adminManager.searchUserNamePassword(logIn.getTheName(), logIn.getPassword());
+				mainWindowUser.setVisible(true);
+				logIn.setVisible(false);
+			} catch (ErrorUserNotFound e) {
+				e.printStackTrace();
+			}
+		}else if (adminManager.searchForLogIn(logIn.getTheName(), logIn.getPassword()).equals("shop")) {
+					mainWindowShop.setVisible(true);
+					logIn.setVisible(false);
+					findTheShopHelper();
+		}else{
+			mainWindowAdmin.setVisible(true);
+			logIn.setVisible(false);
+		}
+		System.out.println(adminManager.getListShop());
+	}
+	
+	/**
+	 * Este metodo fue la unica manera de que no me lanzara la excepcio asi que por favor no lo borre 
+	 * o si saben como solucionarlo de una manera mejor por favor podrian hacerlo y despues explicarme
+	 * att: Brayan 
+	 * @return retorna la tienda encontrada anteriormente
+	 */
+	public Shop findTheShopHelper(){
+		Shop shop = null;
+		try {
+			shop = adminManager.searchShopName(logIn.getTheName());
+		} catch (ErrorShopNotFound e1) {
+			e1.printStackTrace();
+		}
+		return shop;
+	}
+	
 	private void showEditShop() {
 		addShopDialog.changeActionToEditShop();
 		try {
@@ -213,41 +234,6 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		addProductDialog.setVisible(false);
 	}
 
-	private void userView() {
-		if (adminManager.searchForLogInUser(logIn.getTheName(), logIn.getPassword())) {
-			mainWindowUser.refreshShopList(adminManager.getListShop(), this);
-			mainWindowUser.setVisible(true);
-		}
-		logIn.setVisible(false);
-	}
-
-	private void shopView() {
-		mainWindowShop.setVisible(true);
-		logIn.setVisible(false);
-	}
-
-	private void adminView() {
-		mainWindowAdmin.setVisible(true);
-		logIn.setVisible(false);
-	}
-
-	private void userLogIn() {
-		logIn.UserView();
-		chooseWhoYouAre.setVisible(false);
-	}
-
-	/**
-	 * este metodo es lo de shop
-	 */
-	private void shopLogIn() {
-		logIn.CompanyView();
-		chooseWhoYouAre.setVisible(false);
-	}
-
-	private void OpenDialogLogIn() {
-		logIn.adminView();
-		chooseWhoYouAre.setVisible(false);
-	}
 
 	public void changeToProductsFromShopPanel(ActionEvent e) {
 		JButton bntSource = (JButton) (e.getSource());
@@ -398,7 +384,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	}
 
 	public void run() {
-		chooseWhoYouAre.setVisible(true);
+		logIn.setVisible(true);
 	}
 
 	@Override
