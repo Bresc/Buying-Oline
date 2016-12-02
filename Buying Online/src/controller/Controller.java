@@ -163,7 +163,20 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case SHOW_PRODUCTS_BY_SHOP:
 			showProductsByShop(((JButton) e.getSource()).getName());
 			break;
+		case SHOW_EDIT_SHOP:
+			showEditShop();
+			break;
 		}
+	}
+
+	private void showEditShop() {
+		addShopDialog.changeActionToEditShop();
+		try {
+			addShopDialog.setForm(adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
+		} catch (ErrorShopNotFound e) {
+			e.printStackTrace();
+		}
+		addShopDialog.setVisible(true);
 	}
 
 	private void showProductsByShop(String id) {
@@ -180,7 +193,6 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		try {
 			addUserDialog.setForm(adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
 		} catch (ErrorUserNotFound e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		addUserDialog.setVisible(true);
@@ -188,6 +200,11 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private void showEditProduct() {
 		addProductDialog.changeActionToProductEdit();
+		try {
+			addProductDialog.chargeProductInWindow(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
+		} catch (ErrorOrderNotFound e) {
+			e.printStackTrace();
+		}
 		addProductDialog.setVisible(true);
 	}
 
@@ -243,9 +260,16 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	}
 
 	private void editShop() {
-		// TODO Auto-generated method stub
-		actualPage = 1;
-		refreshList(0);
+		try {
+			adminManager.editShop(addShopDialog.getShop(), adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
+			actualPage = 1;
+			refreshList(0);
+			addShopDialog.setVisible(false);
+			addShopDialog.changeActionToAddShop();
+			readXML.writeShop(adminManager.getListShop());
+		} catch (ErrorShopNotFound | TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void editUser() {

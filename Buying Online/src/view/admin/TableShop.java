@@ -40,7 +40,7 @@ public class TableShop extends JPanel {
 
 		JMenuItem itemEditShop = new JMenuItem("Edit Shop");
 		itemEditShop.addActionListener(controller);
-		itemEditShop.setActionCommand(Actions.EDIT_SHOP.toString());
+		itemEditShop.setActionCommand(Actions.SHOW_EDIT_SHOP.toString());
 		listshopMenu.add(itemEditShop);
 
 		shopModel = new DefaultTableModel(COLUMNS_NAME, 0);

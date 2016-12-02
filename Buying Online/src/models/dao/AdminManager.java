@@ -161,10 +161,7 @@ public class AdminManager {
 	}
 	
 	public void editShop(Shop shopEdit, Shop shopOld) throws ErrorShopNotFound {
-		Shop shopFound = searhShop(shopOld.getId());
-		shopFound.setId(shopOld.getId());
-		shopFound.setName(shopEdit.getName());
-		shopFound.setSrcImg(shopEdit.getSrcImg());
+		shopList.set(shopOld.getId(), shopEdit);
 	}
 
 	public void editProduct(Product productEdit, Product procutOld){

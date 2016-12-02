@@ -68,7 +68,7 @@ public class MainWindowAdmin extends JFrame {
 	}
 
 	public int getIdToTableShops() {
-		return tableProducts.getProductFromTable();
+		return tableShop.getShopInTable();
 	}
 
 	public int getIdToTableUser() {

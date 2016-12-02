@@ -32,6 +32,7 @@ public class AddShopDialog extends JDialog {
 	private JTextField txName;
 	private JFileChooser fcLoadImage;
 	private JLabel minImage;
+	private JButton btnAddShop;
 
 	public AddShopDialog(MainWindowAdmin mainWindowAdmin, Controller controller) {
 		super(mainWindowAdmin, true);
@@ -64,13 +65,23 @@ public class AddShopDialog extends JDialog {
 		minImage.setAlignmentX(Component.LEFT_ALIGNMENT);
 		add(minImage, gridDialog.insertComponent(2, 4, 3, 0.1));
 
-		JButton btnAddShop = new JButton("Accept");
+		btnAddShop = new JButton("Accept");
 		btnAddShop.addActionListener(controller);
 		btnAddShop.setActionCommand(Actions.ADD_SHOP.toString());
 		btnAddShop.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddShop, gridDialog.insertComponent(3, 2, 7, 0.01));
 	}
 
+	public void changeActionToEditShop() {
+		btnAddShop.setText("Edit Shop");
+		btnAddShop.setActionCommand(Actions.EDIT_SHOP.name());
+	}
+	
+	public void changeActionToAddShop() {
+		btnAddShop.setText("Add Shop");
+		btnAddShop.setActionCommand(Actions.ADD_SHOP.name());
+	}
+	
 	public Icon reSize(ImageIcon imagen) {
 		Image conversion = imagen.getImage();
 		Image tamanio = conversion.getScaledInstance(200, 150, Image.SCALE_SMOOTH);
@@ -104,7 +115,11 @@ public class AddShopDialog extends JDialog {
 
 	public void setForm(Shop shop) {
 		txName.setText(shop.getName());
-		minImage.setIcon(loadImage(new File(shop.getSrcImg())));
+		try {
+			minImage.setIcon(loadImage(new File(shop.getSrcImg())));
+		} catch (Exception e) {
+			minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));
+		}		
 	}
 
 	public void cleanForm() {
