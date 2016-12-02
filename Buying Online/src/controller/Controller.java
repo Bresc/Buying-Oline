@@ -159,9 +159,21 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case SHOW_EDIT_USER:
 			showEditUser();
 			break;
+		case SHOW_PRODUCTS_BY_SHOP:
+			showProductsByShop(((JButton) e.getSource()).getName());
+			break;
 		}
 	}
 
+	private void showProductsByShop(String id) {
+		try {
+			mainWindowUser.changeToProductsFromShopPanel(
+					adminManager.getProductsListFromShop(adminManager.searhShop(Integer.parseInt(id))));
+		} catch (NumberFormatException | ErrorShopNotFound e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void showEditUser() {
 		addUserDialog.changeActionToEditUser();
 		try {
@@ -185,11 +197,10 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private void userView() {
 		if (adminManager.searchForLogInUser(logIn.getTheName(), logIn.getPassword())) {
+			mainWindowUser.refreshShopList(adminManager.getListShop(), this);
 			mainWindowUser.setVisible(true);
-			logIn.setVisible(false);
-		}else{
-			logIn.setVisible(true);
 		}
+		logIn.setVisible(false);
 	}
 
 	private void shopView() {

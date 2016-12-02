@@ -2,11 +2,8 @@ package view.user;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import java.util.ArrayList;
 import javax.swing.JPanel;
-
 import controller.Controller;
 import models.entities.Shop;
 
@@ -14,27 +11,25 @@ public class PanelShop extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private GridSystem gridFile;
-	private JLabel labelImge;
-	private JLabel labelName;
+	private Controller controller;
+	private int rowPosition;
 
-	public PanelShop(Shop shop, Controller controller) {
+	public PanelShop(Controller controller) {
+		this.controller = controller;
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
 		
-		labelImge = new JLabel(new ImageIcon(shop.getSrcImg()));
-		labelName = new JLabel(shop.getName());
-		
-		add(labelImge, BorderLayout.CENTER);
-		add(labelName, BorderLayout.SOUTH);
-		
+		gridFile = new GridSystem(this);
+		rowPosition = 0;
 	}
 
-	public void refreshCardRestaurant(Controller controller) {
+	public void refreshCardRestaurant(ArrayList<Shop> shops) {
 		removeAll();
-		for (int i = 0; i < 5; i++) {
+		for (Shop shop : shops) {
 			CardRestaurant card = new CardRestaurant(controller);
-			card.setForm();
-			add(card, gridFile.insertComponent(i, 1, 3, 1));
+			card.setForm(shop);
+			add(card, gridFile.insertComponent(rowPosition, 1, 3, 1));		
+			rowPosition++;
 		}
 	}
 }

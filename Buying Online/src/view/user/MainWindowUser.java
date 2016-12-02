@@ -15,13 +15,13 @@ public class MainWindowUser extends JFrame {
 	private ToolBar toolBarUser;
 	
 	private JPanel panelActualCenter;
-	private PanelShops panelShops;
 	private PanelProductsFromShop panelProductsFromShop;
+	private PanelShop panelShop;
 
 	public MainWindowUser(Controller controller) {
 		setSize(380, 600);
 		setLayout(new BorderLayout());
-		setUndecorated(true);
+//		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setTitle("RestaurantSoft Client v0.01");
 		getContentPane().setBackground(ConstanstUIUser.BACKGROUND_COLOR_MAIN_WINDOW_USER);
@@ -33,14 +33,17 @@ public class MainWindowUser extends JFrame {
 		panelActualCenter = new JPanel();
 		panelProductsFromShop = new PanelProductsFromShop(controller);
 		
-		panelShops =  new PanelShops();
-		panelActualCenter.add(panelShops);
+		panelShop =  new PanelShop(controller);
 		add(new JScrollPane(panelActualCenter), BorderLayout.CENTER);
 
 	}
 	
-	public void agregarShop(Shop shop , Controller controller){
-		panelShops.agregaShop(shop, controller);
+	public void refreshShopList(ArrayList<Shop> shops , Controller controller){
+		panelActualCenter.removeAll();
+		panelShop.refreshCardRestaurant(shops);
+		panelActualCenter.add(panelShop);
+		panelActualCenter.updateUI();
+		panelActualCenter.repaint();
 	}
 
 

@@ -1,7 +1,6 @@
 package models.entities;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class Order {
 	private int id;

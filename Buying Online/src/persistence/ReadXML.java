@@ -59,7 +59,6 @@ public class ReadXML {
 					, ((((Element)nodeList.item(i)).getElementsByTagName("srcImg")).item(0)).getTextContent()
 					));
 		}
-		System.out.println(shopList);
 		return shopList;
 	}
 
