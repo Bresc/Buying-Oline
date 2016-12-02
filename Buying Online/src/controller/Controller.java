@@ -182,15 +182,10 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 				e.printStackTrace();
 			}
 		}else if (adminManager.searchForLogIn(logIn.getTheName(), logIn.getPassword()).equals("shop")) {
-			try {
-				Shop shop = adminManager.searchShopName(logIn.getTheName());
+				Shop shop = findTheShopHelper();
 				mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(shop));
 				mainWindowShop.setVisible(true);
 				logIn.setVisible(false);
-				findTheShopHelper();
-			} catch (ErrorShopNotFound e) {
-				e.printStackTrace();
-			}
 		}else{
 			mainWindowAdmin.setVisible(true);
 			logIn.setVisible(false);
