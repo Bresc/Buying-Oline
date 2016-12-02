@@ -5,9 +5,10 @@ public class AssignmentProductShop {
 	private int id;
 	private Product product;
 	private Shop shop;
+	public static int ID_BASE = 0;
 
 	public AssignmentProductShop(int id, Product product, Shop shop) {
-		this.id = id;
+		this.id = ID_BASE++;;
 		this.product = product;
 		this.shop = shop;
 	}
