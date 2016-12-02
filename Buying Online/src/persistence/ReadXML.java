@@ -40,7 +40,7 @@ public class ReadXML {
 		}
 		return userList;
 	}
-	
+
 	public ArrayList<Shop> readShop() throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<Shop> shopList = new ArrayList<>();
 		File file = new File("src/data/shops.xml");
@@ -72,10 +72,10 @@ public class ReadXML {
 		}
 		return productList;
 	}
-	
+
 	public ArrayList<AssignmentProductShop> readAsigmentProducts() throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<AssignmentProductShop> assignmentProductShops = new ArrayList<>();
-		File file = new File("src/data/asigmentProducts.xml");
+		File file = new File("src/data/assignedProducts.xml");
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -89,7 +89,7 @@ public class ReadXML {
 		}
 		return assignmentProductShops;
 	}
-	
+
 	public void writeUser(ArrayList<User> users) throws TransformerException, ParserConfigurationException{
 		DocumentBuilder docBuilder;
 		docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -97,37 +97,15 @@ public class ReadXML {
 		Element rootElement = doc.createElement("list.user");
 		doc.appendChild(rootElement);
 		for (User user : users) {
-			Element elementUser = doc.createElement("user");
-			rootElement.appendChild(elementUser);
-
-			Element id = doc.createElement("id");
-			id.appendChild(doc.createTextNode(String.valueOf(user.getId())));
-			elementUser.appendChild(id);
-
-			Element nombre = doc.createElement("name");
-			nombre.appendChild(doc.createTextNode(user.getName()));
-			elementUser.appendChild(nombre);
-
-			Element address = doc.createElement("address");
-			address.appendChild(doc.createTextNode(user.getAddress()));
-			elementUser.appendChild(address);
-
-			Element password = doc.createElement("password");
-			password.appendChild(doc.createTextNode(user.getPassword()));
-			elementUser.appendChild(password);
-
-			Element sourceImg = doc.createElement("sourceImg");
-			sourceImg.appendChild(doc.createTextNode(user.getSourceImg()));
-			elementUser.appendChild(sourceImg);
-
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("src/data/users.xml"));
-			transformer.transform(source, result);
+			rootElement.appendChild(writeUserElement(doc, user));
 		}
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File("src/data/users.xml"));
+		transformer.transform(source, result);
 	}
-	
+
 	public void writeShop(ArrayList<Shop> shops) throws TransformerException, ParserConfigurationException{
 		DocumentBuilder docBuilder;
 		docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -135,74 +113,131 @@ public class ReadXML {
 		Element rootElement = doc.createElement("list.shop");
 		doc.appendChild(rootElement);
 		for (Shop shop : shops) {
-			Element elementUser = doc.createElement("shop");
-			rootElement.appendChild(elementUser);
-
-			Element id = doc.createElement("id");
-			id.appendChild(doc.createTextNode(String.valueOf(shop.getId())));
-			elementUser.appendChild(id);
-
-			Element nombre = doc.createElement("name");
-			nombre.appendChild(doc.createTextNode(shop.getName()));
-			elementUser.appendChild(nombre);
-
-			Element sourceImg = doc.createElement("srcImg");
-			sourceImg.appendChild(doc.createTextNode(shop.getSrcImg()));
-			elementUser.appendChild(sourceImg);
-
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("src/data/shops.xml"));
-			transformer.transform(source, result);
+			writeShopElement(doc, shop);
 		}
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File("src/data/shops.xml"));
+		transformer.transform(source, result);
 	}
-	
+
 	public void writeProduct(ArrayList<Product> products) throws TransformerException, ParserConfigurationException{
-		DocumentBuilder docBuilder;
-		docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement("list.product");
 		doc.appendChild(rootElement);
 		for (Product product : products) {
-			Element elementUser = doc.createElement("product");
-			rootElement.appendChild(elementUser);
-
-			Element id = doc.createElement("id");
-			id.appendChild(doc.createTextNode(String.valueOf(product.getId())));
-			elementUser.appendChild(id);
-
-			Element nombre = doc.createElement("name");
-			nombre.appendChild(doc.createTextNode(product.getName()));
-			elementUser.appendChild(nombre);
-
-			Element price = doc.createElement("price");
-			price.appendChild(doc.createTextNode(String.valueOf(product.getPrice())));
-			elementUser.appendChild(price);
-
-			Element sourceImg = doc.createElement("srcImg");
-			sourceImg.appendChild(doc.createTextNode(product.getSrcImg()));
-			elementUser.appendChild(sourceImg);
-
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("src/data/products.xml"));
-			transformer.transform(source, result);
+			writeProductElement(doc, product);
 		}
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File("src/data/products.xml"));
+		transformer.transform(source, result);
+	}
+
+	public void writeAssigmentProduct(ArrayList<AssignmentProductShop> assignmentProductShopList) throws TransformerException, ParserConfigurationException{
+		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		Document doc = docBuilder.newDocument();
+		Element rootElement = doc.createElement("assignedList");
+		doc.appendChild(rootElement);
+		for (AssignmentProductShop assignmentProductShop : assignmentProductShopList) {
+			Element elementAssigment = doc.createElement("assignedProduct");
+			rootElement.appendChild(elementAssigment);
+			
+			Element id = doc.createElement("id");
+			id.appendChild(doc.createTextNode(String.valueOf(assignmentProductShop.getId())));
+			elementAssigment.appendChild(id);
+			
+			Element product = writeProductElement(doc, assignmentProductShop.getProduct());
+			elementAssigment.appendChild(product);
+			
+			Element shop = writeShopElement(doc, assignmentProductShop.getShop());
+			elementAssigment.appendChild(shop);
+		}
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File("src/data/assignedProducts.xml"));
+		transformer.transform(source, result);
+	}
+	//metodos usados en la escritura para optimizacion
+	public Element writeProductElement(Document doc, Product product){
+		Element elementProduct = doc.createElement("product");
+
+		Element id = doc.createElement("id");
+		id.appendChild(doc.createTextNode(String.valueOf(product.getId())));
+		elementProduct.appendChild(id);
+
+		Element nombre = doc.createElement("name");
+		nombre.appendChild(doc.createTextNode(product.getName()));
+		elementProduct.appendChild(nombre);
+
+		Element price = doc.createElement("price");
+		price.appendChild(doc.createTextNode(String.valueOf(product.getPrice())));
+		elementProduct.appendChild(price);
+
+		Element sourceImg = doc.createElement("srcImg");
+		sourceImg.appendChild(doc.createTextNode(product.getSrcImg()));
+		elementProduct.appendChild(sourceImg);
+		return elementProduct;
+	}
+
+	public Element writeShopElement(Document doc, Shop shop){
+		Element elementShop = doc.createElement("shop");
+
+		Element id = doc.createElement("id");
+		id.appendChild(doc.createTextNode(String.valueOf(shop.getId())));
+		elementShop.appendChild(id);
+
+		Element nombre = doc.createElement("name");
+		nombre.appendChild(doc.createTextNode(shop.getName()));
+		elementShop.appendChild(nombre);
+
+		Element sourceImg = doc.createElement("srcImg");
+		sourceImg.appendChild(doc.createTextNode(shop.getSrcImg()));
+		elementShop.appendChild(sourceImg);
+		return elementShop;
 	}
 	
+	public Element writeUserElement(Document doc, User user){
+		Element elementUser = doc.createElement("user");
+
+		Element id = doc.createElement("id");
+		id.appendChild(doc.createTextNode(String.valueOf(user.getId())));
+		elementUser.appendChild(id);
+
+		Element nombre = doc.createElement("name");
+		nombre.appendChild(doc.createTextNode(user.getName()));
+		elementUser.appendChild(nombre);
+
+		Element address = doc.createElement("address");
+		address.appendChild(doc.createTextNode(user.getAddress()));
+		elementUser.appendChild(address);
+
+		Element password = doc.createElement("password");
+		password.appendChild(doc.createTextNode(user.getPassword()));
+		elementUser.appendChild(password);
+
+		Element sourceImg = doc.createElement("sourceImg");
+		sourceImg.appendChild(doc.createTextNode(user.getSourceImg()));
+		elementUser.appendChild(sourceImg);
+		return elementUser;
+	}
+
+	//Metodos para devolver las entidades
 	public Product getProduct(Element product){
 		return new Product((product.getElementsByTagName("name").item(0)).getTextContent(),
 				Double.parseDouble((product.getElementsByTagName("price").item(0)).getTextContent()),
 				(product.getElementsByTagName("srcImg").item(0)).getTextContent());
 	}
-	
+
 	public Shop getShop(Element shop){
 		return new Shop((shop.getElementsByTagName("name").item(0)).getTextContent(),
 				(shop.getElementsByTagName("srcImg").item(0)).getTextContent());
 	}
-	
+
 	public User getUser(Element user){
 		return new User((user.getElementsByTagName("name").item(0)).getTextContent(),
 				(user.getElementsByTagName("address").item(0)).getTextContent(),

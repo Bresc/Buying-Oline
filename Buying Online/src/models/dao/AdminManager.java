@@ -224,7 +224,10 @@ public class AdminManager {
 	public ArrayList<Shop> getListShop() {
 		return shopList;
 	}
-
+	
+	public ArrayList<AssignmentProductShop> getAssignmentsProductsShopList() {
+		return assignmentsProductsShopList;
+	}
 	public ArrayList<User> getUsersList() {
 		return usersLsit;
 	}
