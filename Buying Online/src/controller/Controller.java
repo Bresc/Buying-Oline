@@ -175,6 +175,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		if (adminManager.searchForLogIn(logIn.getTheName(), logIn.getPassword()).equals("user")) {
 			try {
 				adminManager.searchUserNamePassword(logIn.getTheName(), logIn.getPassword());
+				mainWindowUser.refreshShopList(adminManager.getListShop(), this);
 				mainWindowUser.setVisible(true);
 				logIn.setVisible(false);
 			} catch (ErrorUserNotFound e) {
