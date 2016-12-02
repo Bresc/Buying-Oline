@@ -404,12 +404,16 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	}
 	
 	private void addProductToShop() {
-//		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
-//		adminManager.addAssignmentProductShop(AdminManager.createAssignmentProductShop(createdProduct,
-//				mainWindowShop.getActualShop()));
-//		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(mainWindowShop.getActualShop()));
+		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
+		adminManager.addAssignmentProductShop(AdminManager.createAssignmentProductShop(createdProduct,
+				getActualShop()));
+		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(getActualShop()));
 		mainWindowAdmin.showMessageDialog("Product Added Successfully");
 		addProductFromShopViewDialog.setVisible(false);
+	}
+
+	private Shop getActualShop() {
+		return findTheShopHelper();
 	}
 
 	private void addUser() {
