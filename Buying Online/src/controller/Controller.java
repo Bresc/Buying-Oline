@@ -53,7 +53,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		adminManager = new AdminManager();
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
-		mainWindowShop = new MainWindowShop();
+		mainWindowShop = new MainWindowShop(this);
 		readXML = new ReadXML();
 		addProductFromShopViewDialog = new AddProductFromShopViewDialog(mainWindowAdmin, this);
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
