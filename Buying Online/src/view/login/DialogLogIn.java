@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -16,7 +17,7 @@ import javax.swing.JTextField;
 import controller.Actions;
 import controller.Controller;
 
-public class DialogLogIn extends JDialog{
+public class DialogLogIn extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 
