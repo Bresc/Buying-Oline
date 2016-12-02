@@ -33,9 +33,8 @@ public class MainWindowUser extends JFrame {
 	public MainWindowUser(Controller controller) {
 		setSize(380, 600);
 		setLayout(new BorderLayout());
-//		setUndecorated(true);
 		setLocationRelativeTo(null);
-		setTitle("RestaurantSoft Client v0.01");
+		setTitle(ConstanstUIUser.TITLE_MAIN_WINDOW_USER);
 		getContentPane().setBackground(ConstanstUIUser.BACKGROUND_COLOR_MAIN_WINDOW_USER);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -55,7 +54,7 @@ public class MainWindowUser extends JFrame {
 		btnFavorites.addActionListener(controller);
 		btnFavorites.setBorderPainted(false);
 		btnFavorites.setBackground(Color.WHITE);
-		btnFavorites.setIcon(new ImageIcon(new ImageIcon("src/img/Baker.png").getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
+		btnFavorites.setIcon(new ImageIcon(ConstanstUIUser.IMAGE_FAVORITES.getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
 		btnFavorites.setActionCommand(Actions.VIEW_USER_FAVORITES.toString());
 		panelButtonsOptions.add(btnFavorites);
 
@@ -63,7 +62,7 @@ public class MainWindowUser extends JFrame {
 		btnListProducts.addActionListener(controller);
 		btnListProducts.setBorderPainted(false);
 		btnListProducts.setBackground(Color.WHITE);
-		btnListProducts.setIcon(new ImageIcon(new ImageIcon("src/img/Owner.png").getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
+		btnListProducts.setIcon(new ImageIcon(ConstanstUIUser.IMAGE_ALL_TO_MENU_USER.getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
 		btnListProducts.setActionCommand(Actions.OPT_USER_VIEW_PRODUCTS.toString());
 		panelButtonsOptions.add(btnListProducts);
 
@@ -71,7 +70,7 @@ public class MainWindowUser extends JFrame {
 		btnShoppingCar.addActionListener(controller);
 		btnShoppingCar.setBorderPainted(false);
 		btnShoppingCar.setBackground(Color.WHITE);
-		btnShoppingCar.setIcon(new ImageIcon(new ImageIcon("src/img/buyer.png").getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
+		btnShoppingCar.setIcon(new ImageIcon(ConstanstUIUser.IMAGE_CAR_BUY.getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
 		btnShoppingCar.setActionCommand(Actions.SHOPPING_CAR_USER.toString());
 		panelButtonsOptions.add(btnShoppingCar);
 		
@@ -79,7 +78,7 @@ public class MainWindowUser extends JFrame {
 		btnSettings.addActionListener(controller);
 		btnSettings.setBorderPainted(false);
 		btnSettings.setBackground(Color.WHITE);
-		btnSettings.setIcon(new ImageIcon(new ImageIcon("src/img/Menu.png").getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
+		btnSettings.setIcon(new ImageIcon(ConstanstUIUser.IMAGE_SETTINGS.getImage().getScaledInstance(40, -10, Image.SCALE_AREA_AVERAGING)));
 		btnSettings.setActionCommand(Actions.USER_SETTINGS.toString());
 		panelButtonsOptions.add(btnSettings);
 
