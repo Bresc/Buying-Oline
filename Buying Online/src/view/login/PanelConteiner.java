@@ -48,7 +48,7 @@ public class PanelConteiner extends JPanel{
 		buttonAgreeLogIn.setVisible(true);
 		add(buttonAgreeLogIn);
 		
-		JButton buttonRegister = new JButton("Log In");
+		JButton buttonRegister = new JButton("Sign Up");
 		buttonRegister.addActionListener(controller);
 		buttonRegister.setActionCommand(Actions.OPEN_DIALOG_CHOOSE.toString());
 		buttonRegister.setVisible(true);

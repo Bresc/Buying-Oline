@@ -11,10 +11,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import controller.Actions;
 import controller.Controller;
 
 public class DialogLogIn extends JFrame{
