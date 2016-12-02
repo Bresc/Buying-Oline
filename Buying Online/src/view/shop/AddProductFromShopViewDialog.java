@@ -9,19 +9,15 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
-import java.io.File;
 import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import controller.Actions;
 import controller.Controller;
 import models.dao.AdminManager;
@@ -35,7 +31,7 @@ public class AddProductFromShopViewDialog extends JDialog{
 	private JButton btnSave;
 	private String imgSource;
 	private JTextField txtPriceProduct;
-	private JFileChooser fileChooser;
+//	private JFileChooser fileChooser;
 	
 	public AddProductFromShopViewDialog(MainWindowAdmin mainWindowAdmin, Controller controller) {
 		super(mainWindowAdmin, true);

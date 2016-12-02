@@ -88,7 +88,6 @@ public class MainWindowUser extends JFrame {
 		
 		add(panelButtonsOptions, BorderLayout.SOUTH);
 
-
 	}
 	
 	public void refreshShopList(ArrayList<Shop> shops , Controller controller){

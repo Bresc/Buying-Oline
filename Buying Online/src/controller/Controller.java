@@ -174,9 +174,26 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			addShopDialog.setVisible(true);
 			chooseWhoYouAre.setVisible(false);
 			break;
+		case ADMIN_VIEW:
+			break;
+		case EDIT_PRODUCT_TO_SHOP:
+			break;
+		case OPEN_DIALOG_LOG_IN:
+			break;
+		case OPT_USER_VIEW_PRODUCTS:
+			break;
+		case SHOPPING_CAR_USER:
+			break;
+		case SHOP_VIEW:
+			break;
+		case USER_SETTINGS:
+			break;
+		case USER_VIEW:
+			break;
+		case VIEW_USER_FAVORITES:
+			break;
 		}
 	}
-
 
 	private void showAddProductFromShopViewDialog() {
 		addProductFromShopViewDialog.showToAddProduct();
@@ -387,7 +404,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	}
 	
 	private void addProductToShop() {
-		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
+//		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
 //		adminManager.addAssignmentProductShop(AdminManager.createAssignmentProductShop(createdProduct,
 //				mainWindowShop.getActualShop()));
 //		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(mainWindowShop.getActualShop()));
