@@ -25,6 +25,7 @@ import models.entities.User;
 
 public class ReadXML {
 
+	// Metodos para leer archivos
 	public ArrayList<User> readUser() throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<User> userList = new ArrayList<>();
 		File file = new File("src/data/users.xml");
@@ -90,6 +91,7 @@ public class ReadXML {
 		return assignmentProductShops;
 	}
 
+	//Metodos para escribir archivos
 	public void writeUser(ArrayList<User> users) throws TransformerException, ParserConfigurationException{
 		DocumentBuilder docBuilder;
 		docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -113,7 +115,7 @@ public class ReadXML {
 		Element rootElement = doc.createElement("list.shop");
 		doc.appendChild(rootElement);
 		for (Shop shop : shops) {
-			writeShopElement(doc, shop);
+			rootElement.appendChild(writeShopElement(doc, shop));
 		}
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
@@ -128,7 +130,7 @@ public class ReadXML {
 		Element rootElement = doc.createElement("list.product");
 		doc.appendChild(rootElement);
 		for (Product product : products) {
-			writeProductElement(doc, product);
+			rootElement.appendChild(writeProductElement(doc, product));
 		}
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
