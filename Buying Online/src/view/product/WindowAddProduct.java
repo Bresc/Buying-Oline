@@ -146,5 +146,4 @@ public class WindowAddProduct extends JDialog {
 	public void setPanelButtonsProduct(JPanel panelButtonsProduct) {
 		this.panelButtonsProduct = panelButtonsProduct;
 	}
-
 }

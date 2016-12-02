@@ -16,9 +16,6 @@ import controller.Controller;
 
 public class DialogLogIn extends JDialog{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private JTextField textToWrite;

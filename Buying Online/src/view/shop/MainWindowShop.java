@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class MainWindowShop extends JFrame{
-
 	
 	private static final long serialVersionUID = 1L;
 
@@ -37,9 +36,7 @@ public class MainWindowShop extends JFrame{
 		panelDetails.add(Box.createRigidArea(new Dimension(25,10)));
 		panelDetails.add(labeImage);
 		
-		
 		ToolBarShop toolBarShop = new ToolBarShop(null);
-//		toolBarShop.setMaximumSize(new Dimension(this.getWidth(), 200));
 		
 		JTabbedPane tabs = new JTabbedPane();
 		
@@ -47,18 +44,12 @@ public class MainWindowShop extends JFrame{
 		TableOrders tableOrders = new TableOrders(null);
 		tabs.add("My Product List", productsByShop);
 		tabs.add("My Orders", tableOrders);
-//		tabs.add("My Product List", component)
-		
 		
 		add(panelDetails);
 		add(Box.createRigidArea(new Dimension(25,50)));
 		add(toolBarShop);
 		add(Box.createRigidArea(new Dimension(25,20)));
 		add(tabs);
-		
-		
-		
-				
 	}
 	
 	public static void main(String[] args) {

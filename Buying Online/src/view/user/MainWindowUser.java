@@ -35,7 +35,6 @@ public class MainWindowUser extends JFrame {
 		
 		panelShop =  new PanelShop(controller);
 		add(new JScrollPane(panelActualCenter), BorderLayout.CENTER);
-
 	}
 	
 	public void refreshShopList(ArrayList<Shop> shops , Controller controller){
@@ -54,5 +53,4 @@ public class MainWindowUser extends JFrame {
 		panelActualCenter.updateUI();
 		panelActualCenter.repaint();
 	}
-
 }

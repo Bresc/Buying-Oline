@@ -29,7 +29,6 @@ public class ToolBarShop extends JToolBar{
 		addSeparator();
 		addSeparator();
 		
-			
 		txSearch = new JTextField();
 		add(txSearch);
 		

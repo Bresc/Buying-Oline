@@ -82,7 +82,6 @@ public class TableOrders extends JPanel {
 
 	public void refreshTable(ArrayList<Order> listOrder) {
 		modelOrders.setRowCount(0);
-		
 		for (Order order : listOrder) {
 				addOrderToTable(order);		
 		}

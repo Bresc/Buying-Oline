@@ -45,7 +45,6 @@ public class TableProductsByShop extends JPanel {
 
 		productsTable = new JTable(modelProducts) {
 			private static final long serialVersionUID = 1L;
-
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
@@ -82,7 +81,6 @@ public class TableProductsByShop extends JPanel {
 
 	public void refreshTable(ArrayList<Product> listProducts) {
 		modelProducts.setRowCount(0);
-		;
 		for (Product product : listProducts) {
 			addProductToTable(product);
 		}

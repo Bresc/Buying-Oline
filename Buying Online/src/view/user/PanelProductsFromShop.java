@@ -18,7 +18,6 @@ import models.entities.Product;
 
 public class PanelProductsFromShop extends JPanel{
 
-	
 	private static final long serialVersionUID = 1L;
 	Controller controller;
 	private JPanel pnlMain;

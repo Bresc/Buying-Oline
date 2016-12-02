@@ -37,5 +37,4 @@ public class PanelProduct extends JPanel {
 
 		this.add(panelDescription, BorderLayout.SOUTH);
 	}
-
 }
