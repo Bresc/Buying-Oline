@@ -219,7 +219,6 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			mainWindowAdmin.setVisible(true);
 			logIn.setVisible(false);
 		}
-		System.out.println(adminManager.getListShop());
 	}
 	
 	/**
