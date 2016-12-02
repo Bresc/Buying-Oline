@@ -166,6 +166,14 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			logIn.setVisible(false);
 			chooseWhoYouAre.setVisible(true);
 			break;
+		case USER_LOG_IN:
+			addUserDialog.setVisible(true);
+			chooseWhoYouAre.setVisible(false);
+			break;
+		case SHOP_LOG_IN:
+			addShopDialog.setVisible(true);
+			chooseWhoYouAre.setVisible(false);
+			break;
 		}
 	}
 

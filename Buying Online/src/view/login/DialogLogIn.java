@@ -49,12 +49,6 @@ public class DialogLogIn extends JFrame{
 		panelConteiner = new PanelConteiner(controller);		
 		add(panelConteiner);
 		
-		JPanel panelRegister = new JPanel();
-		panelRegister.setBackground(Color.decode("#4383BD"));
-		labelNotRegister = new JLabel("are you registered, arent you? click here");
-		labelNotRegister.setForeground(Color.WHITE);
-		panelRegister.add(labelNotRegister);
-		add(panelRegister);
 	}
 
 	public String getTheName(){

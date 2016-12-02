@@ -3,7 +3,6 @@ import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,7 +14,6 @@ public class DialogChooseWhoYouAre extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 
-	private JButton buttonAdmin;
 	private JButton buttonUser;
 	private JButton buttonShop;
 	
