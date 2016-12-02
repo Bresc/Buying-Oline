@@ -7,9 +7,10 @@ public class Order {
 	private User user;
 	private State state;
 	private ArrayList<OrderProduct> products;
+	public static int ID_BASE  = 0;
 
-	public Order(int id, User user, ArrayList<OrderProduct> products, State state) {
-		this.id = id;
+	public Order( User user, ArrayList<OrderProduct> products, State state) {
+		this.id = ID_BASE++;
 		this.user = user;
 		this.products = products;
 		this.state = state;

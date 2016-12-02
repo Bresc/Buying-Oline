@@ -8,9 +8,14 @@ public class Shop {
 	public static int ID_BASE;
 
 	public Shop(String name, String srcImg) {
-		this.id = ID_BASE++;
 		this.name = name;
 		this.srcImg = srcImg;
+		id = ID_BASE;
+	}
+
+	public static void sumShopId() {
+		ID_BASE++;
+		System.out.println(ID_BASE);
 	}
 
 	public int getId() {
