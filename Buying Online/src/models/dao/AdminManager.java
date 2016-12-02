@@ -198,8 +198,6 @@ public class AdminManager {
 	public Shop searchShopName(String name) throws ErrorShopNotFound{
 		for (Shop shop : shopList) {
 			if (shop.getName().equalsIgnoreCase(name)) {
-				System.out.println(shop);
-				System.out.println("Si entrooooo");
 				 return shop;
 			}
 		}
