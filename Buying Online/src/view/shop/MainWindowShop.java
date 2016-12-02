@@ -1,9 +1,8 @@
 package view.shop;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
+import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -11,10 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import models.entities.Product;
 
 public class MainWindowShop extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
+	private TableProductsByShop productsByShop;
+	private TableOrders tableOrders;
 
 	public MainWindowShop() {
 		setTitle("Shop");
@@ -22,6 +24,7 @@ public class MainWindowShop extends JFrame{
 		getContentPane().setBackground(Color.white);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		setSize(450, 450);
+		setLocationRelativeTo(null);
 		
 		JPanel panelDetails = new JPanel();
 		panelDetails.setLayout(new BoxLayout(panelDetails, BoxLayout.X_AXIS));
@@ -40,8 +43,8 @@ public class MainWindowShop extends JFrame{
 		
 		JTabbedPane tabs = new JTabbedPane();
 		
-		TableProductsByShop productsByShop = new TableProductsByShop(null);
-		TableOrders tableOrders = new TableOrders(null);
+		productsByShop = new TableProductsByShop(null);
+		tableOrders = new TableOrders(null);
 		tabs.add("My Product List", productsByShop);
 		tabs.add("My Orders", tableOrders);
 		
@@ -52,8 +55,15 @@ public class MainWindowShop extends JFrame{
 		add(tabs);
 	}
 	
-	public static void main(String[] args) {
-		MainWindowShop mainWindowShop = new MainWindowShop();
-		mainWindowShop.setVisible(true);
+	public void refreshProductsTable(ArrayList<Product> products) {
+		productsByShop.refreshTable(products);
 	}
+	
+//	public static void main(String[] args) {
+//		MainWindowShop mainWindowShop = new MainWindowShop();
+//		ArrayList<Product> products = new ArrayList<>();
+//		products.add(new Product("uno", 23, "sadas"));
+//		mainWindowShop.refreshProductsTable(products);
+//		mainWindowShop.setVisible(true);
+//	}
 }
