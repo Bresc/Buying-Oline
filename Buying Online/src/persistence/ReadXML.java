@@ -18,6 +18,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import models.dao.AdminManager;
 import models.entities.AssignmentProductShop;
 import models.entities.Product;
 import models.entities.Shop;
@@ -51,6 +52,8 @@ public class ReadXML {
 		Document document = builder.parse(file);
 		document.getDocumentElement().normalize();
 
+		NodeList principalNode = document.getElementsByTagName("list.shop");
+		AdminManager.updateActualIdShop(Integer.parseInt(((Element)((Element)principalNode.item(0)).getElementsByTagName("lastId").item(0)).getTextContent()));
 		NodeList nodeList = document.getElementsByTagName("shop");
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			shopList.add(getShop((Element)nodeList.item(i)));
@@ -67,6 +70,10 @@ public class ReadXML {
 		Document document = builder.parse(file);
 		document.getDocumentElement().normalize();
 
+		NodeList principalNode = document.getElementsByTagName("list.product");
+		AdminManager.updateActualIdProduct(Integer.parseInt(((Element)((Element)principalNode.item(0)).getElementsByTagName("lastId").item(0)).getTextContent()));
+		System.out.println(((Element)((Element)principalNode.item(0)).getElementsByTagName("lastId").item(0)).getTextContent());
+		
 		NodeList nodeList = document.getElementsByTagName("product");
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			productList.add(getProduct((Element)nodeList.item(i)));
@@ -114,9 +121,14 @@ public class ReadXML {
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement("list.shop");
 		doc.appendChild(rootElement);
+		Element lastId = doc.createElement("lastId"); 
+		int last = 0;
 		for (Shop shop : shops) {
 			rootElement.appendChild(writeShopElement(doc, shop));
+			last = shop.getId();
 		}
+		lastId.appendChild(doc.createTextNode(String.valueOf(last)));
+		rootElement.appendChild(lastId);
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(doc);
@@ -129,9 +141,14 @@ public class ReadXML {
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement("list.product");
 		doc.appendChild(rootElement);
+		Element lastId = doc.createElement("lastId"); 
+		int last = 0;
 		for (Product product : products) {
 			rootElement.appendChild(writeProductElement(doc, product));
+			last = product.getId();
 		}
+		lastId.appendChild(doc.createTextNode(String.valueOf(last)));
+		rootElement.appendChild(lastId);
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(doc);
@@ -230,13 +247,15 @@ public class ReadXML {
 
 	//Metodos para devolver las entidades
 	public Product getProduct(Element product){
-		return new Product((product.getElementsByTagName("name").item(0)).getTextContent(),
+		return new Product(Integer.parseInt((product.getElementsByTagName("id").item(0)).getTextContent()),
+				(product.getElementsByTagName("name").item(0)).getTextContent(),
 				Double.parseDouble((product.getElementsByTagName("price").item(0)).getTextContent()),
 				(product.getElementsByTagName("srcImg").item(0)).getTextContent());
 	}
 
 	public Shop getShop(Element shop){
-		return new Shop((shop.getElementsByTagName("name").item(0)).getTextContent(),
+		return new Shop(Integer.parseInt((shop.getElementsByTagName("id").item(0)).getTextContent()),
+				(shop.getElementsByTagName("name").item(0)).getTextContent(),
 				(shop.getElementsByTagName("srcImg").item(0)).getTextContent());
 	}
 

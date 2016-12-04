@@ -391,6 +391,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private void addProduct() {
 		try {
+			adminManager.summIdProduct();
 			adminManager.addProduct(addProductDialog.extractProductFromWindow());
 			cancelProduct();
 			readXML.writeProduct(adminManager.getListProducts());
@@ -431,6 +432,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 
 	private void addShop() {
 		try {
+			adminManager.summIdShop();
 			adminManager.addShop(addShopDialog.getShop());
 			addShopDialog.cleanForm();
 			addShopDialog.setVisible(false);

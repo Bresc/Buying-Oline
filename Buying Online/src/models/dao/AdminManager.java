@@ -17,6 +17,8 @@ import models.exceptions.ErrorUserNotFound;
 public class AdminManager {
 	
 	public static final int PAGE_SIZE = 10;
+	public static int ACTUAL_ID_SHOP;
+	public static int ACTUAL_ID_PRODUCT;
 
 	private ArrayList<Order> ordersList;
 	private ArrayList<AssignmentProductShop> assignmentsProductsShopList;
@@ -41,11 +43,11 @@ public class AdminManager {
 	}
 
 	public static Shop createShop(String name, String srcImg) {
-		return new Shop(name, srcImg);
+		return new Shop(ACTUAL_ID_SHOP, name, srcImg);
 	}
 
 	public static Product createProduct(String name, double price, String srcImg) {
-		return new Product(name, price, srcImg);
+		return new Product(ACTUAL_ID_PRODUCT, name, price, srcImg);
 	}
 
 	public static Order createOrder( User user, ArrayList<OrderProduct> products, State state) {
@@ -55,6 +57,23 @@ public class AdminManager {
 	public static AssignmentProductShop createAssignmentProductShop(Product product, Shop shop) {
 		return new AssignmentProductShop(product, shop);
 	}
+	//Metodos para colocar y sumar id de tienda y producto
+	public static void updateActualIdShop(int idActual){
+		ACTUAL_ID_SHOP = idActual;
+	}
+	
+	public static void updateActualIdProduct(int idActual){
+		ACTUAL_ID_PRODUCT = idActual;
+	}
+	
+	public void summIdShop(){
+		ACTUAL_ID_SHOP++;
+	}
+	
+	public void summIdProduct(){
+		ACTUAL_ID_PRODUCT++;
+	}
+	
 	public void addOrderProduct(OrderProduct orderProduct){
 		listOrderProduct.add(orderProduct );
 	}
