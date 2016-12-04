@@ -53,7 +53,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		adminManager = new AdminManager();
 		mainWindowAdmin = new MainWindowAdmin(this);
 		mainWindowUser = new MainWindowUser(this);
-		mainWindowShop = new MainWindowShop();
+		mainWindowShop = new MainWindowShop(this);
 		readXML = new ReadXML();
 		addProductFromShopViewDialog = new AddProductFromShopViewDialog(mainWindowAdmin, this);
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
@@ -403,12 +403,16 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	}
 	
 	private void addProductToShop() {
-//		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
-//		adminManager.addAssignmentProductShop(AdminManager.createAssignmentProductShop(createdProduct,
-//				mainWindowShop.getActualShop()));
-//		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(mainWindowShop.getActualShop()));
+		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
+		adminManager.addAssignmentProductShop(AdminManager.createAssignmentProductShop(createdProduct,
+				getActualShop()));
+		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(getActualShop()));
 		mainWindowAdmin.showMessageDialog("Product Added Successfully");
 		addProductFromShopViewDialog.setVisible(false);
+	}
+
+	private Shop getActualShop() {
+		return findTheShopHelper();
 	}
 
 	private void addUser() {

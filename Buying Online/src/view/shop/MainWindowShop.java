@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import controller.Controller;
 import models.entities.Product;
 
 public class MainWindowShop extends JFrame{
@@ -18,7 +20,7 @@ public class MainWindowShop extends JFrame{
 	private TableProductsByShop productsByShop;
 	private TableOrders tableOrders;
 
-	public MainWindowShop() {
+	public MainWindowShop(Controller controller) {
 		setTitle("Shop");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
@@ -39,7 +41,7 @@ public class MainWindowShop extends JFrame{
 		panelDetails.add(Box.createRigidArea(new Dimension(25,10)));
 		panelDetails.add(labeImage);
 		
-		ToolBarShop toolBarShop = new ToolBarShop(null);
+		ToolBarShop toolBarShop = new ToolBarShop(controller);
 		
 		JTabbedPane tabs = new JTabbedPane();
 		
