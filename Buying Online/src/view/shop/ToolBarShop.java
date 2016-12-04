@@ -18,9 +18,8 @@ public class ToolBarShop extends JToolBar{
 	public ToolBarShop(Controller controller) {
 		setBackground(Color.decode("#00BBBB"));
 		
-		JButton btnAddProduct = new JButton("Add product");
+		JButton btnAddProduct = new JButton(new ImageIcon(getClass().getResource("/img/AddProduct.png")));
 		btnAddProduct.setToolTipText("Add product");
-		btnAddProduct.setIcon(new ImageIcon(new ImageIcon("src/img/default.png").getImage().getScaledInstance(20, 20, 20)));
 		btnAddProduct.setActionCommand(Actions.SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG.toString());
 		btnAddProduct.setBackground(Color.decode("#FFFFFF"));
 		btnAddProduct.addActionListener(controller);

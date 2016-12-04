@@ -72,7 +72,6 @@ public class ReadXML {
 
 		NodeList principalNode = document.getElementsByTagName("list.product");
 		AdminManager.updateActualIdProduct(Integer.parseInt(((Element)((Element)principalNode.item(0)).getElementsByTagName("lastId").item(0)).getTextContent()));
-		System.out.println(((Element)((Element)principalNode.item(0)).getElementsByTagName("lastId").item(0)).getTextContent());
 		
 		NodeList nodeList = document.getElementsByTagName("product");
 		for (int i = 0; i < nodeList.getLength(); i++) {

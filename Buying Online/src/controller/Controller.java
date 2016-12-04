@@ -109,6 +109,9 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
 			break;
+		case BACK_TO_PANEL_RESTAURANTS:
+			mainWindowUser.refreshShopList(adminManager.getListShop(), this);
+				break;
 		case SHOW_ADD_USER_DIALOG:
 			addUserDialog.setVisible(true);
 			break;
@@ -191,6 +194,13 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case USER_VIEW:
 			break;
 		case VIEW_USER_FAVORITES:
+			break;
+		case LOG_OUT:
+			mainWindowAdmin.setVisible(false);
+			mainWindowShop.setVisible(false);
+			mainWindowUser.setVisible(false);
+			logIn.clear();
+			logIn.setVisible(true);
 			break;
 		}
 	}
@@ -424,7 +434,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			readXML.writeUser(adminManager.getUsersList());
 			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
 			actualPage = 1;
-			refreshList(1);			
+			refreshList(1);
 		} catch (TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,9 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
@@ -14,18 +17,26 @@ public class ToolBar extends JToolBar {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txSearch;
+	private JMenu menuFile;
 
 	public ToolBar(Controller controller) {
 		setBackground(Color.decode("#FFC557"));
 		GridSystem gridToolBar = new GridSystem(this);
 
-		JButton btnShowDropDownMenu = new JButton(new ImageIcon(getClass().getResource("/img/Menu.png")));
-		btnShowDropDownMenu.setBackground(Color.decode("#FFC557"));
-		btnShowDropDownMenu.setBorder(null);
-		btnShowDropDownMenu.setToolTipText("Show Drop Down Menu");
-		btnShowDropDownMenu.setActionCommand(Actions.SHOW_DROP_DOWN_MENU.toString());
-		btnShowDropDownMenu.addActionListener(controller);
-		add(btnShowDropDownMenu, gridToolBar.insertComponent(1, 0, 1, 0.1));
+		JMenuBar menu = new JMenuBar();
+		menu.setBackground(Color.decode("#FFC557"));
+		
+		menuFile = new JMenu();
+		menuFile.setIcon(new ImageIcon("src/img/Menu.png"));
+		
+		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/img/Exit.png"));
+		logOut.setBackground(Color.decode("#FFC557"));
+		logOut.setActionCommand(Actions.LOG_OUT.toString());
+		logOut.addActionListener(controller);
+		menuFile.add(logOut);
+		
+		menu.add(menuFile);
+		add(menu, gridToolBar.insertComponent(1, 0, 1, 0.1));
 
 		txSearch = new JTextField();
 		add(txSearch, gridToolBar.insertComponent(1, 2, 9, 0.1));

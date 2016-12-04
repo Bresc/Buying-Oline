@@ -65,4 +65,8 @@ public class DialogLogIn extends JFrame {
 			buttonAgreeLogIn.setEnabled(true);
 		}
 	}
+
+	public void clear() {
+		panelConteiner.clear();
+	}
 }

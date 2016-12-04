@@ -59,4 +59,9 @@ public class PanelConteiner extends JPanel {
 	public String getPassword() {
 		return password.getText();
 	}
+
+	public void clear() {
+		textToWrite.setText("");
+		password.setText("");
+	}
 }
