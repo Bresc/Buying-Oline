@@ -28,7 +28,7 @@ public class ToolBar extends JToolBar{
 		
 		JMenu menuFile = new JMenu("File");
 		
-		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/img/Exit.png"));
+		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/4.png"));
 		logOut.setBackground(Color.decode("#00BBBB"));
 		logOut.setActionCommand(Actions.LOG_OUT.toString());
 		logOut.addActionListener(controller);
@@ -37,21 +37,21 @@ public class ToolBar extends JToolBar{
 		menu.add(menuFile);
 		add(menu, gridMenu.insertComponent(0, 0, 1, 1));
 		
-		JButton btnAddUser = new JButton(new ImageIcon(getClass().getResource("/img/addUser.png")));
+		JButton btnAddUser = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
 		btnAddUser.setToolTipText("Add User");
 		btnAddUser.setActionCommand(Actions.SHOW_ADD_USER_DIALOG.toString());
 		btnAddUser.setBackground(Color.decode("#FFFFFF"));
 		btnAddUser.addActionListener(controller);
 		add(btnAddUser, gridMenu.insertComponent(1, 0, 1, 0.1));
 		
-		JButton btnAddShop = new JButton(new ImageIcon(getClass().getResource("/img/AddShop.png")));
+		JButton btnAddShop = new JButton(new ImageIcon(getClass().getResource("/img/1.png")));
 		btnAddShop.setToolTipText("Add Shop");
 		btnAddShop.setActionCommand(Actions.SHOW_ADD_SHOP_DIALOG.toString());
 		btnAddShop.addActionListener(controller);
 		btnAddShop.setBackground(Color.decode("#FFFFFF"));
 		add(btnAddShop, gridMenu.insertComponent(1, 2, 1, 0.1));
 		
-		JButton btnAddProduct = new JButton(new ImageIcon(getClass().getResource("/img/AddProduct.png")));
+		JButton btnAddProduct = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
 		btnAddProduct.setToolTipText("Add Product");
 		btnAddProduct.setBackground(Color.decode("#FFFFFF"));
 		btnAddProduct.setActionCommand(Actions.SHOW_ADD_PRODUCT.toString());
