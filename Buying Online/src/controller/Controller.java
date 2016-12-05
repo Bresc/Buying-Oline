@@ -47,6 +47,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private DialogLogIn logIn;
 	private AddProductFromShopViewDialog addProductFromShopViewDialog;
 	private ReadXML readXML;
+	
 	private int actualPage;
 
 	public Controller() {
@@ -83,6 +84,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			addProduct();
 			break;
 		case CANCEL_PRODUCT:
+			
 			cancelProduct();
 			break;
 		case SEARCH_RESTAURANT:
