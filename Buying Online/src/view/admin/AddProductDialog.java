@@ -17,11 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
-
-import controller.Actions;
+import controller.ActionsAdmin;
 import controller.ConstantUI;
-import controller.Controller;
-import models.dao.AdminManager;
+import controller.ControllerAdmin;
+import models.dao.ManagerProduct;
 import models.entities.Product;
 import view.product.ConstantUIProduct;
 import view.user.GridSystem;
@@ -40,7 +39,7 @@ public class AddProductDialog extends JDialog {
 	private JButton btnAceptProduct;
 	private JButton btnCancelProduct;
 
-	public AddProductDialog(MainWindowAdmin mainFrame, Controller controller) {
+	public AddProductDialog(MainWindowAdmin mainFrame, ControllerAdmin controller) {
 		super(mainFrame, true);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		setTitle("Add a new Product");
@@ -68,7 +67,7 @@ public class AddProductDialog extends JDialog {
 
 		btnChargeImage = new JButton("Charge An Image");
 		btnChargeImage.setForeground(Color.BLACK);
-		btnChargeImage.setActionCommand(Actions.CHARGE_IMAGE_PRODUCT.toString());
+		btnChargeImage.setActionCommand(ActionsAdmin.CHARGE_IMAGE_PRODUCT.toString());
 		btnChargeImage.addActionListener(controller);
 		add(btnChargeImage, gridProduct.insertComponent(2, 3, 6, 0.001));
 
@@ -85,7 +84,7 @@ public class AddProductDialog extends JDialog {
 
 		btnCancelProduct = new JButton("Cancel");
 		btnCancelProduct.setForeground(Color.black);
-		btnCancelProduct.setActionCommand(Actions.CANCEL_PRODUCT.toString());
+		btnCancelProduct.setActionCommand(ActionsAdmin.CANCEL_PRODUCT.toString());
 		btnCancelProduct.addActionListener(controller);
 		btnCancelProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnCancelProduct, gridProduct.insertComponent(4, 7, 3, 0.001));
@@ -94,18 +93,18 @@ public class AddProductDialog extends JDialog {
 	}
 
 	public Product extractProductFromWindow() throws NumberFormatException {
-		return AdminManager.createProduct(textName.getText(), Double.parseDouble(intergerFormatter(textValue.getText())),
+		return ManagerProduct.createProduct(textName.getText(), Double.parseDouble(intergerFormatter(textValue.getText())),
 				getImageInChooser());
 	}
 	
 	public void changeActionToProductEdit(){
 		btnAceptProduct.setText("Edit Product");
-		btnAceptProduct.setActionCommand(Actions.EDIT_PRODUCT.name());
+		btnAceptProduct.setActionCommand(ActionsAdmin.EDIT_PRODUCT.name());
 	}
 	
 	public void changeActionToProductAdd(){
 		btnAceptProduct.setText("Add Product");
-		btnAceptProduct.setActionCommand(Actions.ADD_PRODUCT.name());
+		btnAceptProduct.setActionCommand(ActionsAdmin.ADD_PRODUCT.name());
 	}
 	
 	public String intergerFormatter(String num){

@@ -7,18 +7,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.Controller;
-import controller.Actions;
+import controller.ControllerAdmin;
+import controller.ActionsAdmin;
 
 public class PaginatePanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel lbPage;
 
-	public PaginatePanel(Controller controller) {
+	public PaginatePanel(ControllerAdmin controller) {
 		JButton btnLeft = new JButton(new ImageIcon("src/img/arrow_left.png"));
 		btnLeft.setToolTipText("Go to left page");
-		btnLeft.setActionCommand(Actions.GO_LEFT_ARROW.toString());
+		btnLeft.setActionCommand(ActionsAdmin.GO_LEFT_ARROW.toString());
 		btnLeft.addActionListener(controller);
 		btnLeft.setFocusPainted(false);
 		btnLeft.setBorder(null);
@@ -30,7 +30,7 @@ public class PaginatePanel extends JPanel{
 		
 		JButton btnRight = new JButton(new ImageIcon("src/img/arrow_right.png"));
 		btnRight.setToolTipText("Go to right page");
-		btnRight.setActionCommand(Actions.GO_RIGHT_ARROW.toString());
+		btnRight.setActionCommand(ActionsAdmin.GO_RIGHT_ARROW.toString());
 		btnRight.addActionListener(controller);
 		btnRight.setFocusPainted(false);
 		btnRight.setBorder(null);

@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -20,12 +19,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import controller.Actions;
-import controller.Controller;
-import models.dao.AdminManager;
+import controller.ActionsUser;
+import controller.ControllerUser;
+import models.dao.ManagerUser;
 import models.entities.User;
 import view.user.GridSystem;
+import view.user.MainWindowUser;
 
 public class AddUserDialog extends JDialog {
 
@@ -37,8 +36,8 @@ public class AddUserDialog extends JDialog {
 	private JPasswordField txPassword;
 	private JButton btnAddUser;
 
-	public AddUserDialog(MainWindowAdmin mainWindowAdmin, Controller controller) {
-		super(mainWindowAdmin, true);
+	public AddUserDialog( MainWindowUser mainWindowUser, ControllerUser controlleruser) {
+		super(mainWindowUser, true);
 		setTitle("Add User");
 		setSize(500, 400);
 		setLocationRelativeTo(null);
@@ -65,9 +64,9 @@ public class AddUserDialog extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10)));
 
 		JButton btImage = new JButton("Add imagen");
-		btImage.addActionListener(controller);
+		btImage.addActionListener(controlleruser);
 		btImage.setBackground(ConstantUIAdmin.BTN_COLOR);
-		btImage.setActionCommand(Actions.ADD_IMAGE_TO_USER.toString());
+		btImage.setActionCommand(ActionsUser.ADD_IMAGE_TO_USER.toString());
 		btImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btImage, gridDialog.insertComponent(3, 4, 3, 0.01));
 
@@ -78,7 +77,7 @@ public class AddUserDialog extends JDialog {
 		add(minImage, gridDialog.insertComponent(4, 4, 3, 0.1));
 
 		btnAddUser = new JButton();
-		btnAddUser.addActionListener(controller);
+		btnAddUser.addActionListener(controlleruser);
 		changeActionToAddUser();
 		btnAddUser.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btnAddUser.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -87,12 +86,12 @@ public class AddUserDialog extends JDialog {
 	
 	public void changeActionToEditUser() {
 		btnAddUser.setText("Edit User");
-		btnAddUser.setActionCommand(Actions.EDIT_USER.name());
+		btnAddUser.setActionCommand(ActionsUser.EDIT_USER.name());
 	}
 	
 	public void changeActionToAddUser() {
 		btnAddUser.setText("Add User");
-		btnAddUser.setActionCommand(Actions.ADD_USER.name());
+		btnAddUser.setActionCommand(ActionsUser.ADD_USER.name());
 	}
 
 	public Icon reSize(ImageIcon imagen) {
@@ -122,7 +121,7 @@ public class AddUserDialog extends JDialog {
 	}
 
 	public User getUser() {
-		return AdminManager.createUser(txName.getText(), txAddress.getText(), String.valueOf(txPassword.getPassword()),
+		return ManagerUser.createUser(txName.getText(), txAddress.getText(), String.valueOf(txPassword.getPassword()),
 				String.valueOf(fcLoadImage.getSelectedFile()));
 	}
 

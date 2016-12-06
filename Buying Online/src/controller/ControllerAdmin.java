@@ -15,7 +15,12 @@ import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
-import models.dao.AdminManager;
+import models.dao.ManagerAsingProduct;
+import models.dao.ManagerOrder;
+import models.dao.ManagerOrderProduct;
+import models.dao.ManagerProduct;
+import models.dao.ManagerShop;
+import models.dao.ManagerUser;
 import models.entities.AssignmentProductShop;
 import models.entities.Product;
 import models.entities.Shop;
@@ -34,49 +39,45 @@ import view.shop.AddProductFromShopViewDialog;
 import view.shop.MainWindowShop;
 import view.user.MainWindowUser;
 
-public class Controller implements ActionListener, KeyListener, ChangeListener {
+public class ControllerAdmin implements ActionListener, KeyListener, ChangeListener {
 
-	private MainWindowUser mainWindowUser;
+	
+
+	private ManagerAsingProduct adminManagerAssingProduct;
 	private MainWindowAdmin mainWindowAdmin;
-	private MainWindowShop mainWindowShop;
-	private AddShopDialog addShopDialog;
-	private AdminManager adminManager;
 	private AddUserDialog addUserDialog;
 	private AddProductDialog addProductDialog;
 	private DialogChooseWhoYouAre chooseWhoYouAre;
-	private DialogLogIn logIn;
-	private AddProductFromShopViewDialog addProductFromShopViewDialog;
-	private ReadXML readXML;
-	
+	//private ReadXML readXML; 
 	private int actualPage;
-
-	public Controller() {
-		adminManager = new AdminManager();
+	private ManagerProduct managerProduct;
+	private ManagerShop managerShop;
+	private AddShopDialog addShopDialog;
+	private MainWindowUser mainWindowUser;
+	private DialogLogIn logIn;
+	private ManagerUser manageruser;
+	public ControllerAdmin() {
+		
+		adminManagerAssingProduct = new ManagerAsingProduct();
 		mainWindowAdmin = new MainWindowAdmin(this);
-		mainWindowUser = new MainWindowUser(this);
-		mainWindowShop = new MainWindowShop(this);
-		readXML = new ReadXML();
-		addProductFromShopViewDialog = new AddProductFromShopViewDialog(mainWindowAdmin, this);
-		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
-		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
+//		readXML = new ReadXML();
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
-		logIn = new DialogLogIn(this);
-		try {
-			refreshDataUser(readXML.readUser());
-			refreshDataShop(readXML.readShop());
-			refreshDataProduct(readXML.readProduct());
-			refreshDataAssigmentProductShop(readXML.readAsigmentProducts());
-		} catch (SAXException | ParserConfigurationException | IOException e) {
-			e.printStackTrace();
-		}
-		actualPage = 1;
-		refreshList(0);
+//		try {
+//          refreshDataUser(readXML.readUser()); este metodo esta en el controller de user
+//			refreshDataShop(readXML.readShop());
+//			refreshDataProduct(readXML.readProduct());
+//			refreshDataAssigmentProductShop(readXML.readAsigmentProducts());
+//		} catch (SAXException | ParserConfigurationException | IOException e) {
+//			e.printStackTrace();
+//		}
+//		actualPage = 1;
+//	    refreshList(0);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		switch (Actions.valueOf(e.getActionCommand())) {
+		switch (ActionsAdmin.valueOf(e.getActionCommand())) {
 		case ADD_USER:
 			addUser();
 			break;
@@ -84,15 +85,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			addProduct();
 			break;
 		case CANCEL_PRODUCT:
-			
 			cancelProduct();
-			break;
-		case SEARCH_RESTAURANT:
-			break;
-		case SHOW_DROP_DOWN_MENU:
-			break;
-		case ADD_IMAGE_TO_SHOP:
-			addShopDialog.openFileChooser();
 			break;
 		case ADD_IMAGE_TO_USER:
 			addUserDialog.openFileChooser();
@@ -100,20 +93,11 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case CHARGE_IMAGE_PRODUCT:
 			addProductDialog.searchForImage();
 			break;
-		case CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW:
-			chargeImageProductFromShopView();
+	
 		case ADD_SHOP:
 			addShop();
+			
 			break;
-		case ADD_PRODUCT_TO_SHOP:
-			addProductToShop();
-			break;
-		case SHOW_ADD_SHOP_DIALOG:
-			addShopDialog.setVisible(true);
-			break;
-		case BACK_TO_PANEL_RESTAURANTS:
-			mainWindowUser.refreshShopList(adminManager.getListShop(), this);
-				break;
 		case SHOW_ADD_USER_DIALOG:
 			addUserDialog.setVisible(true);
 			break;
@@ -149,26 +133,13 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		case EDIT_USER:
 			editUser();
 			break;
-		case CHANGE_TO_PRODUCTS_FROM_SHOP_PANEL:
-			changeToProductsFromShopPanel(e);
-			break;
-		case SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG:
-			showAddProductFromShopViewDialog();
-			break;
 		case SHOW_EDIT_USER:
 			showEditUser();
-			break;
-		case SHOW_PRODUCTS_BY_SHOP:
-			showProductsByShop(((JButton) e.getSource()).getName());
 			break;
 		case SHOW_EDIT_SHOP:
 			showEditShop();
 			break;
-		case CONFIRM:
-			cofirm();
-			break;
 		case OPEN_DIALOG_CHOOSE:
-			logIn.setVisible(false);
 			chooseWhoYouAre.setVisible(true);
 			break;
 		case USER_LOG_IN:
@@ -176,7 +147,6 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			chooseWhoYouAre.setVisible(false);
 			break;
 		case SHOP_LOG_IN:
-			addShopDialog.setVisible(true);
 			chooseWhoYouAre.setVisible(false);
 			break;
 		case ADMIN_VIEW:
@@ -185,53 +155,12 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 			break;
 		case OPEN_DIALOG_LOG_IN:
 			break;
-		case OPT_USER_VIEW_PRODUCTS:
-			break;
-		case SHOPPING_CAR_USER:
-			break;
-		case SHOP_VIEW:
-			break;
-		case USER_SETTINGS:
-			break;
-		case USER_VIEW:
-			break;
-		case VIEW_USER_FAVORITES:
-			break;
 		case LOG_OUT:
 			mainWindowAdmin.setVisible(false);
-			mainWindowShop.setVisible(false);
-			mainWindowUser.setVisible(false);
-			logIn.clear();
-			logIn.setVisible(true);
 			break;
 		}
 	}
 
-	private void showAddProductFromShopViewDialog() {
-		addProductFromShopViewDialog.showToAddProduct();
-		addProductFromShopViewDialog.setVisible(true);
-	}
-
-	private void cofirm() {
-		if (adminManager.searchForLogIn(logIn.getTheName(), logIn.getPassword()).equals("user")) {
-			try {
-				adminManager.searchUserNamePassword(logIn.getTheName(), logIn.getPassword());
-				mainWindowUser.refreshShopList(adminManager.getListShop(), this);
-				mainWindowUser.setVisible(true);
-				logIn.setVisible(false);
-			} catch (ErrorUserNotFound e) {
-				e.printStackTrace();
-			}
-		}else if (adminManager.searchForLogIn(logIn.getTheName(), logIn.getPassword()).equals("shop")) {
-				Shop shop = findTheShopHelper();
-				mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(shop));
-				mainWindowShop.setVisible(true);
-				logIn.setVisible(false);
-		}else{
-			mainWindowAdmin.setVisible(true);
-			logIn.setVisible(false);
-		}
-	}
 	
 	/**
 	 * Este metodo fue la unica manera de que no me lanzara la excepcio asi que por favor no lo borre 
@@ -239,39 +168,32 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	 * att: Brayan 
 	 * @return retorna la tienda encontrada anteriormente
 	 */
-	public Shop findTheShopHelper(){
-		Shop shop = null;
-		try {
-			shop = adminManager.searchShopName(logIn.getTheName());
-		} catch (ErrorShopNotFound e1) {
-			e1.printStackTrace();
-		}
-		return shop;
-	}
+	
 	
 	private void showEditShop() {
 		addShopDialog.changeActionToEditShop();
 		try {
-			addShopDialog.setForm(adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
+			addShopDialog.setForm(managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
 		} catch (ErrorShopNotFound e) {
 			e.printStackTrace();
 		}
 		addShopDialog.setVisible(true);
 	}
 
-	private void showProductsByShop(String id) {
+	public Shop findTheShopHelper(){
+		Shop shop = null;
 		try {
-			mainWindowUser.changeToProductsFromShopPanel(
-					adminManager.getProductsListFromShop(adminManager.searhShop(Integer.parseInt(id))));
-		} catch (NumberFormatException | ErrorShopNotFound e) {
-			e.printStackTrace();
+			shop = managerShop.searchShopName(logIn.getTheName());
+		} catch (ErrorShopNotFound e1) {
+			e1.printStackTrace();
 		}
+		return shop;
 	}
-	
+
 	private void showEditUser() {
 		addUserDialog.changeActionToEditUser();
 		try {
-			addUserDialog.setForm(adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
+			addUserDialog.setForm(manageruser.searhUser(mainWindowAdmin.getIdToTableUser()));
 		} catch (ErrorUserNotFound e) {
 			e.printStackTrace();
 		}
@@ -281,7 +203,7 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	private void showEditProduct() {
 		addProductDialog.changeActionToProductEdit();
 		try {
-			addProductDialog.chargeProductInWindow(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
+			addProductDialog.chargeProductInWindow(managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 		} catch (ErrorOrderNotFound e) {
 			e.printStackTrace();
 		}
@@ -293,168 +215,127 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		addProductDialog.setVisible(false);
 	}
 
-
-	public void changeToProductsFromShopPanel(ActionEvent e) {
-		JButton bntSource = (JButton) (e.getSource());
-		try {
-			Shop selectedShop = adminManager.searhShop(Integer.parseInt(bntSource.getName()));
-			mainWindowUser.changeToProductsFromShopPanel(adminManager.getProductsListFromShop(selectedShop));
-		} catch (NumberFormatException | ErrorShopNotFound e1) {
-			e1.printStackTrace();
-		}
-	}
-
 	private void editShop() {
 		try {
-			adminManager.editShop(addShopDialog.getShop(), adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
+			managerShop.editShop(addShopDialog.getShop(),managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
 			actualPage = 1;
 			refreshList(0);
 			addShopDialog.setVisible(false);
 			addShopDialog.changeActionToAddShop();
-			readXML.writeShop(adminManager.getListShop());
-		} catch (ErrorShopNotFound | TransformerException | ParserConfigurationException e) {
+			//readXML.writeShop(managerShop.getListShop());
+		} catch (ErrorShopNotFound e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void editUser() {
 		try {
-			adminManager.editUser(addUserDialog.getUser(), adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
+			manageruser.editUser(addUserDialog.getUser(), manageruser.searhUser(mainWindowAdmin.getIdToTableUser()));
 			actualPage = 1;
 			refreshList(1);
 			addUserDialog.setVisible(false);
 			addUserDialog.changeActionToAddUser();
-			readXML.writeUser(adminManager.getUsersList());
-		} catch (NumberFormatException | ErrorUserNotFound | TransformerException | ParserConfigurationException e) {
+			//readXML.writeUser(manageruser.getUsersList());
+		} catch (NumberFormatException | ErrorUserNotFound e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void editProduct() {
 		try {
-			adminManager.editProduct(addProductDialog.extractProductFromWindow(),
-					adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
+		managerProduct.editProduct(addProductDialog.extractProductFromWindow(),
+				managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 			actualPage = 1;
 			refreshList(2);
 			addProductDialog.setVisible(false);
 			addProductDialog.changeActionToProductAdd();
-			readXML.writeProduct(adminManager.getListProducts());
-		} catch (NumberFormatException | ErrorOrderNotFound | TransformerException | ParserConfigurationException e) {
+		//	readXML.writeProduct(managerProduct.getListProducts());
+		} catch (NumberFormatException | ErrorOrderNotFound e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void deleteUser() {
 		try {
-			adminManager.deleteUser(adminManager.searhUser(mainWindowAdmin.getIdToTableUser()));
+			manageruser.deleteUser(manageruser.searhUser(mainWindowAdmin.getIdToTableUser()));
 			actualPage = 1;
 			refreshList(1);
-			readXML.writeUser(adminManager.getUsersList());
-		} catch (TransformerException | ParserConfigurationException | ErrorUserNotFound e) {
+			//readXML.writeUser(manageruser.getUsersList());
+		} catch (ErrorUserNotFound e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void deleteShop() {
 		try {
-			adminManager.delteShop(adminManager.searhShop(mainWindowAdmin.getIdToTableShops()));
+			managerShop.delteShop(managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
 			actualPage = 1;
 			refreshList(0);
-			readXML.writeShop(adminManager.getListShop());
-		} catch (ErrorShopNotFound | TransformerException | ParserConfigurationException e) {
+			//readXML.writeShop(managerShop.getListShop());
+		} catch (ErrorShopNotFound e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void refreshDataUser(ArrayList<User> users) throws SAXException {
-		for (User user : users) {
-			adminManager.addUser(user);
-		}
-	}
 
 	private void refreshDataProduct(ArrayList<Product> readProduct) {
 		for (Product product : readProduct) {
-			adminManager.addProduct(product);
+			managerProduct.addProduct(product);
 		}
 	}
 	
 	private void refreshDataAssigmentProductShop(ArrayList<AssignmentProductShop> readAssignmentProductShops) {
 		for (AssignmentProductShop assigment : readAssignmentProductShops) {
-			adminManager.addAssignmentProductShop(assigment);
+			adminManagerAssingProduct.addAssignmentProductShop(assigment);
 		}
 	}
 
 	private void refreshDataShop(ArrayList<Shop> readShop) {
 		for (Shop shop : readShop) {
-			adminManager.addShop(shop);
+			managerShop.addShop(shop);
 		}
 	}
 
 	private void deleteProduct() {
 		try {
-			adminManager.deleteProduct(adminManager.searhProduct(mainWindowAdmin.getIdToTableProducts()));
+			managerProduct.deleteProduct(managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 			actualPage = 1;
 			refreshList(2);
-			readXML.writeProduct(adminManager.getListProducts());
-		} catch (ErrorOrderNotFound | TransformerException | ParserConfigurationException e) {
+			//readXML.writeProduct(managerProduct.getListProducts());
+		} catch (ErrorOrderNotFound e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void addProduct() {
-		try {
-			adminManager.summIdProduct();
-			adminManager.addProduct(addProductDialog.extractProductFromWindow());
-			cancelProduct();
-			readXML.writeProduct(adminManager.getListProducts());
-			mainWindowAdmin.showMessageDialog("Product Added Successfully");
-			actualPage = 1;
-			refreshList(2);
-		} catch (TransformerException | ParserConfigurationException e) {
-			e.printStackTrace();
-		}
+		//adminManagerAssingProduct.summIdProduct(); marco no se si esta linea sea necesaria cuando mejores la persistencia por eso esta comentariada
+		managerProduct.addProduct(addProductDialog.extractProductFromWindow());
+		cancelProduct();
+		//readXML.writeProduct(managerProduct.getListProducts());
+		mainWindowAdmin.showMessageDialog("Product Added Successfully");
+		actualPage = 1;
+		refreshList(2);
 	}
 	
-	private void addProductToShop() {
-		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
-		adminManager.addAssignmentProductShop(AdminManager.createAssignmentProductShop(createdProduct,
-				getActualShop()));
-		mainWindowShop.refreshProductsTable(adminManager.getProductsListFromShop(getActualShop()));
-		mainWindowAdmin.showMessageDialog("Product Added Successfully");
-		addProductFromShopViewDialog.setVisible(false);
-	}
-
-	private Shop getActualShop() {
-		return findTheShopHelper();
-	}
-
 	private void addUser() {
-		try {
-			adminManager.addUser(addUserDialog.getUser());
-			addUserDialog.cleanForm();
-			addUserDialog.setVisible(false);
-			readXML.writeUser(adminManager.getUsersList());
-			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
-			actualPage = 1;
-			refreshList(1);
-		} catch (TransformerException | ParserConfigurationException e) {
-			e.printStackTrace();
-		}
+		manageruser.addUser(addUserDialog.getUser());
+		addUserDialog.cleanForm();
+		addUserDialog.setVisible(false);
+		//readXML.writeUser(manageruser.getUsersList());
+		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+		actualPage = 1;
+		refreshList(1);
 	}
 
 	private void addShop() {
-		try {
-			adminManager.summIdShop();
-			adminManager.addShop(addShopDialog.getShop());
-			addShopDialog.cleanForm();
-			addShopDialog.setVisible(false);
-			readXML.writeShop(adminManager.getListShop());
-			mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
-			actualPage = 1;
-			refreshList(0);
-		} catch (TransformerException | ParserConfigurationException e) {
-			e.printStackTrace();
-		}
+		//adminManagerAssingProduct.summIdShop();
+		managerShop.addShop(addShopDialog.getShop());
+		addShopDialog.cleanForm();
+		addShopDialog.setVisible(false);
+		//readXML.writeShop(managerShop.getListShop());
+		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+		actualPage = 1;
+		refreshList(0);
 	}
 
 	public void run() {
@@ -490,19 +371,19 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 	@SuppressWarnings("unchecked")
 	public void refreshList(int index) {
 		mainWindowAdmin.refreshPage(actualPage,
-				adminManager.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
+				adminManagerAssingProduct.getTotalPages(adminManagerAssingProduct.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
 		switch (index) {
 		case 0:
 			mainWindowAdmin.refreshTableShop(
-					(ArrayList<Shop>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
+					(ArrayList<Shop>) adminManagerAssingProduct.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
 			break;
 		case 1:
 			mainWindowAdmin.refreshTableUser(
-					(ArrayList<User>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
+					(ArrayList<User>) adminManagerAssingProduct.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
 			break;
 		case 2:
 			mainWindowAdmin.refreshTableProducts(
-					(ArrayList<Product>) adminManager.paginate(adminManager.returnListDependIndex(index), actualPage));
+					(ArrayList<Product>) adminManagerAssingProduct.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
 			break;
 
 		default:
@@ -510,16 +391,9 @@ public class Controller implements ActionListener, KeyListener, ChangeListener {
 		}
 	}
 
-	private void chargeImageProductFromShopView(){
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.showOpenDialog(null);
-		File file = fileChooser.getSelectedFile();
-		addProductFromShopViewDialog.addImage(file.getAbsolutePath());
-	}
-	
 	private void changeToNextPage() {
-		if (actualPage < adminManager
-				.getTotalPages(adminManager.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
+		if (actualPage < adminManagerAssingProduct
+				.getTotalPages(adminManagerAssingProduct.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
 			actualPage++;
 			refreshList(mainWindowAdmin.getTabbedPaneIndex());
 		}

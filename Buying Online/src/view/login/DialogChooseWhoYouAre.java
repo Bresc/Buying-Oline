@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import controller.Actions;
-import controller.Controller;
+import controller.ActionsAdmin;
+import controller.ControllerAdmin;
 
 public class DialogChooseWhoYouAre extends JDialog {
 
@@ -18,7 +18,7 @@ public class DialogChooseWhoYouAre extends JDialog {
 	private JButton buttonUser;
 	private JButton buttonShop;
 
-	public DialogChooseWhoYouAre(Controller controller) {
+	public DialogChooseWhoYouAre(ControllerAdmin controller) {
 		setTitle("Log in");
 		setSize(358, 130);
 		setLocationRelativeTo(null);
@@ -35,13 +35,13 @@ public class DialogChooseWhoYouAre extends JDialog {
 		buttonUser = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
 		buttonUser.addActionListener(controller);
-		buttonUser.setActionCommand(Actions.USER_LOG_IN.toString());
+		buttonUser.setActionCommand(ActionsAdmin.USER_LOG_IN.toString());
 		add(buttonUser);
 
 		buttonShop = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496235_shop.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
 		buttonShop.addActionListener(controller);
-		buttonShop.setActionCommand(Actions.SHOP_LOG_IN.toString());
+		buttonShop.setActionCommand(ActionsAdmin.SHOP_LOG_IN.toString());
 		add(buttonShop);
 	}
 }

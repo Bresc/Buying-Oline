@@ -18,9 +18,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import controller.Actions;
-import controller.Controller;
-import models.dao.AdminManager;
+import controller.ActionsAdmin;
+import controller.ActionsShop;
+import controller.ControllerAdmin;
+import models.dao.ManagerProduct;
 import models.entities.Product;
 import view.admin.MainWindowAdmin;
 
@@ -31,9 +32,8 @@ public class AddProductFromShopViewDialog extends JDialog{
 	private JButton btnSave;
 	private String imgSource;
 	private JTextField txtPriceProduct;
-//	private JFileChooser fileChooser;
 	
-	public AddProductFromShopViewDialog(MainWindowAdmin mainWindowAdmin, Controller controller) {
+	public AddProductFromShopViewDialog(MainWindowAdmin mainWindowAdmin, ControllerAdmin controller) {
 		super(mainWindowAdmin, true);
 		setTitle("Student dialog");
 		setSize(400, 370);
@@ -73,7 +73,7 @@ public class AddProductFromShopViewDialog extends JDialog{
 		pnlChooseImage.add(lbImage);
 		JButton btnChooseImage = new JButton("Choose image");
 		btnChooseImage.addActionListener(controller);
-		btnChooseImage.setActionCommand(Actions.CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW.toString());
+		btnChooseImage.setActionCommand(ActionsShop.CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW.toString());
 		btnChooseImage.setBackground(Color.decode("#ccd9ff"));
 		
 		JPanel pnlRightChooseImage = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 70));
@@ -84,7 +84,7 @@ public class AddProductFromShopViewDialog extends JDialog{
 
 		btnSave = new JButton("Save", new ImageIcon("src/img/saveIcon.png"));
 		btnSave.addActionListener(controller);
-		btnSave.setActionCommand(Actions.ADD_PRODUCT_TO_SHOP.toString());
+		btnSave.setActionCommand(ActionsShop.ADD_PRODUCT_TO_SHOP.toString());
 		btnSave.setBackground(Color.decode("#ccd9ff"));
 		btnSave.setAlignmentX(CENTER_ALIGNMENT);
 		add(btnSave);
@@ -92,7 +92,7 @@ public class AddProductFromShopViewDialog extends JDialog{
 	
 	
 	public Product getCreatedProduct() {
-		return AdminManager.createProduct(txtName.getText(), Double.parseDouble(txtPriceProduct.getText()), imgSource);
+		return ManagerProduct.createProduct(txtName.getText(), Double.parseDouble(txtPriceProduct.getText()), imgSource);
 	}
 
 	public void addImage(String newSourceImg) {
@@ -117,13 +117,12 @@ public class AddProductFromShopViewDialog extends JDialog{
 		refill(productFromShopToEdit.getName(), productFromShopToEdit.getSrcImg(),
 				productFromShopToEdit.getPrice());
 		btnSave.setText("Edit");
-		btnSave.setActionCommand(Actions.EDIT_PRODUCT_TO_SHOP.toString());
+		btnSave.setActionCommand(ActionsAdmin.EDIT_PRODUCT_TO_SHOP.toString());
 	}
 	
 	public void showToAddProduct() {
 		cleanFields();
 		btnSave.setText("Save");
-		btnSave.setActionCommand(Actions.ADD_PRODUCT_TO_SHOP.toString());
+		btnSave.setActionCommand(ActionsShop.ADD_PRODUCT_TO_SHOP.toString());
 	}
-	
 }

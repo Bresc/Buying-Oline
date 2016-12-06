@@ -7,10 +7,10 @@ public class Shop {
 	public String srcImg;
 	public static int ID_BASE;
 
-	public Shop(int id, String name, String srcImg) {
+	public Shop( String name, String srcImg) {
 		this.name = name;
 		this.srcImg = srcImg;
-		this.id = id;
+		this.id =0;
 	}
 
 	public static void sumShopId() {

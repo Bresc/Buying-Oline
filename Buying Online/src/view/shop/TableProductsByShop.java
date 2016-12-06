@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.Controller;
+import controller.ControllerAdmin;
 import models.entities.Product;
 import models.entities.Shop;
 
@@ -28,7 +28,7 @@ public class TableProductsByShop extends JPanel {
 	private JTable productsTable;
 	private JPopupMenu listshopMenu;
 
-	public TableProductsByShop(Controller controller) {
+	public TableProductsByShop(ControllerAdmin controller) {
 		setLayout(new BorderLayout());
 
 		listshopMenu = new JPopupMenu();

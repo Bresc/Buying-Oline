@@ -9,9 +9,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-
-import controller.Actions;
-import controller.Controller;
+import controller.ActionsAdmin;
+import controller.ActionsUser;
+import controller.ControllerUser;
 
 public class ToolBar extends JToolBar {
 
@@ -19,7 +19,7 @@ public class ToolBar extends JToolBar {
 	private JTextField txSearch;
 	private JMenu menuFile;
 
-	public ToolBar(Controller controller) {
+	public ToolBar( ControllerUser controllerUser) {
 		setBackground(Color.decode("#FFC557"));
 		GridSystem gridToolBar = new GridSystem(this);
 
@@ -31,8 +31,8 @@ public class ToolBar extends JToolBar {
 		
 		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/img/Exit.png"));
 		logOut.setBackground(Color.decode("#FFC557"));
-		logOut.setActionCommand(Actions.LOG_OUT.toString());
-		logOut.addActionListener(controller);
+		logOut.setActionCommand(ActionsAdmin.LOG_OUT.toString());
+		logOut.addActionListener(controllerUser);
 		menuFile.add(logOut);
 		
 		menu.add(menuFile);
@@ -45,8 +45,8 @@ public class ToolBar extends JToolBar {
 		btnSearch.setBackground(Color.decode("#FFC557"));
 		btnSearch.setBorder(null);
 		btnSearch.setToolTipText("Search Restaurant");
-		btnSearch.setActionCommand(Actions.SEARCH_RESTAURANT.toString());
-		btnSearch.addActionListener(controller);
+		btnSearch.setActionCommand(ActionsUser.SEARCH_RESTAURANT.toString());
+		btnSearch.addActionListener(controllerUser);
 		add(btnSearch, gridToolBar.insertComponent(1, 11, 1, 0.1));
 
 		setFloatable(false);

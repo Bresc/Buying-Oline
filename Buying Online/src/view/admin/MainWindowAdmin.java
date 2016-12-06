@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
-import controller.Controller;
+import controller.ControllerAdmin;
 import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
@@ -23,7 +23,7 @@ public class MainWindowAdmin extends JFrame {
 	private PaginatePanel paginatePanel;
 	private JTabbedPane objects;
 
-	public MainWindowAdmin(Controller controller) {
+	public MainWindowAdmin(ControllerAdmin controller) {
 		setLayout(new BorderLayout());
 		setSize(500, 500);
 		setExtendedState(MAXIMIZED_BOTH);

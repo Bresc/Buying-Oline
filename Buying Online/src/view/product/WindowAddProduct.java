@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,11 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import controller.Actions;
+import controller.ActionsAdmin;
 import controller.ConstantUI;
-import controller.Controller;
-import models.dao.AdminManager;
+import controller.ControllerAdmin;
+import models.dao.ManagerProduct;
 import models.entities.Product;
 import view.admin.MainWindowAdmin;
 
@@ -39,7 +37,7 @@ public class WindowAddProduct extends JDialog {
 	private JButton btnAceptProduct;
 	private JButton btnCancelProduct;
 
-	public WindowAddProduct(MainWindowAdmin mainFrame, Controller controller) {
+	public WindowAddProduct(MainWindowAdmin mainFrame, ControllerAdmin controller) {
 		super(mainFrame, true);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		setTitle("Add a new Product");
@@ -68,7 +66,7 @@ public class WindowAddProduct extends JDialog {
 
 		btnChargeImage = new JButton("Charge An Image");
 		btnChargeImage.setForeground(Color.white);
-		btnChargeImage.setActionCommand(Actions.CHARGE_IMAGE_PRODUCT.toString());
+		btnChargeImage.setActionCommand(ActionsAdmin.CHARGE_IMAGE_PRODUCT.toString());
 		btnChargeImage.addActionListener(controller);
 
 		panelImage.add(btnChargeImage, BorderLayout.EAST);
@@ -83,13 +81,13 @@ public class WindowAddProduct extends JDialog {
 
 		btnAceptProduct = new JButton("Add");
 		btnAceptProduct.setForeground(Color.black);
-		btnAceptProduct.setActionCommand(Actions.ADD_PRODUCT.toString());
+		btnAceptProduct.setActionCommand(ActionsAdmin.ADD_PRODUCT.toString());
 		btnAceptProduct.addActionListener(controller);
 		btnAceptProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		btnCancelProduct = new JButton("Cancel");
 		btnCancelProduct.setForeground(Color.black);
-		btnCancelProduct.setActionCommand(Actions.CANCEL_PRODUCT.toString());
+		btnCancelProduct.setActionCommand(ActionsAdmin.CANCEL_PRODUCT.toString());
 		btnCancelProduct.addActionListener(controller);
 		btnCancelProduct.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -102,7 +100,7 @@ public class WindowAddProduct extends JDialog {
 	}
 
 	public Product extractProductFromWindow() throws NumberFormatException {
-		return AdminManager.createProduct(textName.getText(), Double.parseDouble(textValue.getText()),
+		return ManagerProduct.createProduct(textName.getText(), Double.parseDouble(textValue.getText()),
 				getImageInChooser());
 	}
 

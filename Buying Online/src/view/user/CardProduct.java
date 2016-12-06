@@ -11,8 +11,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import controller.Controller;
+import controller.ControllerUser;
 import models.entities.Product;
 
 public class CardProduct extends JPanel {
@@ -22,7 +21,7 @@ public class CardProduct extends JPanel {
 	private JLabel lbImgProduct;
 	private JLabel lbPriceProduct;
 
-	public CardProduct(Controller controller) {
+	public CardProduct(ControllerUser controllerUser) {
 		setLayout(new GridLayout(1, 2));
 		setBorder(BorderFactory.createLineBorder(Color.decode("#076AC0")));
 		setBackground(Color.WHITE);

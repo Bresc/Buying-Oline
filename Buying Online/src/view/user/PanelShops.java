@@ -5,7 +5,7 @@ import java.awt.GridLayout;
 //import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import controller.Controller;
+import controller.ControllerAdmin;
 import models.entities.Shop;
 
 public class PanelShops extends JPanel {
@@ -23,7 +23,7 @@ public class PanelShops extends JPanel {
 	}
 	
 	
-	public void agregaShop(Shop shop, Controller controller) {
+	public void agregaShop(Shop shop, ControllerAdmin controller) {
 		//PanelShop pnshop = new PanelShop(shop, controller);
 		//listaShops.add(pnshop);
 		//listaShops.add(pnshop);

@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -19,11 +18,11 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import controller.Actions;
-import controller.Controller;
-import models.dao.AdminManager;
+import controller.ActionsShop;
+import controller.ControllerShop;
+import models.dao.ManagerShop;
 import models.entities.Shop;
+import view.shop.MainWindowShop;
 import view.user.GridSystem;
 
 public class AddShopDialog extends JDialog {
@@ -34,8 +33,8 @@ public class AddShopDialog extends JDialog {
 	private JLabel minImage;
 	private JButton btnAddShop;
 
-	public AddShopDialog(MainWindowAdmin mainWindowAdmin, Controller controller) {
-		super(mainWindowAdmin, true);
+	public AddShopDialog( MainWindowShop mainWindowShop,  ControllerShop controllershop) {
+		super(mainWindowShop, true);
 		setTitle("Add Shop");
 		setSize(500, 400);
 		setLocationRelativeTo(null);
@@ -54,8 +53,8 @@ public class AddShopDialog extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10)));
 
 		JButton btImage = new JButton("Add imagen");
-		btImage.addActionListener(controller);
-		btImage.setActionCommand(Actions.ADD_IMAGE_TO_SHOP.toString());
+		btImage.addActionListener(controllershop);
+		btImage.setActionCommand(ActionsShop.ADD_IMAGE_TO_SHOP.toString());
 		btImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btImage, gridDialog.insertComponent(1, 4, 3, 0.01));
 
@@ -66,20 +65,20 @@ public class AddShopDialog extends JDialog {
 		add(minImage, gridDialog.insertComponent(2, 4, 3, 0.1));
 
 		btnAddShop = new JButton("Accept");
-		btnAddShop.addActionListener(controller);
-		btnAddShop.setActionCommand(Actions.ADD_SHOP.toString());
+		btnAddShop.addActionListener(controllershop);
+		btnAddShop.setActionCommand(ActionsShop.ADD_SHOP.toString());
 		btnAddShop.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddShop, gridDialog.insertComponent(3, 2, 7, 0.01));
 	}
 
 	public void changeActionToEditShop() {
 		btnAddShop.setText("Edit Shop");
-		btnAddShop.setActionCommand(Actions.EDIT_SHOP.name());
+		btnAddShop.setActionCommand(ActionsShop.EDIT_SHOP.name());
 	}
 	
 	public void changeActionToAddShop() {
 		btnAddShop.setText("Add Shop");
-		btnAddShop.setActionCommand(Actions.ADD_SHOP.name());
+		btnAddShop.setActionCommand(ActionsShop.ADD_SHOP.name());
 	}
 	
 	public Icon reSize(ImageIcon imagen) {
@@ -111,7 +110,7 @@ public class AddShopDialog extends JDialog {
 
 	public Shop getShop() {
 		Shop.sumShopId();
-		return AdminManager.createShop(txName.getText(), String.valueOf(fcLoadImage.getSelectedFile()));
+		return ManagerShop.createShop(txName.getText(), String.valueOf(fcLoadImage.getSelectedFile()));
 	}
 
 	public void setForm(Shop shop) {

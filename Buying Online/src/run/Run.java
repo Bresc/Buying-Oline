@@ -1,11 +1,11 @@
 package run;
 
-import controller.Controller;
+import controller.ControllerAdmin;
 
 public class Run {
 
 	public static void main(String[] args) {
-		Controller controller = new Controller();
+		ControllerAdmin controller = new ControllerAdmin();
 		controller.run();
 	}
 }

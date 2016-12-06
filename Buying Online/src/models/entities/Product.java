@@ -9,8 +9,8 @@ public class Product {
 	public String srcImg;
 	public static int ID_BASE;
 
-	public Product(int id, String name, double price, String srcImg) {
-		this.id = id;
+	public Product( String name, double price, String srcImg) {
+		this.id = 0;
 		this.name = name;
 		this.price = price;
 		this.srcImg = srcImg;

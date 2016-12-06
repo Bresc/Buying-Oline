@@ -10,8 +10,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
-import controller.Actions;
-import controller.Controller;
+import controller.ActionsAdmin;
+import controller.ControllerAdmin;
 import view.user.GridSystem;
 
 public class ToolBar extends JToolBar{
@@ -19,7 +19,7 @@ public class ToolBar extends JToolBar{
 	private static final long serialVersionUID = 1L;
 	private JTextField txSearch;
 
-	public ToolBar(Controller controller) {
+	public ToolBar(ControllerAdmin controller) {
 		setBackground(Color.decode("#00BBBB"));
 		GridSystem gridMenu = new GridSystem(this);
 		
@@ -30,7 +30,7 @@ public class ToolBar extends JToolBar{
 		
 		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/4.png"));
 		logOut.setBackground(Color.decode("#00BBBB"));
-		logOut.setActionCommand(Actions.LOG_OUT.toString());
+		logOut.setActionCommand(ActionsAdmin.LOG_OUT.toString());
 		logOut.addActionListener(controller);
 		menuFile.add(logOut);
 		
@@ -39,14 +39,14 @@ public class ToolBar extends JToolBar{
 		
 		JButton btnAddUser = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
 		btnAddUser.setToolTipText("Add User");
-		btnAddUser.setActionCommand(Actions.SHOW_ADD_USER_DIALOG.toString());
+		btnAddUser.setActionCommand(ActionsAdmin.SHOW_ADD_USER_DIALOG.toString());
 		btnAddUser.setBackground(Color.decode("#FFFFFF"));
 		btnAddUser.addActionListener(controller);
 		add(btnAddUser, gridMenu.insertComponent(1, 0, 1, 0.1));
 		
 		JButton btnAddShop = new JButton(new ImageIcon(getClass().getResource("/img/1.png")));
 		btnAddShop.setToolTipText("Add Shop");
-		btnAddShop.setActionCommand(Actions.SHOW_ADD_SHOP_DIALOG.toString());
+		btnAddShop.setActionCommand(ActionsAdmin.SHOW_ADD_SHOP_DIALOG.toString());
 		btnAddShop.addActionListener(controller);
 		btnAddShop.setBackground(Color.decode("#FFFFFF"));
 		add(btnAddShop, gridMenu.insertComponent(1, 2, 1, 0.1));
@@ -54,7 +54,7 @@ public class ToolBar extends JToolBar{
 		JButton btnAddProduct = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
 		btnAddProduct.setToolTipText("Add Product");
 		btnAddProduct.setBackground(Color.decode("#FFFFFF"));
-		btnAddProduct.setActionCommand(Actions.SHOW_ADD_PRODUCT.toString());
+		btnAddProduct.setActionCommand(ActionsAdmin.SHOW_ADD_PRODUCT.toString());
 		btnAddProduct.addActionListener(controller);
 		add(btnAddProduct, gridMenu.insertComponent(1, 4, 1, 0.1));
 		

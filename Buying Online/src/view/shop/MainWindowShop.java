@@ -2,21 +2,18 @@ package view.shop;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-
-import controller.Actions;
-import controller.Controller;
+import controller.ActionsAdmin;
+import controller.ControllerShop;
 import models.entities.Product;
 
 public class MainWindowShop extends JFrame{
@@ -25,7 +22,7 @@ public class MainWindowShop extends JFrame{
 	private TableProductsByShop productsByShop;
 	private TableOrders tableOrders;
 
-	public MainWindowShop(Controller controller) {
+	public MainWindowShop(ControllerShop controllershop) {
 		setTitle("Shop");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
@@ -40,14 +37,14 @@ public class MainWindowShop extends JFrame{
 		JMenu menuFile = new JMenu("File");
 		
 		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/img/Exit.png"));
-		logOut.setActionCommand(Actions.LOG_OUT.toString());
-		logOut.addActionListener(controller);
+		logOut.setActionCommand(ActionsAdmin.LOG_OUT.toString());
+		logOut.addActionListener(controllershop);
 		menuFile.add(logOut);
 		menu.add(menuFile);
 		
 		pnlDetails.add(menu);
 		
-		ToolBarShop toolBarShop = new ToolBarShop(controller);
+		ToolBarShop toolBarShop = new ToolBarShop(controllershop);
 		
 		JTabbedPane tabs = new JTabbedPane();
 		
@@ -65,4 +62,5 @@ public class MainWindowShop extends JFrame{
 	public void refreshProductsTable(ArrayList<Product> products) {
 		productsByShop.refreshTable(products);
 	}
+
 }

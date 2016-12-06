@@ -3,7 +3,6 @@ package view.login;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,18 +10,17 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import controller.Controller;
+import controller.ControllerShop;
 
 public class DialogLogIn extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	private JLabel labelBuyingOnline;
-	// private JLabel labelNotRegister;
 	private JButton buttonAgreeLogIn;
 	private PanelConteiner panelConteiner;
 
-	public DialogLogIn(Controller controller) {
+	public DialogLogIn( ControllerShop controllerShop) {
 		setTitle("Log In");
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
 		setSize(350, 200);
@@ -47,7 +45,7 @@ public class DialogLogIn extends JFrame {
 
 		add(panelTitle);
 
-		panelConteiner = new PanelConteiner(controller);
+		panelConteiner = new PanelConteiner(controllerShop);
 		add(panelConteiner);
 
 	}

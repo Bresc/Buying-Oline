@@ -15,8 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import controller.Actions;
-import controller.Controller;
+import controller.ActionsAdmin;
+import controller.ControllerAdmin;
 import models.entities.Product;
 import models.entities.Shop;
 
@@ -29,19 +29,19 @@ public class TableProducts extends JPanel {
 	private JTable productsTable;
 	private JPopupMenu listshopMenu;
 
-	public TableProducts(Controller controller) {
+	public TableProducts(ControllerAdmin controller) {
 		setLayout(new BorderLayout());
 
 		listshopMenu = new JPopupMenu();
 
 		JMenuItem jmiDeleteProduct = new JMenuItem("Delete Product");
 		jmiDeleteProduct.addActionListener(controller);
-		jmiDeleteProduct.setActionCommand(Actions.DELETE_PRODUCT.toString());
+		jmiDeleteProduct.setActionCommand(ActionsAdmin.DELETE_PRODUCT.toString());
 		listshopMenu.add(jmiDeleteProduct);
 
 		JMenuItem itemEditShop = new JMenuItem("Edit Product");
 		itemEditShop.addActionListener(controller);
-		itemEditShop.setActionCommand(Actions.SHOW_EDIT_PRODUCT.toString());
+		itemEditShop.setActionCommand(ActionsAdmin.SHOW_EDIT_PRODUCT.toString());
 		listshopMenu.add(itemEditShop);
 
 		modelProducts = new DefaultTableModel(COLUMN_NAMES, 0);

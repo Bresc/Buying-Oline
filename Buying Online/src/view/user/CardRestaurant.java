@@ -5,16 +5,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
-
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import controller.Actions;
-import controller.Controller;
+import controller.ActionsUser;
+import controller.ControllerUser;
 import models.entities.Shop;
 
 public class CardRestaurant extends JPanel {
@@ -23,7 +21,7 @@ public class CardRestaurant extends JPanel {
 	private JLabel lbNameRestaurant;
 	private JButton btnImgRestaurant;
 
-	public CardRestaurant(Controller controller) {
+	public CardRestaurant(ControllerUser controllerUser) {
 		setLayout(new GridLayout(1, 2));
 		setBorder(BorderFactory.createLineBorder(Color.decode("#076AC0")));
 		setBackground(Color.WHITE);
@@ -32,8 +30,8 @@ public class CardRestaurant extends JPanel {
 
 		btnImgRestaurant = new JButton(new ImageIcon());
 		btnImgRestaurant.setBorder(null);
-		btnImgRestaurant.addActionListener(controller);
-		btnImgRestaurant.setActionCommand(Actions.SHOW_PRODUCTS_BY_SHOP.toString());
+		btnImgRestaurant.addActionListener(controllerUser);
+		btnImgRestaurant.setActionCommand(ActionsUser.SHOW_PRODUCTS_BY_SHOP.toString());
 		add(btnImgRestaurant, gridPanel.insertComponent(1, 1, 5, 0.70));
 
 		lbNameRestaurant = new JLabel();
