@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.io.IOException;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,6 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import controller.ActionsAdmin;
 import controller.ConstantUI;
 import controller.ControllerAdmin;
@@ -99,7 +105,7 @@ public class WindowAddProduct extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10))); // espacio en blanco
 	}
 
-	public Product extractProductFromWindow() throws NumberFormatException {
+	public Product extractProductFromWindow() throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
 		return ManagerProduct.createProduct(textName.getText(), Double.parseDouble(textValue.getText()),
 				getImageInChooser());
 	}

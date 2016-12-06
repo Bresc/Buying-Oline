@@ -18,6 +18,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import controller.ActionsAdmin;
 import controller.ActionsShop;
 import controller.ControllerAdmin;
@@ -91,7 +95,7 @@ public class AddProductFromShopViewDialog extends JDialog{
 	}
 	
 	
-	public Product getCreatedProduct() {
+	public Product getCreatedProduct() throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
 		return ManagerProduct.createProduct(txtName.getText(), Double.parseDouble(txtPriceProduct.getText()), imgSource);
 	}
 

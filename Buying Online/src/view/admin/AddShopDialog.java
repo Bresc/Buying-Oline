@@ -18,6 +18,10 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import controller.ActionsShop;
 import controller.ControllerShop;
 import models.dao.ManagerShop;
@@ -108,8 +112,7 @@ public class AddShopDialog extends JDialog {
 		return imageLoaded;
 	}
 
-	public Shop getShop() {
-		Shop.sumShopId();
+	public Shop getShop() throws ParserConfigurationException, SAXException, IOException {
 		return ManagerShop.createShop(txName.getText(), String.valueOf(fcLoadImage.getSelectedFile()));
 	}
 

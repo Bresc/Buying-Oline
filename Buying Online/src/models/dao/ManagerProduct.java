@@ -1,9 +1,15 @@
 package models.dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import models.entities.Product;
 import models.exceptions.ErrorOrderNotFound;
+import persistence.ReadXML;
 
 public class ManagerProduct {
 
@@ -13,8 +19,8 @@ public class ManagerProduct {
 		productsList = new ArrayList<>();
 	}
 
-	public static Product createProduct(String name, double price, String srcImg) {
-		return new Product( name, price, srcImg);
+	public static Product createProduct(String name, double price, String srcImg) throws ParserConfigurationException, SAXException, IOException {
+		return new Product(ReadXML.getAcutalID("products", "list.product") +1, name, price, srcImg);
 	}
 	
 	public void addProduct(Product product) {

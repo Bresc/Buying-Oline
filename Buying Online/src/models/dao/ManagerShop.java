@@ -1,9 +1,15 @@
 package models.dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import models.entities.Shop;
 import models.exceptions.ErrorShopNotFound;
+import persistence.ReadXML;
 
 public class ManagerShop {
 	
@@ -17,8 +23,8 @@ public class ManagerShop {
 		return shopList;
 	}
 
-	public static Shop createShop(String name, String srcImg) {
-		return new Shop( name, srcImg);
+	public static Shop createShop(String name, String srcImg) throws ParserConfigurationException, SAXException, IOException {
+		return new Shop(ReadXML.getAcutalID("shops", "list.shop") + 1, name, srcImg);
 	}
 	
 	public void addShop(Shop shop) {
