@@ -93,6 +93,9 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 			break;
 		}
 	}
+	public void run() {
+		dialogoLogin.setVisible(true);
+	}
 	
 	private void editShop() throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		try {

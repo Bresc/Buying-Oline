@@ -7,16 +7,22 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import controller.ControllerAdmin;
+import controller.ControllerShop;
+import controller.ControllerUser;
 
 public class Run {
 
 	public static void main(String[] args) {
 		ControllerAdmin controller;
+		ControllerShop controllerShop;
 		try {
 			controller = new ControllerAdmin();
-			controller.run();
+			new ControllerAdmin();
+			controllerShop = new ControllerShop();
+			new ControllerUser();
+			controllerShop.run();
 		} catch (ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

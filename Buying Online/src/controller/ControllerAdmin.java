@@ -46,6 +46,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	private ManagerUser manageruser;
 	
 	public ControllerAdmin() throws ParserConfigurationException, SAXException, IOException {
+		
 		manageruser = new ManagerUser();
 		managerShop = new ManagerShop();
 		managerProduct = new ManagerProduct();
@@ -128,7 +129,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			try {
 				deleteUser();
 			} catch (TransformerException | ParserConfigurationException e2) {
-				// TODO Auto-generated catch block
+				
 				e2.printStackTrace();
 			}
 			break;
@@ -180,6 +181,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		case EDIT_PRODUCT_TO_SHOP:
 			break;
 		case OPEN_DIALOG_LOG_IN:
+			
 			break;
 		case LOG_OUT:
 			mainWindowAdmin.setVisible(false);
@@ -384,9 +386,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		refreshList(0);
 	}
 
-	public void run() {
-		logIn.setVisible(true);
-	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
