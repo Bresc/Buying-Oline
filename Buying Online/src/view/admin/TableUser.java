@@ -47,6 +47,7 @@ public class TableUser extends JPanel {
 
 		userTable = new JTable(userModel) {
 			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}

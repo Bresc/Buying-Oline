@@ -1,12 +1,12 @@
 package models.entities;
 
 public class OrderProduct {
-		
+
 	private Product product;
 	private int id;
 	private int quantity;
-	
-	public OrderProduct(Product product ,int quantity) {
+
+	public OrderProduct(Product product, int quantity) {
 		this.product = product;
 		this.quantity = quantity;
 	}
@@ -27,7 +27,7 @@ public class OrderProduct {
 		return id;
 	}
 
-	public double getTotalPriceOrder(){
-		return product.getPrice()*quantity;
+	public double getTotalPriceOrder() {
+		return product.getPrice() * quantity;
 	}
 }

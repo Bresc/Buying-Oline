@@ -21,20 +21,19 @@ import models.exceptions.ErrorShopNotFound;
 import view.admin.AddUserDialog;
 import view.user.MainWindowUser;
 
-public class ControllerUser implements ActionListener, KeyListener, ChangeListener{
-	
+public class ControllerUser implements ActionListener, KeyListener, ChangeListener {
+
 	private MainWindowUser mainWindowUser;
 	private ManagerUser managerUser;
 	private AddUserDialog addUserDialog;
 	private ManagerShop managerShop;
 	private ManagerAsingProduct adminManagerAssingProduct;
 	private User user;
+
 	public ControllerUser() {
 		mainWindowUser = new MainWindowUser(this);
-		addUserDialog = new AddUserDialog(mainWindowUser , this);
+		addUserDialog = new AddUserDialog(mainWindowUser, this);
 	}
-
-	
 
 	@Override
 	public void actionPerformed(ActionEvent arg2) {
@@ -43,58 +42,54 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			mainWindowUser.refreshShopList(managerShop.getListShop(), this);
 			break;
 		case CANCEL_PRODUCT:
-			
+
 			break;
 		case CHANGE_TO_PRODUCTS_FROM_SHOP_PANEL:
-			
+
 			break;
 		case CONFIRM:
-			
+
 			break;
 		case LOG_OUT:
-			
+
 			break;
 		case OPT_USER_VIEW_PRODUCTS:
-			
+
 			break;
 		case SEARCH_RESTAURANT:
-			
+
 			break;
 		case SHOPPING_CAR_USER:
-			
+
 			break;
 		case SHOW_EDIT_USER:
-			
+
 			break;
 		case SHOW_PRODUCTS_BY_SHOP:
-			
+
 			showProductsByShop(((JButton) arg2.getSource()).getName());
 			break;
 		case USER_SETTINGS:
-			
+
 			break;
 		case USER_VIEW:
-			
+
 			break;
 		case VIEW_USER_FAVORITES:
-			
+
 			break;
 		case ADD_IMAGE_TO_USER:
-			
+
 			break;
 		case ADD_USER:
-			
+
 			break;
 		case EDIT_USER:
-			
+
 			break;
-		default:
-			break;
-		
 		}
-		
 	}
-	
+
 	private void showProductsByShop(String id) {
 		try {
 			mainWindowUser.changeToProductsFromShopPanel(
@@ -103,13 +98,13 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void changeToProductsFromShopPanel(ActionEvent e) {
 		JButton bntSource = (JButton) (e.getSource());
 		try {
 			Shop selectedShop = managerShop.searhShop(Integer.parseInt(bntSource.getName()));
-			mainWindowUser.changeToProductsFromShopPanel(adminManagerAssingProduct.getProductsListFromShop(selectedShop));
+			mainWindowUser
+					.changeToProductsFromShopPanel(adminManagerAssingProduct.getProductsListFromShop(selectedShop));
 		} catch (NumberFormatException | ErrorShopNotFound e1) {
 			e1.printStackTrace();
 		}
@@ -121,35 +116,32 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			managerUser.addUser(user);
 		}
 	}
-	
+
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 	public void setVi() {
 		mainWindowUser.setVi();
 	}
-
 }

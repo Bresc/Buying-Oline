@@ -34,12 +34,12 @@ public class CardProduct extends JPanel {
 		lbNameProduct = new JLabel();
 		lbNameProduct.setFont(new Font("Elephant", Font.ITALIC, 16));
 		add(lbNameProduct, gridPanel.insertComponent(2, 1, 5, 0.15));
-		
+
 		lbPriceProduct = new JLabel();
 		lbPriceProduct.setFont(new Font("Elephant", Font.ITALIC, 16));
 		add(lbPriceProduct, gridPanel.insertComponent(2, 6, 5, 0.15));
 	}
-	
+
 	public Icon loadImagen(String urlImage) {
 		try {
 			return new ImageIcon(new URL(urlImage));

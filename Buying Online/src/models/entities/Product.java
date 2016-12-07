@@ -1,6 +1,5 @@
 package models.entities;
 
-
 public class Product {
 
 	private int id;
@@ -54,7 +53,6 @@ public class Product {
 	}
 
 	public Object[] toObjectVector() {
-		return new Object[] {id, name, price };
+		return new Object[] { id, name, price };
 	}
-
 }

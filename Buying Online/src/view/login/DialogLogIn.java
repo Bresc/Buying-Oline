@@ -10,7 +10,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import controller.ControllerShop;
 import controller.GeneralController;
 
 public class DialogLogIn extends JFrame {

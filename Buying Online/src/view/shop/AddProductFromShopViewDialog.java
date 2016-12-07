@@ -29,14 +29,14 @@ import models.dao.ManagerProduct;
 import models.entities.Product;
 import view.admin.MainWindowAdmin;
 
-public class AddProductFromShopViewDialog extends JDialog{
+public class AddProductFromShopViewDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtName;
 	private JLabel lbImage;
 	private JButton btnSave;
 	private String imgSource;
 	private JTextField txtPriceProduct;
-	
+
 	public AddProductFromShopViewDialog(MainWindowAdmin mainWindowAdmin, ControllerAdmin controller) {
 		super(mainWindowAdmin, true);
 		setTitle("Student dialog");
@@ -44,42 +44,44 @@ public class AddProductFromShopViewDialog extends JDialog{
 		setLocationRelativeTo(null);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		getContentPane().setBackground(Color.WHITE);
-		
+
 		txtName = new JTextField();
 		txtName.setBorder(BorderFactory.createTitledBorder("Name"));
 		add(txtName);
-		
+
 		txtPriceProduct = new JTextField();
 		txtPriceProduct.setBorder(BorderFactory.createTitledBorder("Price"));
 		add(txtPriceProduct);
-			
+
 		JPanel pnlChooseImage = new JPanel(new GridLayout(1, 2));
 		pnlChooseImage.setBackground(Color.WHITE);
-		
+
 		imgSource = "src/img/userIcon.png";
 		lbImage = new JLabel(new ImageIcon(imgSource));
 		lbImage.setBorder(BorderFactory.createTitledBorder("Drag your image here"));
 		lbImage.setSize(40, 50);
-		lbImage.setDropTarget(new DropTarget(){
+		lbImage.setDropTarget(new DropTarget() {
 			private static final long serialVersionUID = 1L;
+
 			@Override
 			public synchronized void drop(DropTargetDropEvent dtde) {
 				dtde.acceptDrop(DnDConstants.ACTION_COPY);
 				try {
-					addImage(dtde.getTransferable().getTransferData(DataFlavor.javaFileListFlavor).toString().replace("[", "").replace("]", "").replace("\\", "/"));
+					addImage(dtde.getTransferable().getTransferData(DataFlavor.javaFileListFlavor).toString()
+							.replace("[", "").replace("]", "").replace("\\", "/"));
 				} catch (UnsupportedFlavorException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}	
+			}
 		});
 		pnlChooseImage.add(lbImage);
 		JButton btnChooseImage = new JButton("Choose image");
 		btnChooseImage.addActionListener(controller);
 		btnChooseImage.setActionCommand(ActionsShop.CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW.toString());
 		btnChooseImage.setBackground(Color.decode("#ccd9ff"));
-		
+
 		JPanel pnlRightChooseImage = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 70));
 		pnlRightChooseImage.setBackground(Color.WHITE);
 		pnlRightChooseImage.add(btnChooseImage);
@@ -93,37 +95,38 @@ public class AddProductFromShopViewDialog extends JDialog{
 		btnSave.setAlignmentX(CENTER_ALIGNMENT);
 		add(btnSave);
 	}
-	
-	
-	public Product getCreatedProduct() throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
-		return ManagerProduct.createProduct(txtName.getText(), Double.parseDouble(txtPriceProduct.getText()), imgSource);
+
+	public Product getCreatedProduct()
+			throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
+		return ManagerProduct.createProduct(txtName.getText(), Double.parseDouble(txtPriceProduct.getText()),
+				imgSource);
 	}
 
 	public void addImage(String newSourceImg) {
 		imgSource = newSourceImg;
-		Image img = new ImageIcon(newSourceImg).getImage().getScaledInstance( 150, -10, java.awt.Image.SCALE_AREA_AVERAGING);
+		Image img = new ImageIcon(newSourceImg).getImage().getScaledInstance(150, -10,
+				java.awt.Image.SCALE_AREA_AVERAGING);
 		lbImage.setIcon(new ImageIcon(img));
 	}
-	
+
 	public void cleanFields() {
 		txtName.setText("");
 		lbImage.setIcon(new ImageIcon(imgSource));
 		txtPriceProduct.setText("");
 	}
-	
+
 	public void refill(String name, String imgSource, double priceProduct) {
 		txtName.setText(name);
 		txtPriceProduct.setText(String.valueOf(priceProduct));
 		addImage(imgSource);
 	}
-	
+
 	public void showToEdit(Product productFromShopToEdit) {
-		refill(productFromShopToEdit.getName(), productFromShopToEdit.getSrcImg(),
-				productFromShopToEdit.getPrice());
+		refill(productFromShopToEdit.getName(), productFromShopToEdit.getSrcImg(), productFromShopToEdit.getPrice());
 		btnSave.setText("Edit");
 		btnSave.setActionCommand(ActionsAdmin.EDIT_PRODUCT_TO_SHOP.toString());
 	}
-	
+
 	public void showToAddProduct() {
 		cleanFields();
 		btnSave.setText("Save");

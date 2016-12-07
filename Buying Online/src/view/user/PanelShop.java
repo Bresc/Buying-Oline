@@ -18,7 +18,7 @@ public class PanelShop extends JPanel {
 		this.controllerUser = controllerUser;
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
-		
+
 		gridFile = new GridSystem(this);
 		rowPosition = 0;
 	}
@@ -28,7 +28,7 @@ public class PanelShop extends JPanel {
 		for (Shop shop : shops) {
 			CardRestaurant card = new CardRestaurant(controllerUser);
 			card.setForm(shop);
-			add(card, gridFile.insertComponent(rowPosition, 1, 3, 1));		
+			add(card, gridFile.insertComponent(rowPosition, 1, 3, 1));
 			rowPosition++;
 		}
 	}

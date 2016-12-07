@@ -1,17 +1,6 @@
 package run;
 
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import controller.ControllerAdmin;
-import controller.ControllerShop;
-import controller.ControllerUser;
-import controller.GeneralActions;
 import controller.GeneralController;
-import models.entities.User;
 
 public class Run {
 

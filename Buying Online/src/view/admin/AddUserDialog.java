@@ -36,7 +36,7 @@ public class AddUserDialog extends JDialog {
 	private JPasswordField txPassword;
 	private JButton btnAddUser;
 
-	public AddUserDialog( MainWindowUser mainWindowUser, ControllerUser controlleruser) {
+	public AddUserDialog(MainWindowUser mainWindowUser, ControllerUser controlleruser) {
 		super(mainWindowUser, true);
 		setTitle("Add User");
 		setSize(500, 400);
@@ -83,12 +83,12 @@ public class AddUserDialog extends JDialog {
 		btnAddUser.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddUser, gridDialog.insertComponent(5, 2, 7, 0.01));
 	}
-	
+
 	public void changeActionToEditUser() {
 		btnAddUser.setText("Edit User");
 		btnAddUser.setActionCommand(ActionsUser.EDIT_USER.name());
 	}
-	
+
 	public void changeActionToAddUser() {
 		btnAddUser.setText("Add User");
 		btnAddUser.setActionCommand(ActionsUser.ADD_USER.name());

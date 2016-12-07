@@ -22,7 +22,7 @@ import models.entities.OrderProduct;
 public class TableOrders extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static final String[] COLUMN_NAMES = {"Id Order", "Product", "N° Products", "User", "State"};
+	private static final String[] COLUMN_NAMES = { "Id Order", "Product", "N° Products", "User", "State" };
 	private static final int ROW_HEIGHT = 25;
 	private DefaultTableModel modelOrders;
 	private JTable tableOrders;
@@ -75,15 +75,16 @@ public class TableOrders extends JPanel {
 
 	public void addOrderToTable(Order order) {
 		for (OrderProduct orderP : order.getProducts()) {
-			Object[] obj = new Object[] {order.getId(), orderP.getProduct().getName(), orderP.getQuantity(), order.getUser().getName(), order.getState()};
-			modelOrders.addRow(obj);					
+			Object[] obj = new Object[] { order.getId(), orderP.getProduct().getName(), orderP.getQuantity(),
+					order.getUser().getName(), order.getState() };
+			modelOrders.addRow(obj);
 		}
 	}
 
 	public void refreshTable(ArrayList<Order> listOrder) {
 		modelOrders.setRowCount(0);
 		for (Order order : listOrder) {
-				addOrderToTable(order);		
+			addOrderToTable(order);
 		}
 	}
 

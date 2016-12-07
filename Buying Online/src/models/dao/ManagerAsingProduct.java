@@ -8,10 +8,10 @@ import models.entities.Shop;
 import models.exceptions.ErrorAssignmentProductShopNotFound;
 
 public class ManagerAsingProduct {
-	
+
 	public static final int PAGE_SIZE = 10;
-	
-	private ManagerShop  managerShop;
+
+	private ManagerShop managerShop;
 	private ManagerUser managerUser;
 	private ManagerProduct managerProduct;
 	private ArrayList<AssignmentProductShop> assignmentsProductsShopList;
@@ -22,7 +22,7 @@ public class ManagerAsingProduct {
 		managerUser = new ManagerUser();
 		assignmentsProductsShopList = new ArrayList<>();
 	}
-	
+
 	public static AssignmentProductShop createAssignmentProductShop(Product product, Shop shop) {
 		return new AssignmentProductShop(product, shop);
 	}
@@ -53,8 +53,7 @@ public class ManagerAsingProduct {
 		assignmentFound.setProduct(newAssignment.getProduct());
 		assignmentFound.setshop(newAssignment.getShop());
 	}
-	
-	
+
 	public ArrayList<Product> getProductsListFromShop(Shop shop) {
 		ArrayList<Product> productsFromShop = new ArrayList<>();
 		for (AssignmentProductShop assignmentProductShop : assignmentsProductsShopList) {
@@ -68,28 +67,28 @@ public class ManagerAsingProduct {
 	public ArrayList<AssignmentProductShop> getAssignmentsProductsShopList() {
 		return assignmentsProductsShopList;
 	}
-	
-	///Paginacion
-	
-	public ArrayList<?> paginate(ArrayList<?> list, int page){
+
+	/// Paginacion
+
+	public ArrayList<?> paginate(ArrayList<?> list, int page) {
 		int firstElement = (page - 1) * PAGE_SIZE;
 		int lastElement = (page * PAGE_SIZE);
 		lastElement = lastElement > list.size() ? list.size() : lastElement;
 		return new ArrayList<>(list.subList(firstElement, lastElement));
 	}
-	
-	public int getTotalPages(ArrayList<?> list){
+
+	public int getTotalPages(ArrayList<?> list) {
 		int totalPages = list.size() / PAGE_SIZE;
 		return (totalPages % PAGE_SIZE) > 0 ? ++totalPages : totalPages;
 	}
-	public ArrayList<?> returnListDependIndex(int index){
+
+	public ArrayList<?> returnListDependIndex(int index) {
 		if (index == 0) {
 			return managerShop.getListShop();
-		}else if (index == 1) {
+		} else if (index == 1) {
 			return managerUser.getUsersList();
-		}else {
+		} else {
 			return managerProduct.getListProducts();
 		}
 	}
-	
 }

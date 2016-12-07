@@ -105,7 +105,8 @@ public class WindowAddProduct extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10))); // espacio en blanco
 	}
 
-	public Product extractProductFromWindow() throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
+	public Product extractProductFromWindow()
+			throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
 		return ManagerProduct.createProduct(textName.getText(), Double.parseDouble(textValue.getText()),
 				getImageInChooser());
 	}

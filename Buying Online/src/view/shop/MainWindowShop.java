@@ -1,4 +1,5 @@
 package view.shop;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,8 +17,8 @@ import controller.ActionsAdmin;
 import controller.ControllerShop;
 import models.entities.Product;
 
-public class MainWindowShop extends JFrame{
-	
+public class MainWindowShop extends JFrame {
+
 	private static final long serialVersionUID = 1L;
 	private TableProductsByShop productsByShop;
 	private TableOrders tableOrders;
@@ -29,36 +30,36 @@ public class MainWindowShop extends JFrame{
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		setSize(450, 450);
 		setLocationRelativeTo(null);
-		
+
 		JPanel pnlDetails = new JPanel();
 		pnlDetails.setLayout(new BorderLayout());
 		JMenuBar menu = new JMenuBar();
-		
+
 		JMenu menuFile = new JMenu("File");
-		
+
 		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/img/Exit.png"));
 		logOut.setActionCommand(ActionsAdmin.LOG_OUT.toString());
 		logOut.addActionListener(controllershop);
 		menuFile.add(logOut);
 		menu.add(menuFile);
-		
+
 		pnlDetails.add(menu);
-		
+
 		ToolBarShop toolBarShop = new ToolBarShop(controllershop);
-		
+
 		JTabbedPane tabs = new JTabbedPane();
-		
+
 		productsByShop = new TableProductsByShop(null);
 		tableOrders = new TableOrders(null);
 		tabs.add("My Product List", productsByShop);
 		tabs.add("My Orders", tableOrders);
-		
+
 		add(pnlDetails);
 		add(toolBarShop);
-		add(Box.createRigidArea(new Dimension(25,20)));
+		add(Box.createRigidArea(new Dimension(25, 20)));
 		add(tabs);
 	}
-	
+
 	public void refreshProductsTable(ArrayList<Product> products) {
 		productsByShop.refreshTable(products);
 	}

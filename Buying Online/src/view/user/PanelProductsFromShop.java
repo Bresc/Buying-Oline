@@ -9,19 +9,17 @@ import controller.ActionsUser;
 import controller.ControllerUser;
 import models.entities.Product;
 
-public class PanelProductsFromShop extends JPanel{
+public class PanelProductsFromShop extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ControllerUser controllerUser;
 	private GridSystem gridFile;
 	private int rowPosition;
 
-	public PanelProductsFromShop( ControllerUser controllerUser) {
-		this.controllerUser  = controllerUser;
+	public PanelProductsFromShop(ControllerUser controllerUser) {
+		this.controllerUser = controllerUser;
 		setLayout(new BorderLayout());
-		
 		gridFile = new GridSystem(this);
-		
 		rowPosition = 0;
 	}
 
@@ -36,7 +34,7 @@ public class PanelProductsFromShop extends JPanel{
 		for (Product product : productsFromShop) {
 			CardProduct card = new CardProduct(controllerUser);
 			card.setForm(product);
-			add(card, gridFile.insertComponent(rowPosition, 1, 11, 1));		
+			add(card, gridFile.insertComponent(rowPosition, 1, 11, 1));
 			rowPosition++;
 		}
 	}

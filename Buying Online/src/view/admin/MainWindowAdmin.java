@@ -34,7 +34,6 @@ public class MainWindowAdmin extends JFrame {
 		add(toolbar, BorderLayout.PAGE_START);
 
 		objects = new JTabbedPane();
-		
 
 		tableUser = new TableUser(controller);
 		tableShop = new TableShop(controller);
@@ -50,10 +49,10 @@ public class MainWindowAdmin extends JFrame {
 		add(paginatePanel, BorderLayout.PAGE_END);
 	}
 
-	public void setVi(){
+	public void setVi() {
 		setVisible(true);
 	}
-	
+
 	public void refreshTableShop(ArrayList<Shop> shops) {
 		tableShop.refreshTable(shops);
 	}
@@ -77,12 +76,12 @@ public class MainWindowAdmin extends JFrame {
 	public int getIdToTableUser() {
 		return tableUser.getUsertInTable();
 	}
-	
-	public int getTabbedPaneIndex(){
+
+	public int getTabbedPaneIndex() {
 		return objects.getSelectedIndex();
 	}
-	
-	public void refreshPage(int actualPage, int maxPage){
+
+	public void refreshPage(int actualPage, int maxPage) {
 		paginatePanel.refreshPage(actualPage, maxPage);
 	}
 

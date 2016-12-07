@@ -45,6 +45,7 @@ public class TableProductsByShop extends JPanel {
 
 		productsTable = new JTable(modelProducts) {
 			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}

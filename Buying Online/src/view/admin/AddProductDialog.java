@@ -51,15 +51,15 @@ public class AddProductDialog extends JDialog {
 		setSize(500, 400);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
-		
+
 		GridSystem gridProduct = new GridSystem(this);
 
 		textName = new JTextField();
 		textName.setBorder(BorderFactory.createTitledBorder("Product's Name"));
 		add(textName, gridProduct.insertComponent(0, 1, 10, 0.001));
-		
+
 		NumberFormat format = NumberFormat.getIntegerInstance();
-		format.setParseIntegerOnly(true);;
+		format.setParseIntegerOnly(true);
 		NumberFormatter formatter = new NumberFormatter(format);
 		formatter.setValueClass(Integer.class);
 		formatter.setMinimum(-1);
@@ -97,22 +97,23 @@ public class AddProductDialog extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10)));
 	}
 
-	public Product extractProductFromWindow() throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
-		return ManagerProduct.createProduct(textName.getText(), Double.parseDouble(intergerFormatter(textValue.getText())),
-				getImageInChooser());
+	public Product extractProductFromWindow()
+			throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
+		return ManagerProduct.createProduct(textName.getText(),
+				Double.parseDouble(intergerFormatter(textValue.getText())), getImageInChooser());
 	}
-	
-	public void changeActionToProductEdit(){
+
+	public void changeActionToProductEdit() {
 		btnAceptProduct.setText("Edit Product");
 		btnAceptProduct.setActionCommand(ActionsAdmin.EDIT_PRODUCT.name());
 	}
-	
-	public void changeActionToProductAdd(){
+
+	public void changeActionToProductAdd() {
 		btnAceptProduct.setText("Add Product");
 		btnAceptProduct.setActionCommand(ActionsAdmin.ADD_PRODUCT.name());
 	}
-	
-	public String intergerFormatter(String num){
+
+	public String intergerFormatter(String num) {
 		char letter;
 		String numString = "";
 		for (int i = 0; i < num.length(); i++) {

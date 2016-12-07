@@ -8,7 +8,8 @@ public class AssignmentProductShop {
 	public static int ID_BASE = 0;
 
 	public AssignmentProductShop(Product product, Shop shop) {
-		this.id = ID_BASE++;;
+		this.id = ID_BASE++;
+		;
 		this.product = product;
 		this.shop = shop;
 	}
@@ -32,7 +33,7 @@ public class AssignmentProductShop {
 	public Shop getShop() {
 		return shop;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "AssignmentProductShop [id=" + id + ", product=" + product + ", shop=" + shop + "]";

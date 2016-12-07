@@ -8,8 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import controller.ActionsShop;
-import controller.ControllerShop;
 import controller.GeneralActions;
 import controller.GeneralController;
 

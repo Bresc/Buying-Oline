@@ -63,13 +63,13 @@ public class User {
 	public static void setID_BASE(int iD_BASE) {
 		ID_BASE = iD_BASE;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", address=" + address + "]";
 	}
 
 	public Object[] toObjectVector() {
-		return new Object[] { id, name, address};
+		return new Object[] { id, name, address };
 	}
 }

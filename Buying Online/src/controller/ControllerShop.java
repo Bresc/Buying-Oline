@@ -27,8 +27,8 @@ import view.login.DialogLogIn;
 import view.shop.AddProductFromShopViewDialog;
 import view.shop.MainWindowShop;
 
-public class ControllerShop  implements ActionListener, KeyListener, ChangeListener {
-	
+public class ControllerShop implements ActionListener, KeyListener, ChangeListener {
+
 	private DialogLogIn dialogoLogin;
 	private ManagerShop managerShop;
 	private MainWindowAdmin mainWindowAdmin;
@@ -37,17 +37,16 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 	private AddProductFromShopViewDialog addProductFromShopViewDialog;
 	private ManagerAsingProduct managerAsingProduct;
 	private int actualPage;
-	
+
 	public ControllerShop() {
 		mainWindowAdmin = new MainWindowAdmin(new ControllerAdmin());
 		actualPage = 1;
-//		dialogoLogin = new DialogLogIn(this);
+		// dialogoLogin = new DialogLogIn(this);
 		managerShop = new ManagerShop();
 		mainWindowShop = new MainWindowShop(this);
-		addShopDialog = new  AddShopDialog(	mainWindowShop, this);
+		addShopDialog = new AddShopDialog(mainWindowShop, this);
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent arg) {
 		switch (ActionsShop.valueOf(arg.getActionCommand())) {
@@ -55,7 +54,6 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 			try {
 				addProductToShop();
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -63,10 +61,10 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 			chargeImageProductFromShopView();
 			break;
 		case EDIT_PRODUCT_TO_SHO:
-			
+
 			break;
 		case LOG_OUT:
-			
+
 			break;
 		case SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG:
 			showAddProductFromShopViewDialog();
@@ -75,10 +73,10 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 			addShopDialog.openFileChooser();
 			break;
 		case ADD_SHOP:
-			
+
 			break;
 		case SHOP_VIEW:
-			
+
 			break;
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
@@ -87,21 +85,21 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 			try {
 				editShop();
 			} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
 		}
 	}
+
 	public void run() {
 		dialogoLogin.setVisible(true);
 	}
-	
+
 	private void editShop() throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		try {
 			managerShop.editShop(addShopDialog.getShop(), managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
 			actualPage = 1;
-			//refreshList(0);
+			// refreshList(0);
 			addShopDialog.setVisible(false);
 			addShopDialog.changeActionToAddShop();
 			ReadXML.writeShop(managerShop.getListShop());
@@ -109,32 +107,33 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void showAddProductFromShopViewDialog() {
 		addProductFromShopViewDialog.showToAddProduct();
 		addProductFromShopViewDialog.setVisible(true);
 	}
-	
-	private void chargeImageProductFromShopView(){
+
+	private void chargeImageProductFromShopView() {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.showOpenDialog(null);
 		File file = fileChooser.getSelectedFile();
 		addProductFromShopViewDialog.addImage(file.getAbsolutePath());
 	}
-	
-	private void addProductToShop() throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
+
+	private void addProductToShop()
+			throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
 		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
-		managerAsingProduct.addAssignmentProductShop(ManagerAsingProduct.createAssignmentProductShop(createdProduct,
-				getActualShop()));
+		managerAsingProduct.addAssignmentProductShop(
+				ManagerAsingProduct.createAssignmentProductShop(createdProduct, getActualShop()));
 		mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(getActualShop()));
 		addProductFromShopViewDialog.setVisible(false);
 	}
-	
+
 	private Shop getActualShop() {
 		return findTheShopHelper();
 	}
 
-	public Shop findTheShopHelper(){
+	public Shop findTheShopHelper() {
 		Shop shop = null;
 		try {
 			shop = managerShop.searchShopName(dialogoLogin.getTheName());
@@ -143,30 +142,30 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 		}
 		return shop;
 	}
+
 	@Override
 	public void stateChanged(ChangeEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	public void setVi() {
 		mainWindowShop.setVi();

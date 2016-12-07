@@ -44,9 +44,8 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	private AddShopDialog addShopDialog;
 	private DialogLogIn logIn;
 	private ManagerUser manageruser;
-	
+
 	public ControllerAdmin() {
-		
 		manageruser = new ManagerUser();
 		managerShop = new ManagerShop();
 		managerProduct = new ManagerProduct();
@@ -54,14 +53,12 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		mainWindowAdmin = new MainWindowAdmin(this);
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
-			
-		actualPage = 1;
-	    refreshList(0);
 
-	    try {
+		actualPage = 1;
+		refreshList(0);
+		try {
 			refrehAllData();
 		} catch (ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -73,7 +70,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			try {
 				addUser();
 			} catch (TransformerException | ParserConfigurationException e6) {
-				// TODO Auto-generated catch block
 				e6.printStackTrace();
 			}
 			break;
@@ -82,7 +78,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 				addProduct();
 			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException
 					| TransformerException e5) {
-				// TODO Auto-generated catch block
 				e5.printStackTrace();
 			}
 			break;
@@ -95,15 +90,14 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		case CHARGE_IMAGE_PRODUCT:
 			addProductDialog.searchForImage();
 			break;
-	
+
 		case ADD_SHOP:
 			try {
 				addShop();
 			} catch (TransformerException | ParserConfigurationException | SAXException | IOException e4) {
-				// TODO Auto-generated catch block
 				e4.printStackTrace();
 			}
-			
+
 			break;
 		case SHOW_ADD_USER_DIALOG:
 			addUserDialog.setVisible(true);
@@ -126,7 +120,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			try {
 				deleteShop();
 			} catch (TransformerException | ParserConfigurationException e3) {
-				// TODO Auto-generated catch block
 				e3.printStackTrace();
 			}
 			break;
@@ -134,7 +127,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			try {
 				deleteUser();
 			} catch (TransformerException | ParserConfigurationException e2) {
-				
+
 				e2.printStackTrace();
 			}
 			break;
@@ -145,7 +138,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			try {
 				editProduct();
 			} catch (TransformerException | ParserConfigurationException | SAXException | IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -153,7 +145,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			try {
 				editShop();
 			} catch (TransformerException | ParserConfigurationException | SAXException | IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -161,7 +152,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			try {
 				editUser();
 			} catch (TransformerException | ParserConfigurationException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -186,7 +176,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		case EDIT_PRODUCT_TO_SHOP:
 			break;
 		case OPEN_DIALOG_LOG_IN:
-			
+
 			break;
 		case LOG_OUT:
 			mainWindowAdmin.setVisible(false);
@@ -201,11 +191,11 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			break;
 		}
 	}
-	
-	public void setVi(){
+
+	public void setVi() {
 		mainWindowAdmin.setVi();
 	}
-	
+
 	private void showEditShop() {
 		addShopDialog.changeActionToEditShop();
 		try {
@@ -216,7 +206,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		addShopDialog.setVisible(true);
 	}
 
-	public Shop findTheShopHelper(){
+	public Shop findTheShopHelper() {
 		Shop shop = null;
 		try {
 			shop = managerShop.searchShopName(logIn.getTheName());
@@ -253,7 +243,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 
 	private void editShop() throws TransformerException, ParserConfigurationException, SAXException, IOException {
 		try {
-			managerShop.editShop(addShopDialog.getShop(),managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
+			managerShop.editShop(addShopDialog.getShop(), managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
 			actualPage = 1;
 			refreshList(0);
 			addShopDialog.setVisible(false);
@@ -279,8 +269,8 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 
 	private void editProduct() throws TransformerException, ParserConfigurationException, SAXException, IOException {
 		try {
-		managerProduct.editProduct(addProductDialog.extractProductFromWindow(),
-				managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
+			managerProduct.editProduct(addProductDialog.extractProductFromWindow(),
+					managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 			actualPage = 1;
 			refreshList(2);
 			addProductDialog.setVisible(false);
@@ -313,20 +303,20 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		}
 	}
 
-	//Metodos para refrescar las listas de las entidades
+	// Metodos para refrescar las listas de las entidades
 	private void refrehAllData() throws ParserConfigurationException, SAXException, IOException {
 		refreshDataUser(ReadXML.readUser());
-    	refreshDataShop(ReadXML.readShop());
-    	refreshDataProduct(ReadXML.readProduct());
-    	refreshDataAssigmentProductShop(ReadXML.readAsigmentProducts());
+		refreshDataShop(ReadXML.readShop());
+		refreshDataProduct(ReadXML.readProduct());
+		refreshDataAssigmentProductShop(ReadXML.readAsigmentProducts());
 	}
-	
+
 	private void refreshDataProduct(ArrayList<Product> readProduct) {
 		for (Product product : readProduct) {
 			managerProduct.addProduct(product);
 		}
 	}
-	
+
 	private void refreshDataAssigmentProductShop(ArrayList<AssignmentProductShop> readAssignmentProductShops) {
 		for (AssignmentProductShop assigment : readAssignmentProductShops) {
 			adminManagerAssingProduct.addAssignmentProductShop(assigment);
@@ -338,12 +328,12 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			managerShop.addShop(shop);
 		}
 	}
-	
+
 	private void refreshDataUser(ArrayList<User> readUser) {
 		for (User user : readUser) {
 			manageruser.addUser(user);
 		}
-		
+
 	}
 
 	private void deleteProduct() {
@@ -351,13 +341,14 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			managerProduct.deleteProduct(managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 			actualPage = 1;
 			refreshList(2);
-			//readXML.writeProduct(managerProduct.getListProducts());
+			// readXML.writeProduct(managerProduct.getListProducts());
 		} catch (ErrorOrderNotFound e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void addProduct() throws NumberFormatException, ParserConfigurationException, SAXException, IOException, TransformerException {
+	private void addProduct() throws NumberFormatException, ParserConfigurationException, SAXException, IOException,
+			TransformerException {
 		managerProduct.addProduct(addProductDialog.extractProductFromWindow());
 		cancelProduct();
 		ReadXML.writeProduct(managerProduct.getListProducts());
@@ -365,7 +356,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		actualPage = 1;
 		refreshList(2);
 	}
-	
+
 	private void addUser() throws TransformerException, ParserConfigurationException {
 		manageruser.addUser(addUserDialog.getUser());
 		addUserDialog.cleanForm();
@@ -385,8 +376,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		actualPage = 1;
 		refreshList(0);
 	}
-
-	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -416,20 +405,20 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 
 	@SuppressWarnings("unchecked")
 	public void refreshList(int index) {
-		mainWindowAdmin.refreshPage(actualPage,
-				adminManagerAssingProduct.getTotalPages(adminManagerAssingProduct.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
+		mainWindowAdmin.refreshPage(actualPage, adminManagerAssingProduct
+				.getTotalPages(adminManagerAssingProduct.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
 		switch (index) {
 		case 0:
-			mainWindowAdmin.refreshTableShop(
-					(ArrayList<Shop>) adminManagerAssingProduct.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
+			mainWindowAdmin.refreshTableShop((ArrayList<Shop>) adminManagerAssingProduct
+					.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
 			break;
 		case 1:
-			mainWindowAdmin.refreshTableUser(
-					(ArrayList<User>) adminManagerAssingProduct.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
+			mainWindowAdmin.refreshTableUser((ArrayList<User>) adminManagerAssingProduct
+					.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
 			break;
 		case 2:
-			mainWindowAdmin.refreshTableProducts(
-					(ArrayList<Product>) adminManagerAssingProduct.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
+			mainWindowAdmin.refreshTableProducts((ArrayList<Product>) adminManagerAssingProduct
+					.paginate(adminManagerAssingProduct.returnListDependIndex(index), actualPage));
 			break;
 
 		default:

@@ -26,7 +26,7 @@ import models.entities.Shop;
 import models.entities.User;
 
 public class ReadXML {
-	
+
 	private static final String TYPE_SHOP = "shops";
 	private static final String TYPE_USER = "users";
 	private static final String TYPE_PRODUCT = "products";
@@ -39,7 +39,7 @@ public class ReadXML {
 	private static final String TAG_NAME_LAST_ID = "lastId";
 	private static final String TAG_NAME_SHOP = "shop";
 	private static final String TAG_NAME_PRODUCT = "product";
-	private static final String TAG_NAME_ASSIGNED_PRODUCT= "assignedProduct";
+	private static final String TAG_NAME_ASSIGNED_PRODUCT = "assignedProduct";
 	private static final String TAG_NAME_ID = "id";
 	private static final String TAG_NAME_NAME = "name";
 	private static final String TAG_NAME_PRICE = "price";
@@ -51,61 +51,59 @@ public class ReadXML {
 	public static ArrayList<User> readUser() throws ParserConfigurationException, SAXException, IOException {
 		ArrayList<User> userList = new ArrayList<>();
 		Document document = readAnythingDocument(TYPE_USER);
-
 		NodeList nodeList = document.getElementsByTagName(TAG_NAME_USER);
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			userList.add(getUser((Element)nodeList.item(i)));
+			userList.add(getUser((Element) nodeList.item(i)));
 		}
 		return userList;
 	}
 
-	public static ArrayList<Shop> readShop() throws ParserConfigurationException, SAXException, IOException{
+	public static ArrayList<Shop> readShop() throws ParserConfigurationException, SAXException, IOException {
 		ArrayList<Shop> shopList = new ArrayList<>();
 		Document document = readAnythingDocument(TYPE_SHOP);
-
 		NodeList nodeList = document.getElementsByTagName(TAG_NAME_SHOP);
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			shopList.add(getShop((Element)nodeList.item(i)));
+			shopList.add(getShop((Element) nodeList.item(i)));
 		}
 		return shopList;
 	}
 
-	public static ArrayList<Product> readProduct() throws ParserConfigurationException, SAXException, IOException{
+	public static ArrayList<Product> readProduct() throws ParserConfigurationException, SAXException, IOException {
 		ArrayList<Product> productList = new ArrayList<>();
 		Document document = readAnythingDocument(TYPE_PRODUCT);
-
 		NodeList nodeList = document.getElementsByTagName(TAG_NAME_PRODUCT);
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			productList.add(getProduct((Element)nodeList.item(i)));
+			productList.add(getProduct((Element) nodeList.item(i)));
 		}
 		return productList;
 	}
 
-	public static ArrayList<AssignmentProductShop> readAsigmentProducts() throws ParserConfigurationException, SAXException, IOException{
+	public static ArrayList<AssignmentProductShop> readAsigmentProducts()
+			throws ParserConfigurationException, SAXException, IOException {
 		ArrayList<AssignmentProductShop> assignmentProductShops = new ArrayList<>();
 		Document document = readAnythingDocument(TYPE_ASSIGNED_PRODUCTS);
-
 		NodeList nodeList = document.getElementsByTagName(TAG_NAME_ASSIGNED_PRODUCT);
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			assignmentProductShops.add(new AssignmentProductShop(getProduct((Element) ((Element) nodeList.item(i)).getElementsByTagName(TAG_NAME_PRODUCT).item(0)),
+			assignmentProductShops.add(new AssignmentProductShop(
+					getProduct((Element) ((Element) nodeList.item(i)).getElementsByTagName(TAG_NAME_PRODUCT).item(0)),
 					getShop((Element) ((Element) nodeList.item(i)).getElementsByTagName(TAG_NAME_SHOP).item(0))));
 		}
 		return assignmentProductShops;
 	}
 
-	private static Document readAnythingDocument(String type) throws ParserConfigurationException, SAXException, IOException {
+	private static Document readAnythingDocument(String type)
+			throws ParserConfigurationException, SAXException, IOException {
 		File file = new File("src/data/" + type + ".xml");
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
-		
 		Document document = builder.parse(file);
 		document.getDocumentElement().normalize();
 		return document;
 	}
 
-	//Metodos para escribir archivos
-	public static void writeUser(ArrayList<User> users) throws TransformerException, ParserConfigurationException{
-		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();;
+	// Metodos para escribir archivos
+	public static void writeUser(ArrayList<User> users) throws TransformerException, ParserConfigurationException {
+		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement(NODE_USER);
 		doc.appendChild(rootElement);
@@ -115,12 +113,12 @@ public class ReadXML {
 		writeAnythingDocumentInXML(doc, TYPE_USER);
 	}
 
-	public static void writeShop(ArrayList<Shop> shops) throws TransformerException, ParserConfigurationException{
+	public static void writeShop(ArrayList<Shop> shops) throws TransformerException, ParserConfigurationException {
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement(NODE_SHOP);
 		doc.appendChild(rootElement);
-		Element lastId = doc.createElement(TAG_NAME_LAST_ID); 
+		Element lastId = doc.createElement(TAG_NAME_LAST_ID);
 		int last = 0;
 		for (Shop shop : shops) {
 			rootElement.appendChild(writeShopElement(doc, shop));
@@ -131,12 +129,13 @@ public class ReadXML {
 		writeAnythingDocumentInXML(doc, TYPE_SHOP);
 	}
 
-	public static void writeProduct(ArrayList<Product> products) throws TransformerException, ParserConfigurationException{
+	public static void writeProduct(ArrayList<Product> products)
+			throws TransformerException, ParserConfigurationException {
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement(NODE_PRODUCT);
 		doc.appendChild(rootElement);
-		Element lastId = doc.createElement(TAG_NAME_LAST_ID); 
+		Element lastId = doc.createElement(TAG_NAME_LAST_ID);
 		int last = 0;
 		for (Product product : products) {
 			rootElement.appendChild(writeProductElement(doc, product));
@@ -147,7 +146,8 @@ public class ReadXML {
 		writeAnythingDocumentInXML(doc, TYPE_PRODUCT);
 	}
 
-	public void writeAssigmentProduct(ArrayList<AssignmentProductShop> assignmentProductShopList) throws TransformerException, ParserConfigurationException{
+	public void writeAssigmentProduct(ArrayList<AssignmentProductShop> assignmentProductShopList)
+			throws TransformerException, ParserConfigurationException {
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement(NODE_ASSIGNED_LIST);
@@ -155,31 +155,31 @@ public class ReadXML {
 		for (AssignmentProductShop assignmentProductShop : assignmentProductShopList) {
 			Element elementAssigment = doc.createElement(TAG_NAME_ASSIGNED_PRODUCT);
 			rootElement.appendChild(elementAssigment);
-			
+
 			Element id = doc.createElement(TAG_NAME_ID);
 			id.appendChild(doc.createTextNode(String.valueOf(assignmentProductShop.getId())));
 			elementAssigment.appendChild(id);
-			
+
 			Element product = writeProductElement(doc, assignmentProductShop.getProduct());
 			elementAssigment.appendChild(product);
-			
+
 			Element shop = writeShopElement(doc, assignmentProductShop.getShop());
 			elementAssigment.appendChild(shop);
 		}
 		writeAnythingDocumentInXML(doc, TYPE_ASSIGNED_PRODUCTS);
 	}
-	
+
 	private static void writeAnythingDocumentInXML(Document doc, String type)
 			throws TransformerFactoryConfigurationError, TransformerConfigurationException, TransformerException {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(doc);
-		StreamResult result = new StreamResult(new File("src/data/"+ type + ".xml"));
+		StreamResult result = new StreamResult(new File("src/data/" + type + ".xml"));
 		transformer.transform(source, result);
 	}
-	
-	//metodos usados en la escritura para optimizacion
-	public static Element writeProductElement(Document doc, Product product){
+
+	// metodos usados en la escritura para optimizacion
+	public static Element writeProductElement(Document doc, Product product) {
 		Element elementProduct = doc.createElement(TAG_NAME_PRODUCT);
 
 		Element id = doc.createElement(TAG_NAME_ID);
@@ -200,7 +200,7 @@ public class ReadXML {
 		return elementProduct;
 	}
 
-	public static Element writeShopElement(Document doc, Shop shop){
+	public static Element writeShopElement(Document doc, Shop shop) {
 		Element elementShop = doc.createElement(TAG_NAME_SHOP);
 
 		Element id = doc.createElement(TAG_NAME_ID);
@@ -216,8 +216,8 @@ public class ReadXML {
 		elementShop.appendChild(sourceImg);
 		return elementShop;
 	}
-	
-	public static Element writeUserElement(Document doc, User user){
+
+	public static Element writeUserElement(Document doc, User user) {
 		Element elementUser = doc.createElement(TAG_NAME_USER);
 
 		Element id = doc.createElement(TAG_NAME_ID);
@@ -242,29 +242,32 @@ public class ReadXML {
 		return elementUser;
 	}
 
-	//Metodos para devolver las entidades
-	public static Product getProduct(Element product){
+	// Metodos para devolver las entidades
+	public static Product getProduct(Element product) {
 		return new Product(Integer.parseInt((product.getElementsByTagName(TAG_NAME_ID).item(0)).getTextContent()),
 				(product.getElementsByTagName(TAG_NAME_NAME).item(0)).getTextContent(),
 				Double.parseDouble((product.getElementsByTagName(TAG_NAME_PRICE).item(0)).getTextContent()),
 				(product.getElementsByTagName(TAG_NAME_SRC_IMG).item(0)).getTextContent());
 	}
 
-	public static Shop getShop(Element shop){
+	public static Shop getShop(Element shop) {
 		return new Shop(Integer.parseInt((shop.getElementsByTagName(TAG_NAME_ID).item(0)).getTextContent()),
 				(shop.getElementsByTagName(TAG_NAME_NAME).item(0)).getTextContent(),
 				(shop.getElementsByTagName(TAG_NAME_SRC_IMG).item(0)).getTextContent());
 	}
 
-	public static User getUser(Element user){
+	public static User getUser(Element user) {
 		return new User((user.getElementsByTagName(TAG_NAME_NAME).item(0)).getTextContent(),
 				(user.getElementsByTagName(TAG_NAME_ADDRESS).item(0)).getTextContent(),
-				(user.getElementsByTagName(TAG_NAME_PASSWORD).item(0)).getTextContent(), 
+				(user.getElementsByTagName(TAG_NAME_PASSWORD).item(0)).getTextContent(),
 				(user.getElementsByTagName(TAG_NAME_SRC_IMG).item(0)).getTextContent());
 	}
-	
-	public static int getAcutalID(String nameDocument, String type) throws ParserConfigurationException, SAXException, IOException {
+
+	public static int getAcutalID(String nameDocument, String type)
+			throws ParserConfigurationException, SAXException, IOException {
 		NodeList principalNode = readAnythingDocument(nameDocument).getElementsByTagName(type);
-		return Integer.parseInt(((Element)((Element)principalNode.item(0)).getElementsByTagName(TAG_NAME_LAST_ID).item(0)).getTextContent());
+		return Integer
+				.parseInt(((Element) ((Element) principalNode.item(0)).getElementsByTagName(TAG_NAME_LAST_ID).item(0))
+						.getTextContent());
 	}
 }

@@ -37,7 +37,7 @@ public class AddShopDialog extends JDialog {
 	private JLabel minImage;
 	private JButton btnAddShop;
 
-	public AddShopDialog( MainWindowShop mainWindowShop,  ControllerShop controllershop) {
+	public AddShopDialog(MainWindowShop mainWindowShop, ControllerShop controllershop) {
 		super(mainWindowShop, true);
 		setTitle("Add Shop");
 		setSize(500, 400);
@@ -79,12 +79,12 @@ public class AddShopDialog extends JDialog {
 		btnAddShop.setText("Edit Shop");
 		btnAddShop.setActionCommand(ActionsShop.EDIT_SHOP.name());
 	}
-	
+
 	public void changeActionToAddShop() {
 		btnAddShop.setText("Add Shop");
 		btnAddShop.setActionCommand(ActionsShop.ADD_SHOP.name());
 	}
-	
+
 	public Icon reSize(ImageIcon imagen) {
 		Image conversion = imagen.getImage();
 		Image tamanio = conversion.getScaledInstance(200, 150, Image.SCALE_SMOOTH);
@@ -122,7 +122,7 @@ public class AddShopDialog extends JDialog {
 			minImage.setIcon(loadImage(new File(shop.getSrcImg())));
 		} catch (Exception e) {
 			minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));
-		}		
+		}
 	}
 
 	public void cleanForm() {
