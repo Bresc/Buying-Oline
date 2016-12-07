@@ -17,6 +17,7 @@ import models.dao.ManagerProduct;
 import models.dao.ManagerShop;
 import models.dao.ManagerUser;
 import models.entities.AssignmentProductShop;
+import models.entities.Order;
 import models.entities.Product;
 import models.entities.Shop;
 import models.entities.User;
@@ -29,7 +30,7 @@ import view.admin.AddShopDialog;
 import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
 import view.login.DialogChooseWhoYouAre;
-import view.login.DialogLogIn;
+import view.login.DialogLogin;
 
 public class ControllerAdmin implements ActionListener, KeyListener, ChangeListener {
 
@@ -42,11 +43,11 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	private ManagerProduct managerProduct;
 	private ManagerShop managerShop;
 	private AddShopDialog addShopDialog;
-	private DialogLogIn logIn;
-	private ManagerUser manageruser;
+	private DialogLogin logIn;
+	private ManagerUser managerUser;
 
 	public ControllerAdmin() {
-		manageruser = new ManagerUser();
+		managerUser = new ManagerUser();
 		managerShop = new ManagerShop();
 		managerProduct = new ManagerProduct();
 		adminManagerAssingProduct = new ManagerAsingProduct();
@@ -56,11 +57,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 
 		actualPage = 1;
 		refreshList(0);
-		try {
-			refrehAllData();
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			e.printStackTrace();
-		}
+		loadingInitialData();
 	}
 
 	@Override
@@ -192,6 +189,14 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		}
 	}
 
+	private void loadingInitialData() {
+		try {
+			refrehAllData();
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void setVi() {
 		mainWindowAdmin.setVi();
 	}
@@ -219,7 +224,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	private void showEditUser() {
 		addUserDialog.changeActionToEditUser();
 		try {
-			addUserDialog.setForm(manageruser.searhUser(mainWindowAdmin.getIdToTableUser()));
+			addUserDialog.setForm(managerUser.searhUser(mainWindowAdmin.getIdToTableUser()));
 		} catch (ErrorUserNotFound e) {
 			e.printStackTrace();
 		}
@@ -256,12 +261,12 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 
 	private void editUser() throws TransformerException, ParserConfigurationException {
 		try {
-			manageruser.editUser(addUserDialog.getUser(), manageruser.searhUser(mainWindowAdmin.getIdToTableUser()));
+			managerUser.editUser(addUserDialog.getUser(), managerUser.searhUser(mainWindowAdmin.getIdToTableUser()));
 			actualPage = 1;
 			refreshList(1);
 			addUserDialog.setVisible(false);
 			addUserDialog.changeActionToAddUser();
-			ReadXML.writeUser(manageruser.getUsersList());
+			ReadXML.writeUser(managerUser.getUsersList());
 		} catch (NumberFormatException | ErrorUserNotFound e) {
 			e.printStackTrace();
 		}
@@ -283,10 +288,10 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 
 	private void deleteUser() throws TransformerException, ParserConfigurationException {
 		try {
-			manageruser.deleteUser(manageruser.searhUser(mainWindowAdmin.getIdToTableUser()));
+			managerUser.deleteUser(managerUser.searhUser(mainWindowAdmin.getIdToTableUser()));
 			actualPage = 1;
 			refreshList(1);
-			ReadXML.writeUser(manageruser.getUsersList());
+			ReadXML.writeUser(managerUser.getUsersList());
 		} catch (ErrorUserNotFound e) {
 			e.printStackTrace();
 		}
@@ -304,7 +309,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	}
 
 	// Metodos para refrescar las listas de las entidades
-	private void refrehAllData() throws ParserConfigurationException, SAXException, IOException {
+	public void refrehAllData() throws ParserConfigurationException, SAXException, IOException {
 		refreshDataUser(ReadXML.readUser());
 		refreshDataShop(ReadXML.readShop());
 		refreshDataProduct(ReadXML.readProduct());
@@ -312,30 +317,33 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	}
 
 	private void refreshDataProduct(ArrayList<Product> readProduct) {
-		for (Product product : readProduct) {
-			managerProduct.addProduct(product);
-		}
+		managerProduct.addAllProducts(readProduct);
 	}
 
 	private void refreshDataAssigmentProductShop(ArrayList<AssignmentProductShop> readAssignmentProductShops) {
-		for (AssignmentProductShop assigment : readAssignmentProductShops) {
-			adminManagerAssingProduct.addAssignmentProductShop(assigment);
-		}
+		adminManagerAssingProduct.addAllAssignmentProductShop(readAssignmentProductShops);
 	}
 
 	private void refreshDataShop(ArrayList<Shop> readShop) {
-		for (Shop shop : readShop) {
-			managerShop.addShop(shop);
-		}
+		managerShop.addAllShop(readShop);
 	}
 
 	private void refreshDataUser(ArrayList<User> readUser) {
-		for (User user : readUser) {
-			manageruser.addUser(user);
-		}
-
+		managerUser.addAllUser(readUser);
 	}
 
+	public User validateUser(String name, String password) throws ErrorUserNotFound {
+		return managerUser.validateUserLogin(name, password);
+	}
+	
+	public ArrayList<Shop> getListShop() {
+		return managerShop.getListShop();
+	}
+	
+	public ArrayList<Product> getListProduct() {
+		return managerProduct.getListProducts();
+	}
+	
 	private void deleteProduct() {
 		try {
 			managerProduct.deleteProduct(managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
@@ -358,10 +366,10 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	}
 
 	private void addUser() throws TransformerException, ParserConfigurationException {
-		manageruser.addUser(addUserDialog.getUser());
+		managerUser.addUser(addUserDialog.getUser());
 		addUserDialog.cleanForm();
 		addUserDialog.setVisible(false);
-		ReadXML.writeUser(manageruser.getUsersList());
+		ReadXML.writeUser(managerUser.getUsersList());
 		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
 		actualPage = 1;
 		refreshList(1);

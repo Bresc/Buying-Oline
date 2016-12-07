@@ -32,6 +32,10 @@ public class ManagerShop {
 		shopList.add(shop);
 	}
 
+	public void addAllShop(ArrayList<Shop> shop) {
+		shopList.addAll(shop);
+	}
+	
 	public Shop delteShop(Shop shop) throws ErrorShopNotFound {
 		shopList.remove(searhShop(shop.getId()));
 		return shop;

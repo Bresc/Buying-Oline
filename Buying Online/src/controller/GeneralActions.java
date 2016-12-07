@@ -2,5 +2,5 @@ package controller;
 
 public enum GeneralActions {
 
-	CONFIRM, OPEN_DIALOG_CHOOSE;
+	VALIDATE_USER_FROM_LOGIN, SHOW_REGISTER_DIALOG;
 }

@@ -20,6 +20,10 @@ public class ManagerUser {
 		usersList.add(user);
 	}
 
+	public void addAllUser(ArrayList<User> user) {
+		usersList.addAll(user);
+	}
+	
 	public User deleteUser(User user) throws ErrorUserNotFound {
 		usersList.remove(searhUser(user.getId()));
 		return user;
@@ -34,14 +38,13 @@ public class ManagerUser {
 		throw new ErrorUserNotFound();
 	}
 
-	public boolean searchForLogInUser(String name, String password) {
-		boolean helper = false;
+	public User validateUserLogin(String name, String password) throws ErrorUserNotFound {
 		for (User user : usersList) {
 			if (user.getName().equals(name) && user.getPassword().equals(password)) {
-				helper = true;
+				return user;
 			}
 		}
-		return helper;
+		throw new ErrorUserNotFound();
 	}
 
 	public User searchUserNamePassword(String name, String password) throws ErrorUserNotFound {

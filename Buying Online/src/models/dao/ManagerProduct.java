@@ -27,6 +27,10 @@ public class ManagerProduct {
 	public void addProduct(Product product) {
 		productsList.add(product);
 	}
+	
+	public void addAllProducts(ArrayList<Product> product) {
+		productsList.addAll(product);
+	}
 
 	public Product deleteProduct(Product product) throws ErrorOrderNotFound {
 		productsList.remove(searhProduct(product.getId()));

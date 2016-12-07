@@ -12,30 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import controller.GeneralController;
 
-public class DialogLogIn extends JFrame {
+public class DialogLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	private JLabel labelBuyingOnline;
-	private JButton buttonAgreeLogIn;
-	private PanelConteiner panelConteiner;
+	private PanelContainer panelConteiner;
 
-	public DialogLogIn(GeneralController generalController) {
+	public DialogLogin(GeneralController generalController) {
 		setTitle("Log In");
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
 		setSize(350, 200);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.decode("#4383BD"));
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent e) {
-				System.exit(0);
-			}
-		});
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		// setLayout(new BorderLayout());
 
 		JPanel panelTitle = new JPanel();
 		panelTitle.setBackground(Color.decode("#4383BD"));
@@ -45,27 +37,21 @@ public class DialogLogIn extends JFrame {
 
 		add(panelTitle);
 
-		panelConteiner = new PanelConteiner(generalController);
+		panelConteiner = new PanelContainer(generalController);
 		add(panelConteiner);
 
 		setVisible(true);
 	}
 
 	public String getTheName() {
-		return panelConteiner.getTheName();
+		return panelConteiner.getName();
 	}
 
 	public String getPassword() {
 		return panelConteiner.getPassword();
 	}
 
-	public void changeTheButtonAdmin(boolean confirmation) {
-		if (confirmation == true) {
-			buttonAgreeLogIn.setEnabled(true);
-		}
-	}
-
-	public void clear() {
+	public void clearLoginDialog() {
 		panelConteiner.clear();
 	}
 }

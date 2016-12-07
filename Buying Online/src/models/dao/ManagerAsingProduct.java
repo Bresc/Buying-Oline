@@ -31,6 +31,10 @@ public class ManagerAsingProduct {
 		assignmentsProductsShopList.add(assignment);
 	}
 
+	public void addAllAssignmentProductShop(ArrayList<AssignmentProductShop> assignment) {
+		assignmentsProductsShopList.addAll(assignment);
+	}
+	
 	public AssignmentProductShop deleteAssignmentProductShop(AssignmentProductShop assignmentToDelete)
 			throws ErrorAssignmentProductShopNotFound {
 		assignmentsProductsShopList.remove(searchAssignmentProductShop(assignmentToDelete.getId()));
