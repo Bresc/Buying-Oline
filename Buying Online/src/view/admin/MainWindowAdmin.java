@@ -48,9 +48,12 @@ public class MainWindowAdmin extends JFrame {
 
 		paginatePanel = new PaginatePanel(controller);
 		add(paginatePanel, BorderLayout.PAGE_END);
-
 	}
 
+	public void setVi(){
+		setVisible(true);
+	}
+	
 	public void refreshTableShop(ArrayList<Shop> shops) {
 		tableShop.refreshTable(shops);
 	}

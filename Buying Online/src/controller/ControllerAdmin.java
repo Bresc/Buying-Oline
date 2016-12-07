@@ -45,7 +45,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	private DialogLogIn logIn;
 	private ManagerUser manageruser;
 	
-	public ControllerAdmin() throws ParserConfigurationException, SAXException, IOException {
+	public ControllerAdmin() {
 		
 		manageruser = new ManagerUser();
 		managerShop = new ManagerShop();
@@ -58,7 +58,12 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		actualPage = 1;
 	    refreshList(0);
 
-	    refrehAllData();
+	    try {
+			refrehAllData();
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -196,15 +201,10 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			break;
 		}
 	}
-
 	
-	/**
-	 * Este metodo fue la unica manera de que no me lanzara la excepcio asi que por favor no lo borre 
-	 * o si saben como solucionarlo de una manera mejor por favor podrian hacerlo y despues explicarme
-	 * att: Brayan 
-	 * @return retorna la tienda encontrada anteriormente
-	 */
-	
+	public void setVi(){
+		mainWindowAdmin.setVi();
+	}
 	
 	private void showEditShop() {
 		addShopDialog.changeActionToEditShop();

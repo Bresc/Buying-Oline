@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import controller.ControllerShop;
+import controller.GeneralController;
 
 public class DialogLogIn extends JFrame {
 
@@ -20,7 +21,7 @@ public class DialogLogIn extends JFrame {
 	private JButton buttonAgreeLogIn;
 	private PanelConteiner panelConteiner;
 
-	public DialogLogIn( ControllerShop controllerShop) {
+	public DialogLogIn(GeneralController generalController) {
 		setTitle("Log In");
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
 		setSize(350, 200);
@@ -45,9 +46,10 @@ public class DialogLogIn extends JFrame {
 
 		add(panelTitle);
 
-		panelConteiner = new PanelConteiner(controllerShop);
+		panelConteiner = new PanelConteiner(generalController);
 		add(panelConteiner);
 
+		setVisible(true);
 	}
 
 	public String getTheName() {

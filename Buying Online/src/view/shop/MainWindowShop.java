@@ -63,4 +63,8 @@ public class MainWindowShop extends JFrame{
 		productsByShop.refreshTable(products);
 	}
 
+	public void setVi() {
+		setVisible(true);
+	}
+
 }

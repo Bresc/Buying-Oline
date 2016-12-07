@@ -28,7 +28,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 	private AddUserDialog addUserDialog;
 	private ManagerShop managerShop;
 	private ManagerAsingProduct adminManagerAssingProduct;
-	
+	private User user;
 	public ControllerUser() {
 		mainWindowUser = new MainWindowUser(this);
 		addUserDialog = new AddUserDialog(mainWindowUser , this);
@@ -94,6 +94,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 		}
 		
 	}
+	
 	private void showProductsByShop(String id) {
 		try {
 			mainWindowUser.changeToProductsFromShopPanel(
@@ -143,6 +144,12 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	public void setVi() {
+		mainWindowUser.setVi();
 	}
 
 }

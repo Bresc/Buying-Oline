@@ -103,4 +103,8 @@ public class MainWindowUser extends JFrame {
 		panelActualCenter.updateUI();
 		panelActualCenter.repaint();
 	}
+
+	public void setVi() {
+		setVisible(true);
+	}
 }

@@ -38,10 +38,10 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 	private ManagerAsingProduct managerAsingProduct;
 	private int actualPage;
 	
-	public ControllerShop() throws ParserConfigurationException, SAXException, IOException {
+	public ControllerShop() {
 		mainWindowAdmin = new MainWindowAdmin(new ControllerAdmin());
 		actualPage = 1;
-		dialogoLogin = new DialogLogIn(this);
+//		dialogoLogin = new DialogLogIn(this);
 		managerShop = new ManagerShop();
 		mainWindowShop = new MainWindowShop(this);
 		addShopDialog = new  AddShopDialog(	mainWindowShop, this);
@@ -165,5 +165,10 @@ public class ControllerShop  implements ActionListener, KeyListener, ChangeListe
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public void setVi() {
+		mainWindowShop.setVi();
 	}
 }

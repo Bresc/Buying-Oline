@@ -10,6 +10,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import controller.ActionsShop;
 import controller.ControllerShop;
+import controller.GeneralActions;
+import controller.GeneralController;
 
 public class PanelConteiner extends JPanel {
 
@@ -20,7 +22,7 @@ public class PanelConteiner extends JPanel {
 	private JLabel labelNickName;
 	private JButton buttonAgreeLogIn;
 
-	public PanelConteiner( ControllerShop controllerShop) {
+	public PanelConteiner(GeneralController generalController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(Color.decode("#4383BD"));
 
@@ -39,14 +41,14 @@ public class PanelConteiner extends JPanel {
 		add(password);
 
 		buttonAgreeLogIn = new JButton("Log In");
-		buttonAgreeLogIn.addActionListener(controllerShop);
-		buttonAgreeLogIn.setActionCommand(ActionsShop.CONFIRM.toString());
+		buttonAgreeLogIn.addActionListener(generalController);
+		buttonAgreeLogIn.setActionCommand(GeneralActions.CONFIRM.toString());
 		buttonAgreeLogIn.setVisible(true);
 		add(buttonAgreeLogIn);
 
 		JButton buttonRegister = new JButton("Sign Up");
-		buttonRegister.addActionListener(controllerShop);
-		buttonRegister.setActionCommand(ActionsShop.OPEN_DIALOG_CHOOSE.toString());
+		buttonRegister.addActionListener(generalController);
+		buttonRegister.setActionCommand(GeneralActions.OPEN_DIALOG_CHOOSE.toString());
 		buttonRegister.setVisible(true);
 		add(buttonRegister);
 	}
