@@ -1,8 +1,6 @@
 package view.user;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
 import javax.swing.BorderFactory;
@@ -22,8 +20,7 @@ public class CardRestaurant extends JPanel {
 	private JButton btnImgRestaurant;
 
 	public CardRestaurant(ControllerUser controllerUser) {
-		setLayout(new GridLayout(1, 2));
-		setBorder(BorderFactory.createLineBorder(Color.decode("#076AC0")));
+		setBorder(BorderFactory.createLineBorder(ConstanstUIUser.COLOR_LINE_BORDER));
 		setBackground(Color.WHITE);
 
 		GridSystem gridPanel = new GridSystem(this);
@@ -35,7 +32,7 @@ public class CardRestaurant extends JPanel {
 		add(btnImgRestaurant, gridPanel.insertComponent(1, 1, 5, 0.70));
 
 		lbNameRestaurant = new JLabel();
-		lbNameRestaurant.setFont(new Font("Elephant", Font.ITALIC, 16));
+		lbNameRestaurant.setFont(ConstanstUIUser.FONT_USER_WINDOW);
 		add(lbNameRestaurant, gridPanel.insertComponent(2, 1, 5, 0.15));
 	}
 
@@ -43,7 +40,7 @@ public class CardRestaurant extends JPanel {
 		try {
 			return new ImageIcon(new URL(urlImage));
 		} catch (java.net.MalformedURLException e) {
-			return new ImageIcon("src/img/loadingFail.png");
+			return ConstanstUIUser.IMAGE_FAIL_LOADING;
 		}
 	}
 

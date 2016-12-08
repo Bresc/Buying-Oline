@@ -1,7 +1,6 @@
 package view.user;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
@@ -23,7 +22,7 @@ public class CardProduct extends JPanel {
 
 	public CardProduct(ControllerUser controllerUser) {
 		setLayout(new GridLayout(1, 2));
-		setBorder(BorderFactory.createLineBorder(Color.decode("#076AC0")));
+		setBorder(BorderFactory.createLineBorder(ConstanstUIUser.COLOR_LINE_BORDER));
 		setBackground(Color.WHITE);
 
 		GridSystem gridPanel = new GridSystem(this);
@@ -32,11 +31,11 @@ public class CardProduct extends JPanel {
 		add(lbImgProduct, gridPanel.insertComponent(1, 1, 11, 1));
 
 		lbNameProduct = new JLabel();
-		lbNameProduct.setFont(new Font("Elephant", Font.ITALIC, 16));
+		lbNameProduct.setFont(ConstanstUIUser.FONT_USER_WINDOW);
 		add(lbNameProduct, gridPanel.insertComponent(2, 1, 5, 0.15));
 
 		lbPriceProduct = new JLabel();
-		lbPriceProduct.setFont(new Font("Elephant", Font.ITALIC, 16));
+		lbPriceProduct.setFont(ConstanstUIUser.FONT_USER_WINDOW);
 		add(lbPriceProduct, gridPanel.insertComponent(2, 6, 5, 0.15));
 	}
 
@@ -44,7 +43,7 @@ public class CardProduct extends JPanel {
 		try {
 			return new ImageIcon(new URL(urlImage));
 		} catch (java.net.MalformedURLException e) {
-			return new ImageIcon("src/img/loadingFail.png");
+			return ConstanstUIUser.IMAGE_FAIL_LOADING;
 		}
 	}
 

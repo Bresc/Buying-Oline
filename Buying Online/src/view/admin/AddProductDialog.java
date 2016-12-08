@@ -4,11 +4,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
+
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,7 +21,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.text.NumberFormatter;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -70,6 +74,9 @@ public class AddProductDialog extends JDialog {
 		textValue.setBorder(BorderFactory.createTitledBorder("Product's Value"));
 		add(textValue, gridProduct.insertComponent(1, 1, 10, 0.001));
 
+		chooseImage = new JFileChooser();
+		chooseImage.setCurrentDirectory(new File("./src/img"));
+		
 		btnChargeImage = new JButton("Charge An Image");
 		btnChargeImage.setForeground(Color.BLACK);
 		btnChargeImage.setActionCommand(ActionsAdmin.CHARGE_IMAGE_PRODUCT.toString());
@@ -100,7 +107,7 @@ public class AddProductDialog extends JDialog {
 	public Product extractProductFromWindow()
 			throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
 		return ManagerProduct.createProduct(textName.getText(),
-				Double.parseDouble(intergerFormatter(textValue.getText())), getImageInChooser());
+				Double.parseDouble(intergerFormatter(textValue.getText())), String.valueOf(chooseImage.getSelectedFile()));
 	}
 
 	public void changeActionToProductEdit() {
@@ -125,30 +132,37 @@ public class AddProductDialog extends JDialog {
 		return numString;
 	}
 
+	public void openFileChooser() {
+		int option = chooseImage.showOpenDialog(this);
+		if (option == JFileChooser.APPROVE_OPTION) {
+			loadImage(chooseImage.getSelectedFile());
+		}
+	}
+	
 	public void chargeProductInWindow(Product product) {
 		textName.setText(product.getName());
 		textValue.setText("" + product.getPrice());
-		labelImage.setIcon(new ImageIcon(
-				new ImageIcon(product.getSrcImg()).getImage().getScaledInstance(150, -10, Image.SCALE_AREA_AVERAGING)));
+		labelImage.setIcon(loadImage(new File(product.getSrcImg())));
 	}
 
-	public void searchForImage() {
-		chooseImage = new JFileChooser("src/img");
-		chooseImage.showOpenDialog(this);
-		// chooseImage.setSelectedFile(new
-		// File(ConstantUI.DEFAULT_PRODUCT_IMAGE));
-		String image = getImageInChooser();
-		labelImage.setHorizontalAlignment(SwingConstants.CENTER);
-		Image img = new ImageIcon(image).getImage().getScaledInstance(150, -10, java.awt.Image.SCALE_AREA_AVERAGING);
-		this.labelImage.setIcon(new ImageIcon(img));
+	public ImageIcon loadImage(File file) {
+		BufferedImage image = null;
+		ImageIcon imageLoaded;
+		try {
+			image = ImageIO.read(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		imageLoaded = new ImageIcon(image);
+		labelImage.setIcon(reSize(imageLoaded));
+		return imageLoaded;
 	}
-
-	public String getImageInChooser() {
-		return chooseImage.getSelectedFile().toString();
-	}
-
-	public void changeImageInLabel(String urlImage) {
-		labelImage.setIcon(new ImageIcon(new ImageIcon(urlImage).getImage().getScaledInstance(30, 30, 100)));
+	
+	public Icon reSize(ImageIcon imagen) {
+		Image conversion = imagen.getImage();
+		Image tamanio = conversion.getScaledInstance(200, 150, Image.SCALE_SMOOTH);
+		ImageIcon result = new ImageIcon(tamanio);
+		return result;
 	}
 
 	public void cleanForm() {

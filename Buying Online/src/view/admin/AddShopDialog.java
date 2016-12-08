@@ -22,11 +22,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import controller.ActionsAdmin;
 import controller.ActionsShop;
-import controller.ControllerShop;
+import controller.ControllerAdmin;
 import models.dao.ManagerShop;
 import models.entities.Shop;
-import view.shop.MainWindowShop;
 import view.user.GridSystem;
 
 public class AddShopDialog extends JDialog {
@@ -37,8 +37,8 @@ public class AddShopDialog extends JDialog {
 	private JLabel minImage;
 	private JButton btnAddShop;
 
-	public AddShopDialog(MainWindowShop mainWindowShop, ControllerShop controllershop) {
-		super(mainWindowShop, true);
+	public AddShopDialog(MainWindowAdmin mainWindowAdmin, ControllerAdmin controllerAdmin) {
+		super(mainWindowAdmin, true);
 		setTitle("Add Shop");
 		setSize(500, 400);
 		setLocationRelativeTo(null);
@@ -57,8 +57,8 @@ public class AddShopDialog extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10)));
 
 		JButton btImage = new JButton("Add imagen");
-		btImage.addActionListener(controllershop);
-		btImage.setActionCommand(ActionsShop.ADD_IMAGE_TO_SHOP.toString());
+		btImage.addActionListener(controllerAdmin);
+		btImage.setActionCommand(ActionsAdmin.ADD_IMAGE_TO_SHOP.toString());
 		btImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btImage, gridDialog.insertComponent(1, 4, 3, 0.01));
 
@@ -69,8 +69,8 @@ public class AddShopDialog extends JDialog {
 		add(minImage, gridDialog.insertComponent(2, 4, 3, 0.1));
 
 		btnAddShop = new JButton("Accept");
-		btnAddShop.addActionListener(controllershop);
-		btnAddShop.setActionCommand(ActionsShop.ADD_SHOP.toString());
+		btnAddShop.addActionListener(controllerAdmin);
+		btnAddShop.setActionCommand(ActionsAdmin.ADD_SHOP.toString());
 		btnAddShop.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddShop, gridDialog.insertComponent(3, 2, 7, 0.01));
 	}
@@ -124,7 +124,7 @@ public class AddShopDialog extends JDialog {
 			minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));
 		}
 	}
-
+	
 	public void cleanForm() {
 		txName.setText("");
 		minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));

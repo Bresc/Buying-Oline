@@ -19,10 +19,6 @@ public class ManagerShop {
 		shopList = new ArrayList<>();
 	}
 
-	public ArrayList<Shop> getShopList() {
-		return shopList;
-	}
-
 	public static Shop createShop(String name, String srcImg)
 			throws ParserConfigurationException, SAXException, IOException {
 		return new Shop(ReadXML.getAcutalID("shops", "list.shop") + 1, name, srcImg);
@@ -34,6 +30,10 @@ public class ManagerShop {
 
 	public void addAllShop(ArrayList<Shop> shop) {
 		shopList.addAll(shop);
+	}
+	
+	public void clearList() {
+		shopList.clear();
 	}
 	
 	public Shop delteShop(Shop shop) throws ErrorShopNotFound {
@@ -65,9 +65,5 @@ public class ManagerShop {
 
 	public ArrayList<Shop> getListShop() {
 		return shopList;
-	}
-
-	public void setListShop(ArrayList<Shop> listShop) {
-		this.shopList = listShop;
 	}
 }

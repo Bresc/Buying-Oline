@@ -43,8 +43,8 @@ public class DialogLogin extends JFrame {
 		setVisible(true);
 	}
 
-	public String getTheName() {
-		return panelConteiner.getName();
+	public String getUsername() {
+		return panelConteiner.getUsername();
 	}
 
 	public String getPassword() {

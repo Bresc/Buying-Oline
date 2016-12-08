@@ -35,6 +35,10 @@ public class ManagerAsingProduct {
 		assignmentsProductsShopList.addAll(assignment);
 	}
 	
+	public void clearList() {
+		assignmentsProductsShopList.clear();
+	}
+
 	public AssignmentProductShop deleteAssignmentProductShop(AssignmentProductShop assignmentToDelete)
 			throws ErrorAssignmentProductShopNotFound {
 		assignmentsProductsShopList.remove(searchAssignmentProductShop(assignmentToDelete.getId()));
@@ -95,4 +99,5 @@ public class ManagerAsingProduct {
 			return managerProduct.getListProducts();
 		}
 	}
+
 }

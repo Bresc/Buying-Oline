@@ -24,6 +24,10 @@ public class ManagerUser {
 		usersList.addAll(user);
 	}
 	
+	public void clearList() {
+		usersList.clear();
+	}
+	
 	public User deleteUser(User user) throws ErrorUserNotFound {
 		usersList.remove(searhUser(user.getId()));
 		return user;

@@ -24,12 +24,12 @@ public class ToolBar extends JToolBar {
 		GridSystem gridMenu = new GridSystem(this);
 
 		JMenuBar menu = new JMenuBar();
-		menu.setBackground(Color.decode("#00BBBB"));
+		menu.setBackground(ConstantUIAdmin.BACKGROUND_COLOR);
 
 		JMenu menuFile = new JMenu("File");
 
 		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/4.png"));
-		logOut.setBackground(Color.decode("#00BBBB"));
+		logOut.setBackground(ConstantUIAdmin.BACKGROUND_COLOR);
 		logOut.setActionCommand(ActionsAdmin.LOG_OUT.toString());
 		logOut.addActionListener(controller);
 		menuFile.add(logOut);
@@ -54,7 +54,7 @@ public class ToolBar extends JToolBar {
 		JButton btnAddProduct = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
 		btnAddProduct.setToolTipText("Add Product");
 		btnAddProduct.setBackground(Color.decode("#FFFFFF"));
-		btnAddProduct.setActionCommand(ActionsAdmin.SHOW_ADD_PRODUCT.toString());
+		btnAddProduct.setActionCommand(ActionsAdmin.SHOW_ADD_PRODUCT_DIALOG.toString());
 		btnAddProduct.addActionListener(controller);
 		add(btnAddProduct, gridMenu.insertComponent(1, 4, 1, 0.1));
 

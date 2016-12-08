@@ -19,12 +19,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import controller.ActionsUser;
-import controller.ControllerUser;
+
+import controller.ActionsAdmin;
+import controller.ControllerAdmin;
 import models.dao.ManagerUser;
 import models.entities.User;
 import view.user.GridSystem;
-import view.user.MainWindowUser;
 
 public class AddUserDialog extends JDialog {
 
@@ -36,8 +36,8 @@ public class AddUserDialog extends JDialog {
 	private JPasswordField txPassword;
 	private JButton btnAddUser;
 
-	public AddUserDialog(MainWindowUser mainWindowUser, ControllerUser controlleruser) {
-		super(mainWindowUser, true);
+	public AddUserDialog(MainWindowAdmin mainWindowAdmin, ControllerAdmin controllerAdmin) {
+		super(mainWindowAdmin, true);
 		setTitle("Add User");
 		setSize(500, 400);
 		setLocationRelativeTo(null);
@@ -64,9 +64,9 @@ public class AddUserDialog extends JDialog {
 		add(Box.createRigidArea(new Dimension(0, 10)));
 
 		JButton btImage = new JButton("Add imagen");
-		btImage.addActionListener(controlleruser);
+		btImage.addActionListener(controllerAdmin);
 		btImage.setBackground(ConstantUIAdmin.BTN_COLOR);
-		btImage.setActionCommand(ActionsUser.ADD_IMAGE_TO_USER.toString());
+		btImage.setActionCommand(ActionsAdmin.ADD_IMAGE_TO_USER.toString());
 		btImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btImage, gridDialog.insertComponent(3, 4, 3, 0.01));
 
@@ -77,7 +77,7 @@ public class AddUserDialog extends JDialog {
 		add(minImage, gridDialog.insertComponent(4, 4, 3, 0.1));
 
 		btnAddUser = new JButton();
-		btnAddUser.addActionListener(controlleruser);
+		btnAddUser.addActionListener(controllerAdmin);
 		changeActionToAddUser();
 		btnAddUser.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btnAddUser.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -86,12 +86,12 @@ public class AddUserDialog extends JDialog {
 
 	public void changeActionToEditUser() {
 		btnAddUser.setText("Edit User");
-		btnAddUser.setActionCommand(ActionsUser.EDIT_USER.name());
+		btnAddUser.setActionCommand(ActionsAdmin.EDIT_USER.name());
 	}
 
 	public void changeActionToAddUser() {
 		btnAddUser.setText("Add User");
-		btnAddUser.setActionCommand(ActionsUser.ADD_USER.name());
+		btnAddUser.setActionCommand(ActionsAdmin.ADD_USER.name());
 	}
 
 	public Icon reSize(ImageIcon imagen) {

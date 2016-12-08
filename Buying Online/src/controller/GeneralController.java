@@ -4,24 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import models.dao.GeneralManager;
-import models.entities.User;
-import models.exceptions.ErrorShopNotFound;
 import models.exceptions.ErrorUserNotFound;
-import persistence.ReadXML;
+import view.login.DialogChooseWhoYouAre;
 import view.login.DialogLogin;
 
 public class GeneralController implements ActionListener {
 
 	private DialogLogin loginMainWindow;
+	private DialogChooseWhoYouAre chooseWhoYouAre;
 	private GeneralManager general;
-	private ControllerUser userStart;
-	private ControllerShop shopStart;
+	private ControllerUser controllerUser;
+	private ControllerShop controllerShop;
 	private ControllerAdmin controllerAdmin;
 	public static final String USER = "user";
 	public static final String SHOP = "shop";
@@ -29,7 +27,10 @@ public class GeneralController implements ActionListener {
 
 	public GeneralController() {
 		loginMainWindow = new DialogLogin(this);
-		controllerAdmin = new ControllerAdmin();
+		controllerAdmin = new ControllerAdmin(this);
+		controllerUser = new ControllerUser(this);
+		controllerShop = new ControllerShop(this);
+		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		readAllData();
 	}
 
@@ -50,13 +51,28 @@ public class GeneralController implements ActionListener {
 		case SHOW_REGISTER_DIALOG:
 			openDialog();
 			break;
+		case SHOP_LOG_IN:
+			chooseWhoYouAre.setVisible(false);
+			controllerAdmin.showAddShopDialog();
+			break;
+		case USER_LOG_IN:
+			chooseWhoYouAre.setVisible(false);
+			controllerAdmin.showAddUserDialog();
+			break;
+		default:
+			break;
 		}
 	}
 
 	private void validateUserFromLogin() {
-		String userName = loginMainWindow.getName(), password = loginMainWindow.getPassword();
+		String userName = loginMainWindow.getUsername(), password = loginMainWindow.getPassword();
 		if (validateLoginUser(userName, password)) {
-//			TODO: Controlador user
+			controllerUser.setVisible();
+		}else if (validateLoginShop(userName, password)) {
+			
+		}else {
+			readAllData();
+			controllerAdmin.setVisible();
 		}
 	}
 
@@ -69,9 +85,20 @@ public class GeneralController implements ActionListener {
 			return false;
 		}
 	}
+	
+	private boolean validateLoginShop(String name, String password) {
+		try {
+			controllerAdmin.validateUser(name, password);
+			return true;
+		} catch (ErrorUserNotFound e) {
+//			TODO: mostrar error
+			return false;
+		}
+	}
 
 	private void openDialog() {
-
+		chooseWhoYouAre.setVisible(true);
+		loginMainWindow.setVisible(false);
 	}
 
 	// private void VALIDATE_USER_FROM_LOGIN() {
@@ -106,6 +133,11 @@ public class GeneralController implements ActionListener {
 	// }
 
 	public void run() {
+		loginMainWindow.setVisible(true);
+	}
+
+	public void LoginVisible() {
+		loginMainWindow.clearLoginDialog();
 		loginMainWindow.setVisible(true);
 	}
 }

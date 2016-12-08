@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import controller.ActionsAdmin;
-import controller.ControllerAdmin;
+import controller.GeneralActions;
+import controller.GeneralController;
 
 public class DialogChooseWhoYouAre extends JDialog {
 
@@ -18,7 +18,7 @@ public class DialogChooseWhoYouAre extends JDialog {
 	private JButton buttonUser;
 	private JButton buttonShop;
 
-	public DialogChooseWhoYouAre(ControllerAdmin controller) {
+	public DialogChooseWhoYouAre(GeneralController generalController) {
 		setTitle("Log in");
 		setSize(358, 130);
 		setLocationRelativeTo(null);
@@ -34,14 +34,14 @@ public class DialogChooseWhoYouAre extends JDialog {
 
 		buttonUser = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
-		buttonUser.addActionListener(controller);
-		buttonUser.setActionCommand(ActionsAdmin.USER_LOG_IN.toString());
+		buttonUser.addActionListener(generalController);
+		buttonUser.setActionCommand(GeneralActions.USER_LOG_IN.toString());
 		add(buttonUser);
 
 		buttonShop = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496235_shop.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
-		buttonShop.addActionListener(controller);
-		buttonShop.setActionCommand(ActionsAdmin.SHOP_LOG_IN.toString());
+		buttonShop.addActionListener(generalController);
+		buttonShop.setActionCommand(GeneralActions.SHOP_LOG_IN.toString());
 		add(buttonShop);
 	}
 }

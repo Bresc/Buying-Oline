@@ -4,35 +4,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import models.dao.ManagerAsingProduct;
 import models.dao.ManagerShop;
-import models.dao.ManagerUser;
+import models.entities.AssignmentProductShop;
 import models.entities.Shop;
-import models.entities.User;
 import models.exceptions.ErrorShopNotFound;
-import view.admin.AddUserDialog;
+import persistence.ReadXML;
 import view.user.MainWindowUser;
 
 public class ControllerUser implements ActionListener, KeyListener, ChangeListener {
 
 	private MainWindowUser mainWindowUser;
-	private ManagerUser managerUser;
-	private AddUserDialog addUserDialog;
 	private ManagerShop managerShop;
 	private ManagerAsingProduct adminManagerAssingProduct;
-	private User user;
+	private GeneralController generalController;
 
-	public ControllerUser() {
+	public ControllerUser(GeneralController generalController) {
+		this.generalController = generalController;
 		mainWindowUser = new MainWindowUser(this);
-		addUserDialog = new AddUserDialog(mainWindowUser, this);
+		managerShop = new ManagerShop();
+		adminManagerAssingProduct = new ManagerAsingProduct();
 	}
 
 	@Override
@@ -41,53 +42,33 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 		case BACK_TO_PANEL_RESTAURANTS:
 			mainWindowUser.refreshShopList(managerShop.getListShop(), this);
 			break;
-		case CANCEL_PRODUCT:
-
-			break;
-		case CHANGE_TO_PRODUCTS_FROM_SHOP_PANEL:
-
-			break;
-		case CONFIRM:
-
-			break;
 		case LOG_OUT:
-
-			break;
-		case OPT_USER_VIEW_PRODUCTS:
-
-			break;
-		case SEARCH_RESTAURANT:
-
-			break;
-		case SHOPPING_CAR_USER:
-
-			break;
-		case SHOW_EDIT_USER:
-
+			logOut();
 			break;
 		case SHOW_PRODUCTS_BY_SHOP:
-
 			showProductsByShop(((JButton) arg2.getSource()).getName());
 			break;
-		case USER_SETTINGS:
-
-			break;
-		case USER_VIEW:
-
-			break;
-		case VIEW_USER_FAVORITES:
-
-			break;
-		case ADD_IMAGE_TO_USER:
-
-			break;
-		case ADD_USER:
-
-			break;
-		case EDIT_USER:
-
-			break;
 		}
+	}
+	
+	public void setVisible() {
+		refreshShopData();
+		mainWindowUser.refreshShopList(managerShop.getListShop(), this);
+		mainWindowUser.setVisible(true);
+	}
+
+	private void refreshShopData() {
+		try {
+			refreshShopData(ReadXML.readShop());
+			refreshDataAssigmentProductShop(ReadXML.readAsigmentProducts());
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			// TODO poner Exepciones
+		}
+	}
+	
+	private void logOut() {
+		mainWindowUser.setVisible(false);
+		generalController.LoginVisible();
 	}
 
 	private void showProductsByShop(String id) {
@@ -95,7 +76,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			mainWindowUser.changeToProductsFromShopPanel(
 					adminManagerAssingProduct.getProductsListFromShop(managerShop.searhShop(Integer.parseInt(id))));
 		} catch (NumberFormatException | ErrorShopNotFound e) {
-			e.printStackTrace();
+			//TODO mostrar exepcion
 		}
 	}
 
@@ -103,20 +84,20 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 		JButton bntSource = (JButton) (e.getSource());
 		try {
 			Shop selectedShop = managerShop.searhShop(Integer.parseInt(bntSource.getName()));
-			mainWindowUser
-					.changeToProductsFromShopPanel(adminManagerAssingProduct.getProductsListFromShop(selectedShop));
+			mainWindowUser.changeToProductsFromShopPanel(adminManagerAssingProduct.getProductsListFromShop(selectedShop));
 		} catch (NumberFormatException | ErrorShopNotFound e1) {
 			e1.printStackTrace();
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private void refreshDataUser(ArrayList<User> users) throws SAXException {
-		for (User user : users) {
-			managerUser.addUser(user);
-		}
+	private void refreshShopData(ArrayList<Shop> shops){
+		managerShop.addAllShop(shops);
 	}
-
+	
+	private void refreshDataAssigmentProductShop(ArrayList<AssignmentProductShop> readAssignmentProductShops) {
+		adminManagerAssingProduct.addAllAssignmentProductShop(readAssignmentProductShops);
+	}
+	
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
@@ -139,9 +120,5 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public void setVi() {
-		mainWindowUser.setVi();
 	}
 }

@@ -49,6 +49,10 @@ public class PanelContainer extends JPanel {
 		add(btnSignUp);
 	}
 
+	public String getUsername(){
+		return txtUserName.getText();
+	}
+	
 	public String getName() {
 		return txtUserName.getText();
 	}

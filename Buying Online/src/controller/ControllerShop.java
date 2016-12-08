@@ -36,15 +36,16 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	private AddShopDialog addShopDialog;
 	private AddProductFromShopViewDialog addProductFromShopViewDialog;
 	private ManagerAsingProduct managerAsingProduct;
+	private GeneralController generalController;
 	private int actualPage;
 
-	public ControllerShop() {
-		mainWindowAdmin = new MainWindowAdmin(new ControllerAdmin());
+	public ControllerShop(GeneralController generalController) {
+		this.generalController = generalController;
 		actualPage = 1;
-		// dialogoLogin = new DialogLogIn(this);
+//		 dialogoLogin = new DialogLogIn();
 		managerShop = new ManagerShop();
 		mainWindowShop = new MainWindowShop(this);
-		addShopDialog = new AddShopDialog(mainWindowShop, this);
+//		addShopDialog = new AddShopDialog(mainWindowShop, this);
 	}
 
 	@Override
@@ -136,7 +137,7 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	public Shop findTheShopHelper() {
 		Shop shop = null;
 		try {
-			shop = managerShop.searchShopName(dialogoLogin.getTheName());
+			shop = managerShop.searchShopName(dialogoLogin.getUsername());
 		} catch (ErrorShopNotFound e1) {
 			e1.printStackTrace();
 		}

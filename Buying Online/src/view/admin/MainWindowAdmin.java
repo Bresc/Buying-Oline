@@ -3,7 +3,6 @@ package view.admin;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -29,7 +28,7 @@ public class MainWindowAdmin extends JFrame {
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("RestaurantSoft Admin v0.1");
-		setIconImage(new ImageIcon("src/img/administrator-icon.png").getImage());
+		setIconImage((ConstantUIAdmin.ICON_MAIN_WINDOW_ADMIN).getImage());
 		toolbar = new ToolBar(controller);
 		add(toolbar, BorderLayout.PAGE_START);
 
@@ -47,10 +46,6 @@ public class MainWindowAdmin extends JFrame {
 
 		paginatePanel = new PaginatePanel(controller);
 		add(paginatePanel, BorderLayout.PAGE_END);
-	}
-
-	public void setVi() {
-		setVisible(true);
 	}
 
 	public void refreshTableShop(ArrayList<Shop> shops) {

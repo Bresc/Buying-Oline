@@ -31,8 +31,6 @@ public class GeneralManager {
 				return valie = SHOP;
 			}
 		}
-		System.out.println(shop.getListShop());
-		System.out.println(user.getUsersList());
 		return valie;
 	}
 
