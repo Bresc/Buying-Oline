@@ -37,7 +37,7 @@ public class ToolBar extends JToolBar {
 		menu.add(menuFile);
 		add(menu, gridMenu.insertComponent(0, 0, 1, 1));
 
-		JButton btnAddUser = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
+		JButton btnAddUser = new JButton(new ImageIcon(getClass().getResource("/img/adduser.png")));
 		btnAddUser.setToolTipText("Add User");
 		btnAddUser.setActionCommand(ActionsAdmin.SHOW_ADD_USER_DIALOG.toString());
 		btnAddUser.setBackground(Color.decode("#FFFFFF"));
