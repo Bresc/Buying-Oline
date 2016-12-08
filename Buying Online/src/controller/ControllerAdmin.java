@@ -32,7 +32,7 @@ import view.admin.MainWindowAdmin;
 public class ControllerAdmin implements ActionListener, KeyListener, ChangeListener {
 
 	private MainWindowAdmin mainWindowAdmin;
-	private ManagerAsingProduct managerAsingProduct;
+	private ManagerAsingProduct managerAsingProduct;        
 	private ManagerProduct managerProduct;
 	private ManagerShop managerShop;
 	private ManagerUser managerUser;
@@ -41,15 +41,16 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	private AddShopDialog addShopDialog;
 	private GeneralController generalController;
 	private int actualPage;
+	
+	public static final int PAGE_SIZE = 10;
 
-	public ControllerAdmin(GeneralController generalController) {
+	public ControllerAdmin(GeneralController generalController, ManagerShop managerShop, ManagerUser managerUser, ManagerAsingProduct managerAsingProduct) {
 		this.generalController = generalController;
+		this.managerShop = managerShop;
+		this.managerUser = managerUser;
 		mainWindowAdmin = new MainWindowAdmin(this);
-		managerUser = new ManagerUser();
-		managerShop = new ManagerShop();
 		managerProduct = new ManagerProduct();
-		managerAsingProduct = new ManagerAsingProduct();
-		
+		this.managerAsingProduct = managerAsingProduct;
 		addProductDialog = new AddProductDialog(mainWindowAdmin, this);
 		addUserDialog = new AddUserDialog(mainWindowAdmin, this);
 		addShopDialog = new AddShopDialog(mainWindowAdmin, this);
@@ -383,20 +384,16 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 
 	@SuppressWarnings("unchecked")
 	public void refreshList(int index) {
-		mainWindowAdmin.refreshPage(actualPage, managerAsingProduct
-				.getTotalPages(managerAsingProduct.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
+		mainWindowAdmin.refreshPage(actualPage,getTotalPages(returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex())));
 		switch (index) {
 		case 0:
-			mainWindowAdmin.refreshTableShop((ArrayList<Shop>) managerAsingProduct
-					.paginate(managerAsingProduct.returnListDependIndex(index), actualPage));
+			mainWindowAdmin.refreshTableShop((ArrayList<Shop>)paginate(returnListDependIndex(index), actualPage));
 			break;
 		case 1:
-			mainWindowAdmin.refreshTableUser((ArrayList<User>) managerAsingProduct
-					.paginate(managerAsingProduct.returnListDependIndex(index), actualPage));
+			mainWindowAdmin.refreshTableUser((ArrayList<User>)paginate(returnListDependIndex(index), actualPage));
 			break;
 		case 2:
-			mainWindowAdmin.refreshTableProducts((ArrayList<Product>) managerAsingProduct
-					.paginate(managerAsingProduct.returnListDependIndex(index), actualPage));
+			mainWindowAdmin.refreshTableProducts((ArrayList<Product>)paginate(returnListDependIndex(index), actualPage));
 			break;
 
 		default:
@@ -405,8 +402,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	}
 
 	private void changeToNextPage() {
-		if (actualPage < managerAsingProduct
-				.getTotalPages(managerAsingProduct.returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
+		if (actualPage < getTotalPages(returnListDependIndex(mainWindowAdmin.getTabbedPaneIndex()))) {
 			actualPage++;
 			refreshList(mainWindowAdmin.getTabbedPaneIndex());
 		}
@@ -434,4 +430,30 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		addUserDialog.setVisible(true);
 		generalController.LoginVisible();
 	}
+	
+
+	/// Paginacion
+
+	public ArrayList<?> paginate(ArrayList<?> list, int page) {
+		int firstElement = (page - 1) * PAGE_SIZE;
+		int lastElement = (page * PAGE_SIZE);
+		lastElement = lastElement > list.size() ? list.size() : lastElement;
+		return new ArrayList<>(list.subList(firstElement, lastElement));
+	}
+
+	public int getTotalPages(ArrayList<?> list) {
+		int totalPages = list.size() / PAGE_SIZE;
+		return (totalPages % PAGE_SIZE) > 0 ? ++totalPages : totalPages;
+	}
+
+	public ArrayList<?> returnListDependIndex(int index) {
+		if (index == 0) {
+			return managerShop.getListShop();
+		} else if (index == 1) {
+			return managerUser.getUsersList();
+		} else {
+			return managerProduct.getListProducts();
+		}
+	}
+
 }

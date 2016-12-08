@@ -11,15 +11,11 @@ public class ManagerAsingProduct {
 
 	public static final int PAGE_SIZE = 10;
 
-	private ManagerShop managerShop;
-	private ManagerUser managerUser;
-	private ManagerProduct managerProduct;
+	
 	private ArrayList<AssignmentProductShop> assignmentsProductsShopList;
 
 	public ManagerAsingProduct() {
-		managerShop = new ManagerShop();
-		managerProduct = new ManagerProduct();
-		managerUser = new ManagerUser();
+
 		assignmentsProductsShopList = new ArrayList<>();
 	}
 
@@ -75,29 +71,4 @@ public class ManagerAsingProduct {
 	public ArrayList<AssignmentProductShop> getAssignmentsProductsShopList() {
 		return assignmentsProductsShopList;
 	}
-
-	/// Paginacion
-
-	public ArrayList<?> paginate(ArrayList<?> list, int page) {
-		int firstElement = (page - 1) * PAGE_SIZE;
-		int lastElement = (page * PAGE_SIZE);
-		lastElement = lastElement > list.size() ? list.size() : lastElement;
-		return new ArrayList<>(list.subList(firstElement, lastElement));
-	}
-
-	public int getTotalPages(ArrayList<?> list) {
-		int totalPages = list.size() / PAGE_SIZE;
-		return (totalPages % PAGE_SIZE) > 0 ? ++totalPages : totalPages;
-	}
-
-	public ArrayList<?> returnListDependIndex(int index) {
-		if (index == 0) {
-			return managerShop.getListShop();
-		} else if (index == 1) {
-			return managerUser.getUsersList();
-		} else {
-			return managerProduct.getListProducts();
-		}
-	}
-
 }

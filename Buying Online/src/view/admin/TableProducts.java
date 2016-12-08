@@ -85,7 +85,6 @@ public class TableProducts extends JPanel {
 
 	public void refreshTable(ArrayList<Product> listProducts) {
 		modelProducts.setRowCount(0);
-		;
 		for (Product product : listProducts) {
 			addProductToTable(product);
 		}

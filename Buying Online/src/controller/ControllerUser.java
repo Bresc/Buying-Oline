@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 
 import models.dao.ManagerAsingProduct;
 import models.dao.ManagerShop;
+import models.dao.ManagerUser;
 import models.entities.AssignmentProductShop;
 import models.entities.Shop;
 import models.exceptions.ErrorShopNotFound;
@@ -25,15 +26,21 @@ import view.user.MainWindowUser;
 public class ControllerUser implements ActionListener, KeyListener, ChangeListener {
 
 	private MainWindowUser mainWindowUser;
-	private ManagerShop managerShop;
-	private ManagerAsingProduct adminManagerAssingProduct;
+	private ManagerAsingProduct managerAsingProduct;
 	private GeneralController generalController;
+	private ManagerShop managerShop;
+	private ManagerUser managerUser;
 
-	public ControllerUser(GeneralController generalController) {
+	public ControllerUser(GeneralController generalController, ManagerShop managerShop, ManagerAsingProduct managerAsingProduct) {
 		this.generalController = generalController;
+		this.managerShop = managerShop;
+		managerUser = new ManagerUser();
 		mainWindowUser = new MainWindowUser(this);
-		managerShop = new ManagerShop();
-		adminManagerAssingProduct = new ManagerAsingProduct();
+		this.managerAsingProduct = managerAsingProduct;
+	}
+	
+	public ManagerUser getManagerUser(){
+		return managerUser;
 	}
 
 	@Override
@@ -74,7 +81,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 	private void showProductsByShop(String id) {
 		try {
 			mainWindowUser.changeToProductsFromShopPanel(
-					adminManagerAssingProduct.getProductsListFromShop(managerShop.searhShop(Integer.parseInt(id))));
+					managerAsingProduct.getProductsListFromShop(managerShop.searhShop(Integer.parseInt(id))));
 		} catch (NumberFormatException | ErrorShopNotFound e) {
 			//TODO mostrar exepcion
 		}
@@ -84,7 +91,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 		JButton bntSource = (JButton) (e.getSource());
 		try {
 			Shop selectedShop = managerShop.searhShop(Integer.parseInt(bntSource.getName()));
-			mainWindowUser.changeToProductsFromShopPanel(adminManagerAssingProduct.getProductsListFromShop(selectedShop));
+			mainWindowUser.changeToProductsFromShopPanel(managerAsingProduct.getProductsListFromShop(selectedShop));
 		} catch (NumberFormatException | ErrorShopNotFound e1) {
 			e1.printStackTrace();
 		}
@@ -95,9 +102,9 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 	}
 	
 	private void refreshDataAssigmentProductShop(ArrayList<AssignmentProductShop> readAssignmentProductShops) {
-		adminManagerAssingProduct.addAllAssignmentProductShop(readAssignmentProductShops);
+		managerAsingProduct.addAllAssignmentProductShop(readAssignmentProductShops);
 	}
-	
+	 
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub

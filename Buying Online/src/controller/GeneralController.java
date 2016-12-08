@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import models.dao.GeneralManager;
+import models.dao.ManagerAsingProduct;
 import models.exceptions.ErrorUserNotFound;
 import view.login.DialogChooseWhoYouAre;
 import view.login.DialogLogin;
@@ -17,19 +18,20 @@ public class GeneralController implements ActionListener {
 
 	private DialogLogin loginMainWindow;
 	private DialogChooseWhoYouAre chooseWhoYouAre;
-	private GeneralManager general;
 	private ControllerUser controllerUser;
 	private ControllerShop controllerShop;
 	private ControllerAdmin controllerAdmin;
+	private ManagerAsingProduct managerAsingProduct;   
 	public static final String USER = "user";
 	public static final String SHOP = "shop";
 	public static final String ADMIN = "admin";
 
 	public GeneralController() {
 		loginMainWindow = new DialogLogin(this);
-		controllerAdmin = new ControllerAdmin(this);
-		controllerUser = new ControllerUser(this);
 		controllerShop = new ControllerShop(this);
+		managerAsingProduct = new ManagerAsingProduct();
+		controllerUser = new ControllerUser(this, controllerShop.getManagerShop(), managerAsingProduct);
+		controllerAdmin = new ControllerAdmin(this, controllerShop.getManagerShop(), controllerUser.getManagerUser(), managerAsingProduct);
 		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		readAllData();
 	}

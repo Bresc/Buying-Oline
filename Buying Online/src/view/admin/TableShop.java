@@ -84,7 +84,6 @@ public class TableShop extends JPanel {
 
 	public void refreshTable(ArrayList<Shop> shops) {
 		shopModel.setRowCount(0);
-		;
 		for (Shop shop : shops) {
 			addShopToTable(shop);
 		}

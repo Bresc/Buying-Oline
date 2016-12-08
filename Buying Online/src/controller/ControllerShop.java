@@ -47,6 +47,10 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 		mainWindowShop = new MainWindowShop(this);
 //		addShopDialog = new AddShopDialog(mainWindowShop, this);
 	}
+	
+	public ManagerShop getManagerShop(){
+		return managerShop;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg) {

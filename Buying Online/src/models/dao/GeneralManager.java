@@ -7,26 +7,28 @@ import models.exceptions.ErrorUserNotFound;
 
 public class GeneralManager {
 
-	private ManagerUser user;
-	private ManagerShop shop;
+	
 	public static final String USER = "user";
 	public static final String ADMIN = "admin";
 	public static final String SHOP = "shop";
+	
+	private ManagerShop managerShop;
+	private ManagerUser managerUser;
 
-	public GeneralManager() {
-		user = new ManagerUser();
-		shop = new ManagerShop();
+	public GeneralManager(ManagerUser managerUser, ManagerShop managerShop) {
+		this.managerShop = managerShop;
+		this.managerUser = managerUser;
 	}
 
 	public String confirmTheLoginUser(String nickName, String password) {
 		String valie = ADMIN;
-		for (User use : user.getUsersList()) {
+		for (User use : managerUser.getUsersList()) {
 			if (use.getName().equals(nickName) && use.getPassword().equals(password)) {
 				return valie = USER;
 			}
 		}
 
-		for (Shop sho : shop.getListShop()) {
+		for (Shop sho : managerShop.getListShop()) {
 			if (sho.getName().equalsIgnoreCase(nickName)) {
 				return valie = SHOP;
 			}
@@ -35,7 +37,7 @@ public class GeneralManager {
 	}
 
 	public User searchUser(String name, String password) throws ErrorUserNotFound {
-		for (User use : user.getUsersList()) {
+		for (User use : managerUser.getUsersList()) {
 			if (use.getName().equals(name) && use.getPassword().equals(password)) {
 				return use;
 			}
@@ -44,7 +46,7 @@ public class GeneralManager {
 	}
 
 	public Shop searchTheShop(String name) throws ErrorShopNotFound {
-		for (Shop sho : shop.getListShop()) {
+		for (Shop sho : managerShop.getListShop()) {
 			if (sho.getName().equalsIgnoreCase(name)) {
 				return sho;
 			}
