@@ -67,10 +67,12 @@ public class GeneralController implements ActionListener {
 	private void validateUserFromLogin() {
 		String userName = loginMainWindow.getUsername(), password = loginMainWindow.getPassword();
 		if (validateLoginUser(userName, password)) {
+			loginMainWindow.setVisible(false);
 			controllerUser.setVisible();
 		}else if (validateLoginShop(userName, password)) {
-			
+			loginMainWindow.setVisible(false);
 		}else {
+			loginMainWindow.setVisible(false);
 			readAllData();
 			controllerAdmin.setVisible();
 		}
