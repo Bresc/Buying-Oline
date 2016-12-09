@@ -69,27 +69,13 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	public void actionPerformed(ActionEvent e) {
 		switch (ActionsAdmin.valueOf(e.getActionCommand())) {
 		case ADD_USER:
-			try {
-				addUser();
-			} catch (TransformerException | ParserConfigurationException e6) {
-				e6.printStackTrace();
-			}
+			addUser();
 			break;
 		case ADD_PRODUCT:
-			try {
-				addProduct();
-			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException
-					| TransformerException e5) {
-				e5.printStackTrace();
-			}
+			addProduct();
 			break;
 		case ADD_SHOP:
-			try {
-				addShop();
-			} catch (TransformerException | ParserConfigurationException | SAXException | IOException e4) {
-				e4.printStackTrace();
-			}
-
+			addShop();
 			break;
 		case CANCEL_PRODUCT:
 			cancelProduct();
@@ -119,37 +105,19 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			changeToNextPage();
 			break;
 		case DELETE_PRODUCT:
-			try {
-				deleteProduct();
-			} catch (TransformerException | ParserConfigurationException e4) {
-				// TODO Auto-generated catch block
-				e4.printStackTrace();
-			}
+			deleteProduct();
 			break;
 		case DELETE_SHOP:
-			try {
-				deleteShop();
-			} catch (TransformerException | ParserConfigurationException e3) {
-				e3.printStackTrace();
-			}
+			deleteShop();
 			break;
 		case DELETE_USER:
-			try {
-				deleteUser();
-			} catch (TransformerException | ParserConfigurationException e2) {
-
-				e2.printStackTrace();
-			}
+			deleteUser();
 			break;
 		case SHOW_EDIT_PRODUCT:
 			showEditProduct();
 			break;
 		case EDIT_PRODUCT:
-			try {
-				editProduct();
-			} catch (TransformerException | ParserConfigurationException | SAXException | IOException e1) {
-				e1.printStackTrace();
-			}
+			editProduct();
 			break;
 		case EDIT_SHOP:
 			editShop();
@@ -222,7 +190,8 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			addShopDialog.changeActionToAddShop();
 			ReadXML.writeShop(managerShop.getListShop());
 			mainWindowAdmin.refreshTableShop(managerShop.getListShop());
-		} catch (ErrorShopNotFound | ParserConfigurationException | SAXException | IOException | TransformerException e) {
+		} catch (ErrorShopNotFound | ParserConfigurationException | SAXException | IOException
+				| TransformerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -241,7 +210,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		}
 	}
 
-	private void editProduct() throws TransformerException, ParserConfigurationException, SAXException, IOException {
+	private void editProduct() {
 		try {
 			managerProduct.editProduct(addProductDialog.extractProductFromWindow(),
 					managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
@@ -251,44 +220,45 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			addProductDialog.changeActionToProductAdd();
 			ReadXML.writeProduct(managerProduct.getListProducts());
 			mainWindowAdmin.refreshTableProducts(managerProduct.getListProducts());
-		} catch (NumberFormatException | ErrorOrderNotFound e) {
+		} catch (NumberFormatException | ErrorOrderNotFound | TransformerException | ParserConfigurationException
+				| SAXException | IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	// Metodos de borrar
-	private void deleteUser() throws TransformerException, ParserConfigurationException {
+	private void deleteUser() {
 		try {
 			managerUser.deleteUser(managerUser.searhUser(mainWindowAdmin.getIdToTableUser()));
 			actualPage = 1;
 			refreshList(1);
 			ReadXML.writeUser(managerUser.getUsersList());
 			mainWindowAdmin.refreshTableUser(managerUser.getUsersList());
-		} catch (ErrorUserNotFound e) {
+		} catch (ErrorUserNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void deleteShop() throws TransformerException, ParserConfigurationException {
+	private void deleteShop() {
 		try {
 			managerShop.delteShop(managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
 			actualPage = 1;
 			refreshList(0);
 			ReadXML.writeShop(managerShop.getListShop());
 			mainWindowAdmin.refreshTableShop(managerShop.getListShop());
-		} catch (ErrorShopNotFound e) {
+		} catch (ErrorShopNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void deleteProduct() throws TransformerException, ParserConfigurationException {
+	private void deleteProduct() {
 		try {
 			managerProduct.deleteProduct(managerProduct.searhProduct(mainWindowAdmin.getIdToTableProducts()));
 			actualPage = 1;
 			refreshList(2);
 			ReadXML.writeProduct(managerProduct.getListProducts());
 			mainWindowAdmin.refreshTableProducts(managerProduct.getListProducts());
-		} catch (ErrorOrderNotFound e) {
+		} catch (ErrorOrderNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
@@ -326,37 +296,49 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	}
 
 	// Metodos de agregar
-	private void addProduct() throws NumberFormatException, ParserConfigurationException, SAXException, IOException,
-			TransformerException {
-		managerProduct.addProduct(addProductDialog.extractProductFromWindow());
-		cancelProduct();
-		ReadXML.writeProduct(managerProduct.getListProducts());
-		mainWindowAdmin.showMessageDialog("Product Added Successfully");
-		actualPage = 1;
-		refreshList(2);
-		mainWindowAdmin.refreshTableProducts(managerProduct.getListProducts());
+	private void addProduct() {
+		try {
+			managerProduct.addProduct(addProductDialog.extractProductFromWindow());
+			cancelProduct();
+			ReadXML.writeProduct(managerProduct.getListProducts());
+			mainWindowAdmin.showMessageDialog("Product Added Successfully");
+			actualPage = 1;
+			refreshList(2);
+			mainWindowAdmin.refreshTableProducts(managerProduct.getListProducts());
+		} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException
+				| TransformerException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void addUser() throws TransformerException, ParserConfigurationException {
-		managerUser.addUser(addUserDialog.getUser());
-		addUserDialog.cleanForm();
-		addUserDialog.setVisible(false);
-		ReadXML.writeUser(managerUser.getUsersList());
-		mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
-		actualPage = 1;
-		refreshList(1);
-		mainWindowAdmin.refreshTableUser(managerUser.getUsersList());
+	private void addUser() {
+		try {
+			managerUser.addUser(addUserDialog.getUser());
+			addUserDialog.cleanForm();
+			addUserDialog.setVisible(false);
+			ReadXML.writeUser(managerUser.getUsersList());
+			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+			actualPage = 1;
+			refreshList(1);
+			mainWindowAdmin.refreshTableUser(managerUser.getUsersList());
+		} catch (TransformerException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private void addShop() throws TransformerException, ParserConfigurationException, SAXException, IOException {
-		managerShop.addShop(addShopDialog.getShop());
-		addShopDialog.cleanForm();
-		addShopDialog.setVisible(false);
-		ReadXML.writeShop(managerShop.getListShop());
-		mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
-		actualPage = 1;
-		refreshList(0);
-		mainWindowAdmin.refreshTableShop(managerShop.getListShop());
+	private void addShop() {
+		try {
+			managerShop.addShop(addShopDialog.getShop());
+			addShopDialog.cleanForm();
+			addShopDialog.setVisible(false);
+			ReadXML.writeShop(managerShop.getListShop());
+			mainWindowAdmin.showMessageDialog("Se ha añadido la tienda con exito");
+			actualPage = 1;
+			refreshList(0);
+			mainWindowAdmin.refreshTableShop(managerShop.getListShop());
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
