@@ -28,6 +28,7 @@ import controller.ControllerAdmin;
 import models.dao.ManagerProduct;
 import models.entities.Product;
 import view.admin.MainWindowAdmin;
+import view.login.ConstantsUILogin;
 
 public class AddProductFromShopViewDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
@@ -39,6 +40,7 @@ public class AddProductFromShopViewDialog extends JDialog {
 
 	public AddProductFromShopViewDialog(MainWindowAdmin mainWindowAdmin, ControllerAdmin controller) {
 		super(mainWindowAdmin, true);
+		setIconImage(new ImageIcon(getClass().getResource(ConstantsUILogin.IMG_ICON_LOGIN)).getImage());
 		setTitle("Student dialog");
 		setSize(400, 370);
 		setLocationRelativeTo(null);

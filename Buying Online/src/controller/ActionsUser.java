@@ -1,5 +1,6 @@
 package controller;
-/*
+
+/**
  * Este enumerado tiene las acciones que se usan la vista de usuario 
  */
 public enum ActionsUser {

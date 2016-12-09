@@ -58,6 +58,7 @@ public class AddShopDialog extends JDialog {
 
 		JButton btImage = new JButton("Add imagen");
 		btImage.addActionListener(controllerAdmin);
+		btImage.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btImage.setActionCommand(ActionsAdmin.ADD_IMAGE_TO_SHOP.toString());
 		btImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btImage, gridDialog.insertComponent(1, 4, 3, 0.01));
@@ -70,6 +71,7 @@ public class AddShopDialog extends JDialog {
 
 		btnAddShop = new JButton("Accept");
 		btnAddShop.addActionListener(controllerAdmin);
+		btnAddShop.setBackground(ConstantUIAdmin.BTN_COLOR);
 		btnAddShop.setActionCommand(ActionsAdmin.ADD_SHOP.toString());
 		btnAddShop.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnAddShop, gridDialog.insertComponent(3, 2, 7, 0.01));
