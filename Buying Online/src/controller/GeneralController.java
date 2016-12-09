@@ -1,5 +1,9 @@
 package controller;
 
+/*
+ * Este controllador  tiene las acciones de registrar le logear y tuliza las acciones de el enumerado de acciones generales 
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;

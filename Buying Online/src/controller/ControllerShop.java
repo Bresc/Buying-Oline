@@ -1,5 +1,8 @@
 package controller;
 
+/*
+ * Este  es el controlador de shop/ tienda  que ejecuta las acciones del enumerado de tienda con sus respectivos metodos  
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -42,10 +45,8 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	public ControllerShop(GeneralController generalController) {
 		this.generalController = generalController;
 		actualPage = 1;
-//		 dialogoLogin = new DialogLogIn();
 		managerShop = new ManagerShop();
 		mainWindowShop = new MainWindowShop(this);
-//		addShopDialog = new AddShopDialog(mainWindowShop, this);
 	}
 	
 	public ManagerShop getManagerShop(){
@@ -77,12 +78,7 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 		case ADD_IMAGE_TO_SHOP:
 			addShopDialog.openFileChooser();
 			break;
-		case ADD_SHOP:
-
-			break;
-		case SHOP_VIEW:
-
-			break;
+		
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
 			break;
