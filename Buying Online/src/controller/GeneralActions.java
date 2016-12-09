@@ -1,7 +1,7 @@
 package controller;
 
-/*
- * estas son las acciones  que utiliza el controllador general 
+/**
+ * Acciones  que utiliza el controlador general 
  */
 public enum GeneralActions {
 

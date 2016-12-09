@@ -1,7 +1,8 @@
 package controller;
 
-/*
- * Este controllador  tiene las acciones de registrar le logear y tuliza las acciones de el enumerado de acciones generales 
+/**
+ * Este es el controlador principal, se encarga de unir los 
+ * demas controladores, y valilda que tipo de usuario es Ej: Admin, User, Shop
  */
 
 import java.awt.event.ActionEvent;
@@ -12,7 +13,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import models.dao.GeneralManager;
 import models.dao.ManagerAsingProduct;
 import models.exceptions.ErrorUserNotFound;
 import view.login.DialogChooseWhoYouAre;
@@ -40,14 +40,6 @@ public class GeneralController implements ActionListener {
 		readAllData();
 	}
 
-	private void readAllData() {
-		try {
-			controllerAdmin.refrehAllData();
-		} catch (ParserConfigurationException | SAXException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (GeneralActions.valueOf(e.getActionCommand())) {
@@ -65,8 +57,17 @@ public class GeneralController implements ActionListener {
 			chooseWhoYouAre.setVisible(false);
 			controllerAdmin.showAddUserDialog();
 			break;
-		default:
-			break;
+		}
+	}
+	
+	/**
+	 * Metodo que actualiza los datos en cada vista al ingresar como usuario, tienda o Administrador
+	 */
+	private void readAllData() {
+		try {
+			controllerAdmin.refrehAllData();
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 
