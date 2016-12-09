@@ -26,13 +26,13 @@ import models.exceptions.ErrorShopNotFound;
 import persistence.ReadXML;
 import view.admin.AddShopDialog;
 import view.admin.MainWindowAdmin;
-import view.login.DialogLogin;
+import view.login.LoginMainWindow;
 import view.shop.AddProductFromShopViewDialog;
 import view.shop.MainWindowShop;
 
 public class ControllerShop implements ActionListener, KeyListener, ChangeListener {
 
-	private DialogLogin dialogoLogin;
+	private LoginMainWindow dialogoLogin;
 	private ManagerShop managerShop;
 	private MainWindowAdmin mainWindowAdmin;
 	private MainWindowShop mainWindowShop;

@@ -16,26 +16,27 @@ import org.xml.sax.SAXException;
 import models.dao.ManagerAsingProduct;
 import models.exceptions.ErrorUserNotFound;
 import view.login.DialogChooseWhoYouAre;
-import view.login.DialogLogin;
+import view.login.LoginMainWindow;
 
 public class GeneralController implements ActionListener {
 
-	private DialogLogin loginMainWindow;
+	private LoginMainWindow loginMainWindow;
 	private DialogChooseWhoYouAre chooseWhoYouAre;
 	private ControllerUser controllerUser;
 	private ControllerShop controllerShop;
 	private ControllerAdmin controllerAdmin;
-	private ManagerAsingProduct managerAsingProduct;   
+	private ManagerAsingProduct managerAsingProduct;
 	public static final String USER = "user";
 	public static final String SHOP = "shop";
 	public static final String ADMIN = "admin";
 
 	public GeneralController() {
-		loginMainWindow = new DialogLogin(this);
+		loginMainWindow = new LoginMainWindow(this);
 		controllerShop = new ControllerShop(this);
 		managerAsingProduct = new ManagerAsingProduct();
 		controllerUser = new ControllerUser(this, controllerShop.getManagerShop(), managerAsingProduct);
-		controllerAdmin = new ControllerAdmin(this, controllerShop.getManagerShop(), controllerUser.getManagerUser(), managerAsingProduct);
+		controllerAdmin = new ControllerAdmin(this, controllerShop.getManagerShop(), controllerUser.getManagerUser(),
+				managerAsingProduct, loginMainWindow);
 		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		readAllData();
 	}
@@ -54,14 +55,20 @@ public class GeneralController implements ActionListener {
 			controllerAdmin.showAddShopDialog();
 			break;
 		case USER_LOG_IN:
-			chooseWhoYouAre.setVisible(false);
-			controllerAdmin.showAddUserDialog();
+			managerLogOut();
 			break;
 		}
 	}
-	
+
+	private void managerLogOut() {
+		chooseWhoYouAre.setVisible(false);
+		controllerAdmin.showAddUserDialog();
+		loginMainWindow.clearLoginDialog();
+	}
+
 	/**
-	 * Metodo que actualiza los datos en cada vista al ingresar como usuario, tienda o Administrador
+	 * Metodo que actualiza los datos en cada vista al ingresar como usuario,
+	 * tienda o Administrador
 	 */
 	private void readAllData() {
 		try {
@@ -76,9 +83,9 @@ public class GeneralController implements ActionListener {
 		if (validateLoginUser(userName, password)) {
 			loginMainWindow.setVisible(false);
 			controllerUser.setVisible();
-		}else if (validateLoginShop(userName, password)) {
+		} else if (validateLoginShop(userName, password)) {
 			loginMainWindow.setVisible(false);
-		}else {
+		} else {
 			loginMainWindow.setVisible(false);
 			readAllData();
 			controllerAdmin.setVisible();
@@ -90,17 +97,17 @@ public class GeneralController implements ActionListener {
 			controllerAdmin.validateUser(name, password);
 			return true;
 		} catch (ErrorUserNotFound e) {
-//			TODO: mostrar error
+			// TODO: mostrar error
 			return false;
 		}
 	}
-	
+
 	private boolean validateLoginShop(String name, String password) {
 		try {
 			controllerAdmin.validateUser(name, password);
 			return true;
 		} catch (ErrorUserNotFound e) {
-//			TODO: mostrar error
+			// TODO: mostrar error
 			return false;
 		}
 	}

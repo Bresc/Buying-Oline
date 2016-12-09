@@ -83,5 +83,6 @@ public class PanelContainer extends JPanel {
 	public void clear() {
 		txtUserName.setText("");
 		psPassword.setText("");
+		revalidate();
 	}
 }

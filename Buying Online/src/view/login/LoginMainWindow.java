@@ -7,14 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import controller.GeneralController;
 
-public class DialogLogin extends JFrame {
+public class LoginMainWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	private JLabel labelBuyingOnline;
 	private PanelContainer panelConteiner;
 
-	public DialogLogin(GeneralController generalController) {
+	public LoginMainWindow(GeneralController generalController) {
 		setTitle(ConstantsUILogin.TITLE_DIALOG_LOGIN);
 		setIconImage(new ImageIcon(getClass().getResource(ConstantsUILogin.IMG_ICON_LOGIN)).getImage());
 		setSize(320, 350);
