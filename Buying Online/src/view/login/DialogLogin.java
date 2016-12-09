@@ -17,7 +17,7 @@ public class DialogLogin extends JFrame {
 	public DialogLogin(GeneralController generalController) {
 		setTitle("Log In");
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
-		setSize(350, 200);
+		setSize(320, 350);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -33,7 +33,6 @@ public class DialogLogin extends JFrame {
 
 		panelConteiner = new PanelContainer(generalController);
 		add(panelConteiner);
-
 		setVisible(true);
 	}
 

@@ -2,8 +2,10 @@ package view.login;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +26,14 @@ public class PanelContainer extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
 
+		JButton btnImgCharacteristic = new JButton();
+		btnImgCharacteristic.setBorder(null);
+		btnImgCharacteristic.setAlignmentX(CENTER_ALIGNMENT);
+		Image img = new ImageIcon(ConstantsUILogin.URL_IMG_WELCOME).getImage().getScaledInstance(200, 150,
+				Image.SCALE_AREA_AVERAGING);
+		btnImgCharacteristic.setIcon(new ImageIcon(img));
+		add(btnImgCharacteristic);
+
 		labelNickName = new JLabel(ConstantsUILogin.NICK_NAME);
 		labelNickName.setAlignmentX(CENTER_ALIGNMENT);
 		add(labelNickName);
@@ -37,11 +47,11 @@ public class PanelContainer extends JPanel {
 
 		psPassword = new JPasswordField();
 		add(psPassword);
-		
+
 		JPanel pnButtons = new JPanel();
 		pnButtons.setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
 		pnButtons.setLayout(new FlowLayout());
-		
+
 		JButton btnLogin = new JButton(ConstantsUILogin.LOGIN);
 		btnLogin.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
 		btnLogin.setForeground(Color.WHITE);
@@ -58,10 +68,10 @@ public class PanelContainer extends JPanel {
 		add(pnButtons);
 	}
 
-	public String getUsername(){
+	public String getUsername() {
 		return txtUserName.getText();
 	}
-	
+
 	public String getName() {
 		return txtUserName.getText();
 	}

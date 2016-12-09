@@ -21,6 +21,7 @@ public class MainWindowUser extends JFrame {
 	public MainWindowUser(ControllerUser controllerUser) {
 		setSize(380, 600);
 		setLayout(new BorderLayout());
+		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setTitle(ConstanstUIUser.TITLE_MAIN_WINDOW_USER);
 		getContentPane().setBackground(ConstanstUIUser.BACKGROUND_COLOR_MAIN_WINDOW_USER);

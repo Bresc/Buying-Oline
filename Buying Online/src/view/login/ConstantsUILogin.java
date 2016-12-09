@@ -13,4 +13,5 @@ public class ConstantsUILogin {
 	public static final String SIGN_UP = "Sign Up";
 	public static final String INITIAL_MESSAGE = "Food to domicile Online";
 	public static final Font FONT_TITLE = new Font("Arial", 1, 15);
+	public static final String URL_IMG_WELCOME = "src/img/orderProcess.jpg";
 }
