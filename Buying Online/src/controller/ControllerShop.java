@@ -48,8 +48,8 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 		managerShop = new ManagerShop();
 		mainWindowShop = new MainWindowShop(this);
 	}
-	
-	public ManagerShop getManagerShop(){
+
+	public ManagerShop getManagerShop() {
 		return managerShop;
 	}
 
@@ -57,20 +57,16 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	public void actionPerformed(ActionEvent arg) {
 		switch (ActionsShop.valueOf(arg.getActionCommand())) {
 		case ADD_PRODUCT_TO_SHOP:
-			try {
-				addProductToShop();
-			} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e1) {
-				e1.printStackTrace();
-			}
+			addProductToShop();
 			break;
 		case CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW:
 			chargeImageProductFromShopView();
 			break;
 		case EDIT_PRODUCT_TO_SHO:
-
+			// TODO:
 			break;
 		case LOG_OUT:
-
+			// TODO:
 			break;
 		case SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG:
 			showAddProductFromShopViewDialog();
@@ -78,16 +74,20 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 		case ADD_IMAGE_TO_SHOP:
 			addShopDialog.openFileChooser();
 			break;
-		
 		case SHOW_ADD_SHOP_DIALOG:
 			addShopDialog.setVisible(true);
 			break;
 		case EDIT_SHOP:
-			try {
-				editShop();
-			} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-				e.printStackTrace();
-			}
+			editShop();
+			break;
+		case ADD_SHOP:
+			// TODO:
+			break;
+		case CONFIRM:
+			break;
+		case OPEN_DIALOG_CHOOSE:
+			break;
+		case SHOP_VIEW:
 			break;
 		}
 	}
@@ -96,15 +96,15 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 		dialogoLogin.setVisible(true);
 	}
 
-	private void editShop() throws ParserConfigurationException, SAXException, IOException, TransformerException {
+	private void editShop() {
 		try {
 			managerShop.editShop(addShopDialog.getShop(), managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
 			actualPage = 1;
-			// refreshList(0);
 			addShopDialog.setVisible(false);
 			addShopDialog.changeActionToAddShop();
 			ReadXML.writeShop(managerShop.getListShop());
-		} catch (ErrorShopNotFound e) {
+		} catch (ParserConfigurationException | SAXException | IOException | ErrorShopNotFound
+				| TransformerException e) {
 			e.printStackTrace();
 		}
 	}
@@ -121,13 +121,17 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 		addProductFromShopViewDialog.addImage(file.getAbsolutePath());
 	}
 
-	private void addProductToShop()
-			throws NumberFormatException, ParserConfigurationException, SAXException, IOException {
-		Product createdProduct = addProductFromShopViewDialog.getCreatedProduct();
-		managerAsingProduct.addAssignmentProductShop(
-				ManagerAsingProduct.createAssignmentProductShop(createdProduct, getActualShop()));
-		mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(getActualShop()));
-		addProductFromShopViewDialog.setVisible(false);
+	private void addProductToShop() {
+		Product createdProduct;
+		try {
+			createdProduct = addProductFromShopViewDialog.getCreatedProduct();
+			managerAsingProduct.addAssignmentProductShop(
+					ManagerAsingProduct.createAssignmentProductShop(createdProduct, getActualShop()));
+			mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(getActualShop()));
+			addProductFromShopViewDialog.setVisible(false);
+		} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private Shop getActualShop() {
@@ -147,7 +151,6 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	@Override
 	public void stateChanged(ChangeEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
