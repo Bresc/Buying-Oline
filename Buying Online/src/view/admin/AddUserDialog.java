@@ -19,6 +19,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import controller.ActionsAdmin;
 import controller.ControllerAdmin;
@@ -120,7 +123,7 @@ public class AddUserDialog extends JDialog {
 		return imageLoaded;
 	}
 
-	public User getUser() {
+	public User getUser() throws ParserConfigurationException, SAXException, IOException {
 		return ManagerUser.createUser(txName.getText(), txAddress.getText(), String.valueOf(txPassword.getPassword()),
 				String.valueOf(fcLoadImage.getSelectedFile()));
 	}

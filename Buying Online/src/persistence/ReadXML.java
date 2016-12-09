@@ -256,7 +256,8 @@ public class ReadXML {
 	}
 
 	public static User getUser(Element user) {
-		return new User((user.getElementsByTagName(TAG_NAME_NAME).item(0)).getTextContent(),
+		return new User(Integer.parseInt((user.getElementsByTagName(TAG_NAME_ID).item(0)).getTextContent()),
+				(user.getElementsByTagName(TAG_NAME_NAME).item(0)).getTextContent(),
 				(user.getElementsByTagName(TAG_NAME_ADDRESS).item(0)).getTextContent(),
 				(user.getElementsByTagName(TAG_NAME_PASSWORD).item(0)).getTextContent(),
 				(user.getElementsByTagName(TAG_NAME_SRC_IMG).item(0)).getTextContent());

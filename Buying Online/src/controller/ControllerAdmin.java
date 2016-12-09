@@ -205,7 +205,7 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 			addUserDialog.changeActionToAddUser();
 			ReadXML.writeUser(managerUser.getUsersList());
 			mainWindowAdmin.refreshTableUser(managerUser.getUsersList());
-		} catch (NumberFormatException | ErrorUserNotFound | TransformerException | ParserConfigurationException e) {
+		} catch (IOException|SAXException|NumberFormatException | ErrorUserNotFound | TransformerException | ParserConfigurationException e) {
 			e.printStackTrace();
 		}
 	}
@@ -312,18 +312,19 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	}
 
 	private void addUser() {
-		try {
-			managerUser.addUser(addUserDialog.getUser());
-			addUserDialog.cleanForm();
-			addUserDialog.setVisible(false);
-			ReadXML.writeUser(managerUser.getUsersList());
-			mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
-			actualPage = 1;
-			refreshList(1);
-			mainWindowAdmin.refreshTableUser(managerUser.getUsersList());
-		} catch (TransformerException | ParserConfigurationException e) {
-			e.printStackTrace();
-		}
+			try {
+				managerUser.addUser(addUserDialog.getUser());
+				addUserDialog.cleanForm();
+				addUserDialog.setVisible(false);
+				ReadXML.writeUser(managerUser.getUsersList());
+				mainWindowAdmin.showMessageDialog("Se ha añadido el usuario con exito");
+				actualPage = 1;
+				refreshList(1);
+				mainWindowAdmin.refreshTableUser(managerUser.getUsersList());
+			} catch (TransformerException |ParserConfigurationException | SAXException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	private void addShop() {

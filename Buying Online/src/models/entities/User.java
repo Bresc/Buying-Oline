@@ -6,14 +6,13 @@ public class User {
 	private String address;
 	private String password;
 	private String sourceImg;
-	public static int ID_BASE;
 
-	public User(String name, String address, String password, String sourceImg) {
+	public User(int id, String name, String address, String password, String sourceImg) {
 		this.name = name;
 		this.address = address;
 		this.password = password;
 		this.sourceImg = sourceImg;
-		this.id = ID_BASE++;
+		this.id = id;
 	}
 
 	public int getId() {
@@ -36,10 +35,6 @@ public class User {
 		return sourceImg;
 	}
 
-	public static int getID_BASE() {
-		return ID_BASE;
-	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -58,10 +53,6 @@ public class User {
 
 	public void setSourceImg(String sourceImg) {
 		this.sourceImg = sourceImg;
-	}
-
-	public static void setID_BASE(int iD_BASE) {
-		ID_BASE = iD_BASE;
 	}
 
 	@Override

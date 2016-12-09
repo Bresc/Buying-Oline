@@ -1,8 +1,15 @@
 package models.dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import models.entities.User;
 import models.exceptions.ErrorUserNotFound;
+import persistence.ReadXML;
 
 public class ManagerUser {
 
@@ -12,8 +19,8 @@ public class ManagerUser {
 		usersList = new ArrayList<>();
 	}
 
-	public static User createUser(String name, String address, String password, String sourceImg) {
-		return new User(name, address, password, sourceImg);
+	public static User createUser(String name, String address, String password, String sourceImg) throws ParserConfigurationException, SAXException, IOException {
+		return new User(ReadXML.getAcutalID("users", "list.user") + 1, name, address, password, sourceImg);
 	}
 
 	public void addUser(User user) {
