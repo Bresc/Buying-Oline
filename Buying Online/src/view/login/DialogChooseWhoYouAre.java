@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.GeneralActions;
@@ -22,7 +23,7 @@ public class DialogChooseWhoYouAre extends JDialog {
 
 	public DialogChooseWhoYouAre(GeneralController generalController) {
 		setTitle(ConstantsUILogin.TITLE_DIALOG_LOGIN);
-		setSize(358, 130);
+		setSize(358, 180);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon(getClass().getResource(ConstantsUILogin.IMG_ICON_LOGIN)).getImage());
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -33,17 +34,21 @@ public class DialogChooseWhoYouAre extends JDialog {
 			}
 		});
 		setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
+		JLabel lbDescription = new JLabel("Select if you are a user or shop");
+		lbDescription.setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
+		lbDescription.setAlignmentX(CENTER_ALIGNMENT);
+		add(lbDescription);
 
 		JPanel pnButtons = new JPanel();
 		pnButtons.setLayout(new FlowLayout());
-		buttonUser = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png"))
+		buttonUser = new JButton("User ",new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
 		buttonUser.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
 		buttonUser.addActionListener(generalController);
 		buttonUser.setActionCommand(GeneralActions.USER_LOG_IN.toString());
 		pnButtons.add(buttonUser);
 
-		buttonShop = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496235_shop.png"))
+		buttonShop = new JButton("Shop ", new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496235_shop.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
 		buttonShop.addActionListener(generalController);
 		buttonShop.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
