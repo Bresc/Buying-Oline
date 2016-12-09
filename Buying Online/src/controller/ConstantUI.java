@@ -1,8 +1,8 @@
 package controller;
-/*
- * Aqui encontramos las constantes para no dejar datos quemados o palabras en ""
- */
 
+/**
+ * Constantes de los controladores
+ */
 public class ConstantUI {
 
 	public static final String DEFAULT_PRODUCT_IMAGE = "";

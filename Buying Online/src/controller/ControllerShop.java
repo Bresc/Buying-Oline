@@ -1,7 +1,7 @@
 package controller;
 
-/*
- * Este  es el controlador de shop/ tienda  que ejecuta las acciones del enumerado de tienda con sus respectivos metodos  
+/**
+ * Controlador de tienda, ejecuta opciones relacionadas con producto y con tienda
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

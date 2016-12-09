@@ -1,7 +1,7 @@
 package controller;
 
-/*
- * Este controlador implementa las acciones de la vista del usuario con susu respectivos metodos 
+/**
+ * Este controlador implementa las acciones de la vista  del usuario y metodos de actualizacion de datos
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,10 +1,8 @@
 package controller;
-/**
- * 
- * Este Enumerado tiene la acciones que se usan en la vista del administrador 
- *
- */
 
+/**
+ * Este Enumerado tiene la acciones que se usan en la vista del administrador 
+ */
 public enum ActionsAdmin {
 	ADD_USER, ADD_PRODUCT,ADD_IMAGE_TO_SHOP,
 	SHOW_ADD_SHOP_DIALOG, SHOW_ADD_USER_DIALOG, ADD_IMAGE_TO_USER,

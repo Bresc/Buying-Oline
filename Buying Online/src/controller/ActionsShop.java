@@ -1,5 +1,5 @@
 package controller;
-/*
+/**
  * Este enunerado tiene las accion es que se usan en la vista de tienda o shop 
  */
 public enum ActionsShop {

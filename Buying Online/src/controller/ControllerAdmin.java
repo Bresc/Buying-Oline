@@ -1,7 +1,7 @@
 package controller;
 
-/*
- * El proyecto esta dividido en 4 controladores este controlador maneja las acciones de la vista del administrador y las ejecuta 
+/**
+ * Controlador maneja las acciones de la vista del administrador incluyendo CRUD respectivas
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
