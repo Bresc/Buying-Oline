@@ -107,7 +107,7 @@ public class AddShopDialog extends JDialog {
 		try {
 			image = ImageIO.read(file);
 		} catch (IOException e) {
-			e.printStackTrace();
+			minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));
 		}
 		imageLoaded = new ImageIcon(image);
 		minImage.setIcon(reSize(imageLoaded));
