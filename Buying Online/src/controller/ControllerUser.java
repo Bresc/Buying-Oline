@@ -17,13 +17,23 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import models.dao.GeneralManager;
 import models.dao.ManagerAsingProduct;
+import models.dao.ManagerOrder;
+import models.dao.ManagerOrderProduct;
+import models.dao.ManagerProduct;
 import models.dao.ManagerShop;
 import models.dao.ManagerUser;
 import models.entities.AssignmentProductShop;
+import models.entities.Order;
+import models.entities.OrderProduct;
+import models.entities.Product;
 import models.entities.Shop;
+import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
+import models.exceptions.OrderProductNotFound;
 import persistence.ReadXML;
+import view.user.ConstanstUIUser;
 import view.user.MainWindowUser;
 
 public class ControllerUser implements ActionListener, KeyListener, ChangeListener {
@@ -33,15 +43,21 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 	private GeneralController generalController;
 	private ManagerShop managerShop;
 	private ManagerUser managerUser;
+	private ManagerOrder managerOrder;
+	private ManagerOrderProduct managerOrderProduct;
+	private ManagerProduct managerProduct;
 
 	public ControllerUser(GeneralController generalController, ManagerShop managerShop, ManagerAsingProduct managerAsingProduct) {
 		this.generalController = generalController;
 		this.managerShop = managerShop;
 		managerUser = new ManagerUser();
+		managerOrder = new ManagerOrder();
+		managerProduct = new ManagerProduct();
 		mainWindowUser = new MainWindowUser(this);
+		managerOrderProduct = new ManagerOrderProduct();
 		this.managerAsingProduct = managerAsingProduct;
 	}
-	
+
 	public ManagerUser getManagerUser(){
 		return managerUser;
 	}
@@ -58,9 +74,19 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 		case SHOW_PRODUCTS_BY_SHOP:
 			showProductsByShop(((JButton) arg2.getSource()).getName());
 			break;
+		case ADD_PRODUCT_TO_CAR:
+			try {
+				addProductToCar(Integer.parseInt(((JButton)arg2.getSource()).getName()));
+			} catch (OrderProductNotFound e) {
+				e.printStackTrace();
+			}
+			mainWindowUser.showMessageDialog("Product Added To Car Successfully");
+			break;
+		default:
+			break;
 		}
 	}
-	
+
 	public void setVisible() {
 		refreshShopData();
 		mainWindowUser.refreshShopList(managerShop.getListShop(), this);
@@ -75,7 +101,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			// TODO poner Exepciones
 		}
 	}
-	
+
 	private void logOut() {
 		mainWindowUser.setVisible(false);
 		generalController.LoginVisible();
@@ -103,11 +129,29 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 	private void refreshShopData(ArrayList<Shop> shops){
 		managerShop.addAllShop(shops);
 	}
-	
+
 	private void refreshDataAssigmentProductShop(ArrayList<AssignmentProductShop> readAssignmentProductShops) {
 		managerAsingProduct.addAllAssignmentProductShop(readAssignmentProductShops);
 	}
-	 
+
+	/**
+	 * 
+	 * busca el producto por id lo agraga a la lista del carro
+	 * 2@author DAYAN
+	 * @throws OrderProductNotFound 
+	 * el 3 es de prueba dado que no hay aun casilla de especificacion de cuantos productos se desean de uno
+	 */
+	private void addProductToCar(int id) throws OrderProductNotFound{
+		try {			
+			Product selectedProduct = managerProduct.searhProduct(id);
+			managerOrderProduct.addOrderProduct(new OrderProduct(selectedProduct, 3));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (ErrorOrderNotFound e) {
+			throw new OrderProductNotFound();
+		}
+	}
+
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub

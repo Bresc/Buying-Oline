@@ -3,6 +3,7 @@ package view.user;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import controller.ControllerUser;
@@ -55,5 +56,9 @@ public class MainWindowUser extends JFrame {
 
 	public void setVi() {
 		setVisible(true);
+	}
+	
+	public void showMessageDialog(String message) {
+		JOptionPane.showMessageDialog(this, message);
 	}
 }

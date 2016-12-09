@@ -67,4 +67,6 @@ public class ManagerUser {
 	public ArrayList<User> getUsersList() {
 		return usersList;
 	}
+
+	
 }

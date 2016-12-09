@@ -84,10 +84,13 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 			// TODO:
 			break;
 		case CONFIRM:
+			
 			break;
 		case OPEN_DIALOG_CHOOSE:
+			
 			break;
 		case SHOP_VIEW:
+			
 			break;
 		}
 	}
