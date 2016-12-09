@@ -1,6 +1,5 @@
 package view.login;
 
-import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -20,15 +19,14 @@ public class DialogLogin extends JFrame {
 		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
 		setSize(350, 200);
 		setLocationRelativeTo(null);
-		getContentPane().setBackground(Color.decode("#4383BD"));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
 		JPanel panelTitle = new JPanel();
-		panelTitle.setBackground(Color.decode("#4383BD"));
-		labelBuyingOnline = new JLabel("Buying Online");
-		labelBuyingOnline.setForeground(Color.WHITE);
+		panelTitle.setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
+		labelBuyingOnline = new JLabel(ConstantsUILogin.INITIAL_MESSAGE);
+		labelBuyingOnline.setFont(ConstantsUILogin.FONT_TITLE);
 		panelTitle.add(labelBuyingOnline);
 
 		add(panelTitle);

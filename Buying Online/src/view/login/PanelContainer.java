@@ -1,6 +1,7 @@
 package view.login;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,35 +19,43 @@ public class PanelContainer extends JPanel {
 	private JTextField psPassword;
 	private JLabel labelPassword;
 	private JLabel labelNickName;
-	private JButton btnLogin;
 
 	public PanelContainer(GeneralController generalController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setBackground(Color.decode("#4383BD"));
+		setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
 
-		labelNickName = new JLabel("Name");
-		labelNickName.setForeground(Color.WHITE);
+		labelNickName = new JLabel(ConstantsUILogin.NICK_NAME);
+		labelNickName.setAlignmentX(CENTER_ALIGNMENT);
 		add(labelNickName);
 
 		txtUserName = new JTextField();
 		add(txtUserName);
 
-		labelPassword = new JLabel("Password");
-		labelPassword.setForeground(Color.WHITE);
+		labelPassword = new JLabel(ConstantsUILogin.PASSWORD);
+		labelPassword.setAlignmentX(CENTER_ALIGNMENT);
 		add(labelPassword);
 
 		psPassword = new JPasswordField();
 		add(psPassword);
-
-		btnLogin = new JButton("Log In");
+		
+		JPanel pnButtons = new JPanel();
+		pnButtons.setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
+		pnButtons.setLayout(new FlowLayout());
+		
+		JButton btnLogin = new JButton(ConstantsUILogin.LOGIN);
+		btnLogin.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
+		btnLogin.setForeground(Color.WHITE);
 		btnLogin.addActionListener(generalController);
 		btnLogin.setActionCommand(GeneralActions.VALIDATE_USER_FROM_LOGIN.toString());
-		add(btnLogin);
+		pnButtons.add(btnLogin);
 
-		JButton btnSignUp = new JButton("Sign Up");
+		JButton btnSignUp = new JButton(ConstantsUILogin.SIGN_UP);
 		btnSignUp.addActionListener(generalController);
+		btnSignUp.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
+		btnSignUp.setForeground(Color.WHITE);
 		btnSignUp.setActionCommand(GeneralActions.SHOW_REGISTER_DIALOG.toString());
-		add(btnSignUp);
+		pnButtons.add(btnSignUp);
+		add(pnButtons);
 	}
 
 	public String getUsername(){
