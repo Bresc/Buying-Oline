@@ -1,5 +1,6 @@
 package view.login;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -34,6 +35,7 @@ public class DialogChooseWhoYouAre extends JDialog {
 
 		buttonUser = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
+		buttonUser.setBackground(Color.decode("#585858"));
 		buttonUser.addActionListener(generalController);
 		buttonUser.setActionCommand(GeneralActions.USER_LOG_IN.toString());
 		add(buttonUser);
@@ -41,6 +43,7 @@ public class DialogChooseWhoYouAre extends JDialog {
 		buttonShop = new JButton(new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496235_shop.png"))
 				.getImage().getScaledInstance(80, 80, 0)));
 		buttonShop.addActionListener(generalController);
+		buttonShop.setBackground(Color.decode("#A4A4A4"));
 		buttonShop.setActionCommand(GeneralActions.SHOP_LOG_IN.toString());
 		add(buttonShop);
 	}
