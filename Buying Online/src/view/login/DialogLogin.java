@@ -15,8 +15,8 @@ public class DialogLogin extends JFrame {
 	private PanelContainer panelConteiner;
 
 	public DialogLogin(GeneralController generalController) {
-		setTitle("Log In");
-		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
+		setTitle(ConstantsUILogin.TITLE_DIALOG_LOGIN);
+		setIconImage(new ImageIcon(getClass().getResource(ConstantsUILogin.IMG_ICON_LOGIN)).getImage());
 		setSize(320, 350);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

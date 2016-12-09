@@ -19,10 +19,10 @@ public class DialogChooseWhoYouAre extends JDialog {
 	private JButton buttonShop;
 
 	public DialogChooseWhoYouAre(GeneralController generalController) {
-		setTitle("Log in");
+		setTitle(ConstantsUILogin.TITLE_DIALOG_LOGIN);
 		setSize(358, 130);
 		setLocationRelativeTo(null);
-		setIconImage(new ImageIcon(getClass().getResource("/img/1480497089_vector_65_12.png")).getImage());
+		setIconImage(new ImageIcon(getClass().getResource(ConstantsUILogin.IMG_ICON_LOGIN)).getImage());
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
