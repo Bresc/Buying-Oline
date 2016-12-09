@@ -94,8 +94,7 @@ public class ReadXML {
 	private static Document readAnythingDocument(String type)
 			throws ParserConfigurationException, SAXException, IOException {
 		File file = new File("src/data/" + type + ".xml");
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
+		DocumentBuilder builder = (DocumentBuilderFactory.newInstance()).newDocumentBuilder();
 		Document document = builder.parse(file);
 		document.getDocumentElement().normalize();
 		return document;
