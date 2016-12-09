@@ -37,7 +37,6 @@ public class GeneralController implements ActionListener {
 		controllerUser = new ControllerUser(this, controllerShop.getManagerShop(), managerAsingProduct);
 		controllerAdmin = new ControllerAdmin(this, controllerShop.getManagerShop(), controllerUser.getManagerUser(),
 				managerAsingProduct, loginMainWindow);
-		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		readAllData();
 	}
 
@@ -113,40 +112,9 @@ public class GeneralController implements ActionListener {
 	}
 
 	private void openDialog() {
-		chooseWhoYouAre.setVisible(true);
+		chooseWhoYouAre = new DialogChooseWhoYouAre(this);
 		loginMainWindow.setVisible(false);
 	}
-
-	// private void VALIDATE_USER_FROM_LOGIN() {
-	// if (general.confirmTheLoginUser(loginMainWindow.getTheName(),
-	// loginMainWindow.getPassword()).equals(USER)) {
-	// userStart.setVi();
-	// loginMainWindow.setVisible(false);
-	// System.out.println("Holi");
-	// try {
-	// general.searchUser(loginMainWindow.getTheName(),
-	// loginMainWindow.getPassword());
-	// } catch (ErrorUserNotFound e) {
-	// new JOptionPane("Hola", JOptionPane.ERROR_MESSAGE);
-	// e.printStackTrace();
-	// }
-	// } else if (general.confirmTheLoginUser(loginMainWindow.getTheName(),
-	// loginMainWindow.getPassword()).equals(SHOP)) {
-	// shopStart.setVi();
-	// loginMainWindow.setVisible(false);
-	// System.out.println("Holi2");
-	// try {
-	// general.searchTheShop(loginMainWindow.getTheName());
-	// } catch (ErrorShopNotFound e) {
-	// new JOptionPane("Hola", JOptionPane.ERROR_MESSAGE);
-	// e.printStackTrace();
-	// }
-	// } else {
-	// adminStart.setVi();
-	// loginMainWindow.setVisible(false);
-	// System.out.println("Holi3");
-	// }
-	// }
 
 	public void run() {
 		loginMainWindow.setVisible(true);
