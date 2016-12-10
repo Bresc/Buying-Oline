@@ -29,6 +29,7 @@ public class ManagerShop {
 	}
 
 	public void addAllShop(ArrayList<Shop> shop) {
+		shopList.clear();
 		shopList.addAll(shop);
 	}
 	
