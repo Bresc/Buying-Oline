@@ -5,27 +5,20 @@ package controller;
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import models.dao.GeneralManager;
 import models.dao.ManagerAsingProduct;
-import models.dao.ManagerOrder;
 import models.dao.ManagerOrderProduct;
 import models.dao.ManagerProduct;
 import models.dao.ManagerShop;
 import models.dao.ManagerUser;
 import models.entities.AssignmentProductShop;
-import models.entities.Order;
 import models.entities.OrderProduct;
 import models.entities.Product;
 import models.entities.Shop;
@@ -33,17 +26,15 @@ import models.exceptions.ErrorOrderNotFound;
 import models.exceptions.ErrorShopNotFound;
 import models.exceptions.OrderProductNotFound;
 import persistence.ReadXML;
-import view.user.ConstanstUIUser;
 import view.user.MainWindowUser;
 
-public class ControllerUser implements ActionListener, KeyListener, ChangeListener {
+public class ControllerUser implements ActionListener {
 
 	private MainWindowUser mainWindowUser;
 	private ManagerAsingProduct managerAsingProduct;
 	private GeneralController generalController;
 	private ManagerShop managerShop;
 	private ManagerUser managerUser;
-	private ManagerOrder managerOrder;
 	private ManagerOrderProduct managerOrderProduct;
 	private ManagerProduct managerProduct;
 
@@ -51,7 +42,6 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 		this.generalController = generalController;
 		this.managerShop = managerShop;
 		managerUser = new ManagerUser();
-		managerOrder = new ManagerOrder();
 		managerProduct = new ManagerProduct();
 		mainWindowUser = new MainWindowUser(this);
 		managerOrderProduct = new ManagerOrderProduct();
@@ -75,16 +65,18 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			showProductsByShop(((JButton) arg2.getSource()).getName());
 			break;
 		case ADD_PRODUCT_TO_CAR:
-			try {
-				addProductToCar(Integer.parseInt(((JButton)arg2.getSource()).getName()));
-			} catch (OrderProductNotFound e) {
-				e.printStackTrace();
-			}
-			mainWindowUser.showMessageDialog("Product Added To Car Successfully");
-			break;
-		default:
+			addProductToCar(arg2);
 			break;
 		}
+	}
+
+	private void addProductToCar(ActionEvent arg2) {
+		try {
+			addProductToCar(Integer.parseInt(((JButton)arg2.getSource()).getName()));
+		} catch (OrderProductNotFound e) {
+			e.printStackTrace();
+		}
+		mainWindowUser.showMessageDialog("Product Added To Car Successfully");
 	}
 
 	public void setVisible() {
@@ -98,7 +90,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			refreshShopData(ReadXML.readShop());
 			refreshDataAssigmentProductShop(ReadXML.readAsigmentProducts());
 		} catch (ParserConfigurationException | SAXException | IOException e) {
-			// TODO poner Exepciones
+			e.printStackTrace();
 		}
 	}
 
@@ -112,7 +104,7 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 			mainWindowUser.changeToProductsFromShopPanel(
 					managerAsingProduct.getProductsListFromShop(managerShop.searhShop(Integer.parseInt(id))));
 		} catch (NumberFormatException | ErrorShopNotFound e) {
-			//TODO mostrar exepcion
+			e.printStackTrace();
 		}
 	}
 
@@ -150,29 +142,5 @@ public class ControllerUser implements ActionListener, KeyListener, ChangeListen
 		} catch (ErrorOrderNotFound e) {
 			throw new OrderProductNotFound();
 		}
-	}
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 }

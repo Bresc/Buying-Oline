@@ -42,14 +42,15 @@ public class CardProduct extends JPanel {
 		lbPriceProduct = new JLabel();
 		lbPriceProduct.setFont(ConstanstUIUser.FONT_USER_WINDOW);
 		add(lbPriceProduct, gridPanel.insertComponent(2, 6, 5, 0.15));
-		
+
 		btnAddProductToCar = new JButton();
 		btnAddProductToCar.addActionListener(controllerUser);
 		btnAddProductToCar.setActionCommand(ActionsUser.ADD_PRODUCT_TO_CAR.name());
 		btnAddProductToCar.setBorder(null);
 		btnAddProductToCar.setOpaque(false);
 		btnAddProductToCar.setBackground(Color.white);
-		btnAddProductToCar.setIcon(new ImageIcon(new ImageIcon(ConstantUIProduct.IMG_ADD_TO_CAR).getImage().getScaledInstance(40, 40, 40)));
+		btnAddProductToCar.setIcon(new ImageIcon(
+				new ImageIcon(ConstantUIProduct.IMG_ADD_TO_CAR).getImage().getScaledInstance(40, 40, 40)));
 		add(btnAddProductToCar, gridPanel.insertComponent(2, 8, 5, 0.15));
 	}
 

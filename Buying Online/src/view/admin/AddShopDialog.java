@@ -126,7 +126,7 @@ public class AddShopDialog extends JDialog {
 			minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));
 		}
 	}
-	
+
 	public void cleanForm() {
 		txName.setText("");
 		minImage.setIcon(new ImageIcon("src/img/DefaultImage.png"));

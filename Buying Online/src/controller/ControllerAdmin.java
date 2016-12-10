@@ -5,8 +5,6 @@ package controller;
  */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;
@@ -33,7 +31,7 @@ import view.admin.AddUserDialog;
 import view.admin.MainWindowAdmin;
 import view.login.LoginMainWindow;
 
-public class ControllerAdmin implements ActionListener, KeyListener, ChangeListener {
+public class ControllerAdmin implements ActionListener, ChangeListener {
 
 	private MainWindowAdmin mainWindowAdmin;
 	private ManagerAsingProduct managerAsingProduct;
@@ -326,7 +324,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 				refreshList(1);
 				mainWindowAdmin.refreshTableUser(managerUser.getUsersList());
 			} catch (TransformerException |ParserConfigurationException | SAXException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
@@ -344,24 +341,6 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
-		// logIn.getPassword()));
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
-		// logIn.getPassword()));
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// logIn.changeTheButtonUser(adminManager.searchForLogInUser(logIn.getName(),
-		// logIn.getPassword()));
 	}
 
 	// paginacion

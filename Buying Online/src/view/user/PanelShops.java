@@ -11,20 +11,15 @@ import models.entities.Shop;
 public class PanelShops extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel PanelShops;
-	// private ArrayList<PanelShop> listaShops;
 
 	public PanelShops() {
 		setLayout(new BorderLayout());
 		PanelShops = new JPanel(new GridLayout(3, 1, 5, 10));
 		JScrollPane js = new JScrollPane(PanelShops);
-		// listaShops = new ArrayList<>();
 		add(js, BorderLayout.CENTER);
 	}
 
 	public void agregaShop(Shop shop, ControllerAdmin controller) {
-		// PanelShop pnshop = new PanelShop(shop, controller);
-		// listaShops.add(pnshop);
-		// listaShops.add(pnshop);
 		PanelShops.revalidate();
 	}
 

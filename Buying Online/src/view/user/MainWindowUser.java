@@ -57,7 +57,7 @@ public class MainWindowUser extends JFrame {
 	public void setVi() {
 		setVisible(true);
 	}
-	
+
 	public void showMessageDialog(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}

@@ -16,7 +16,6 @@ import org.xml.sax.SAXException;
 import models.dao.ManagerAsingProduct;
 import models.exceptions.ErrorShopNotFound;
 import models.exceptions.ErrorUserNotFound;
-import view.admin.MainWindowAdmin;
 import view.login.DialogChooseWhoYouAre;
 import view.login.LoginMainWindow;
 
@@ -99,7 +98,6 @@ public class GeneralController implements ActionListener {
 			controllerAdmin.validateUser(name, password);
 			return true;
 		} catch (ErrorUserNotFound e) {
-			// TODO: mostrar error
 			return false;
 		}
 	}
@@ -109,7 +107,6 @@ public class GeneralController implements ActionListener {
 			controllerShop.setThisShop(controllerAdmin.validateShop(name));
 			return true;
 		} catch (ErrorShopNotFound e) {
-			// TODO: mostrar error
 			return false;
 		}
 	}

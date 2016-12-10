@@ -33,7 +33,7 @@ public class DialogChooseWhoYouAre extends JDialog {
 				System.exit(0);
 			}
 		});
-		setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		JLabel lbDescription = new JLabel("Select if you are a user or shop");
 		lbDescription.setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
 		lbDescription.setAlignmentX(CENTER_ALIGNMENT);
@@ -41,15 +41,17 @@ public class DialogChooseWhoYouAre extends JDialog {
 
 		JPanel pnButtons = new JPanel();
 		pnButtons.setLayout(new FlowLayout());
-		buttonUser = new JButton("User ",new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png"))
-				.getImage().getScaledInstance(80, 80, 0)));
+		buttonUser = new JButton("User ",
+				new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496151_user.png")).getImage()
+						.getScaledInstance(80, 80, 0)));
 		buttonUser.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
 		buttonUser.addActionListener(generalController);
 		buttonUser.setActionCommand(GeneralActions.USER_LOG_IN.toString());
 		pnButtons.add(buttonUser);
 
-		buttonShop = new JButton("Shop ", new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496235_shop.png"))
-				.getImage().getScaledInstance(80, 80, 0)));
+		buttonShop = new JButton("Shop ",
+				new ImageIcon(new ImageIcon(getClass().getResource("/img/1480496235_shop.png")).getImage()
+						.getScaledInstance(80, 80, 0)));
 		buttonShop.addActionListener(generalController);
 		buttonShop.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
 		buttonShop.setActionCommand(GeneralActions.SHOP_LOG_IN.toString());
