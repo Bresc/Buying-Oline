@@ -20,7 +20,7 @@ public class ToolBar extends JToolBar {
 	private JTextField txSearch;
 
 	public ToolBar(ControllerAdmin controller) {
-		setBackground(Color.decode("#00BBBB"));
+		setBackground(ConstantUIAdmin.COLOR_BACKGROUND_LOGIN);
 		GridSystem gridMenu = new GridSystem(this);
 
 		JMenuBar menu = new JMenuBar();
@@ -40,7 +40,7 @@ public class ToolBar extends JToolBar {
 		JButton btnAddUser = new JButton(new ImageIcon(getClass().getResource("/img/adduser.png")));
 		btnAddUser.setToolTipText("Add User");
 		btnAddUser.setActionCommand(ActionsAdmin.SHOW_ADD_USER_DIALOG.toString());
-		btnAddUser.setBackground(Color.decode("#FFFFFF"));
+		btnAddUser.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		btnAddUser.addActionListener(controller);
 		add(btnAddUser, gridMenu.insertComponent(1, 0, 1, 0.1));
 
@@ -48,12 +48,12 @@ public class ToolBar extends JToolBar {
 		btnAddShop.setToolTipText("Add Shop");
 		btnAddShop.setActionCommand(ActionsAdmin.SHOW_ADD_SHOP_DIALOG.toString());
 		btnAddShop.addActionListener(controller);
-		btnAddShop.setBackground(Color.decode("#FFFFFF"));
+		btnAddShop.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		add(btnAddShop, gridMenu.insertComponent(1, 2, 1, 0.1));
 
 		JButton btnAddProduct = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
 		btnAddProduct.setToolTipText("Add Product");
-		btnAddProduct.setBackground(Color.decode("#FFFFFF"));
+		btnAddProduct.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		btnAddProduct.setActionCommand(ActionsAdmin.SHOW_ADD_PRODUCT_DIALOG.toString());
 		btnAddProduct.addActionListener(controller);
 		add(btnAddProduct, gridMenu.insertComponent(1, 4, 1, 0.1));
@@ -63,7 +63,8 @@ public class ToolBar extends JToolBar {
 
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setToolTipText("Search");
-		btnSearch.setBackground(Color.decode("#FFFFFF"));
+		btnSearch.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
+		btnSearch.setForeground(Color.WHITE);
 		add(btnSearch, gridMenu.insertComponent(1, 10, 1, 0.1));
 
 		addSeparator();
