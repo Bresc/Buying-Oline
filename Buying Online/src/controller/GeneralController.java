@@ -14,7 +14,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import models.dao.ManagerAsingProduct;
+import models.exceptions.ErrorShopNotFound;
 import models.exceptions.ErrorUserNotFound;
+import view.admin.MainWindowAdmin;
 import view.login.DialogChooseWhoYouAre;
 import view.login.LoginMainWindow;
 
@@ -82,8 +84,9 @@ public class GeneralController implements ActionListener {
 		if (validateLoginUser(userName, password)) {
 			loginMainWindow.setVisible(false);
 			controllerUser.setVisible();
-		} else if (validateLoginShop(userName, password)) {
+		} else if (validateLoginShop(userName)) {
 			loginMainWindow.setVisible(false);
+			controllerShop.setVisible();
 		} else {
 			loginMainWindow.setVisible(false);
 			readAllData();
@@ -101,11 +104,11 @@ public class GeneralController implements ActionListener {
 		}
 	}
 
-	private boolean validateLoginShop(String name, String password) {
+	private boolean validateLoginShop(String name) {
 		try {
-			controllerAdmin.validateUser(name, password);
+			controllerShop.setThisShop(controllerAdmin.validateShop(name));
 			return true;
-		} catch (ErrorUserNotFound e) {
+		} catch (ErrorShopNotFound e) {
 			// TODO: mostrar error
 			return false;
 		}
@@ -124,4 +127,5 @@ public class GeneralController implements ActionListener {
 		loginMainWindow.clearLoginDialog();
 		loginMainWindow.setVisible(true);
 	}
+
 }

@@ -67,4 +67,8 @@ public class ManagerShop {
 	public ArrayList<Shop> getListShop() {
 		return shopList;
 	}
+
+	public Shop validateShopLogin(String name) throws ErrorShopNotFound {
+		return searchShopName(name);
+	}
 }

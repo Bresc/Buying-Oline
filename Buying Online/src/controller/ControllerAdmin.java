@@ -294,6 +294,10 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 	public User validateUser(String name, String password) throws ErrorUserNotFound {
 		return managerUser.validateUserLogin(name, password);
 	}
+	
+	public Shop validateShop(String name) throws ErrorShopNotFound {
+		return managerShop.validateShopLogin(name);
+	}
 
 	// Metodos de agregar
 	private void addProduct() {
@@ -442,6 +446,10 @@ public class ControllerAdmin implements ActionListener, KeyListener, ChangeListe
 		} else {
 			return managerProduct.getListProducts();
 		}
+	}
+
+	public MainWindowAdmin getMainWindow() {
+		return mainWindowAdmin;
 	}
 
 }

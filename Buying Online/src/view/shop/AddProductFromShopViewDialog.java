@@ -24,10 +24,9 @@ import org.xml.sax.SAXException;
 
 import controller.ActionsAdmin;
 import controller.ActionsShop;
-import controller.ControllerAdmin;
+import controller.ControllerShop;
 import models.dao.ManagerProduct;
 import models.entities.Product;
-import view.admin.MainWindowAdmin;
 import view.login.ConstantsUILogin;
 
 public class AddProductFromShopViewDialog extends JDialog {
@@ -38,10 +37,10 @@ public class AddProductFromShopViewDialog extends JDialog {
 	private String imgSource;
 	private JTextField txtPriceProduct;
 
-	public AddProductFromShopViewDialog(MainWindowAdmin mainWindowAdmin, ControllerAdmin controller) {
-		super(mainWindowAdmin, true);
+	public AddProductFromShopViewDialog(MainWindowShop mainWindowShop, ControllerShop controllerShop) {
+		super(mainWindowShop, true);
 		setIconImage(new ImageIcon(getClass().getResource(ConstantsUILogin.IMG_ICON_LOGIN)).getImage());
-		setTitle("Student dialog");
+		setTitle("AddProduct dialog");
 		setSize(400, 370);
 		setLocationRelativeTo(null);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -80,7 +79,7 @@ public class AddProductFromShopViewDialog extends JDialog {
 		});
 		pnlChooseImage.add(lbImage);
 		JButton btnChooseImage = new JButton("Choose image");
-		btnChooseImage.addActionListener(controller);
+		btnChooseImage.addActionListener(controllerShop);
 		btnChooseImage.setActionCommand(ActionsShop.CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW.toString());
 		btnChooseImage.setBackground(Color.decode("#ccd9ff"));
 
@@ -91,7 +90,7 @@ public class AddProductFromShopViewDialog extends JDialog {
 		add(pnlChooseImage);
 
 		btnSave = new JButton("Save", new ImageIcon("src/img/saveIcon.png"));
-		btnSave.addActionListener(controller);
+		btnSave.addActionListener(controllerShop);
 		btnSave.setActionCommand(ActionsShop.ADD_PRODUCT_TO_SHOP.toString());
 		btnSave.setBackground(Color.decode("#ccd9ff"));
 		btnSave.setAlignmentX(CENTER_ALIGNMENT);

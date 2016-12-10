@@ -21,7 +21,6 @@ public class MainWindowShop extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private TableProductsByShop productsByShop;
-	private TableOrders tableOrders;
 
 	public MainWindowShop(ControllerShop controllershop) {
 		setTitle("Shop");
@@ -50,9 +49,7 @@ public class MainWindowShop extends JFrame {
 		JTabbedPane tabs = new JTabbedPane();
 
 		productsByShop = new TableProductsByShop(null);
-		tableOrders = new TableOrders(null);
 		tabs.add("My Product List", productsByShop);
-		tabs.add("My Orders", tableOrders);
 
 		add(pnlDetails);
 		add(toolBarShop);

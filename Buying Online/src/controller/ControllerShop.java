@@ -41,12 +41,15 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	private ManagerAsingProduct managerAsingProduct;
 	private GeneralController generalController;
 	private int actualPage;
+	private Shop shop;
 
 	public ControllerShop(GeneralController generalController) {
 		this.generalController = generalController;
 		actualPage = 1;
 		managerShop = new ManagerShop();
 		mainWindowShop = new MainWindowShop(this);
+		managerAsingProduct = new ManagerAsingProduct();
+		addProductFromShopViewDialog = new AddProductFromShopViewDialog(mainWindowShop, this);
 	}
 
 	public ManagerShop getManagerShop() {
@@ -129,26 +132,30 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 		try {
 			createdProduct = addProductFromShopViewDialog.getCreatedProduct();
 			managerAsingProduct.addAssignmentProductShop(
-					ManagerAsingProduct.createAssignmentProductShop(createdProduct, getActualShop()));
-			mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(getActualShop()));
+					ManagerAsingProduct.createAssignmentProductShop(createdProduct, shop));
+			mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(shop));
 			addProductFromShopViewDialog.setVisible(false);
 		} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	private Shop getActualShop() {
-		return findTheShopHelper();
+	
+	public void setThisShop(Shop shop){
+		this.shop = shop;
 	}
 
-	public Shop findTheShopHelper() {
-		Shop shop = null;
+	private void refreshShopData() {
 		try {
-			shop = managerShop.searchShopName(dialogoLogin.getUsername());
-		} catch (ErrorShopNotFound e1) {
-			e1.printStackTrace();
+			managerAsingProduct.addAllAssignmentProductShop((ReadXML.readAsigmentProducts()));
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			// TODO poner Exepciones
 		}
-		return shop;
+	}
+	
+	public void setVisible() {
+		refreshShopData();
+		mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(this.shop));
+		mainWindowShop.setVisible(true);
 	}
 
 	@Override
@@ -172,9 +179,5 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public void setVi() {
-		mainWindowShop.setVi();
 	}
 }
