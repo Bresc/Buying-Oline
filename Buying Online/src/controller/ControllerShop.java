@@ -71,7 +71,7 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 			break;
 		case LOG_OUT:
 			mainWindowShop.setVisible(false);
-			dialogoLogin.setVisible(true);
+			generalController.LoginVisible();
 			break;
 		case SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG:
 			showAddProductFromShopViewDialog();
