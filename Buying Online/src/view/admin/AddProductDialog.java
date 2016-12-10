@@ -77,7 +77,8 @@ public class AddProductDialog extends JDialog {
 		chooseImage = new JFileChooser();
 		chooseImage.setCurrentDirectory(new File("./src/img"));
 		
-		btnChargeImage = new JButton("Charge An Image");
+		btnChargeImage = new JButton("Charge Image");
+		btnChargeImage.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		btnChargeImage.setForeground(Color.BLACK);
 		btnChargeImage.setActionCommand(ActionsAdmin.CHARGE_IMAGE_PRODUCT.toString());
 		btnChargeImage.addActionListener(controller);
@@ -88,6 +89,7 @@ public class AddProductDialog extends JDialog {
 		add(labelImage, gridProduct.insertComponent(3, 5, 4, 0.01));
 
 		btnAceptProduct = new JButton();
+		btnAceptProduct.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		btnAceptProduct.setForeground(Color.black);
 		changeActionToProductAdd();
 		btnAceptProduct.addActionListener(controller);
@@ -95,6 +97,7 @@ public class AddProductDialog extends JDialog {
 		add(btnAceptProduct, gridProduct.insertComponent(4, 3, 3, 0.001));
 
 		btnCancelProduct = new JButton("Cancel");
+		btnCancelProduct.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		btnCancelProduct.setForeground(Color.black);
 		btnCancelProduct.setActionCommand(ActionsAdmin.CANCEL_PRODUCT.toString());
 		btnCancelProduct.addActionListener(controller);
