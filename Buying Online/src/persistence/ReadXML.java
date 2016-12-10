@@ -106,9 +106,14 @@ public class ReadXML {
 		Document doc = docBuilder.newDocument();
 		Element rootElement = doc.createElement(NODE_USER);
 		doc.appendChild(rootElement);
+		Element lastId = doc.createElement(TAG_NAME_LAST_ID);
+		int last = 0;
 		for (User user : users) {
 			rootElement.appendChild(writeUserElement(doc, user));
+			last = user.getId();
 		}
+		lastId.appendChild(doc.createTextNode(String.valueOf(last)));
+		rootElement.appendChild(lastId);
 		writeAnythingDocumentInXML(doc, TYPE_USER);
 	}
 
