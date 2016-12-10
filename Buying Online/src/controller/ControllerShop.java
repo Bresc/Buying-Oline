@@ -35,6 +35,9 @@ public class ControllerShop implements ActionListener {
 	private AddShopDialog addShopDialog;
 	private AddProductFromShopViewDialog addProductFromShopViewDialog;
 	private ManagerAsingProduct managerAsingProduct;
+
+	private GeneralController generalController;
+
 	private Shop shop;
 
 	public ControllerShop(GeneralController generalController, LoginMainWindow loginMainWindow) {
@@ -60,7 +63,7 @@ public class ControllerShop implements ActionListener {
 			break;
 		case LOG_OUT:
 			mainWindowShop.setVisible(false);
-			dialogoLogin.setVisible(true);
+			generalController.LoginVisible();
 			break;
 		case SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG:
 			showAddProductFromShopViewDialog();
@@ -116,7 +119,8 @@ public class ControllerShop implements ActionListener {
 					ManagerAsingProduct.createAssignmentProductShop(createdProduct, shop));
 			mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(shop));
 			addProductFromShopViewDialog.setVisible(false);
-		} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
+			ReadXML.writeAssigmentProduct(managerAsingProduct.getAssignmentsProductsShopList());
+		} catch (TransformerException | NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
 	}
