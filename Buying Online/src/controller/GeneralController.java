@@ -34,7 +34,7 @@ public class GeneralController implements ActionListener {
 
 	public GeneralController() {
 		loginMainWindow = new LoginMainWindow(this);
-		controllerShop = new ControllerShop(this);
+		controllerShop = new ControllerShop(this, loginMainWindow);
 		managerAsingProduct = new ManagerAsingProduct();
 		controllerUser = new ControllerUser(this, controllerShop.getManagerShop(), managerAsingProduct);
 		controllerAdmin = new ControllerAdmin(this, controllerShop.getManagerShop(), controllerUser.getManagerUser(),

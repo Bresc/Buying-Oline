@@ -43,12 +43,13 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	private int actualPage;
 	private Shop shop;
 
-	public ControllerShop(GeneralController generalController) {
+	public ControllerShop(GeneralController generalController, LoginMainWindow loginMainWindow) {
 		this.generalController = generalController;
+		this.dialogoLogin = loginMainWindow;
 		actualPage = 1;
 		managerShop = new ManagerShop();
-		mainWindowShop = new MainWindowShop(this);
 		managerAsingProduct = new ManagerAsingProduct();
+		mainWindowShop = new MainWindowShop(this);
 		addProductFromShopViewDialog = new AddProductFromShopViewDialog(mainWindowShop, this);
 	}
 
@@ -69,7 +70,8 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 			// TODO:
 			break;
 		case LOG_OUT:
-			// TODO:
+			mainWindowShop.setVisible(false);
+			dialogoLogin.setVisible(true);
 			break;
 		case SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG:
 			showAddProductFromShopViewDialog();

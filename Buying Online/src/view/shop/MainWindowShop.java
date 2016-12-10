@@ -55,7 +55,6 @@ public class MainWindowShop extends JFrame {
 		add(toolBarShop);
 		add(Box.createRigidArea(new Dimension(25, 20)));
 		add(tabs);
-		setVisible(true);
 	}
 
 	public void refreshProductsTable(ArrayList<Product> products) {
@@ -64,9 +63,5 @@ public class MainWindowShop extends JFrame {
 
 	public void setVi() {
 		setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		new MainWindowShop(null);
 	}
 }
