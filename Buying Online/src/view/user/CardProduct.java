@@ -69,6 +69,7 @@ public class CardProduct extends JPanel {
 	}
 
 	public void setForm(Product product) {
+		btnAddProductToCar.setName(String.valueOf(product.getId()));
 		lbImgProduct.setIcon(reSize(loadImagen(product.getSrcImg())));
 		lbNameProduct.setText(product.getName());
 		lbPriceProduct.setText(String.valueOf(product.getPrice()));
