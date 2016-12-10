@@ -40,13 +40,11 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	private AddProductFromShopViewDialog addProductFromShopViewDialog;
 	private ManagerAsingProduct managerAsingProduct;
 	private GeneralController generalController;
-	private int actualPage;
 	private Shop shop;
 
 	public ControllerShop(GeneralController generalController, LoginMainWindow loginMainWindow) {
 		this.generalController = generalController;
 		this.dialogoLogin = loginMainWindow;
-		actualPage = 1;
 		managerShop = new ManagerShop();
 		managerAsingProduct = new ManagerAsingProduct();
 		mainWindowShop = new MainWindowShop(this);
@@ -107,7 +105,6 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 	private void editShop() {
 		try {
 			managerShop.editShop(addShopDialog.getShop(), managerShop.searhShop(mainWindowAdmin.getIdToTableShops()));
-			actualPage = 1;
 			addShopDialog.setVisible(false);
 			addShopDialog.changeActionToAddShop();
 			ReadXML.writeShop(managerShop.getListShop());
@@ -137,7 +134,8 @@ public class ControllerShop implements ActionListener, KeyListener, ChangeListen
 					ManagerAsingProduct.createAssignmentProductShop(createdProduct, shop));
 			mainWindowShop.refreshProductsTable(managerAsingProduct.getProductsListFromShop(shop));
 			addProductFromShopViewDialog.setVisible(false);
-		} catch (NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
+			ReadXML.writeAssigmentProduct(managerAsingProduct.getAssignmentsProductsShopList());
+		} catch (TransformerException | NumberFormatException | ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
 	}

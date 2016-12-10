@@ -150,7 +150,7 @@ public class ReadXML {
 		writeAnythingDocumentInXML(doc, TYPE_PRODUCT);
 	}
 
-	public void writeAssigmentProduct(ArrayList<AssignmentProductShop> assignmentProductShopList)
+	public static void writeAssigmentProduct(ArrayList<AssignmentProductShop> assignmentProductShopList)
 			throws TransformerException, ParserConfigurationException {
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = docBuilder.newDocument();
