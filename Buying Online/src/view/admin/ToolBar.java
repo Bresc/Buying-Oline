@@ -24,12 +24,12 @@ public class ToolBar extends JToolBar {
 		GridSystem gridMenu = new GridSystem(this);
 
 		JMenuBar menu = new JMenuBar();
-		menu.setBackground(ConstantUIAdmin.BACKGROUND_COLOR);
+		menu.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_LOGIN);
 
 		JMenu menuFile = new JMenu("File");
 
 		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/4.png"));
-		logOut.setBackground(ConstantUIAdmin.BACKGROUND_COLOR);
+		logOut.setBackground(ConstantUIAdmin.COLOR_BACKGROUND_LOGIN);
 		logOut.setActionCommand(ActionsAdmin.LOG_OUT.toString());
 		logOut.addActionListener(controller);
 		menuFile.add(logOut);

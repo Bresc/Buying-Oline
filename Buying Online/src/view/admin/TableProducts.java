@@ -53,9 +53,9 @@ public class TableProducts extends JPanel {
 				return false;
 			}
 		};
-		productsTable.getTableHeader().setBackground(Color.decode("#E6E6FA"));
+		productsTable.getTableHeader().setBackground(ConstantUIAdmin.COLOR_BACKGROUND_LOGIN);
 		productsTable.getTableHeader().setFont(new Font("Ahaori", Font.BOLD, 18));
-		productsTable.getTableHeader().setForeground(Color.decode("#1E90FF"));
+		productsTable.getTableHeader().setForeground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		productsTable.addMouseListener(new MouseAdapter() {
 
 			@Override

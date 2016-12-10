@@ -52,9 +52,9 @@ public class TableShop extends JPanel {
 				return false;
 			}
 		};
-		shopTable.getTableHeader().setBackground(Color.decode("#E6E6FA"));
+		shopTable.getTableHeader().setBackground(ConstantUIAdmin.COLOR_BACKGROUND_LOGIN);
 		shopTable.getTableHeader().setFont(new Font("Ahaori", Font.BOLD, 18));
-		shopTable.getTableHeader().setForeground(Color.decode("#1E90FF"));
+		shopTable.getTableHeader().setForeground(ConstantUIAdmin.COLOR_BACKGROUND_BTN);
 		shopTable.addMouseListener(new MouseAdapter() {
 
 			@Override
