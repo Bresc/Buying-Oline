@@ -41,6 +41,7 @@ public class ControllerShop implements ActionListener {
 	private Shop shop;
 
 	public ControllerShop(GeneralController generalController, LoginMainWindow loginMainWindow) {
+		this.generalController = generalController;
 		this.dialogoLogin = loginMainWindow;
 		managerShop = new ManagerShop();
 		managerAsingProduct = new ManagerAsingProduct();
