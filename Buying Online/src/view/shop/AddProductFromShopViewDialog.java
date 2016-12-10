@@ -44,7 +44,7 @@ public class AddProductFromShopViewDialog extends JDialog {
 		setSize(400, 370);
 		setLocationRelativeTo(null);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		getContentPane().setBackground(Color.WHITE);
+		getContentPane().setBackground(ConstantsUIShop.COLOR_BACKGROUND_LOGIN);
 
 		txtName = new JTextField();
 		txtName.setBorder(BorderFactory.createTitledBorder("Name"));
@@ -55,7 +55,7 @@ public class AddProductFromShopViewDialog extends JDialog {
 		add(txtPriceProduct);
 
 		JPanel pnlChooseImage = new JPanel(new GridLayout(1, 2));
-		pnlChooseImage.setBackground(Color.WHITE);
+		pnlChooseImage.setBackground(ConstantsUIShop.COLOR_BACKGROUND_LOGIN);
 
 		imgSource = "src/img/userIcon.png";
 		lbImage = new JLabel(new ImageIcon(imgSource));
@@ -81,10 +81,10 @@ public class AddProductFromShopViewDialog extends JDialog {
 		JButton btnChooseImage = new JButton("Choose image");
 		btnChooseImage.addActionListener(controllerShop);
 		btnChooseImage.setActionCommand(ActionsShop.CHARGE_IMAGE_PRODUCT_FROM_SHOP_VIEW.toString());
-		btnChooseImage.setBackground(Color.decode("#ccd9ff"));
+		btnChooseImage.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
 
 		JPanel pnlRightChooseImage = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 70));
-		pnlRightChooseImage.setBackground(Color.WHITE);
+		pnlRightChooseImage.setBackground(ConstantsUILogin.COLOR_BACKGROUND_LOGIN);
 		pnlRightChooseImage.add(btnChooseImage);
 		pnlChooseImage.add(pnlRightChooseImage);
 		add(pnlChooseImage);
@@ -92,7 +92,7 @@ public class AddProductFromShopViewDialog extends JDialog {
 		btnSave = new JButton("Save", new ImageIcon("src/img/saveIcon.png"));
 		btnSave.addActionListener(controllerShop);
 		btnSave.setActionCommand(ActionsShop.ADD_PRODUCT_TO_SHOP.toString());
-		btnSave.setBackground(Color.decode("#ccd9ff"));
+		btnSave.setBackground(ConstantsUILogin.COLOR_BACKGROUND_BTN);
 		btnSave.setAlignmentX(CENTER_ALIGNMENT);
 		add(btnSave);
 	}

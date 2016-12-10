@@ -15,10 +15,10 @@ public class ToolBarShop extends JToolBar {
 	private JTextField txSearch;
 
 	public ToolBarShop(ControllerShop controllershop) {
-		setBackground(Color.decode("#00BBBB"));
+		setBackground(ConstantsUIShop.COLOR_BACKGROUND_LOGIN);
 
 		JButton btnAddProduct = new JButton(new ImageIcon(getClass().getResource("/img/2.png")));
-		btnAddProduct.setToolTipText("Add product");
+		btnAddProduct.setToolTipText(ConstantsUIShop.ADD_PRODUCT);
 		btnAddProduct.setActionCommand(ActionsShop.SHOW_ADD_PRODUCT_FROM_SHOP_VIEW_DIALOG.toString());
 		btnAddProduct.setBackground(Color.decode("#FFFFFF"));
 		btnAddProduct.addActionListener(controllershop);

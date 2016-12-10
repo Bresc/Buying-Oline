@@ -50,9 +50,9 @@ public class TableOrders extends JPanel {
 				return false;
 			}
 		};
-		tableOrders.getTableHeader().setBackground(Color.decode("#E6E6FA"));
+		tableOrders.getTableHeader().setBackground(ConstantsUIShop.COLOR_BACKGROUND_LOGIN);
 		tableOrders.getTableHeader().setFont(new Font("Ahaori", Font.BOLD, 18));
-		tableOrders.getTableHeader().setForeground(Color.decode("#1E90FF"));
+		tableOrders.getTableHeader().setForeground(ConstantsUIShop.COLOR_BACKGROUND_BTN);
 		tableOrders.setBackground(Color.blue);
 		tableOrders.addMouseListener(new MouseAdapter() {
 

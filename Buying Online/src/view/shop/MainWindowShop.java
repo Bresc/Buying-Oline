@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -23,20 +22,21 @@ public class MainWindowShop extends JFrame {
 	private TableProductsByShop productsByShop;
 
 	public MainWindowShop(ControllerShop controllershop) {
-		setTitle("Shop");
+		setTitle(ConstantsUIShop.TITLE_SHOP);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		getContentPane().setBackground(Color.white);
+		getContentPane().setBackground(Color.WHITE);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		setSize(450, 450);
+		setSize(450, 600);
+		setUndecorated(true);
 		setLocationRelativeTo(null);
 
 		JPanel pnlDetails = new JPanel();
 		pnlDetails.setLayout(new BorderLayout());
 		JMenuBar menu = new JMenuBar();
 
-		JMenu menuFile = new JMenu("File");
+		JMenu menuFile = new JMenu(ConstantsUIShop.FILE);
 
-		JMenuItem logOut = new JMenuItem("Log Out  ", new ImageIcon("src/img/Exit.png"));
+		JMenuItem logOut = new JMenuItem(ConstantsUIShop.LOG_OUT, ConstantsUIShop.IMG_EXT);
 		logOut.setActionCommand(ActionsAdmin.LOG_OUT.toString());
 		logOut.addActionListener(controllershop);
 		menuFile.add(logOut);
@@ -49,12 +49,13 @@ public class MainWindowShop extends JFrame {
 		JTabbedPane tabs = new JTabbedPane();
 
 		productsByShop = new TableProductsByShop(null);
-		tabs.add("My Product List", productsByShop);
+		tabs.add(ConstantsUIShop.MY_PRODUCT_LIST, productsByShop);
 
 		add(pnlDetails);
 		add(toolBarShop);
 		add(Box.createRigidArea(new Dimension(25, 20)));
 		add(tabs);
+		setVisible(true);
 	}
 
 	public void refreshProductsTable(ArrayList<Product> products) {
@@ -65,4 +66,7 @@ public class MainWindowShop extends JFrame {
 		setVisible(true);
 	}
 
+	public static void main(String[] args) {
+		new MainWindowShop(null);
+	}
 }
